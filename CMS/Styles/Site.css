@@ -3,7 +3,8 @@
 
 body   
 {
-    background: #b6b7bc;
+    /*background: #b6b7bc;*/
+    background: #e1e1e1;
     font-size: .80em;
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
     margin: 0px;
@@ -193,8 +194,8 @@ div.menu ul li a:active
 fieldset
 {
     margin: 1em 0px;
-    padding: 1em;
-    border: 1px solid #ccc;
+    border: none;
+    padding: 20px 1em 1em 25px;
 }
 
 fieldset p 
@@ -221,13 +222,15 @@ legend
 
 input.textEntry 
 {
-    width: 320px;
+    width: 220px;
+    height:25px;
     border: 1px solid #ccc;
 }
 
 input.passwordEntry 
 {
-    width: 320px;
+    width: 220px;
+    height:25px;
     border: 1px solid #ccc;
 }
 
@@ -291,4 +294,100 @@ div.accountInfo
 {
     text-align: right;
     padding-right: 10px;
+}
+
+.logInBtn
+{
+    background-color: #ACACAC;
+    box-shadow: 0 1px 2px 0 #333333;
+    float: right;
+    font-family: Sans-Serif,Times New Roman;
+    font-size: 20px;
+    font-weight: 900;
+    height: 70px;
+    margin-right: -125px;
+    margin-top: -140px;
+    text-transform: uppercase;
+    width: 100px;
+}
+
+.logInBtn:hover
+{
+    background: -moz-linear-gradient(center bottom , #a1a1a1  0%, white 50%, #d1d1d1 100%);
+    background-image: -webkit-linear-gradient( #a1a1a1 , white, #d1d1d1);
+    box-shadow: 0 1px 2px 0 #a1a1a1;
+    text-decoration: underline;
+}
+
+.logInBox
+{
+    background-color: White;
+    border-radius: 10px 10px 10px 10px;   
+    width: 420px;
+    margin-left: 140px;
+}
+
+.loginBody
+{
+    background-color: #3f3f3f;
+    border-radius: 10px 10px 10px 10px; 
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    width: 600px;
+    margin-top: 200px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.login p
+{
+    width: 220px;
+}
+
+.loginBody-inner
+{
+    border: 2px dashed #738593;
+    border-radius: 10px 10px 10px 10px;
+    width: 585px;
+}
+
+.login-heading
+{
+    width: 320px !important;
+    font-weight: bold;
+}
+
+.ccapp-logo
+{
+    float: left;
+    margin-left: 20px;
+    margin-top: -230px;
+}
+
+.ccapp-logo img
+{
+    width: 100px;
+}
+
+.ccapp-banner
+{
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+.ccapp-banner img
+{
+    width: 510px
+}
+
+.login-footer
+{
+     margin-left: 130px;
+}
+
+.login-footer p
+{
+    color: white;
+    font-weight: 600;
 }
