@@ -7,6 +7,5 @@ namespace CMS.Resources
 {
     public class Test
     {
-        //bla bla bla
     }
 }
