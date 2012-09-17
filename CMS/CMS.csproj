@@ -52,8 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AdminPages\Admin.aspx" />
     <Content Include="ChangePassword.aspx" />
     <Content Include="ChangePasswordSuccess.aspx" />
+    <Content Include="GeneralPages\Category.aspx" />
+    <Content Include="GeneralPages\Event.aspx" />
+    <Content Include="GeneralPages\News.aspx" />
+    <Content Include="GeneralPages\POI.aspx" />
+    <Content Include="GeneralPages\Tour.aspx" />
+    <Content Include="GeneralPages\User.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Resources\button-hover.png" />
@@ -81,6 +88,13 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -94,6 +108,48 @@
     </Compile>
     <Compile Include="ChangePasswordSuccess.aspx.designer.cs">
       <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPages\Category.aspx.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralPages\Category.aspx.designer.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPages\Event.aspx.cs">
+      <DependentUpon>Event.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralPages\Event.aspx.designer.cs">
+      <DependentUpon>Event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPages\News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralPages\News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPages\POI.aspx.cs">
+      <DependentUpon>POI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralPages\POI.aspx.designer.cs">
+      <DependentUpon>POI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPages\Tour.aspx.cs">
+      <DependentUpon>Tour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralPages\Tour.aspx.designer.cs">
+      <DependentUpon>Tour.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPages\User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralPages\User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

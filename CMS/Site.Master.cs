@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace CMS
 {
@@ -11,7 +12,87 @@ namespace CMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            /* Redirect to login page when logged out
+            
+            if (Membership.GetUser() == null)
+            {
+                Response.Redirect("~/Index.aspx");
+            }
+            */
+
+
+            //Set current menu button colour
+            string[] file = Request.CurrentExecutionFilePath.Split('/');
+            string fileName = file[file.Length - 1];
+            switch (fileName)
+            {
+                case "Default.aspx":
+                    this.LinkButtonHome.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");     
+                    break;
+                case "Category.aspx":
+                    this.LinkButtonCategory.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+                case "POI.aspx":
+                    this.LinkButtonPOI.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+                case "Event.aspx":
+                    this.LinkButtonEvent.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+                case "Tour.aspx":
+                    this.LinkButtonTour.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+                case "News.aspx":
+                    this.LinkButtonNews.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+                case "User.aspx":
+                    this.LinkButtonUser.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+                case "Admin.aspx":
+                    this.LinkButtonAdmin.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+            }
+             
+
 
         }
+
+
+        //Redirect when menu button is clicked.
+        protected void MenuButton_Clicked(object sender, EventArgs e)
+        {
+            LinkButton clickedButton = (LinkButton)sender;
+
+            switch (clickedButton.ID)
+            {
+                case "LinkButtonHome":
+                    Response.Redirect("~/Default.aspx");
+                    break;
+                case "LinkButtonCategory":
+                    Response.Redirect("~/GeneralPages/Category.aspx");
+                    break;
+                case "LinkButtonPOI":
+                    Response.Redirect("~/GeneralPages/POI.aspx");
+                    break;
+                case "LinkButtonEvent":
+                    Response.Redirect("~/GeneralPages/Event.aspx");
+                    break;
+                case "LinkButtonTour":
+                    Response.Redirect("~/GeneralPages/Tour.aspx");
+                    break;
+                case "LinkButtonNews":
+                    Response.Redirect("~/GeneralPages/News.aspx");
+                    break;
+                case "LinkButtonUser":
+                    Response.Redirect("~/GeneralPages/User.aspx");
+                    break;
+                case "LinkButtonAdmin":
+                    Response.Redirect("~/AdminPages/Admin.aspx");
+                    break;
+                default:
+                    Response.Redirect("~/Default.aspx");
+                    break;
+            }
+        }
+
     }
 }
