@@ -2,8 +2,7 @@
     CodeBehind="Index.aspx.cs" Inherits="CMS.Account.Login" %>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false">
-        <LayoutTemplate>
-            
+        <LayoutTemplate>     
             
             <div class="accountInfo">
                 <div class="logInBox">
@@ -11,18 +10,13 @@
                         <p class="login-heading">Please enter ID and Password to login to CMS</p>
                         <p>
                             <asp:TextBox ID="UserName" runat="server" CssClass="textEntry" placeholder="ID" ToolTip="UserID"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" 
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="UserName" 
                                  CssClass="failureNotification" ErrorMessage="User Name is required." ToolTip="User Name is required." 
                                  ValidationGroup="LoginUserValidationGroup"></asp:RequiredFieldValidator>
-                        </p>
-                        <p>
                             <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password" placeholder="Password" ToolTip="Password"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
-                                 CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
-                                 ValidationGroup="LoginUserValidationGroup"></asp:RequiredFieldValidator>
-                        </p>
-                        
-                        <p>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="Password" 
+                                CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
+                                ValidationGroup="LoginUserValidationGroup"></asp:RequiredFieldValidator></br>
                             <asp:CheckBox ID="RememberMe" runat="server"/>
                             <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Keep me logged in</asp:Label>
                         </p>
@@ -30,9 +24,9 @@
                         <p class="submitButton">
                             <asp:Button ID="LoginButton" CssClass="logInBtn" runat="server" CommandName="Login" Text="Log In" ValidationGroup="LoginUserValidationGroup"/>
                         </p>
-                        <span class="failureNotification">
+                        <div class="failureNotification">
                             <asp:Literal ID="FailureText" runat="server"></asp:Literal>
-                        </span>
+                        </div>
                     </fieldset>
                 </div>
             </div>

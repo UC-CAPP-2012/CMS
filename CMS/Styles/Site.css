@@ -281,8 +281,11 @@ div.accountInfo
 
 .failureNotification
 {
-    font-size: 1.2em;
+    font-size: 12px;
     color: Red;
+    margin:0;
+    padding:0;
+    line-height:20px;
 }
 
 .bold
@@ -301,22 +304,23 @@ div.accountInfo
     background-color: #ACACAC;
     box-shadow: 0 1px 2px 0 #333333;
     float: right;
-    font-family: Sans-Serif,Times New Roman;
-    font-size: 20px;
+    font-family: "Arial Black", Sans-Serif,Times New Roman;
+    font-size: 18px;
     font-weight: 900;
     height: 70px;
     margin-right: -125px;
-    margin-top: -140px;
+    margin-top: -135px;
     text-transform: uppercase;
     width: 100px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    color:#4f4f4f;
 }
 
 .logInBtn:hover
 {
-    background: -moz-linear-gradient(center bottom , #a1a1a1  0%, white 50%, #d1d1d1 100%);
+    background: -moz-linear-gradient(center bottom , #a1a1a1  0%, #d4d4d4 50%, #a1a1a1 100%);
     background-image: -webkit-linear-gradient( #a1a1a1 , white, #d1d1d1);
     box-shadow: 0 1px 2px 0 #a1a1a1;
-    text-decoration: underline;
 }
 
 .logInBox
@@ -335,7 +339,7 @@ div.accountInfo
     margin-right: auto;
     padding-left: 10px;
     width: 600px;
-    margin-top: 200px;
+    margin-top: 100px;
     padding-bottom: 10px;
     padding-top: 10px;
 }
