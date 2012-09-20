@@ -35,6 +35,8 @@
                         CssClass="medium button gray" > Home </asp:LinkButton>
                <asp:LinkButton ID="LinkButtonCategory" runat="server" OnClick="MenuButton_Clicked" 
                         CssClass="medium button gray" > Category </asp:LinkButton>
+                <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" 
+                        CssClass="medium button gray" > Sub Type </asp:LinkButton>
                 <asp:LinkButton ID="LinkButtonPOI" runat="server" OnClick="MenuButton_Clicked" 
                         CssClass="medium button gray" > POI </asp:LinkButton>
                 <asp:LinkButton ID="LinkButtonEvent" runat="server" OnClick="MenuButton_Clicked" 

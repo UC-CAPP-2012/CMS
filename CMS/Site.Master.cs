@@ -88,6 +88,9 @@ namespace CMS
                 case "LinkButtonAdmin":
                     Response.Redirect("~/AdminPages/Admin.aspx");
                     break;
+                case "LinkButtonSubType":
+                    Response.Redirect("~/GeneralPages/SubType.aspx");
+                    break;
                 default:
                     Response.Redirect("~/Default.aspx");
                     break;

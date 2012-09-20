@@ -60,6 +60,7 @@
     <Content Include="GeneralPages\Event.aspx" />
     <Content Include="GeneralPages\News.aspx" />
     <Content Include="GeneralPages\POI.aspx" />
+    <Content Include="GeneralPages\SubType.aspx" />
     <Content Include="GeneralPages\Tour.aspx" />
     <Content Include="GeneralPages\User.aspx" />
     <Content Include="Index.aspx" />
@@ -143,6 +144,13 @@
     </Compile>
     <Compile Include="GeneralPages\POI.aspx.designer.cs">
       <DependentUpon>POI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPages\SubType.aspx.cs">
+      <DependentUpon>SubType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralPages\SubType.aspx.designer.cs">
+      <DependentUpon>SubType.aspx</DependentUpon>
     </Compile>
     <Compile Include="GeneralPages\Tour.aspx.cs">
       <DependentUpon>Tour.aspx</DependentUpon>
