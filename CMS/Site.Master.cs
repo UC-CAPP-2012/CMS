@@ -12,13 +12,13 @@ namespace CMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /* Redirect to login page when logged out
+            //Redirect to login page when logged out
             
             if (Membership.GetUser() == null)
             {
                 Response.Redirect("~/Index.aspx");
             }
-            */
+            
 
 
             //Set current menu button colour
