@@ -532,6 +532,75 @@
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="POIItmeTableAdapter" GeneratorDataComponentClassName="POIItmeTableAdapter" Name="POIItme" UserDataComponentName="POIItmeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillAll" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataAll" GeneratorSourceName="FillAll" GetMethodModifier="Public" GetMethodName="GetDataAll" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataAll" UserSourceName="FillAll">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  Item.*, POI.CategoryID
+FROM     (Item INNER JOIN
+               POI ON Item.ItemID = POI.ItemID)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ItemID" DataSetColumn="ItemID" />
+              <Mapping SourceColumn="ItemName" DataSetColumn="ItemName" />
+              <Mapping SourceColumn="Details" DataSetColumn="Details" />
+              <Mapping SourceColumn="Cost" DataSetColumn="Cost" />
+              <Mapping SourceColumn="Rating" DataSetColumn="Rating" />
+              <Mapping SourceColumn="Phone" DataSetColumn="Phone" />
+              <Mapping SourceColumn="Website" DataSetColumn="Website" />
+              <Mapping SourceColumn="Email" DataSetColumn="Email" />
+              <Mapping SourceColumn="OpeningHours" DataSetColumn="OpeningHours" />
+              <Mapping SourceColumn="StreetNo" DataSetColumn="StreetNo" />
+              <Mapping SourceColumn="StreetName" DataSetColumn="StreetName" />
+              <Mapping SourceColumn="Latitute" DataSetColumn="Latitute" />
+              <Mapping SourceColumn="Longitute" DataSetColumn="Longitute" />
+              <Mapping SourceColumn="Postcode" DataSetColumn="Postcode" />
+              <Mapping SourceColumn="Suburb" DataSetColumn="Suburb" />
+              <Mapping SourceColumn="SubtypeID" DataSetColumn="SubtypeID" />
+              <Mapping SourceColumn="CategoryID" DataSetColumn="CategoryID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EventItemTableAdapter" GeneratorDataComponentClassName="EventItemTableAdapter" Name="EventItem" UserDataComponentName="EventItemTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillAll" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataAll" GeneratorSourceName="FillAll" GetMethodModifier="Public" GetMethodName="GetDataAll" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataAll" UserSourceName="FillAll">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  Item.*, Event.EventStartDate, Event.EventEndDate
+FROM     (Item INNER JOIN
+               Event ON Item.ItemID = Event.ItemID)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ItemID" DataSetColumn="ItemID" />
+              <Mapping SourceColumn="ItemName" DataSetColumn="ItemName" />
+              <Mapping SourceColumn="Details" DataSetColumn="Details" />
+              <Mapping SourceColumn="Cost" DataSetColumn="Cost" />
+              <Mapping SourceColumn="Rating" DataSetColumn="Rating" />
+              <Mapping SourceColumn="Phone" DataSetColumn="Phone" />
+              <Mapping SourceColumn="Website" DataSetColumn="Website" />
+              <Mapping SourceColumn="Email" DataSetColumn="Email" />
+              <Mapping SourceColumn="OpeningHours" DataSetColumn="OpeningHours" />
+              <Mapping SourceColumn="StreetNo" DataSetColumn="StreetNo" />
+              <Mapping SourceColumn="StreetName" DataSetColumn="StreetName" />
+              <Mapping SourceColumn="Latitute" DataSetColumn="Latitute" />
+              <Mapping SourceColumn="Longitute" DataSetColumn="Longitute" />
+              <Mapping SourceColumn="Postcode" DataSetColumn="Postcode" />
+              <Mapping SourceColumn="Suburb" DataSetColumn="Suburb" />
+              <Mapping SourceColumn="SubtypeID" DataSetColumn="SubtypeID" />
+              <Mapping SourceColumn="EventStartDate" DataSetColumn="EventStartDate" />
+              <Mapping SourceColumn="EventEndDate" DataSetColumn="EventEndDate" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -774,6 +843,149 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="POIItme" msprop:Generator_TableClassName="POIItmeDataTable" msprop:Generator_TableVarName="tablePOIItme" msprop:Generator_TablePropName="POIItme" msprop:Generator_RowDeletingName="POIItmeRowDeleting" msprop:Generator_UserTableName="POIItme" msprop:Generator_RowChangingName="POIItmeRowChanging" msprop:Generator_RowEvHandlerName="POIItmeRowChangeEventHandler" msprop:Generator_RowDeletedName="POIItmeRowDeleted" msprop:Generator_RowEvArgName="POIItmeRowChangeEvent" msprop:Generator_RowChangedName="POIItmeRowChanged" msprop:Generator_RowClassName="POIItmeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ItemID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnItemID" msprop:Generator_ColumnPropNameInRow="ItemID" msprop:Generator_ColumnPropNameInTable="ItemIDColumn" msprop:Generator_UserColumnName="ItemID" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemName" msprop:Generator_ColumnVarNameInTable="columnItemName" msprop:Generator_ColumnPropNameInRow="ItemName" msprop:Generator_ColumnPropNameInTable="ItemNameColumn" msprop:Generator_UserColumnName="ItemName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Details" msprop:Generator_ColumnVarNameInTable="columnDetails" msprop:Generator_ColumnPropNameInRow="Details" msprop:Generator_ColumnPropNameInTable="DetailsColumn" msprop:Generator_UserColumnName="Details" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cost" msprop:Generator_ColumnVarNameInTable="columnCost" msprop:Generator_ColumnPropNameInRow="Cost" msprop:Generator_ColumnPropNameInTable="CostColumn" msprop:Generator_UserColumnName="Cost" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Rating" msprop:Generator_ColumnVarNameInTable="columnRating" msprop:Generator_ColumnPropNameInRow="Rating" msprop:Generator_ColumnPropNameInTable="RatingColumn" msprop:Generator_UserColumnName="Rating" type="xs:int" minOccurs="0" />
+              <xs:element name="Phone" msprop:Generator_ColumnVarNameInTable="columnPhone" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_UserColumnName="Phone" type="xs:int" minOccurs="0" />
+              <xs:element name="Website" msprop:Generator_ColumnVarNameInTable="columnWebsite" msprop:Generator_ColumnPropNameInRow="Website" msprop:Generator_ColumnPropNameInTable="WebsiteColumn" msprop:Generator_UserColumnName="Website" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OpeningHours" msprop:Generator_ColumnVarNameInTable="columnOpeningHours" msprop:Generator_ColumnPropNameInRow="OpeningHours" msprop:Generator_ColumnPropNameInTable="OpeningHoursColumn" msprop:Generator_UserColumnName="OpeningHours" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StreetNo" msprop:Generator_ColumnVarNameInTable="columnStreetNo" msprop:Generator_ColumnPropNameInRow="StreetNo" msprop:Generator_ColumnPropNameInTable="StreetNoColumn" msprop:Generator_UserColumnName="StreetNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StreetName" msprop:Generator_ColumnVarNameInTable="columnStreetName" msprop:Generator_ColumnPropNameInRow="StreetName" msprop:Generator_ColumnPropNameInTable="StreetNameColumn" msprop:Generator_UserColumnName="StreetName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Latitute" msprop:Generator_ColumnVarNameInTable="columnLatitute" msprop:Generator_ColumnPropNameInRow="Latitute" msprop:Generator_ColumnPropNameInTable="LatituteColumn" msprop:Generator_UserColumnName="Latitute" type="xs:int" minOccurs="0" />
+              <xs:element name="Longitute" msprop:Generator_ColumnVarNameInTable="columnLongitute" msprop:Generator_ColumnPropNameInRow="Longitute" msprop:Generator_ColumnPropNameInTable="LongituteColumn" msprop:Generator_UserColumnName="Longitute" type="xs:int" minOccurs="0" />
+              <xs:element name="Postcode" msprop:Generator_ColumnVarNameInTable="columnPostcode" msprop:Generator_ColumnPropNameInRow="Postcode" msprop:Generator_ColumnPropNameInTable="PostcodeColumn" msprop:Generator_UserColumnName="Postcode" type="xs:int" minOccurs="0" />
+              <xs:element name="Suburb" msprop:Generator_ColumnVarNameInTable="columnSuburb" msprop:Generator_ColumnPropNameInRow="Suburb" msprop:Generator_ColumnPropNameInTable="SuburbColumn" msprop:Generator_UserColumnName="Suburb" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SubtypeID" msprop:Generator_ColumnVarNameInTable="columnSubtypeID" msprop:Generator_ColumnPropNameInRow="SubtypeID" msprop:Generator_ColumnPropNameInTable="SubtypeIDColumn" msprop:Generator_UserColumnName="SubtypeID" type="xs:int" minOccurs="0" />
+              <xs:element name="CategoryID" msprop:Generator_ColumnVarNameInTable="columnCategoryID" msprop:Generator_ColumnPropNameInRow="CategoryID" msprop:Generator_ColumnPropNameInTable="CategoryIDColumn" msprop:Generator_UserColumnName="CategoryID" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EventItem" msprop:Generator_TableClassName="EventItemDataTable" msprop:Generator_TableVarName="tableEventItem" msprop:Generator_TablePropName="EventItem" msprop:Generator_RowDeletingName="EventItemRowDeleting" msprop:Generator_UserTableName="EventItem" msprop:Generator_RowChangingName="EventItemRowChanging" msprop:Generator_RowEvHandlerName="EventItemRowChangeEventHandler" msprop:Generator_RowDeletedName="EventItemRowDeleted" msprop:Generator_RowEvArgName="EventItemRowChangeEvent" msprop:Generator_RowChangedName="EventItemRowChanged" msprop:Generator_RowClassName="EventItemRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ItemID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnItemID" msprop:Generator_ColumnPropNameInRow="ItemID" msprop:Generator_ColumnPropNameInTable="ItemIDColumn" msprop:Generator_UserColumnName="ItemID" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemName" msprop:Generator_ColumnVarNameInTable="columnItemName" msprop:Generator_ColumnPropNameInRow="ItemName" msprop:Generator_ColumnPropNameInTable="ItemNameColumn" msprop:Generator_UserColumnName="ItemName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Details" msprop:Generator_ColumnVarNameInTable="columnDetails" msprop:Generator_ColumnPropNameInRow="Details" msprop:Generator_ColumnPropNameInTable="DetailsColumn" msprop:Generator_UserColumnName="Details" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cost" msprop:Generator_ColumnVarNameInTable="columnCost" msprop:Generator_ColumnPropNameInRow="Cost" msprop:Generator_ColumnPropNameInTable="CostColumn" msprop:Generator_UserColumnName="Cost" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Rating" msprop:Generator_ColumnVarNameInTable="columnRating" msprop:Generator_ColumnPropNameInRow="Rating" msprop:Generator_ColumnPropNameInTable="RatingColumn" msprop:Generator_UserColumnName="Rating" type="xs:int" minOccurs="0" />
+              <xs:element name="Phone" msprop:Generator_ColumnVarNameInTable="columnPhone" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_UserColumnName="Phone" type="xs:int" minOccurs="0" />
+              <xs:element name="Website" msprop:Generator_ColumnVarNameInTable="columnWebsite" msprop:Generator_ColumnPropNameInRow="Website" msprop:Generator_ColumnPropNameInTable="WebsiteColumn" msprop:Generator_UserColumnName="Website" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OpeningHours" msprop:Generator_ColumnVarNameInTable="columnOpeningHours" msprop:Generator_ColumnPropNameInRow="OpeningHours" msprop:Generator_ColumnPropNameInTable="OpeningHoursColumn" msprop:Generator_UserColumnName="OpeningHours" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StreetNo" msprop:Generator_ColumnVarNameInTable="columnStreetNo" msprop:Generator_ColumnPropNameInRow="StreetNo" msprop:Generator_ColumnPropNameInTable="StreetNoColumn" msprop:Generator_UserColumnName="StreetNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StreetName" msprop:Generator_ColumnVarNameInTable="columnStreetName" msprop:Generator_ColumnPropNameInRow="StreetName" msprop:Generator_ColumnPropNameInTable="StreetNameColumn" msprop:Generator_UserColumnName="StreetName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Latitute" msprop:Generator_ColumnVarNameInTable="columnLatitute" msprop:Generator_ColumnPropNameInRow="Latitute" msprop:Generator_ColumnPropNameInTable="LatituteColumn" msprop:Generator_UserColumnName="Latitute" type="xs:int" minOccurs="0" />
+              <xs:element name="Longitute" msprop:Generator_ColumnVarNameInTable="columnLongitute" msprop:Generator_ColumnPropNameInRow="Longitute" msprop:Generator_ColumnPropNameInTable="LongituteColumn" msprop:Generator_UserColumnName="Longitute" type="xs:int" minOccurs="0" />
+              <xs:element name="Postcode" msprop:Generator_ColumnVarNameInTable="columnPostcode" msprop:Generator_ColumnPropNameInRow="Postcode" msprop:Generator_ColumnPropNameInTable="PostcodeColumn" msprop:Generator_UserColumnName="Postcode" type="xs:int" minOccurs="0" />
+              <xs:element name="Suburb" msprop:Generator_ColumnVarNameInTable="columnSuburb" msprop:Generator_ColumnPropNameInRow="Suburb" msprop:Generator_ColumnPropNameInTable="SuburbColumn" msprop:Generator_UserColumnName="Suburb" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SubtypeID" msprop:Generator_ColumnVarNameInTable="columnSubtypeID" msprop:Generator_ColumnPropNameInRow="SubtypeID" msprop:Generator_ColumnPropNameInTable="SubtypeIDColumn" msprop:Generator_UserColumnName="SubtypeID" type="xs:int" minOccurs="0" />
+              <xs:element name="EventStartDate" msprop:Generator_ColumnVarNameInTable="columnEventStartDate" msprop:Generator_ColumnPropNameInRow="EventStartDate" msprop:Generator_ColumnPropNameInTable="EventStartDateColumn" msprop:Generator_UserColumnName="EventStartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EventEndDate" msprop:Generator_ColumnVarNameInTable="columnEventEndDate" msprop:Generator_ColumnPropNameInRow="EventEndDate" msprop:Generator_ColumnPropNameInTable="EventEndDateColumn" msprop:Generator_UserColumnName="EventEndDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -824,13 +1036,18 @@
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="ItemEvent" msdata:parent="Item" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_UserParentTable="Item" msprop:Generator_UserRelationName="ItemEvent" msprop:Generator_RelationVarName="relationItemEvent" msprop:Generator_ParentPropName="ItemRow" />
-      <msdata:Relationship name="SubtypeItem" msdata:parent="Subtype" msdata:child="Item" msdata:parentkey="SubtypeID" msdata:childkey="SubtypeID" msprop:Generator_UserChildTable="Item" msprop:Generator_ChildPropName="GetItemRows" msprop:Generator_UserParentTable="Subtype" msprop:Generator_UserRelationName="SubtypeItem" msprop:Generator_RelationVarName="relationSubtypeItem" msprop:Generator_ParentPropName="SubtypeRow" />
-      <msdata:Relationship name="ItemMedia" msdata:parent="Item" msdata:child="Media" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_UserParentTable="Item" msprop:Generator_UserRelationName="ItemMedia" msprop:Generator_RelationVarName="relationItemMedia" msprop:Generator_ParentPropName="ItemRow" />
-      <msdata:Relationship name="CategoryPOI" msdata:parent="Category" msdata:child="POI" msdata:parentkey="CategoryID" msdata:childkey="CategoryID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_UserParentTable="Category" msprop:Generator_UserRelationName="CategoryPOI" msprop:Generator_RelationVarName="relationCategoryPOI" msprop:Generator_ParentPropName="CategoryRow" />
-      <msdata:Relationship name="ItemPOI" msdata:parent="Item" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_UserParentTable="Item" msprop:Generator_UserRelationName="ItemPOI" msprop:Generator_RelationVarName="relationItemPOI" msprop:Generator_ParentPropName="ItemRow" />
-      <msdata:Relationship name="POIPOITour" msdata:parent="POI" msdata:child="POITour" msdata:parentkey="ItemID" msdata:childkey="POIID" msprop:Generator_UserChildTable="POITour" msprop:Generator_ChildPropName="GetPOITourRows" msprop:Generator_UserParentTable="POI" msprop:Generator_UserRelationName="POIPOITour" msprop:Generator_RelationVarName="relationPOIPOITour" msprop:Generator_ParentPropName="POIRow" />
-      <msdata:Relationship name="TourPOITour" msdata:parent="Tour" msdata:child="POITour" msdata:parentkey="TourID" msdata:childkey="TourID" msprop:Generator_UserChildTable="POITour" msprop:Generator_ChildPropName="GetPOITourRows" msprop:Generator_UserParentTable="Tour" msprop:Generator_UserRelationName="TourPOITour" msprop:Generator_RelationVarName="relationTourPOITour" msprop:Generator_ParentPropName="TourRow" />
+      <msdata:Relationship name="ItemEvent" msdata:parent="Item" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_ParentPropName="ItemRow" msprop:Generator_UserRelationName="ItemEvent" msprop:Generator_RelationVarName="relationItemEvent" msprop:Generator_UserParentTable="Item" />
+      <msdata:Relationship name="SubtypeItem" msdata:parent="Subtype" msdata:child="Item" msdata:parentkey="SubtypeID" msdata:childkey="SubtypeID" msprop:Generator_UserChildTable="Item" msprop:Generator_ChildPropName="GetItemRows" msprop:Generator_ParentPropName="SubtypeRow" msprop:Generator_UserRelationName="SubtypeItem" msprop:Generator_RelationVarName="relationSubtypeItem" msprop:Generator_UserParentTable="Subtype" />
+      <msdata:Relationship name="ItemMedia" msdata:parent="Item" msdata:child="Media" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_ParentPropName="ItemRow" msprop:Generator_UserRelationName="ItemMedia" msprop:Generator_RelationVarName="relationItemMedia" msprop:Generator_UserParentTable="Item" />
+      <msdata:Relationship name="CategoryPOI" msdata:parent="Category" msdata:child="POI" msdata:parentkey="CategoryID" msdata:childkey="CategoryID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_ParentPropName="CategoryRow" msprop:Generator_UserRelationName="CategoryPOI" msprop:Generator_RelationVarName="relationCategoryPOI" msprop:Generator_UserParentTable="Category" />
+      <msdata:Relationship name="ItemPOI" msdata:parent="Item" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_ParentPropName="ItemRow" msprop:Generator_UserRelationName="ItemPOI" msprop:Generator_RelationVarName="relationItemPOI" msprop:Generator_UserParentTable="Item" />
+      <msdata:Relationship name="POIPOITour" msdata:parent="POI" msdata:child="POITour" msdata:parentkey="ItemID" msdata:childkey="POIID" msprop:Generator_UserChildTable="POITour" msprop:Generator_ChildPropName="GetPOITourRows" msprop:Generator_ParentPropName="POIRow" msprop:Generator_UserRelationName="POIPOITour" msprop:Generator_RelationVarName="relationPOIPOITour" msprop:Generator_UserParentTable="POI" />
+      <msdata:Relationship name="TourPOITour" msdata:parent="Tour" msdata:child="POITour" msdata:parentkey="TourID" msdata:childkey="TourID" msprop:Generator_UserChildTable="POITour" msprop:Generator_ChildPropName="GetPOITourRows" msprop:Generator_ParentPropName="TourRow" msprop:Generator_UserRelationName="TourPOITour" msprop:Generator_RelationVarName="relationTourPOITour" msprop:Generator_UserParentTable="Tour" />
+      <msdata:Relationship name="ItemEvent1" msdata:parent="POIItme" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_ParentPropName="POIItmeRow" msprop:Generator_UserRelationName="ItemEvent1" msprop:Generator_RelationVarName="relationItemEvent1" msprop:Generator_UserParentTable="POIItme" />
+      <msdata:Relationship name="ItemMedia1" msdata:parent="POIItme" msdata:child="Media" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_ParentPropName="POIItmeRow" msprop:Generator_UserRelationName="ItemMedia1" msprop:Generator_RelationVarName="relationItemMedia1" msprop:Generator_UserParentTable="POIItme" />
+      <msdata:Relationship name="ItemPOI1" msdata:parent="POIItme" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_ParentPropName="POIItmeRow" msprop:Generator_UserRelationName="ItemPOI1" msprop:Generator_RelationVarName="relationItemPOI1" msprop:Generator_UserParentTable="POIItme" />
+      <msdata:Relationship name="SubtypeItem1" msdata:parent="Subtype" msdata:child="POIItme" msdata:parentkey="SubtypeID" msdata:childkey="SubtypeID" msprop:Generator_UserChildTable="POIItme" msprop:Generator_ChildPropName="GetPOIItmeRows" msprop:Generator_ParentPropName="SubtypeRow" msprop:Generator_UserRelationName="SubtypeItem1" msprop:Generator_RelationVarName="relationSubtypeItem1" msprop:Generator_UserParentTable="Subtype" />
+      <msdata:Relationship name="ItemEvent2" msdata:parent="Item" msdata:child="EventItem" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="EventItem" msprop:Generator_ChildPropName="GetEventItemRows" msprop:Generator_ParentPropName="ItemRow" msprop:Generator_UserRelationName="ItemEvent2" msprop:Generator_RelationVarName="relationItemEvent2" msprop:Generator_UserParentTable="Item" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
