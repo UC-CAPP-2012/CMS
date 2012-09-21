@@ -14,11 +14,15 @@ namespace CMS
         protected void Page_Load(object sender, EventArgs e)
         {
             //Redirect to login page when logged out
-            
+<<<<<<< HEAD
             if (!Page.User.Identity.IsAuthenticated)
+=======
+            /*
+            if (Membership.GetUser() == null)
+>>>>>>> ec96d27f8e9debf8d1b3010ffe7e00af38dbe2b9
             {
                 Response.Redirect("~/Index.aspx");
-            }
+            }*/
 
             if(Page.User.IsInRole("Admin")){
                 Admin_link.Visible = true;

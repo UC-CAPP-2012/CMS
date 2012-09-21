@@ -58,6 +58,27 @@
     <Content Include="About.aspx" />
     <Content Include="AdminPages\AddUser.aspx" />
     <Content Include="AdminPages\Admin.aspx" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\AjaxControlToolkit.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\ar\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\cs\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\de\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\es\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\fr\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\he\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\hi\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\it\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\ja\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\ko\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\LICENSE.txt" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\nl\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\pt\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\ReadMe.html" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\ru\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\SanitizerProviders\HtmlAgilityPack.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\SanitizerProviders\SanitizerProviders.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\tr-TR\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\zh-CHS\AjaxControlToolkit.resources.dll" />
+    <Content Include="AjaxControlToolkit.Binary.NET4\zh-CHT\AjaxControlToolkit.resources.dll" />
     <Content Include="App_Data\ASPNETDB.MDF" />
     <Content Include="App_Data\ASPNETDB_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
@@ -253,7 +274,9 @@
   <ItemGroup>
     <Content Include="Login.Master" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
