@@ -10,7 +10,6 @@
     function CancelClick() {}
 </script>
 
-
     <!-- Data Detail -->
     <div class="contentDetailWrapper">
         <div class="contentDetail category">
