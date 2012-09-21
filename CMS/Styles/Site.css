@@ -186,7 +186,6 @@ first child of the left and right table columns */
     width:200px; 
     background-color:#acacac;
     overflow-y:hidden;
-    padding-left:20px;
 }
 
 .contentLeftMenu h1
@@ -196,8 +195,28 @@ first child of the left and right table columns */
     font-weight:bold;
     color:#fff;
     text-shadow: 1px -2px 2px rgba(0,0,0,0.25);
+    margin-bottom: 20px;
     
 }
+
+.contentLeftMenu a, a:visited
+{
+    font-size:1.2em;
+    font-family:Calibri;
+    color:#636363;
+    font-weight:bold;
+    text-decoration:none;
+    margin-left:20px;
+    margin-bottom: 5px;
+}
+
+.contentLeftMenu a:hover
+{
+    color:#000;
+    text-decoration:underline;
+    cursor:pointer;    
+}
+
 
 .contentList
 {
@@ -205,9 +224,20 @@ first child of the left and right table columns */
     top:140px; left:200px; bottom:30px;
     width:400px;
     background-color:#f7f7de;
-    overflow-y: auto;
+    overflow-y: scroll;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
 
 }
+
+.category.contentList       {   width:223px;    }
+.event.contentList          {   width:223px;    }
+.news.contentList           {   width:223px;    }
+.poi.contentList            {   width:223px;    }
+.subtype.contentList        {   width:223px;    }
+.tour.contentList           {   width:223px;    }
+.user.contentList           {   width:223px;    }
+
 .contentDetailWrapper
 {
     position:absolute; 
@@ -216,10 +246,58 @@ first child of the left and right table columns */
     background-color:#fff;
     overflow-y: auto;
 }
+
 .contentDetail
 {
    margin: 10px 10px 10px 610px;    
 }
+
+.contentDetail h2
+{
+    color:#272727;
+    font-size:1.3em;
+    font-weight:bold; 
+    padding:0;
+    margin:0 0 10px 0;   
+}
+
+.contentDetail h3
+{
+    color:#272727;
+    font-size:1.2em;
+    font-weight:bold;    
+}
+
+.detailButtons
+{
+    margin: 5px 5px 20px 0;
+    border-color: Gray;
+    border-radius: 8px;
+}
+
+.category.contentDetail     {   margin-left: 493px;  }
+.event.contentDetail        {   margin-left: 493px;  }
+.news.contentDetail         {   margin-left: 493px;  }
+.poi.contentDetail          {   margin-left: 493px;  }
+.subtype.contentDetail      {   margin-left: 493px;  }
+.tour.contentDetail         {   margin-left: 493px;  }
+.user.contentDetail         {   margin-left: 493px;  }
+.admin.contentDetail        {   margin-left: 493px;  }
+
+.validationError
+{
+    margin:0 0 5px 160px;
+    padding: 0;
+    color:Red;    
+    font-size:0.9em;
+}
+
+.label
+{
+    text-align:right; 
+    margin-left:5px;   
+}
+
 
 
 /* FORM ELEMENTS   
