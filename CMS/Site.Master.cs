@@ -13,11 +13,11 @@ namespace CMS
         protected void Page_Load(object sender, EventArgs e)
         {
             //Redirect to login page when logged out
-            
+            /*
             if (Membership.GetUser() == null)
             {
                 Response.Redirect("~/Index.aspx");
-            }
+            }*/
 
 
             Admin_link.HRef = "/AdminPages/Admin.aspx";

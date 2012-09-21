@@ -1,14 +1,131 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Category.aspx.cs" Inherits="CMS.CMSPages.Category" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+<script type="text/javascript">
+    //Don't run suver side code and do nothing when cancel button on confirmation is clicked.
+    function CancelClick() {}
+</script>
+
+
+    <!-- Data Detail -->
     <div class="contentDetailWrapper">
-        <div class="contentDetail">
+        <div class="contentDetail category">
+            <asp:ScriptManager ID="ScriptManager1" runat="server"/>
+            <asp:MultiView ID="CategotyMultiView" runat="server">
+
+                <!-- default detail display -->
+                <asp:View ID="DetailView" runat="server">
+                    <asp:Button ID="UpdateButton" runat="server" Text="Update" Width="100px" 
+                        onclick="UpdateButton_Click" CssClass="detailButtons" />
+                    <asp:Button ID="DeleteButton" runat="server" Text="Delete" Width="100px" 
+                        onclick="DeleteButton_Click" CssClass="detailButtons"/>                
+                    <asp:ConfirmButtonExtender ID="DeleteButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
+                        runat="server" ConfirmText="Are you sure you want to delete the selected category?" 
+                        Enabled="True" TargetControlID="DeleteButton">
+                    </asp:ConfirmButtonExtender>
+                    <h2> Category Details </h2>  
+                    <asp:Label ID="NameLabel" runat="server" CssClass="label" Text="Category Name : " Font-Bold="True" Width="150px"></asp:Label>
+                    <asp:Label ID="NameDataLabel" runat="server"></asp:Label>
+                </asp:View>
+
+                <!-- update display (Visible when update button is clicked) -->
+                <asp:View ID="UpdateView" runat="server">
+                    <asp:Button ID="SubmitButton" runat="server" Text="Submit Update" Width="120px" 
+                        CssClass="detailButtons" onclick="SubmitButton_Click"  />
+                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" OnClientCancel="CancelClick"
+                        runat="server" ConfirmText="Do you want to submit the update?" Enabled="True" 
+                        TargetControlID="SubmitButton" ConfirmOnFormSubmit="True">
+                    </asp:ConfirmButtonExtender>
+                    <asp:Button ID="CancelButton" runat="server" Text="Cancel" Width="70px" 
+                        CssClass="detailButtons" onclick="CancelButton_Click" CausesValidation="False" />
+                    <h2> Update Category Details </h2>  
+                    <asp:Label ID="NameUpdateLabel" CssClass="label" runat="server" Text="Category Name : " Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:TextBox ID="NameTextBox" runat="server" Width="250px"></asp:TextBox> 
+                    <p class="validationError">             
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorCategoryName" runat="server" 
+                        ErrorMessage="Category name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
+                    </p>
+                </asp:View>
+
+                <!-- insert new display (Visible when insert link button is clicked) -->
+                <asp:View ID="InsertView" runat="server">
+                    <asp:Button ID="SubnitNewButton" runat="server" Text="Insert New" Width="100px" 
+                        CssClass="detailButtons" onclick="SubnitNewButton_Click" />
+                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender2" OnClientCancel="CancelClick"
+                        runat="server" ConfirmText="Do you want to submit the new category?" Enabled="True" 
+                        TargetControlID="SubnitNewButton" ConfirmOnFormSubmit="True">
+                    </asp:ConfirmButtonExtender>
+                    <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
+                        CssClass="detailButtons" CausesValidation="False" 
+                        onclick="InsertCancelButton_Click" />
+                    <h2> Insert New Category </h2>
+                    <asp:Label ID="InsertNameLabel" CssClass="label" runat="server" Text="Category Name : " Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:TextBox ID="InsertNameTextBox" runat="server" Width="250px"></asp:TextBox> 
+                    <p class="validationError">             
+                        <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
+                        ErrorMessage="Category name is required." ControlToValidate="InsertNameTextBox" SetFocusOnError="True" />
+                    </p>
+                </asp:View>
+            </asp:MultiView>
         </div>
     </div>
-    <div class="contentList">
+
+    <!-- Data List -->
+    <div class="contentList category">
+        <asp:GridView ID="GridViewCategory" runat="server" AllowSorting="True" 
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
+            BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CategoryID" 
+            DataSourceID="ObjectDataSourceCategory" ForeColor="Black" 
+            GridLines="Vertical" onrowdatabound="GridViewCategory_RowDataBound" 
+            onselectedindexchanged="GridViewCategory_SelectedIndexChanged">
+            <AlternatingRowStyle BackColor="White"  />
+            <Columns>           
+                    <asp:CommandField SelectText="" ShowSelectButton="True" />
+                    <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" 
+                        InsertVisible="False" ReadOnly="True" SortExpression="CategoryID" 
+                        Visible="False" >
+                    <ItemStyle Width="80px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" 
+                        SortExpression="CategoryName" >
+                    <ItemStyle Width="200px" />
+                    </asp:BoundField>
+            </Columns>
+            <FooterStyle BackColor="#CCCC99" />
+            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#F7F7DE"  />
+            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#FBFBF2" />
+            <SortedAscendingHeaderStyle BackColor="#848384" />
+            <SortedDescendingCellStyle BackColor="#EAEAD3" />
+            <SortedDescendingHeaderStyle BackColor="#575357" />
+        </asp:GridView>
+        <asp:ObjectDataSource ID="ObjectDataSourceCategory" runat="server" 
+            DeleteMethod="DeleteCategory" InsertMethod="InsertCategory" 
+            SelectMethod="getAllCategory" TypeName="CMS.BLL.CMSBLClass" 
+            UpdateMethod="UpdateCategory" 
+            OldValuesParameterFormatString="original_{0}">
+            <DeleteParameters>
+                <asp:Parameter Name="original_CategoryID" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="categoryName" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="categoryName" Type="String" />
+                <asp:Parameter Name="original_CategoryID" Type="Int32" />
+            </UpdateParameters>
+        </asp:ObjectDataSource>
     </div>
+
+    <!-- The menu on the left -->
     <div class="contentLeftMenu">
         <h1> Category </h1>
+        <asp:LinkButton ID="InsertLinkButton" runat="server" onclick="InsertLinkButton_Click"> Insert New Category </asp:LinkButton>
     </div>
 </asp:Content>
