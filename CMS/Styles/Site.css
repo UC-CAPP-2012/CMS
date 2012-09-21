@@ -22,18 +22,19 @@ body
 
 a:link, a:visited
 {
-    color: #034af3;
+    font-weight: bolder;
+    color: orange;
 }
 
 a:hover
 {
-    color: #1d60ff;
+    color: white;
     text-decoration: none;
 }
 
 a:active
 {
-    color: #034af3;
+    color: orange;
 }
 
 p
@@ -60,6 +61,7 @@ h1
     font-size: 1.6em;
     padding-bottom: 0px;
     margin-bottom: 0px;
+    font-weight: bold;
 }
 
 h2
@@ -193,7 +195,7 @@ first child of the left and right table columns */
     font-family:Calibri;
     font-weight:bold;
     color:#fff;
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    text-shadow: 1px -2px 2px rgba(0,0,0,0.25);
     
 }
 
@@ -265,6 +267,10 @@ input.passwordEntry
 div.accountInfo
 {
     width: 42%;
+    border: 1px dashed;
+    border-radius: 10px 10px 10px 10px;
+    padding-bottom: 20px;
+    width: 60%;
 }
 
 /* MISC  
@@ -490,30 +496,94 @@ div.accountInfo
 	.gray.button:hover						{ background-color: #acacac; }
    
    
-   
-.elgg-icon-settings {
+.elgg-icon-admin-settings
+{
     background-position: 0 -755px !important;
     background: url('/Resources/elgg_sprites.png') no-repeat scroll left center transparent;
     height: 16px;
-    margin: 15px 2px 0;
+    margin: 13px 5px 0;
+    width: 16px;
+    float: left;
+}  
+   
+.elgg-icon-settings {
+    background-position: 0 -775px !important;
+    background: url('/Resources/elgg_sprites.png') no-repeat scroll left center transparent;
+    height: 16px;
+    margin: 13px 5px 0;
     width: 16px;
     float: left;
 }
 
-#adminSettings
+#settings
 {
     float: right;
     margin-right: 10px;
     margin-top: -45px;
 }
 
+#settings a:visited
+{  
+    color: Orange !important;
+}
+
 .adminLeftMenu
 {
-    width: 380px !important;
+    text-align: right;
+    width: 540px !important;
+}
+
+.adminLeftMenu h1
+{
+    padding-right: 20px;
 }
 
 .adminBody
 {
-    left: 400px;
-    width: 800px;
+    margin-left: 360px;
+    padding-left: 30px;
+    width: 770px;
+}
+
+
+.failureNotification li
+{
+    list-style: none !important;
+}
+
+.statusMsg
+{
+    color: Red;
+}
+
+.createUserMsg
+{
+    float: right;
+    margin-right: 340px;
+    margin-top: 230px;
+}
+
+.addUserBtn
+{
+    float: left;
+    margin-left: 300px;
+    margin-top: -40px;
+}
+
+.duplicateUserMsg
+{
+    margin-left: 35px;
+    padding-bottom: 20px;
+}
+
+.sideBarNavigation{
+    float: right;
+    margin-right: 50px;
+    text-align: left;
+}
+
+.admin_settings
+{
+    float: left;
+    padding-right: 20px;
 }

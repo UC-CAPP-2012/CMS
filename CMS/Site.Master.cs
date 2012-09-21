@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Security;
 using System.Web.Security;
 
 namespace CMS
@@ -13,14 +14,20 @@ namespace CMS
         protected void Page_Load(object sender, EventArgs e)
         {
             //Redirect to login page when logged out
-            
-            if (Membership.GetUser() == null)
+            if (!Page.User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Index.aspx");
             }
 
+            if(Page.User.IsInRole("Admin")){
+                Admin_link.Visible = true;
+            }
+            else{
+                Admin_link.Visible = false;
+            }
 
-            Admin_link.HRef = "/AdminPages/Admin.aspx";
+            Settings_link.HRef = "/GeneralPages/ChangePassword.aspx";
+            Admin_link.HRef = "/AdminPages/AddUser.aspx";
             //Set current menu button colour
             string[] file = Request.CurrentExecutionFilePath.Split('/');
             string fileName = file[file.Length - 1];
