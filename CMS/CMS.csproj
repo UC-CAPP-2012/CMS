@@ -41,6 +41,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -55,10 +56,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AdminPages\AddUser.aspx" />
     <Content Include="AdminPages\Admin.aspx" />
+    <Content Include="App_Data\ASPNETDB.MDF" />
+    <Content Include="App_Data\ASPNETDB_log.ldf">
+      <DependentUpon>ASPNETDB.MDF</DependentUpon>
+    </Content>
     <Content Include="App_Data\CMS.accdb" />
-    <Content Include="ChangePassword.aspx" />
-    <Content Include="ChangePasswordSuccess.aspx" />
+    <Content Include="GeneralPages\ChangePassword.aspx" />
+    <Content Include="GeneralPages\ChangePasswordSuccess.aspx" />
     <Content Include="GeneralPages\Category.aspx" />
     <Content Include="GeneralPages\Event.aspx" />
     <Content Include="GeneralPages\News.aspx" />
@@ -67,7 +73,6 @@
     <Content Include="GeneralPages\Tour.aspx" />
     <Content Include="GeneralPages\User.aspx" />
     <Content Include="Index.aspx" />
-    <Content Include="Account\Register.aspx" />
     <Content Include="Resources\button-hover.png" />
     <Content Include="Resources\ccapp-banner.png" />
     <Content Include="Resources\ccapp-logo.png" />
@@ -94,6 +99,13 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\AddUser.aspx.cs">
+      <DependentUpon>AddUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPages\AddUser.aspx.designer.cs">
+      <DependentUpon>AddUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPages\Admin.aspx.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -101,25 +113,31 @@
     <Compile Include="AdminPages\Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BLL\ClassManageUser.cs" />
     <Compile Include="BLL\CMSBLClass.cs" />
-    <Compile Include="ChangePassword.aspx.cs">
+    <Compile Include="GeneralPages\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ChangePassword.aspx.designer.cs">
+    <Compile Include="GeneralPages\ChangePassword.aspx.designer.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ChangePasswordSuccess.aspx.cs">
+    <Compile Include="GeneralPages\ChangePasswordSuccess.aspx.cs">
       <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ChangePasswordSuccess.aspx.designer.cs">
+    <Compile Include="GeneralPages\ChangePasswordSuccess.aspx.designer.cs">
       <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
     </Compile>
     <Compile Include="DAL\CMSDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CMSDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DataSetManageUser.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetManageUser.xsd</DependentUpon>
     </Compile>
     <Compile Include="GeneralPages\Category.aspx.cs">
       <DependentUpon>Category.aspx</DependentUpon>
@@ -177,13 +195,6 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -223,14 +234,26 @@
     <None Include="DAL\CMSDBDataSet.xss">
       <DependentUpon>CMSDBDataSet.xsd</DependentUpon>
     </None>
+    <None Include="DAL\DataSetManageUser.xsc">
+      <DependentUpon>DataSetManageUser.xsd</DependentUpon>
+    </None>
+    <None Include="DAL\DataSetManageUser.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetManageUser.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DAL\DataSetManageUser.xss">
+      <DependentUpon>DataSetManageUser.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\Web.config" />
+    <Content Include="AdminPages\Web.config" />
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login.Master" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

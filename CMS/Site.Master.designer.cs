@@ -103,13 +103,13 @@ namespace CMS {
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonUser;
         
         /// <summary>
-        /// adminSettings control.
+        /// settings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl adminSettings;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl settings;
         
         /// <summary>
         /// Admin_link control.
@@ -119,6 +119,15 @@ namespace CMS {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Admin_link;
+        
+        /// <summary>
+        /// Settings_link control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Settings_link;
         
         /// <summary>
         /// MainContent control.
