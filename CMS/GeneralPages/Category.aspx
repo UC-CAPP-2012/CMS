@@ -78,7 +78,7 @@
         <asp:GridView ID="GridViewCategory" runat="server" AllowSorting="True" 
             AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
             BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CategoryID" 
-            DataSourceID="ObjectDataSourceCategory" ForeColor="Black" 
+            DataSourceID="ObjectDataSourceCategory" ForeColor="Black" Width="100%"
             GridLines="Vertical" onrowdatabound="GridViewCategory_RowDataBound" 
             onselectedindexchanged="GridViewCategory_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White"  />
@@ -87,11 +87,9 @@
                     <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" 
                         InsertVisible="False" ReadOnly="True" SortExpression="CategoryID" 
                         Visible="False" >
-                    <ItemStyle Width="80px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" 
                         SortExpression="CategoryName" >
-                    <ItemStyle Width="200px" />
                     </asp:BoundField>
             </Columns>
             <FooterStyle BackColor="#CCCC99" />

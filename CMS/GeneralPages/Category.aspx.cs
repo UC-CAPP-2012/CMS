@@ -80,7 +80,7 @@ namespace CMS.CMSPages
 
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
-            this.CategoryMultiView.ActiveViewIndex = 0;
+            this.CategoryMultiView.ActiveViewIndex = -1;
         }
 
     }

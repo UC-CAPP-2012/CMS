@@ -74,7 +74,7 @@ namespace CMS.GeneralPages
 
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
-            this.SubtypeMultiView.ActiveViewIndex = 0;
+            this.SubtypeMultiView.ActiveViewIndex = -1;
         }
 
         protected void InsertLinkButton_Click(object sender, EventArgs e)

@@ -13,7 +13,6 @@
         <div class="contentDetail subtype">
             <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="SubtypeMultiView" runat="server">
-
                 <!-- default detail display -->
                 <asp:View ID="DetailView" runat="server">
                     <asp:Button ID="UpdateButton" runat="server" Text="Update" Width="100px" 
@@ -76,8 +75,8 @@
             AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
             BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="SubtypeID" 
             DataSourceID="SubtypeObjectDataSource" ForeColor="Black" GridLines="Vertical" 
-            onrowdatabound="SubtypeGridView_RowDataBound" 
-            onselectedindexchanged="SubtypeGridView_SelectedIndexChanged">
+            onrowdatabound="SubtypeGridView_RowDataBound" Width="100%"
+            onselectedindexchanged="SubtypeGridView_SelectedIndexChanged" >
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField SelectText="" ShowSelectButton="True" />
@@ -86,7 +85,6 @@
                     Visible="False" />
                 <asp:BoundField DataField="SubtypeName" HeaderText="SubtypeName" 
                     SortExpression="SubtypeName">
-                <ItemStyle Width="200px" />
                 </asp:BoundField>
             </Columns>
             <FooterStyle BackColor="#CCCC99" />

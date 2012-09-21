@@ -17,6 +17,9 @@ namespace CMS.BLL
         DAL.CMSDBDataSetTableAdapters.EventTableAdapter eventTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.EventTableAdapter();
 
+        DAL.CMSDBDataSetTableAdapters.EventListTableAdapter eventListTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.EventListTableAdapter();
+
         DAL.CMSDBDataSetTableAdapters.ItemTableAdapter itemTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.ItemTableAdapter();
 
@@ -28,6 +31,9 @@ namespace CMS.BLL
 
         DAL.CMSDBDataSetTableAdapters.POITableAdapter poiTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.POITableAdapter();
+
+        DAL.CMSDBDataSetTableAdapters.POIListTableAdapter poiListTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.POIListTableAdapter();
 
         DAL.CMSDBDataSetTableAdapters.SubtypeTableAdapter subtypeTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.SubtypeTableAdapter();
@@ -89,9 +95,14 @@ namespace CMS.BLL
          * POI data access
          *********************************************************************/
 
-        public DAL.CMSDBDataSet.POIItemDataTable getAllPOI()
+        public DAL.CMSDBDataSet.POIListDataTable getAllPOIList()
         {
-            return poiItemTableAdapter.GetDataAll();
+            return poiListTableAdapter.GetDataAll();
+        }
+
+        public DAL.CMSDBDataSet.POIItemDataTable getPOIByItemID(int ItemID)
+        {
+            return poiItemTableAdapter.GetDataByItemID(ItemID);
         }
 
         public int UpdatePOI(String ItemName, String Details, Decimal Cost, int Rating, int Phone, String Website, String Email,
@@ -132,9 +143,14 @@ namespace CMS.BLL
          * Event data access
          *********************************************************************/
 
-        public DAL.CMSDBDataSet.EventItemDataTable getAllEvent()
+        public DAL.CMSDBDataSet.EventListDataTable getAllEventList()
         {
-            return eventItemTableAdapter.GetDataAll();
+            return eventListTableAdapter.GetDataAll();
+        }
+
+        public DAL.CMSDBDataSet.EventItemDataTable getEventByItemID(int ItemID)
+        {
+            return eventItemTableAdapter.GetDataByItemID(ItemID);
         }
 
         public int UpdateEvent(String ItemName, String Details, Decimal Cost, int Rating, int Phone, String Website, String Email,

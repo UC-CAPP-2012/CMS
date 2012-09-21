@@ -232,7 +232,7 @@ first child of the left and right table columns */
 .category.contentList       {   width:223px;    }
 .event.contentList          {   width:223px;    }
 .news.contentList           {   width:223px;    }
-.poi.contentList            {   width:223px;    }
+.poi.contentList            {   width:450px;    }
 .subtype.contentList        {   width:223px;    }
 .tour.contentList           {   width:223px;    }
 .user.contentList           {   width:223px;    }
@@ -277,7 +277,7 @@ first child of the left and right table columns */
 .category.contentDetail     {   margin-left: 493px;  }
 .event.contentDetail        {   margin-left: 493px;  }
 .news.contentDetail         {   margin-left: 493px;  }
-.poi.contentDetail          {   margin-left: 493px;  }
+.poi.contentDetail          {   margin-left: 650px;  }
 .subtype.contentDetail      {   margin-left: 493px;  }
 .tour.contentDetail         {   margin-left: 493px;  }
 .user.contentDetail         {   margin-left: 493px;  }
