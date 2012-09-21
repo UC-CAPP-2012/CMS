@@ -22,13 +22,13 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// CategotyMultiView control.
+        /// CategoryMultiView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView CategotyMultiView;
+        protected global::System.Web.UI.WebControls.MultiView CategoryMultiView;
         
         /// <summary>
         /// DetailView control.
@@ -157,13 +157,13 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.View InsertView;
         
         /// <summary>
-        /// SubnitNewButton control.
+        /// SubmitNewButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SubnitNewButton;
+        protected global::System.Web.UI.WebControls.Button SubmitNewButton;
         
         /// <summary>
         /// ConfirmButtonExtender2 control.

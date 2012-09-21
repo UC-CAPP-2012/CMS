@@ -27,14 +27,14 @@ namespace CMS.CMSPages
 
         protected void GridViewCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.CategotyMultiView.ActiveViewIndex = 0;
+            this.CategoryMultiView.ActiveViewIndex = 0;
             this.NameDataLabel.Text = this.GridViewCategory.SelectedRow.Cells[2].Text;
         }
 
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
-            this.CategotyMultiView.ActiveViewIndex = 1;
+            this.CategoryMultiView.ActiveViewIndex = 1;
             this.NameTextBox.Text = this.GridViewCategory.SelectedRow.Cells[2].Text;
         }
 
@@ -43,7 +43,7 @@ namespace CMS.CMSPages
             int id = (Int32)this.GridViewCategory.SelectedDataKey.Value;
             dataAccess.DeleteCategory(id);
             this.GridViewCategory.DataBind();
-            this.CategotyMultiView.ActiveViewIndex = -1;
+            this.CategoryMultiView.ActiveViewIndex = -1;
         }
 
         protected void SubmitButton_Click(object sender, EventArgs e)
@@ -53,34 +53,34 @@ namespace CMS.CMSPages
                 dataAccess.UpdateCategory(this.NameTextBox.Text, (Int32)this.GridViewCategory.SelectedDataKey.Value);
                 this.GridViewCategory.DataBind();
                 this.NameDataLabel.Text = this.GridViewCategory.SelectedRow.Cells[2].Text;
-                this.CategotyMultiView.ActiveViewIndex = 0;
+                this.CategoryMultiView.ActiveViewIndex = 0;
             }
 
         }
 
         protected void CancelButton_Click(object sender, EventArgs e)
         {
-            this.CategotyMultiView.ActiveViewIndex = 0;
+            this.CategoryMultiView.ActiveViewIndex = 0;
         }
 
         protected void InsertLinkButton_Click(object sender, EventArgs e)
         {
-            this.CategotyMultiView.ActiveViewIndex = 2;
+            this.CategoryMultiView.ActiveViewIndex = 2;
         }
 
-        protected void SubnitNewButton_Click(object sender, EventArgs e)
+        protected void SubmitNewButton_Click(object sender, EventArgs e)
         {
             if (this.InsertNameTextBox.Text.Length > 0)
             {
                 dataAccess.InsertCategory(this.InsertNameTextBox.Text);
                 this.GridViewCategory.DataBind();
-                this.CategotyMultiView.ActiveViewIndex = -1;
+                this.CategoryMultiView.ActiveViewIndex = -1;
             }
         }
 
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
-            this.CategotyMultiView.ActiveViewIndex = 0;
+            this.CategoryMultiView.ActiveViewIndex = 0;
         }
 
     }

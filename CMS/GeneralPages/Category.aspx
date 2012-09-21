@@ -14,7 +14,7 @@
     <div class="contentDetailWrapper">
         <div class="contentDetail category">
             <asp:ScriptManager ID="ScriptManager1" runat="server"/>
-            <asp:MultiView ID="CategotyMultiView" runat="server">
+            <asp:MultiView ID="CategoryMultiView" runat="server">
 
                 <!-- default detail display -->
                 <asp:View ID="DetailView" runat="server">
@@ -52,11 +52,11 @@
 
                 <!-- insert new display (Visible when insert link button is clicked) -->
                 <asp:View ID="InsertView" runat="server">
-                    <asp:Button ID="SubnitNewButton" runat="server" Text="Insert New" Width="100px" 
-                        CssClass="detailButtons" onclick="SubnitNewButton_Click" />
+                    <asp:Button ID="SubmitNewButton" runat="server" Text="Insert New" Width="100px" 
+                        CssClass="detailButtons" onclick="SubmitNewButton_Click" />
                     <asp:ConfirmButtonExtender ID="ConfirmButtonExtender2" OnClientCancel="CancelClick"
                         runat="server" ConfirmText="Do you want to submit the new category?" Enabled="True" 
-                        TargetControlID="SubnitNewButton" ConfirmOnFormSubmit="True">
+                        TargetControlID="SubmitNewButton" ConfirmOnFormSubmit="True">
                     </asp:ConfirmButtonExtender>
                     <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
                         CssClass="detailButtons" CausesValidation="False" 

@@ -44,7 +44,7 @@ namespace CMS.DAL {
         
         private TourDataTable tableTour;
         
-        private POIItmeDataTable tablePOIItme;
+        private POIItemDataTable tablePOIItem;
         
         private EventItemDataTable tableEventItem;
         
@@ -62,15 +62,9 @@ namespace CMS.DAL {
         
         private global::System.Data.DataRelation relationTourPOITour;
         
+        private global::System.Data.DataRelation relationCategoryPOI1;
+        
         private global::System.Data.DataRelation relationItemEvent1;
-        
-        private global::System.Data.DataRelation relationItemMedia1;
-        
-        private global::System.Data.DataRelation relationItemPOI1;
-        
-        private global::System.Data.DataRelation relationSubtypeItem1;
-        
-        private global::System.Data.DataRelation relationItemEvent2;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -130,8 +124,8 @@ namespace CMS.DAL {
                 if ((ds.Tables["Tour"] != null)) {
                     base.Tables.Add(new TourDataTable(ds.Tables["Tour"]));
                 }
-                if ((ds.Tables["POIItme"] != null)) {
-                    base.Tables.Add(new POIItmeDataTable(ds.Tables["POIItme"]));
+                if ((ds.Tables["POIItem"] != null)) {
+                    base.Tables.Add(new POIItemDataTable(ds.Tables["POIItem"]));
                 }
                 if ((ds.Tables["EventItem"] != null)) {
                     base.Tables.Add(new EventItemDataTable(ds.Tables["EventItem"]));
@@ -258,9 +252,9 @@ namespace CMS.DAL {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public POIItmeDataTable POIItme {
+        public POIItemDataTable POIItem {
             get {
-                return this.tablePOIItme;
+                return this.tablePOIItem;
             }
         }
         
@@ -371,8 +365,8 @@ namespace CMS.DAL {
                 if ((ds.Tables["Tour"] != null)) {
                     base.Tables.Add(new TourDataTable(ds.Tables["Tour"]));
                 }
-                if ((ds.Tables["POIItme"] != null)) {
-                    base.Tables.Add(new POIItmeDataTable(ds.Tables["POIItme"]));
+                if ((ds.Tables["POIItem"] != null)) {
+                    base.Tables.Add(new POIItemDataTable(ds.Tables["POIItem"]));
                 }
                 if ((ds.Tables["EventItem"] != null)) {
                     base.Tables.Add(new EventItemDataTable(ds.Tables["EventItem"]));
@@ -470,10 +464,10 @@ namespace CMS.DAL {
                     this.tableTour.InitVars();
                 }
             }
-            this.tablePOIItme = ((POIItmeDataTable)(base.Tables["POIItme"]));
+            this.tablePOIItem = ((POIItemDataTable)(base.Tables["POIItem"]));
             if ((initTable == true)) {
-                if ((this.tablePOIItme != null)) {
-                    this.tablePOIItme.InitVars();
+                if ((this.tablePOIItem != null)) {
+                    this.tablePOIItem.InitVars();
                 }
             }
             this.tableEventItem = ((EventItemDataTable)(base.Tables["EventItem"]));
@@ -489,11 +483,8 @@ namespace CMS.DAL {
             this.relationItemPOI = this.Relations["ItemPOI"];
             this.relationPOIPOITour = this.Relations["POIPOITour"];
             this.relationTourPOITour = this.Relations["TourPOITour"];
+            this.relationCategoryPOI1 = this.Relations["CategoryPOI1"];
             this.relationItemEvent1 = this.Relations["ItemEvent1"];
-            this.relationItemMedia1 = this.Relations["ItemMedia1"];
-            this.relationItemPOI1 = this.Relations["ItemPOI1"];
-            this.relationSubtypeItem1 = this.Relations["SubtypeItem1"];
-            this.relationItemEvent2 = this.Relations["ItemEvent2"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -524,8 +515,8 @@ namespace CMS.DAL {
             base.Tables.Add(this.tableSubtype);
             this.tableTour = new TourDataTable();
             base.Tables.Add(this.tableTour);
-            this.tablePOIItme = new POIItmeDataTable();
-            base.Tables.Add(this.tablePOIItme);
+            this.tablePOIItem = new POIItemDataTable();
+            base.Tables.Add(this.tablePOIItem);
             this.tableEventItem = new EventItemDataTable();
             base.Tables.Add(this.tableEventItem);
             this.relationItemEvent = new global::System.Data.DataRelation("ItemEvent", new global::System.Data.DataColumn[] {
@@ -556,26 +547,14 @@ namespace CMS.DAL {
                         this.tableTour.TourIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePOITour.TourIDColumn}, false);
             this.Relations.Add(this.relationTourPOITour);
+            this.relationCategoryPOI1 = new global::System.Data.DataRelation("CategoryPOI1", new global::System.Data.DataColumn[] {
+                        this.tablePOIItem.CategoryIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePOI.CategoryIDColumn}, false);
+            this.Relations.Add(this.relationCategoryPOI1);
             this.relationItemEvent1 = new global::System.Data.DataRelation("ItemEvent1", new global::System.Data.DataColumn[] {
-                        this.tablePOIItme.ItemIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableEvent.ItemIDColumn}, false);
-            this.Relations.Add(this.relationItemEvent1);
-            this.relationItemMedia1 = new global::System.Data.DataRelation("ItemMedia1", new global::System.Data.DataColumn[] {
-                        this.tablePOIItme.ItemIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMedia.ItemIDColumn}, false);
-            this.Relations.Add(this.relationItemMedia1);
-            this.relationItemPOI1 = new global::System.Data.DataRelation("ItemPOI1", new global::System.Data.DataColumn[] {
-                        this.tablePOIItme.ItemIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePOI.ItemIDColumn}, false);
-            this.Relations.Add(this.relationItemPOI1);
-            this.relationSubtypeItem1 = new global::System.Data.DataRelation("SubtypeItem1", new global::System.Data.DataColumn[] {
-                        this.tableSubtype.SubtypeIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePOIItme.SubtypeIDColumn}, false);
-            this.Relations.Add(this.relationSubtypeItem1);
-            this.relationItemEvent2 = new global::System.Data.DataRelation("ItemEvent2", new global::System.Data.DataColumn[] {
                         this.tableItem.ItemIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableEventItem.ItemIDColumn}, false);
-            this.Relations.Add(this.relationItemEvent2);
+            this.Relations.Add(this.relationItemEvent1);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -640,7 +619,7 @@ namespace CMS.DAL {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializePOIItme() {
+        private bool ShouldSerializePOIItem() {
             return false;
         }
         
@@ -736,7 +715,7 @@ namespace CMS.DAL {
         public delegate void TourRowChangeEventHandler(object sender, TourRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void POIItmeRowChangeEventHandler(object sender, POIItmeRowChangeEvent e);
+        public delegate void POIItemRowChangeEventHandler(object sender, POIItemRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void EventItemRowChangeEventHandler(object sender, EventItemRowChangeEvent e);
@@ -3939,7 +3918,7 @@ namespace CMS.DAL {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class POIItmeDataTable : global::System.Data.TypedTableBase<POIItmeRow> {
+        public partial class POIItemDataTable : global::System.Data.TypedTableBase<POIItemRow> {
             
             private global::System.Data.DataColumn columnItemID;
             
@@ -3973,12 +3952,16 @@ namespace CMS.DAL {
             
             private global::System.Data.DataColumn columnSubtypeID;
             
+            private global::System.Data.DataColumn columnSubtypeName;
+            
             private global::System.Data.DataColumn columnCategoryID;
+            
+            private global::System.Data.DataColumn columnCategoryName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeDataTable() {
-                this.TableName = "POIItme";
+            public POIItemDataTable() {
+                this.TableName = "POIItem";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -3986,7 +3969,7 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal POIItmeDataTable(global::System.Data.DataTable table) {
+            internal POIItemDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -4003,7 +3986,7 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected POIItmeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected POIItemDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -4138,9 +4121,25 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SubtypeNameColumn {
+                get {
+                    return this.columnSubtypeName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn CategoryIDColumn {
                 get {
                     return this.columnCategoryID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CategoryNameColumn {
+                get {
+                    return this.columnCategoryName;
                 }
             }
             
@@ -4155,33 +4154,33 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRow this[int index] {
+            public POIItemRow this[int index] {
                 get {
-                    return ((POIItmeRow)(this.Rows[index]));
+                    return ((POIItemRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event POIItmeRowChangeEventHandler POIItmeRowChanging;
+            public event POIItemRowChangeEventHandler POIItemRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event POIItmeRowChangeEventHandler POIItmeRowChanged;
+            public event POIItemRowChangeEventHandler POIItemRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event POIItmeRowChangeEventHandler POIItmeRowDeleting;
+            public event POIItemRowChangeEventHandler POIItemRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event POIItmeRowChangeEventHandler POIItmeRowDeleted;
+            public event POIItemRowChangeEventHandler POIItemRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddPOIItmeRow(POIItmeRow row) {
+            public void AddPOIItemRow(POIItemRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRow AddPOIItmeRow(
+            public POIItemRow AddPOIItemRow(
                         string ItemName, 
                         string Details, 
                         decimal Cost, 
@@ -4196,9 +4195,11 @@ namespace CMS.DAL {
                         int Longitute, 
                         int Postcode, 
                         string Suburb, 
-                        SubtypeRow parentSubtypeRowBySubtypeItem1, 
-                        int CategoryID) {
-                POIItmeRow rowPOIItmeRow = ((POIItmeRow)(this.NewRow()));
+                        int SubtypeID, 
+                        string SubtypeName, 
+                        int CategoryID, 
+                        string CategoryName) {
+                POIItemRow rowPOIItemRow = ((POIItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         ItemName,
@@ -4215,20 +4216,19 @@ namespace CMS.DAL {
                         Longitute,
                         Postcode,
                         Suburb,
-                        null,
-                        CategoryID};
-                if ((parentSubtypeRowBySubtypeItem1 != null)) {
-                    columnValuesArray[15] = parentSubtypeRowBySubtypeItem1[0];
-                }
-                rowPOIItmeRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowPOIItmeRow);
-                return rowPOIItmeRow;
+                        SubtypeID,
+                        SubtypeName,
+                        CategoryID,
+                        CategoryName};
+                rowPOIItemRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPOIItemRow);
+                return rowPOIItemRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                POIItmeDataTable cln = ((POIItmeDataTable)(base.Clone()));
+                POIItemDataTable cln = ((POIItemDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -4236,7 +4236,7 @@ namespace CMS.DAL {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new POIItmeDataTable();
+                return new POIItemDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4258,7 +4258,9 @@ namespace CMS.DAL {
                 this.columnPostcode = base.Columns["Postcode"];
                 this.columnSuburb = base.Columns["Suburb"];
                 this.columnSubtypeID = base.Columns["SubtypeID"];
+                this.columnSubtypeName = base.Columns["SubtypeName"];
                 this.columnCategoryID = base.Columns["CategoryID"];
+                this.columnCategoryName = base.Columns["CategoryName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4296,8 +4298,12 @@ namespace CMS.DAL {
                 base.Columns.Add(this.columnSuburb);
                 this.columnSubtypeID = new global::System.Data.DataColumn("SubtypeID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubtypeID);
+                this.columnSubtypeName = new global::System.Data.DataColumn("SubtypeName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubtypeName);
                 this.columnCategoryID = new global::System.Data.DataColumn("CategoryID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCategoryID);
+                this.columnCategoryName = new global::System.Data.DataColumn("CategoryName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCategoryName);
                 this.columnItemID.AutoIncrement = true;
                 this.columnItemID.AutoIncrementSeed = -1;
                 this.columnItemID.AutoIncrementStep = -1;
@@ -4309,32 +4315,34 @@ namespace CMS.DAL {
                 this.columnStreetNo.MaxLength = 255;
                 this.columnStreetName.MaxLength = 255;
                 this.columnSuburb.MaxLength = 255;
+                this.columnSubtypeName.MaxLength = 255;
+                this.columnCategoryName.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRow NewPOIItmeRow() {
-                return ((POIItmeRow)(this.NewRow()));
+            public POIItemRow NewPOIItemRow() {
+                return ((POIItemRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new POIItmeRow(builder);
+                return new POIItemRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(POIItmeRow);
+                return typeof(POIItemRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.POIItmeRowChanged != null)) {
-                    this.POIItmeRowChanged(this, new POIItmeRowChangeEvent(((POIItmeRow)(e.Row)), e.Action));
+                if ((this.POIItemRowChanged != null)) {
+                    this.POIItemRowChanged(this, new POIItemRowChangeEvent(((POIItemRow)(e.Row)), e.Action));
                 }
             }
             
@@ -4342,8 +4350,8 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.POIItmeRowChanging != null)) {
-                    this.POIItmeRowChanging(this, new POIItmeRowChangeEvent(((POIItmeRow)(e.Row)), e.Action));
+                if ((this.POIItemRowChanging != null)) {
+                    this.POIItemRowChanging(this, new POIItemRowChangeEvent(((POIItemRow)(e.Row)), e.Action));
                 }
             }
             
@@ -4351,8 +4359,8 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.POIItmeRowDeleted != null)) {
-                    this.POIItmeRowDeleted(this, new POIItmeRowChangeEvent(((POIItmeRow)(e.Row)), e.Action));
+                if ((this.POIItemRowDeleted != null)) {
+                    this.POIItemRowDeleted(this, new POIItemRowChangeEvent(((POIItemRow)(e.Row)), e.Action));
                 }
             }
             
@@ -4360,14 +4368,14 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.POIItmeRowDeleting != null)) {
-                    this.POIItmeRowDeleting(this, new POIItmeRowChangeEvent(((POIItmeRow)(e.Row)), e.Action));
+                if ((this.POIItemRowDeleting != null)) {
+                    this.POIItemRowDeleting(this, new POIItemRowChangeEvent(((POIItemRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemovePOIItmeRow(POIItmeRow row) {
+            public void RemovePOIItemRow(POIItemRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -4394,7 +4402,7 @@ namespace CMS.DAL {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "POIItmeDataTable";
+                attribute2.FixedValue = "POIItemDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4477,6 +4485,8 @@ namespace CMS.DAL {
             private global::System.Data.DataColumn columnEventStartDate;
             
             private global::System.Data.DataColumn columnEventEndDate;
+            
+            private global::System.Data.DataColumn columnSubtypeName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -4657,6 +4667,14 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SubtypeNameColumn {
+                get {
+                    return this.columnSubtypeName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4709,7 +4727,8 @@ namespace CMS.DAL {
                         string Suburb, 
                         int SubtypeID, 
                         System.DateTime EventStartDate, 
-                        System.DateTime EventEndDate) {
+                        System.DateTime EventEndDate, 
+                        string SubtypeName) {
                 EventItemRow rowEventItemRow = ((EventItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -4729,7 +4748,8 @@ namespace CMS.DAL {
                         Suburb,
                         SubtypeID,
                         EventStartDate,
-                        EventEndDate};
+                        EventEndDate,
+                        SubtypeName};
                 rowEventItemRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEventItemRow);
                 return rowEventItemRow;
@@ -4770,6 +4790,7 @@ namespace CMS.DAL {
                 this.columnSubtypeID = base.Columns["SubtypeID"];
                 this.columnEventStartDate = base.Columns["EventStartDate"];
                 this.columnEventEndDate = base.Columns["EventEndDate"];
+                this.columnSubtypeName = base.Columns["SubtypeName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4811,6 +4832,8 @@ namespace CMS.DAL {
                 base.Columns.Add(this.columnEventStartDate);
                 this.columnEventEndDate = new global::System.Data.DataColumn("EventEndDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEventEndDate);
+                this.columnSubtypeName = new global::System.Data.DataColumn("SubtypeName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubtypeName);
                 this.columnItemID.AutoIncrement = true;
                 this.columnItemID.AutoIncrementSeed = -1;
                 this.columnItemID.AutoIncrementStep = -1;
@@ -4822,6 +4845,7 @@ namespace CMS.DAL {
                 this.columnStreetNo.MaxLength = 255;
                 this.columnStreetName.MaxLength = 255;
                 this.columnSuburb.MaxLength = 255;
+                this.columnSubtypeName.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5188,17 +5212,6 @@ namespace CMS.DAL {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["ItemEvent"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRow POIItmeRow {
-                get {
-                    return ((POIItmeRow)(this.GetParentRow(this.Table.ParentRelations["ItemEvent1"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["ItemEvent1"]);
                 }
             }
             
@@ -5702,11 +5715,11 @@ namespace CMS.DAL {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public EventItemRow[] GetEventItemRows() {
-                if ((this.Table.ChildRelations["ItemEvent2"] == null)) {
+                if ((this.Table.ChildRelations["ItemEvent1"] == null)) {
                     return new EventItemRow[0];
                 }
                 else {
-                    return ((EventItemRow[])(base.GetChildRows(this.Table.ChildRelations["ItemEvent2"])));
+                    return ((EventItemRow[])(base.GetChildRows(this.Table.ChildRelations["ItemEvent1"])));
                 }
             }
         }
@@ -5787,17 +5800,6 @@ namespace CMS.DAL {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["ItemMedia"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRow POIItmeRow {
-                get {
-                    return ((POIItmeRow)(this.GetParentRow(this.Table.ParentRelations["ItemMedia1"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["ItemMedia1"]);
                 }
             }
             
@@ -6024,12 +6026,12 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRow POIItmeRow {
+            public POIItemRow POIItemRow {
                 get {
-                    return ((POIItmeRow)(this.GetParentRow(this.Table.ParentRelations["ItemPOI1"])));
+                    return ((POIItemRow)(this.GetParentRow(this.Table.ParentRelations["CategoryPOI1"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["ItemPOI1"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["CategoryPOI1"]);
                 }
             }
             
@@ -6204,17 +6206,6 @@ namespace CMS.DAL {
                 }
                 else {
                     return ((ItemRow[])(base.GetChildRows(this.Table.ChildRelations["SubtypeItem"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRow[] GetPOIItmeRows() {
-                if ((this.Table.ChildRelations["SubtypeItem1"] == null)) {
-                    return new POIItmeRow[0];
-                }
-                else {
-                    return ((POIItmeRow[])(base.GetChildRows(this.Table.ChildRelations["SubtypeItem1"])));
                 }
             }
         }
@@ -6399,15 +6390,15 @@ namespace CMS.DAL {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class POIItmeRow : global::System.Data.DataRow {
+        public partial class POIItemRow : global::System.Data.DataRow {
             
-            private POIItmeDataTable tablePOIItme;
+            private POIItemDataTable tablePOIItem;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal POIItmeRow(global::System.Data.DataRowBuilder rb) : 
+            internal POIItemRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tablePOIItme = ((POIItmeDataTable)(this.Table));
+                this.tablePOIItem = ((POIItemDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6415,14 +6406,14 @@ namespace CMS.DAL {
             public int ItemID {
                 get {
                     try {
-                        return ((int)(this[this.tablePOIItme.ItemIDColumn]));
+                        return ((int)(this[this.tablePOIItem.ItemIDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ItemID\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemID\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.ItemIDColumn] = value;
+                    this[this.tablePOIItem.ItemIDColumn] = value;
                 }
             }
             
@@ -6431,14 +6422,14 @@ namespace CMS.DAL {
             public string ItemName {
                 get {
                     try {
-                        return ((string)(this[this.tablePOIItme.ItemNameColumn]));
+                        return ((string)(this[this.tablePOIItem.ItemNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ItemName\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemName\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.ItemNameColumn] = value;
+                    this[this.tablePOIItem.ItemNameColumn] = value;
                 }
             }
             
@@ -6447,14 +6438,14 @@ namespace CMS.DAL {
             public string Details {
                 get {
                     try {
-                        return ((string)(this[this.tablePOIItme.DetailsColumn]));
+                        return ((string)(this[this.tablePOIItem.DetailsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Details\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Details\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.DetailsColumn] = value;
+                    this[this.tablePOIItem.DetailsColumn] = value;
                 }
             }
             
@@ -6463,14 +6454,14 @@ namespace CMS.DAL {
             public decimal Cost {
                 get {
                     try {
-                        return ((decimal)(this[this.tablePOIItme.CostColumn]));
+                        return ((decimal)(this[this.tablePOIItem.CostColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Cost\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cost\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.CostColumn] = value;
+                    this[this.tablePOIItem.CostColumn] = value;
                 }
             }
             
@@ -6479,14 +6470,14 @@ namespace CMS.DAL {
             public int Rating {
                 get {
                     try {
-                        return ((int)(this[this.tablePOIItme.RatingColumn]));
+                        return ((int)(this[this.tablePOIItem.RatingColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Rating\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Rating\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.RatingColumn] = value;
+                    this[this.tablePOIItem.RatingColumn] = value;
                 }
             }
             
@@ -6495,14 +6486,14 @@ namespace CMS.DAL {
             public int Phone {
                 get {
                     try {
-                        return ((int)(this[this.tablePOIItme.PhoneColumn]));
+                        return ((int)(this[this.tablePOIItem.PhoneColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Phone\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Phone\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.PhoneColumn] = value;
+                    this[this.tablePOIItem.PhoneColumn] = value;
                 }
             }
             
@@ -6511,14 +6502,14 @@ namespace CMS.DAL {
             public string Website {
                 get {
                     try {
-                        return ((string)(this[this.tablePOIItme.WebsiteColumn]));
+                        return ((string)(this[this.tablePOIItem.WebsiteColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Website\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Website\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.WebsiteColumn] = value;
+                    this[this.tablePOIItem.WebsiteColumn] = value;
                 }
             }
             
@@ -6527,14 +6518,14 @@ namespace CMS.DAL {
             public string Email {
                 get {
                     try {
-                        return ((string)(this[this.tablePOIItme.EmailColumn]));
+                        return ((string)(this[this.tablePOIItem.EmailColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Email\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Email\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.EmailColumn] = value;
+                    this[this.tablePOIItem.EmailColumn] = value;
                 }
             }
             
@@ -6543,14 +6534,14 @@ namespace CMS.DAL {
             public string OpeningHours {
                 get {
                     try {
-                        return ((string)(this[this.tablePOIItme.OpeningHoursColumn]));
+                        return ((string)(this[this.tablePOIItem.OpeningHoursColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'OpeningHours\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'OpeningHours\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.OpeningHoursColumn] = value;
+                    this[this.tablePOIItem.OpeningHoursColumn] = value;
                 }
             }
             
@@ -6559,14 +6550,14 @@ namespace CMS.DAL {
             public string StreetNo {
                 get {
                     try {
-                        return ((string)(this[this.tablePOIItme.StreetNoColumn]));
+                        return ((string)(this[this.tablePOIItem.StreetNoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'StreetNo\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'StreetNo\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.StreetNoColumn] = value;
+                    this[this.tablePOIItem.StreetNoColumn] = value;
                 }
             }
             
@@ -6575,14 +6566,14 @@ namespace CMS.DAL {
             public string StreetName {
                 get {
                     try {
-                        return ((string)(this[this.tablePOIItme.StreetNameColumn]));
+                        return ((string)(this[this.tablePOIItem.StreetNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'StreetName\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'StreetName\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.StreetNameColumn] = value;
+                    this[this.tablePOIItem.StreetNameColumn] = value;
                 }
             }
             
@@ -6591,14 +6582,14 @@ namespace CMS.DAL {
             public int Latitute {
                 get {
                     try {
-                        return ((int)(this[this.tablePOIItme.LatituteColumn]));
+                        return ((int)(this[this.tablePOIItem.LatituteColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Latitute\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Latitute\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.LatituteColumn] = value;
+                    this[this.tablePOIItem.LatituteColumn] = value;
                 }
             }
             
@@ -6607,14 +6598,14 @@ namespace CMS.DAL {
             public int Longitute {
                 get {
                     try {
-                        return ((int)(this[this.tablePOIItme.LongituteColumn]));
+                        return ((int)(this[this.tablePOIItem.LongituteColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Longitute\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Longitute\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.LongituteColumn] = value;
+                    this[this.tablePOIItem.LongituteColumn] = value;
                 }
             }
             
@@ -6623,14 +6614,14 @@ namespace CMS.DAL {
             public int Postcode {
                 get {
                     try {
-                        return ((int)(this[this.tablePOIItme.PostcodeColumn]));
+                        return ((int)(this[this.tablePOIItem.PostcodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Postcode\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Postcode\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.PostcodeColumn] = value;
+                    this[this.tablePOIItem.PostcodeColumn] = value;
                 }
             }
             
@@ -6639,14 +6630,14 @@ namespace CMS.DAL {
             public string Suburb {
                 get {
                     try {
-                        return ((string)(this[this.tablePOIItme.SuburbColumn]));
+                        return ((string)(this[this.tablePOIItem.SuburbColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Suburb\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Suburb\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.SuburbColumn] = value;
+                    this[this.tablePOIItem.SuburbColumn] = value;
                 }
             }
             
@@ -6655,14 +6646,30 @@ namespace CMS.DAL {
             public int SubtypeID {
                 get {
                     try {
-                        return ((int)(this[this.tablePOIItme.SubtypeIDColumn]));
+                        return ((int)(this[this.tablePOIItem.SubtypeIDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SubtypeID\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SubtypeID\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.SubtypeIDColumn] = value;
+                    this[this.tablePOIItem.SubtypeIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SubtypeName {
+                get {
+                    try {
+                        return ((string)(this[this.tablePOIItem.SubtypeNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SubtypeName\' in table \'POIItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePOIItem.SubtypeNameColumn] = value;
                 }
             }
             
@@ -6671,262 +6678,269 @@ namespace CMS.DAL {
             public int CategoryID {
                 get {
                     try {
-                        return ((int)(this[this.tablePOIItme.CategoryIDColumn]));
+                        return ((int)(this[this.tablePOIItem.CategoryIDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CategoryID\' in table \'POIItme\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CategoryID\' in table \'POIItem\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePOIItme.CategoryIDColumn] = value;
+                    this[this.tablePOIItem.CategoryIDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SubtypeRow SubtypeRow {
+            public string CategoryName {
                 get {
-                    return ((SubtypeRow)(this.GetParentRow(this.Table.ParentRelations["SubtypeItem1"])));
+                    try {
+                        return ((string)(this[this.tablePOIItem.CategoryNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CategoryName\' in table \'POIItem\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["SubtypeItem1"]);
+                    this[this.tablePOIItem.CategoryNameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsItemIDNull() {
-                return this.IsNull(this.tablePOIItme.ItemIDColumn);
+                return this.IsNull(this.tablePOIItem.ItemIDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetItemIDNull() {
-                this[this.tablePOIItme.ItemIDColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.ItemIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsItemNameNull() {
-                return this.IsNull(this.tablePOIItme.ItemNameColumn);
+                return this.IsNull(this.tablePOIItem.ItemNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetItemNameNull() {
-                this[this.tablePOIItme.ItemNameColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.ItemNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDetailsNull() {
-                return this.IsNull(this.tablePOIItme.DetailsColumn);
+                return this.IsNull(this.tablePOIItem.DetailsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDetailsNull() {
-                this[this.tablePOIItme.DetailsColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.DetailsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCostNull() {
-                return this.IsNull(this.tablePOIItme.CostColumn);
+                return this.IsNull(this.tablePOIItem.CostColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCostNull() {
-                this[this.tablePOIItme.CostColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.CostColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsRatingNull() {
-                return this.IsNull(this.tablePOIItme.RatingColumn);
+                return this.IsNull(this.tablePOIItem.RatingColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetRatingNull() {
-                this[this.tablePOIItme.RatingColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.RatingColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPhoneNull() {
-                return this.IsNull(this.tablePOIItme.PhoneColumn);
+                return this.IsNull(this.tablePOIItem.PhoneColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPhoneNull() {
-                this[this.tablePOIItme.PhoneColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.PhoneColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsWebsiteNull() {
-                return this.IsNull(this.tablePOIItme.WebsiteColumn);
+                return this.IsNull(this.tablePOIItem.WebsiteColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetWebsiteNull() {
-                this[this.tablePOIItme.WebsiteColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.WebsiteColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEmailNull() {
-                return this.IsNull(this.tablePOIItme.EmailColumn);
+                return this.IsNull(this.tablePOIItem.EmailColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEmailNull() {
-                this[this.tablePOIItme.EmailColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.EmailColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsOpeningHoursNull() {
-                return this.IsNull(this.tablePOIItme.OpeningHoursColumn);
+                return this.IsNull(this.tablePOIItem.OpeningHoursColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetOpeningHoursNull() {
-                this[this.tablePOIItme.OpeningHoursColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.OpeningHoursColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsStreetNoNull() {
-                return this.IsNull(this.tablePOIItme.StreetNoColumn);
+                return this.IsNull(this.tablePOIItem.StreetNoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetStreetNoNull() {
-                this[this.tablePOIItme.StreetNoColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.StreetNoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsStreetNameNull() {
-                return this.IsNull(this.tablePOIItme.StreetNameColumn);
+                return this.IsNull(this.tablePOIItem.StreetNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetStreetNameNull() {
-                this[this.tablePOIItme.StreetNameColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.StreetNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsLatituteNull() {
-                return this.IsNull(this.tablePOIItme.LatituteColumn);
+                return this.IsNull(this.tablePOIItem.LatituteColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetLatituteNull() {
-                this[this.tablePOIItme.LatituteColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.LatituteColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsLongituteNull() {
-                return this.IsNull(this.tablePOIItme.LongituteColumn);
+                return this.IsNull(this.tablePOIItem.LongituteColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetLongituteNull() {
-                this[this.tablePOIItme.LongituteColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.LongituteColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPostcodeNull() {
-                return this.IsNull(this.tablePOIItme.PostcodeColumn);
+                return this.IsNull(this.tablePOIItem.PostcodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPostcodeNull() {
-                this[this.tablePOIItme.PostcodeColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.PostcodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSuburbNull() {
-                return this.IsNull(this.tablePOIItme.SuburbColumn);
+                return this.IsNull(this.tablePOIItem.SuburbColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSuburbNull() {
-                this[this.tablePOIItme.SuburbColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.SuburbColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSubtypeIDNull() {
-                return this.IsNull(this.tablePOIItme.SubtypeIDColumn);
+                return this.IsNull(this.tablePOIItem.SubtypeIDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSubtypeIDNull() {
-                this[this.tablePOIItme.SubtypeIDColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.SubtypeIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSubtypeNameNull() {
+                return this.IsNull(this.tablePOIItem.SubtypeNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSubtypeNameNull() {
+                this[this.tablePOIItem.SubtypeNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCategoryIDNull() {
-                return this.IsNull(this.tablePOIItme.CategoryIDColumn);
+                return this.IsNull(this.tablePOIItem.CategoryIDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCategoryIDNull() {
-                this[this.tablePOIItme.CategoryIDColumn] = global::System.Convert.DBNull;
+                this[this.tablePOIItem.CategoryIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EventRow[] GetEventRows() {
-                if ((this.Table.ChildRelations["ItemEvent1"] == null)) {
-                    return new EventRow[0];
-                }
-                else {
-                    return ((EventRow[])(base.GetChildRows(this.Table.ChildRelations["ItemEvent1"])));
-                }
+            public bool IsCategoryNameNull() {
+                return this.IsNull(this.tablePOIItem.CategoryNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public MediaRow[] GetMediaRows() {
-                if ((this.Table.ChildRelations["ItemMedia1"] == null)) {
-                    return new MediaRow[0];
-                }
-                else {
-                    return ((MediaRow[])(base.GetChildRows(this.Table.ChildRelations["ItemMedia1"])));
-                }
+            public void SetCategoryNameNull() {
+                this[this.tablePOIItem.CategoryNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public POIRow[] GetPOIRows() {
-                if ((this.Table.ChildRelations["ItemPOI1"] == null)) {
+                if ((this.Table.ChildRelations["CategoryPOI1"] == null)) {
                     return new POIRow[0];
                 }
                 else {
-                    return ((POIRow[])(base.GetChildRows(this.Table.ChildRelations["ItemPOI1"])));
+                    return ((POIRow[])(base.GetChildRows(this.Table.ChildRelations["CategoryPOI1"])));
                 }
             }
         }
@@ -7235,12 +7249,28 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ItemRow ItemRow {
+            public string SubtypeName {
                 get {
-                    return ((ItemRow)(this.GetParentRow(this.Table.ParentRelations["ItemEvent2"])));
+                    try {
+                        return ((string)(this[this.tableEventItem.SubtypeNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SubtypeName\' in table \'EventItem\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["ItemEvent2"]);
+                    this[this.tableEventItem.SubtypeNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ItemRow ItemRow {
+                get {
+                    return ((ItemRow)(this.GetParentRow(this.Table.ParentRelations["ItemEvent1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["ItemEvent1"]);
                 }
             }
             
@@ -7458,6 +7488,18 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEventEndDateNull() {
                 this[this.tableEventItem.EventEndDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSubtypeNameNull() {
+                return this.IsNull(this.tableEventItem.SubtypeNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSubtypeNameNull() {
+                this[this.tableEventItem.SubtypeNameColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -7805,22 +7847,22 @@ namespace CMS.DAL {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class POIItmeRowChangeEvent : global::System.EventArgs {
+        public class POIItemRowChangeEvent : global::System.EventArgs {
             
-            private POIItmeRow eventRow;
+            private POIItemRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRowChangeEvent(POIItmeRow row, global::System.Data.DataRowAction action) {
+            public POIItemRowChangeEvent(POIItemRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public POIItmeRow Row {
+            public POIItemRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -11432,7 +11474,7 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class POIItmeTableAdapter : global::System.ComponentModel.Component {
+    public partial class POIItemTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.OleDb.OleDbDataAdapter _adapter;
         
@@ -11446,7 +11488,7 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public POIItmeTableAdapter() {
+        public POIItemTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -11543,7 +11585,7 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "POIItme";
+            tableMapping.DataSetTable = "POIItem";
             tableMapping.ColumnMappings.Add("ItemID", "ItemID");
             tableMapping.ColumnMappings.Add("ItemName", "ItemName");
             tableMapping.ColumnMappings.Add("Details", "Details");
@@ -11560,7 +11602,9 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("Postcode", "Postcode");
             tableMapping.ColumnMappings.Add("Suburb", "Suburb");
             tableMapping.ColumnMappings.Add("SubtypeID", "SubtypeID");
+            tableMapping.ColumnMappings.Add("SubtypeName", "SubtypeName");
             tableMapping.ColumnMappings.Add("CategoryID", "CategoryID");
+            tableMapping.ColumnMappings.Add("CategoryName", "CategoryName");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -11577,8 +11621,11 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT  Item.*, POI.CategoryID\r\nFROM     (Item INNER JOIN\r\n               POI ON " +
-                "Item.ItemID = POI.ItemID)";
+            this._commandCollection[0].CommandText = @"SELECT  Item.*, Subtype.SubtypeName, POI.CategoryID, Category.CategoryName
+FROM     (((Category INNER JOIN
+               POI ON Category.CategoryID = POI.CategoryID) INNER JOIN
+               Item ON POI.ItemID = Item.ItemID) INNER JOIN
+               Subtype ON Item.SubtypeID = Subtype.SubtypeID)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -11586,7 +11633,7 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int FillAll(CMSDBDataSet.POIItmeDataTable dataTable) {
+        public virtual int FillAll(CMSDBDataSet.POIItemDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -11599,9 +11646,9 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual CMSDBDataSet.POIItmeDataTable GetDataAll() {
+        public virtual CMSDBDataSet.POIItemDataTable GetDataAll() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            CMSDBDataSet.POIItmeDataTable dataTable = new CMSDBDataSet.POIItmeDataTable();
+            CMSDBDataSet.POIItemDataTable dataTable = new CMSDBDataSet.POIItemDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -11746,6 +11793,7 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("SubtypeID", "SubtypeID");
             tableMapping.ColumnMappings.Add("EventStartDate", "EventStartDate");
             tableMapping.ColumnMappings.Add("EventEndDate", "EventEndDate");
+            tableMapping.ColumnMappings.Add("SubtypeName", "SubtypeName");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -11762,8 +11810,9 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT  Item.*, Event.EventStartDate, Event.EventEndDate\r\nFROM     (Item INNER JO" +
-                "IN\r\n               Event ON Item.ItemID = Event.ItemID)";
+            this._commandCollection[0].CommandText = "SELECT  Item.*, Event.EventStartDate, Event.EventEndDate, Subtype.SubtypeName\r\nFR" +
+                "OM     ((Event INNER JOIN\r\n               Item ON Event.ItemID = Item.ItemID) IN" +
+                "NER JOIN\r\n               Subtype ON Item.SubtypeID = Subtype.SubtypeID)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

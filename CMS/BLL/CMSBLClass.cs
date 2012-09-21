@@ -23,8 +23,8 @@ namespace CMS.BLL
         DAL.CMSDBDataSetTableAdapters.MediaTableAdapter mediaTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.MediaTableAdapter();
 
-        DAL.CMSDBDataSetTableAdapters.POIItmeTableAdapter poiItmeTableAdapter
-            = new DAL.CMSDBDataSetTableAdapters.POIItmeTableAdapter();
+        DAL.CMSDBDataSetTableAdapters.POIItemTableAdapter poiItemTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.POIItemTableAdapter();
 
         DAL.CMSDBDataSetTableAdapters.POITableAdapter poiTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.POITableAdapter();
@@ -89,9 +89,9 @@ namespace CMS.BLL
          * POI data access
          *********************************************************************/
 
-        public DAL.CMSDBDataSet.POIItmeDataTable getAllPOI()
+        public DAL.CMSDBDataSet.POIItemDataTable getAllPOI()
         {
-            return poiItmeTableAdapter.GetDataAll();
+            return poiItemTableAdapter.GetDataAll();
         }
 
         public int UpdatePOI(String ItemName, String Details, Decimal Cost, int Rating, int Phone, String Website, String Email,
