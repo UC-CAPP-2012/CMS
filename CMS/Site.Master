@@ -24,6 +24,7 @@
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
+                
                 <h1>
                     <span class="capitalTitle">C</span>ontent 
                     <span class="capitalTitle">M</span>anagement 
@@ -31,24 +32,27 @@
                 </h1>
             </div>
             <div class="mainMenu">
-                <asp:LinkButton ID="LinkButtonHome" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > Home </asp:LinkButton>
-               <asp:LinkButton ID="LinkButtonCategory" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > Category </asp:LinkButton>
-                <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > Sub Type </asp:LinkButton>
-                <asp:LinkButton ID="LinkButtonPOI" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > POI </asp:LinkButton>
-                <asp:LinkButton ID="LinkButtonEvent" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > Event </asp:LinkButton>
-                <asp:LinkButton ID="LinkButtonTour" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > Tour </asp:LinkButton>
-                <asp:LinkButton ID="LinkButtonNews" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > News </asp:LinkButton>
-                <asp:LinkButton ID="LinkButtonUser" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > User </asp:LinkButton>
-                <asp:LinkButton ID="LinkButtonAdmin" runat="server" OnClick="MenuButton_Clicked" 
-                        CssClass="medium button gray" > Admin </asp:LinkButton>
+                <div class="navigation-links">
+                    <asp:LinkButton ID="LinkButtonHome" runat="server" OnClick="MenuButton_Clicked" 
+                            CssClass="medium button gray" > Home </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButtonCategory" runat="server" OnClick="MenuButton_Clicked" 
+                            CssClass="medium button gray" > Category </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" 
+                            CssClass="medium button gray" > Sub Type </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButtonPOI" runat="server" OnClick="MenuButton_Clicked" 
+                            CssClass="medium button gray" > POI </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButtonEvent" runat="server" OnClick="MenuButton_Clicked" 
+                            CssClass="medium button gray" > Event </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButtonTour" runat="server" OnClick="MenuButton_Clicked" 
+                            CssClass="medium button gray" > Tour </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButtonNews" runat="server" OnClick="MenuButton_Clicked" 
+                            CssClass="medium button gray" > News </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButtonUser" runat="server" OnClick="MenuButton_Clicked" 
+                            CssClass="medium button gray" > User </asp:LinkButton>
+                </div>
+                <div runat="server" ID="adminSettings">
+                    <a runat="server" id="Admin_link" name="administration"><span class="elgg-icon-settings"></span>Administrations</a>
+                </div>
             </div>
             <div class="mainUnderLine"></div>
         </div>

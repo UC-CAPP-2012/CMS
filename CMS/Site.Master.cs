@@ -18,9 +18,9 @@ namespace CMS
             {
                 Response.Redirect("~/Index.aspx");
             }
-            
 
 
+            Admin_link.HRef = "/AdminPages/Admin.aspx";
             //Set current menu button colour
             string[] file = Request.CurrentExecutionFilePath.Split('/');
             string fileName = file[file.Length - 1];
@@ -47,8 +47,7 @@ namespace CMS
                 case "User.aspx":
                     this.LinkButtonUser.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
                     break;
-                case "Admin.aspx":
-                    this.LinkButtonAdmin.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                default:
                     break;
             }
              

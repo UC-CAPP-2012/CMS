@@ -2,10 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="contentLeftMenu">
+    <div class="contentLeftMenu adminLeftMenu">
         <h1> Administrator </h1>
     </div>
-    <div class="contentList">
+    <div class="contentList  adminBody">
     </div>
     <div class="contentDetailWrapper">
         <div class="contentDetail">
