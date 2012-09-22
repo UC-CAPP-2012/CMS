@@ -14,20 +14,10 @@ namespace CMS
         protected void Page_Load(object sender, EventArgs e)
         {
             //Redirect to login page when logged out
-using System.Web.Security;
-
-namespace CMS
-{
-    public partial class SiteMaster : System.Web.UI.MasterPage
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            //Redirect to login page when logged out
             
             if (!Page.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~/Index.aspx");
-            }*/
+                //Response.Redirect("~/Index.aspx");
             }
 
             if(Page.User.IsInRole("Admin")){

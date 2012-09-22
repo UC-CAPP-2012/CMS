@@ -33,27 +33,27 @@
             </div>
             <div class="mainMenu">
                 <div class="navigation-links">
-                    <asp:LinkButton ID="LinkButtonHome" runat="server" OnClick="MenuButton_Clicked" 
+                    <asp:LinkButton ID="LinkButtonHome" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > Home </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonCategory" runat="server" OnClick="MenuButton_Clicked" 
+                    <asp:LinkButton ID="LinkButtonCategory" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > Category </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" 
+                    <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > Sub Type </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonPOI" runat="server" OnClick="MenuButton_Clicked" 
+                    <asp:LinkButton ID="LinkButtonPOI" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > POI </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonEvent" runat="server" OnClick="MenuButton_Clicked" 
+                    <asp:LinkButton ID="LinkButtonEvent" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > Event </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonTour" runat="server" OnClick="MenuButton_Clicked" 
+                    <asp:LinkButton ID="LinkButtonTour" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > Tour </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonNews" runat="server" OnClick="MenuButton_Clicked" 
+                    <asp:LinkButton ID="LinkButtonNews" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > News </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonUser" runat="server" OnClick="MenuButton_Clicked" 
+                    <asp:LinkButton ID="LinkButtonUser" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > User </asp:LinkButton>
                 </div>
                 <div runat="server" ID="settings">
                 
-                    <a runat="server" id="Admin_link" name="administration" class="admin_settings"><span class="elgg-icon-admin-settings"></span>Administrations</a>
-                    <a runat="server" id="Settings_link" name="administration"><span class="elgg-icon-settings"></span>Settings</a>
+                    <a runat="server" id="Admin_link" name="administration" class="admin_settings" CausesValidation="False"><span class="elgg-icon-admin-settings"></span>Administrations</a>
+                    <a runat="server" id="Settings_link" name="administration" CausesValidation="False"><span class="elgg-icon-settings"></span>Settings</a>
                 </div>
             </div>
             <div class="mainUnderLine"></div>

@@ -1718,6 +1718,10 @@ namespace CMS.DAL {
             
             private global::System.Data.DataColumn columnSubtypeID;
             
+            private global::System.Data.DataColumn columnLatitute1;
+            
+            private global::System.Data.DataColumn columnLongitute1;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ItemDataTable() {
@@ -1881,6 +1885,22 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Latitute1Column {
+                get {
+                    return this.columnLatitute1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Longitute1Column {
+                get {
+                    return this.columnLongitute1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1916,7 +1936,24 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ItemRow AddItemRow(string ItemName, string Details, decimal Cost, int Rating, int Phone, string Website, string Email, string OpeningHours, string StreetNo, string StreetName, int Latitute, int Longitute, int Postcode, string Suburb, SubtypeRow parentSubtypeRowBySubtypeItem) {
+            public ItemRow AddItemRow(
+                        string ItemName, 
+                        string Details, 
+                        decimal Cost, 
+                        int Rating, 
+                        int Phone, 
+                        string Website, 
+                        string Email, 
+                        string OpeningHours, 
+                        string StreetNo, 
+                        string StreetName, 
+                        int Latitute, 
+                        int Longitute, 
+                        int Postcode, 
+                        string Suburb, 
+                        SubtypeRow parentSubtypeRowBySubtypeItem, 
+                        double Latitute1, 
+                        double Longitute1) {
                 ItemRow rowItemRow = ((ItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1934,7 +1971,9 @@ namespace CMS.DAL {
                         Longitute,
                         Postcode,
                         Suburb,
-                        null};
+                        null,
+                        Latitute1,
+                        Longitute1};
                 if ((parentSubtypeRowBySubtypeItem != null)) {
                     columnValuesArray[15] = parentSubtypeRowBySubtypeItem[0];
                 }
@@ -1984,6 +2023,8 @@ namespace CMS.DAL {
                 this.columnPostcode = base.Columns["Postcode"];
                 this.columnSuburb = base.Columns["Suburb"];
                 this.columnSubtypeID = base.Columns["SubtypeID"];
+                this.columnLatitute1 = base.Columns["Latitute1"];
+                this.columnLongitute1 = base.Columns["Longitute1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2021,6 +2062,10 @@ namespace CMS.DAL {
                 base.Columns.Add(this.columnSuburb);
                 this.columnSubtypeID = new global::System.Data.DataColumn("SubtypeID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubtypeID);
+                this.columnLatitute1 = new global::System.Data.DataColumn("Latitute1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLatitute1);
+                this.columnLongitute1 = new global::System.Data.DataColumn("Longitute1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLongitute1);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnItemID,
                                 this.columnSubtypeID}, true));
@@ -2037,6 +2082,8 @@ namespace CMS.DAL {
                 this.columnStreetName.MaxLength = 255;
                 this.columnSuburb.MaxLength = 255;
                 this.columnSubtypeID.AllowDBNull = false;
+                this.columnLatitute1.Caption = "Latitute";
+                this.columnLongitute1.Caption = "Longitute";
                 this.ExtendedProperties.Add("Generator_RowClassName", "ItemRow");
                 this.ExtendedProperties.Add("Generator_RowEvArgName", "ItemRowChangeEvent");
                 this.ExtendedProperties.Add("Generator_RowEvHandlerName", "ItemRowChangeEventHandler");
@@ -4049,6 +4096,10 @@ namespace CMS.DAL {
             
             private global::System.Data.DataColumn columnCategoryName;
             
+            private global::System.Data.DataColumn columnLatitute1;
+            
+            private global::System.Data.DataColumn columnLongitute1;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public POIItemDataTable() {
@@ -4236,6 +4287,22 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Latitute1Column {
+                get {
+                    return this.columnLatitute1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Longitute1Column {
+                get {
+                    return this.columnLongitute1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4289,7 +4356,9 @@ namespace CMS.DAL {
                         int SubtypeID, 
                         string SubtypeName, 
                         int CategoryID, 
-                        string CategoryName) {
+                        string CategoryName, 
+                        double Latitute1, 
+                        double Longitute1) {
                 POIItemRow rowPOIItemRow = ((POIItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -4310,7 +4379,9 @@ namespace CMS.DAL {
                         SubtypeID,
                         SubtypeName,
                         CategoryID,
-                        CategoryName};
+                        CategoryName,
+                        Latitute1,
+                        Longitute1};
                 rowPOIItemRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPOIItemRow);
                 return rowPOIItemRow;
@@ -4352,6 +4423,8 @@ namespace CMS.DAL {
                 this.columnSubtypeName = base.Columns["SubtypeName"];
                 this.columnCategoryID = base.Columns["CategoryID"];
                 this.columnCategoryName = base.Columns["CategoryName"];
+                this.columnLatitute1 = base.Columns["Latitute1"];
+                this.columnLongitute1 = base.Columns["Longitute1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4395,6 +4468,10 @@ namespace CMS.DAL {
                 base.Columns.Add(this.columnCategoryID);
                 this.columnCategoryName = new global::System.Data.DataColumn("CategoryName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCategoryName);
+                this.columnLatitute1 = new global::System.Data.DataColumn("Latitute1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLatitute1);
+                this.columnLongitute1 = new global::System.Data.DataColumn("Longitute1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLongitute1);
                 this.columnItemID.AutoIncrement = true;
                 this.columnItemID.AutoIncrementSeed = -1;
                 this.columnItemID.AutoIncrementStep = -1;
@@ -4408,6 +4485,8 @@ namespace CMS.DAL {
                 this.columnSuburb.MaxLength = 255;
                 this.columnSubtypeName.MaxLength = 255;
                 this.columnCategoryName.MaxLength = 50;
+                this.columnLatitute1.Caption = "Latitute";
+                this.columnLongitute1.Caption = "Longitute";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4578,6 +4657,10 @@ namespace CMS.DAL {
             private global::System.Data.DataColumn columnEventEndDate;
             
             private global::System.Data.DataColumn columnSubtypeName;
+            
+            private global::System.Data.DataColumn columnLatitute1;
+            
+            private global::System.Data.DataColumn columnLongitute1;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -4766,6 +4849,22 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Latitute1Column {
+                get {
+                    return this.columnLatitute1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Longitute1Column {
+                get {
+                    return this.columnLongitute1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4819,7 +4918,9 @@ namespace CMS.DAL {
                         int SubtypeID, 
                         System.DateTime EventStartDate, 
                         System.DateTime EventEndDate, 
-                        string SubtypeName) {
+                        string SubtypeName, 
+                        double Latitute1, 
+                        double Longitute1) {
                 EventItemRow rowEventItemRow = ((EventItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -4840,7 +4941,9 @@ namespace CMS.DAL {
                         SubtypeID,
                         EventStartDate,
                         EventEndDate,
-                        SubtypeName};
+                        SubtypeName,
+                        Latitute1,
+                        Longitute1};
                 rowEventItemRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEventItemRow);
                 return rowEventItemRow;
@@ -4882,6 +4985,8 @@ namespace CMS.DAL {
                 this.columnEventStartDate = base.Columns["EventStartDate"];
                 this.columnEventEndDate = base.Columns["EventEndDate"];
                 this.columnSubtypeName = base.Columns["SubtypeName"];
+                this.columnLatitute1 = base.Columns["Latitute1"];
+                this.columnLongitute1 = base.Columns["Longitute1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4925,6 +5030,10 @@ namespace CMS.DAL {
                 base.Columns.Add(this.columnEventEndDate);
                 this.columnSubtypeName = new global::System.Data.DataColumn("SubtypeName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubtypeName);
+                this.columnLatitute1 = new global::System.Data.DataColumn("Latitute1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLatitute1);
+                this.columnLongitute1 = new global::System.Data.DataColumn("Longitute1", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLongitute1);
                 this.columnItemID.AutoIncrement = true;
                 this.columnItemID.AutoIncrementSeed = -1;
                 this.columnItemID.AutoIncrementStep = -1;
@@ -4937,6 +5046,8 @@ namespace CMS.DAL {
                 this.columnStreetName.MaxLength = 255;
                 this.columnSuburb.MaxLength = 255;
                 this.columnSubtypeName.MaxLength = 255;
+                this.columnLatitute1.Caption = "Latitute";
+                this.columnLongitute1.Caption = "Longitute";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6194,6 +6305,38 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Latitute1 {
+                get {
+                    try {
+                        return ((double)(this[this.tableItem.Latitute1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Latitute1\' in table \'Item\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableItem.Latitute1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Longitute1 {
+                get {
+                    try {
+                        return ((double)(this[this.tableItem.Longitute1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Longitute1\' in table \'Item\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableItem.Longitute1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SubtypeRow SubtypeRow {
                 get {
                     return ((SubtypeRow)(this.GetParentRow(this.Table.ParentRelations["SubtypeItem"])));
@@ -6369,6 +6512,30 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSuburbNull() {
                 this[this.tableItem.SuburbColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLatitute1Null() {
+                return this.IsNull(this.tableItem.Latitute1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLatitute1Null() {
+                this[this.tableItem.Latitute1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLongitute1Null() {
+                return this.IsNull(this.tableItem.Longitute1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLongitute1Null() {
+                this[this.tableItem.Longitute1Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7421,6 +7588,38 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Latitute1 {
+                get {
+                    try {
+                        return ((double)(this[this.tablePOIItem.Latitute1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Latitute1\' in table \'POIItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePOIItem.Latitute1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Longitute1 {
+                get {
+                    try {
+                        return ((double)(this[this.tablePOIItem.Longitute1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Longitute1\' in table \'POIItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePOIItem.Longitute1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsItemIDNull() {
                 return this.IsNull(this.tablePOIItem.ItemIDColumn);
             }
@@ -7645,6 +7844,30 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCategoryNameNull() {
                 this[this.tablePOIItem.CategoryNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLatitute1Null() {
+                return this.IsNull(this.tablePOIItem.Latitute1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLatitute1Null() {
+                this[this.tablePOIItem.Latitute1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLongitute1Null() {
+                return this.IsNull(this.tablePOIItem.Longitute1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLongitute1Null() {
+                this[this.tablePOIItem.Longitute1Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7979,6 +8202,38 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Latitute1 {
+                get {
+                    try {
+                        return ((double)(this[this.tableEventItem.Latitute1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Latitute1\' in table \'EventItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEventItem.Latitute1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Longitute1 {
+                get {
+                    try {
+                        return ((double)(this[this.tableEventItem.Longitute1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Longitute1\' in table \'EventItem\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEventItem.Longitute1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ItemRow ItemRow {
                 get {
                     return ((ItemRow)(this.GetParentRow(this.Table.ParentRelations["ItemEvent1"])));
@@ -8214,6 +8469,30 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSubtypeNameNull() {
                 this[this.tableEventItem.SubtypeNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLatitute1Null() {
+                return this.IsNull(this.tableEventItem.Latitute1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLatitute1Null() {
+                this[this.tableEventItem.Latitute1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLongitute1Null() {
+                return this.IsNull(this.tableEventItem.Longitute1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLongitute1Null() {
+                this[this.tableEventItem.Longitute1Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -9784,7 +10063,7 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[3];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ItemID, EventStartDate, EventEndDate FROM Event";
@@ -9793,6 +10072,14 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = "SELECT ItemID, EventStartDate, EventEndDate FROM Event";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO Event\r\n               (ItemID, EventStartDate, EventEndDate)\r\nVALUES " +
+                " (?, ?, ?)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("EventStartDate", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "EventStartDate", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("EventEndDate", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "EventEndDate", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9960,6 +10247,47 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
                 }
             }
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertNewItem(global::System.Nullable<int> ItemID, global::System.Nullable<global::System.DateTime> EventStartDate, global::System.Nullable<global::System.DateTime> EventEndDate) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[2];
+            if ((ItemID.HasValue == true)) {
+                command.Parameters[0].Value = ((int)(ItemID.Value));
+            }
+            else {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((EventStartDate.HasValue == true)) {
+                command.Parameters[1].Value = ((System.DateTime)(EventStartDate.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((EventEndDate.HasValue == true)) {
+                command.Parameters[2].Value = ((System.DateTime)(EventEndDate.Value));
+            }
+            else {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
     }
     
     /// <summary>
@@ -10094,11 +10422,11 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("OpeningHours", "OpeningHours");
             tableMapping.ColumnMappings.Add("StreetNo", "StreetNo");
             tableMapping.ColumnMappings.Add("StreetName", "StreetName");
-            tableMapping.ColumnMappings.Add("Latitute", "Latitute");
-            tableMapping.ColumnMappings.Add("Longitute", "Longitute");
             tableMapping.ColumnMappings.Add("Postcode", "Postcode");
             tableMapping.ColumnMappings.Add("Suburb", "Suburb");
             tableMapping.ColumnMappings.Add("SubtypeID", "SubtypeID");
+            tableMapping.ColumnMappings.Add("Latitute", "Latitute1");
+            tableMapping.ColumnMappings.Add("Longitute", "Longitute1");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -10123,8 +10451,8 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("OpeningHours", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "OpeningHours", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("StreetNo", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "StreetNo", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("StreetName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "StreetName", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Latitute", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Latitute", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Longitute", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Longitute", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Latitute", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Latitute", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Longitute", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Longitute", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Postcode", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Postcode", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Suburb", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Suburb", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SubtypeID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubtypeID", global::System.Data.DataRowVersion.Current, false, null));
@@ -10142,8 +10470,8 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("OpeningHours", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "OpeningHours", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("StreetNo", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "StreetNo", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("StreetName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "StreetName", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Latitute", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Latitute", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Longitute", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Longitute", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Latitute", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Latitute", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Longitute", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Longitute", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Postcode", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Postcode", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Suburb", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Suburb", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SubtypeID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubtypeID", global::System.Data.DataRowVersion.Current, false, null));
@@ -10161,13 +10489,17 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ItemID, ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHou" +
                 "rs, StreetNo, StreetName, Latitute, Longitute, Postcode, Suburb, SubtypeID FROM " +
                 "Item";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT  TOP 1 ItemID\r\nFROM     Item\r\nORDER BY ItemID DESC";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10255,7 +10587,7 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string ItemName, string Details, global::System.Nullable<decimal> Cost, global::System.Nullable<int> Rating, global::System.Nullable<int> Phone, string Website, string Email, string OpeningHours, string StreetNo, string StreetName, global::System.Nullable<int> Latitute, global::System.Nullable<int> Longitute, global::System.Nullable<int> Postcode, string Suburb, global::System.Nullable<int> SubtypeID) {
+        public virtual int Insert(string ItemName, string Details, global::System.Nullable<decimal> Cost, global::System.Nullable<int> Rating, global::System.Nullable<int> Phone, string Website, string Email, string OpeningHours, string StreetNo, string StreetName, global::System.Nullable<double> Latitute, global::System.Nullable<double> Longitute, global::System.Nullable<int> Postcode, string Suburb, global::System.Nullable<int> SubtypeID) {
             if ((ItemName == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -10317,13 +10649,13 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[9].Value = ((string)(StreetName));
             }
             if ((Latitute.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((int)(Latitute.Value));
+                this.Adapter.InsertCommand.Parameters[10].Value = ((double)(Latitute.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             if ((Longitute.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((int)(Longitute.Value));
+                this.Adapter.InsertCommand.Parameters[11].Value = ((double)(Longitute.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
@@ -10377,8 +10709,8 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
                     string OpeningHours, 
                     string StreetNo, 
                     string StreetName, 
-                    global::System.Nullable<int> Latitute, 
-                    global::System.Nullable<int> Longitute, 
+                    global::System.Nullable<double> Latitute, 
+                    global::System.Nullable<double> Longitute, 
                     global::System.Nullable<int> Postcode, 
                     string Suburb, 
                     global::System.Nullable<int> SubtypeID, 
@@ -10445,13 +10777,13 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(StreetName));
             }
             if ((Latitute.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Latitute.Value));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(Latitute.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             if ((Longitute.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Longitute.Value));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((double)(Longitute.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
@@ -10512,13 +10844,41 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
                     string OpeningHours, 
                     string StreetNo, 
                     string StreetName, 
-                    global::System.Nullable<int> Latitute, 
-                    global::System.Nullable<int> Longitute, 
+                    global::System.Nullable<double> Latitute, 
+                    global::System.Nullable<double> Longitute, 
                     global::System.Nullable<int> Postcode, 
                     string Suburb, 
                     int Original_ItemID, 
                     global::System.Nullable<int> Original_SubtypeID) {
             return this.Update(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, StreetNo, StreetName, Latitute, Longitute, Postcode, Suburb, Original_SubtypeID, Original_ItemID, Original_SubtypeID);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> GetNewlyAddedID() {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[1];
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
         }
     }
     
@@ -11397,11 +11757,17 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ItemID, CategoryID FROM POI";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO POI\r\n               (ItemID, CategoryID)\r\nVALUES  (?, ?)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("CategoryID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "CategoryID", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11552,6 +11918,41 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int Original_ItemID, global::System.Nullable<int> Original_CategoryID) {
             return this.Update(Original_CategoryID, Original_ItemID, Original_CategoryID);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertNewPOI(global::System.Nullable<int> ItemID, global::System.Nullable<int> CategoryID) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[1];
+            if ((ItemID.HasValue == true)) {
+                command.Parameters[0].Value = ((int)(ItemID.Value));
+            }
+            else {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((CategoryID.HasValue == true)) {
+                command.Parameters[1].Value = ((int)(CategoryID.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -12666,14 +13067,14 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("OpeningHours", "OpeningHours");
             tableMapping.ColumnMappings.Add("StreetNo", "StreetNo");
             tableMapping.ColumnMappings.Add("StreetName", "StreetName");
-            tableMapping.ColumnMappings.Add("Latitute", "Latitute");
-            tableMapping.ColumnMappings.Add("Longitute", "Longitute");
             tableMapping.ColumnMappings.Add("Postcode", "Postcode");
             tableMapping.ColumnMappings.Add("Suburb", "Suburb");
             tableMapping.ColumnMappings.Add("SubtypeID", "SubtypeID");
             tableMapping.ColumnMappings.Add("SubtypeName", "SubtypeName");
             tableMapping.ColumnMappings.Add("CategoryID", "CategoryID");
             tableMapping.ColumnMappings.Add("CategoryName", "CategoryName");
+            tableMapping.ColumnMappings.Add("Latitute", "Latitute1");
+            tableMapping.ColumnMappings.Add("Longitute", "Longitute1");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -12738,9 +13139,14 @@ WHERE  (Item.ItemID LIKE ?)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByItemID(CMSDBDataSet.POIItemDataTable dataTable, int ItemID) {
+        public virtual int FillByItemID(CMSDBDataSet.POIItemDataTable dataTable, global::System.Nullable<int> ItemID) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID));
+            if ((ItemID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -12752,9 +13158,14 @@ WHERE  (Item.ItemID LIKE ?)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual CMSDBDataSet.POIItemDataTable GetDataByItemID(int ItemID) {
+        public virtual CMSDBDataSet.POIItemDataTable GetDataByItemID(global::System.Nullable<int> ItemID) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID));
+            if ((ItemID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             CMSDBDataSet.POIItemDataTable dataTable = new CMSDBDataSet.POIItemDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -12893,14 +13304,14 @@ WHERE  (Item.ItemID LIKE ?)";
             tableMapping.ColumnMappings.Add("OpeningHours", "OpeningHours");
             tableMapping.ColumnMappings.Add("StreetNo", "StreetNo");
             tableMapping.ColumnMappings.Add("StreetName", "StreetName");
-            tableMapping.ColumnMappings.Add("Latitute", "Latitute");
-            tableMapping.ColumnMappings.Add("Longitute", "Longitute");
             tableMapping.ColumnMappings.Add("Postcode", "Postcode");
             tableMapping.ColumnMappings.Add("Suburb", "Suburb");
             tableMapping.ColumnMappings.Add("SubtypeID", "SubtypeID");
             tableMapping.ColumnMappings.Add("EventStartDate", "EventStartDate");
             tableMapping.ColumnMappings.Add("EventEndDate", "EventEndDate");
             tableMapping.ColumnMappings.Add("SubtypeName", "SubtypeName");
+            tableMapping.ColumnMappings.Add("Latitute", "Latitute1");
+            tableMapping.ColumnMappings.Add("Longitute", "Longitute1");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -12962,9 +13373,14 @@ WHERE  (Item.ItemID LIKE ?)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByItemID(CMSDBDataSet.EventItemDataTable dataTable, int ItemID) {
+        public virtual int FillByItemID(CMSDBDataSet.EventItemDataTable dataTable, global::System.Nullable<int> ItemID) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID));
+            if ((ItemID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -12976,9 +13392,14 @@ WHERE  (Item.ItemID LIKE ?)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual CMSDBDataSet.EventItemDataTable GetDataByItemID(int ItemID) {
+        public virtual CMSDBDataSet.EventItemDataTable GetDataByItemID(global::System.Nullable<int> ItemID) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID));
+            if ((ItemID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             CMSDBDataSet.EventItemDataTable dataTable = new CMSDBDataSet.EventItemDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
