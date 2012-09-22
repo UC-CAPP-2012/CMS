@@ -17,7 +17,7 @@ namespace CMS
             
             if (!Page.User.Identity.IsAuthenticated)
             {
-                //Response.Redirect("~/Index.aspx");
+                Response.Redirect("~/Index.aspx");
             }
 
             if(Page.User.IsInRole("Admin")){
@@ -54,6 +54,9 @@ namespace CMS
                     break;
                 case "User.aspx":
                     this.LinkButtonUser.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+                case "Subtype.aspx":
+                    this.LinkButtonSubType.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
                     break;
                 default:
                     break;

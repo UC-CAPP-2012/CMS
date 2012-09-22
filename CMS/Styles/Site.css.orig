@@ -1,0 +1,776 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+html
+{
+    width:100%; height:100%;
+    overflow:auto;    
+    margin:0; padding:0;
+}
+
+body   
+{
+    position:relative;
+    background: #FFF;
+    font-size: .80em;
+    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+    margin: 0px; padding: 0px;
+    color: #696969;    
+    top: 0; left: 0; bottom: 0;
+    width:100%; height:100%;
+}
+
+
+
+a:link, a:visited
+{
+    font-weight: bolder;
+    color: orange;
+}
+
+a:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
+a:active
+{
+    color: orange;
+}
+
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em;
+}
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #666666;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1
+{
+    font-size: 1.6em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+h2
+{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3
+{
+    font-size: 1.2em;
+}
+
+h4
+{
+    font-size: 1.1em;
+}
+
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page
+{
+    background-color: #fff;
+}
+
+.header
+{
+    width: 100%; 
+    background: #272727;
+}
+
+.main
+{
+    min-height:800px;
+}
+
+.contents
+{
+    overflow:auto; 
+}
+
+.leftCol
+{
+    padding: 6px 0px; margin: 12px 8px 8px 8px;
+    width: 200px; min-height: 200px;
+}
+
+.footer
+{
+    height: 30px;
+    padding-top: 10px;
+    background-color:#272727;  
+    margin-top: -10px;
+}
+
+.footer p
+{
+    text-align:center;
+    font-size:1em;
+    color:#fff;
+    padding:0; margin:5px 0 0 0;
+    line-height:1em;
+}
+
+
+/* MAIN MENU   
+----------------------------------------------------------*/
+.mainMenu
+{
+    padding-top: 15px;
+    text-align: center;
+}
+
+
+.mainUnderLine
+{
+    background-color:#acacac;  
+    height: 8px;
+    box-shadow: 0px 3px 3px #888888;
+    -moz-box-shadow:0px 3px 3px #888888;
+	-webkit-box-shadow:0px 3px 3px #888888;
+	z-index:5;
+}
+
+
+/* CONTENT PAGE LAYOUT  
+----------------------------------------------------------*/
+.contentLeftMenu
+{
+    width:200px; 
+    float: left;
+}
+
+.contentLeftMenu h1
+{
+    font-size:23px;
+    font-family:Calibri;
+    font-weight:bold;
+    color:#fff;
+    text-shadow: 1px -2px 2px rgba(0,0,0,0.25);
+    margin-bottom: 20px;
+    margin-left:20px;
+    
+}
+
+.contentLeftMenu a, a:visited
+{
+    font-size:1.2em;
+    font-family:Calibri;
+    color:#636363;
+    font-weight:bold;
+    text-decoration:none;
+    margin-left:20px;
+    margin-bottom: 5px;
+}
+
+.contentLeftMenu a:hover
+{
+    color:#000;
+    text-decoration:underline;
+    cursor:pointer;    
+}
+
+<<<<<<< HEAD
+.wrapper2
+{
+    background-color: #F7F7DE;
+    box-shadow: 0 0 10px #555555 inset;
+    margin-left: 200px;
+    margin-top: -8px;
+}
+
+.wrapper2Settings
+{
+    margin-left: 200px;
+    margin-top: -8px;
+}
+=======
+.contentList
+{
+    position:absolute; float:left;
+    top:140px; left:200px; bottom:30px;
+    width:400px;
+    background-color:#fff;
+    overflow-y: scroll;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+>>>>>>> 50475939bc5dd2385e1dfa6320d0926ab666f8a5
+
+.wrapper1
+{
+    background: none repeat scroll 0 0 #ACACAC;
+    box-shadow: 0 0 10px #555555 inset;
+}
+
+.contentList
+{
+    float:left;
+    width:360px;
+    margin-left: 8px;
+    margin-top: 20px;
+}
+
+.category.contentList       {   width:223px;    }
+.event.contentList          {   width:223px;    }
+.news.contentList           {   width:223px;    }
+.poi.contentList            {   width:450px;    }
+.subtype.contentList        {   width:223px;    }
+.tour.contentList           {   width:223px;    }
+.user.contentList           {   width:223px;    }
+
+<<<<<<< HEAD
+=======
+.contentDetailWrapper
+{
+    position:absolute; 
+    top:140px; left:0px; bottom:30px;
+    width: 100%;
+    background-color:#f7f7de;
+    overflow-y: auto;
+}
+>>>>>>> 50475939bc5dd2385e1dfa6320d0926ab666f8a5
+
+.contentDetail
+{
+   background: none repeat scroll 0 0 white;
+    box-shadow: 0 0 10px #555555 inset;
+    margin: 10px 0 10px 400px;
+    padding: 20px;
+    min-height: 800px;
+}
+
+.contentDetail h1
+{
+    margin-top:0px;    
+}
+
+.contentDetail h3
+{
+    color:#272727;
+    font-size:1.2em;
+    font-weight:bold;    
+}
+
+.detailButtons
+{
+    float:right;
+    margin: 0 100px 0 0;   
+}
+
+.bottom.detailButtons
+{
+    margin: 30px 10% 20px 0;
+}
+
+.category.contentDetail     {   margin-left: 493px;  }
+.event.contentDetail        {   margin-left: 493px;  }
+.news.contentDetail         {   margin-left: 493px;  }
+.poi.contentDetail          {   margin-left: 690px;  }
+.subtype.contentDetail      {   margin-left: 493px;  }
+.tour.contentDetail         {   margin-left: 493px;  }
+.user.contentDetail         {   margin-left: 493px;  }
+.admin.contentDetail        {   margin-left: 493px;  }
+
+.validationError
+{
+    margin:0 0 0 170px;
+    padding: 0;
+    color:Red;    
+    font-size:0.9em;
+}
+
+.label
+{
+    position:relative;
+    float:left;
+    text-align:right; 
+    margin-right:10px;  
+    vertical-align: top; 
+}
+
+.textBoxWatermark
+{   
+    background-color:#e4e2e2;   
+    color: #908f8f;
+}
+
+.noText.textBoxWatermark
+{
+    color:#e4e2e2;
+}
+
+.map
+{
+    width:400px;
+    height:250px;
+    background-color:#272727;
+    margin-left:166px;
+}
+
+/* Rating */
+
+.Rating
+{
+    position:relative;
+    float:left;
+}
+
+.ratingStar {
+    font-size: 0pt;
+    width: 25px;
+    height: 25px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.filledRatingStar {
+    background-image: url(/Resources/FilledStar.png);
+}
+
+.emptyRatingStar {
+    background-image: url(/Resources/EmptyStar.png);
+}
+
+.savedRatingStar {
+    background-image: url(/Resources/SavedStar.png);
+}
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+    margin: 1em 0px; padding: 20px 1em 1em 25px;
+    border: none;    
+}
+
+fieldset p 
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+    display: block;
+}
+
+fieldset label.inline 
+{
+    display: inline;
+}
+
+legend 
+{
+    font-size: 1.1em; font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry 
+{
+    width: 220px; height:25px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry 
+{
+    width: 220px; height:25px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+    width: 45% !important;
+    border: 1px dashed;
+    border-radius: 10px 10px 10px 10px;
+    padding-bottom: 20px;
+    width: 60%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+    clear: both;
+}
+
+.title
+{    
+    width: 100%; height:90px;    
+    border-bottom: 3px dashed #aeaeae;
+    text-align: center;
+}
+
+.title h1
+{
+    font-family: "Arial Black";
+    font-weight: bolder;
+    font-size:30px;
+    letter-spacing:2px;
+    color:#fff;
+    vertical-align:middle;
+    margin-top:0px;
+}
+
+.capitalTitle
+{
+    font-size:35px;
+    color:#f79f1d;    
+}
+
+.loginDisplay
+{
+    font-size: 1em;
+    display: block;
+    text-align: right;
+    padding: 5px; margin:0;
+    color: White;
+    line-height:1em;
+    
+}
+
+.loginDisplay a:link, a:visited, a:active
+{
+    color: white;
+    text-decoration:none;
+}
+
+.loginDisplay a:hover
+{
+    color: white;
+    text-decoration: underline;
+}
+
+.failureNotification
+{
+    font-size: 12px;
+    color: Red;
+    margin:0; padding:0;
+    line-height:20px;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.submitButton
+{
+    text-align: right;
+    padding-right: 10px;
+}
+
+.logInBtn
+{
+    background-color: #ACACAC;
+    box-shadow: 0 1px 2px 0 #333333;
+    float: right;
+    font-family: "Arial Black", Sans-Serif,Times New Roman;
+    font-size: 18px; font-weight: 900;
+    height: 80px; width: 100px;
+    margin-right: -125px; margin-top: -130px;
+    text-transform: uppercase;    
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    color:#4f4f4f;
+    
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.logInBtn:hover
+{
+    background: -moz-linear-gradient(center bottom , #a1a1a1  0%, #d4d4d4 50%, #a1a1a1 100%);
+    background-image: -webkit-linear-gradient( #a1a1a1 , white, #d1d1d1);
+    box-shadow: 0 1px 2px 0 #a1a1a1;
+}
+
+.logInBox
+{
+    background-color: White;
+    border-radius: 10px 10px 10px 10px;   
+    width: 420px;
+    margin-left: 140px;
+}
+
+.loginBody
+{
+    background-color: #3f3f3f;
+    border-radius: 10px 10px 10px 10px; 
+    margin-left: auto; margin-right: auto;margin-top: 100px;
+    padding-left: 10px; padding-bottom: 10px; padding-top: 10px;
+    width: 600px;  
+}
+
+.login p
+{
+    width: 220px;
+}
+
+.loginBody-inner
+{
+    border: 2px dashed #738593;
+    border-radius: 10px 10px 10px 10px;
+    width: 585px;
+}
+
+.login-heading
+{
+    width: 320px !important;
+    font-weight: bold;
+}
+
+.ccapp-logo
+{
+    float: left;
+    margin-left: 20px;
+    margin-top: -160px;
+}
+
+.ccapp-logo img
+{
+    width: 100px;
+}
+
+.ccapp-banner
+{
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+.ccapp-banner img
+{
+    width: 510px
+}
+
+.login-footer
+{
+     margin-left: 130px;
+}
+
+.login-footer p
+{
+    color: white;
+    font-weight: 600;
+}
+
+
+/* Button  
+----------------------------------------------------------*/
+
+.button, .button:visited {
+	background: #222 url(overlay.png) repeat-x; 
+	display: inline-block; 
+	padding: 5px 10px 6px;
+	color: #fff; 
+	text-decoration: none;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	cursor: pointer
+}
+ 
+	.button:hover							{ background-color: #111; color: #fff; }
+	.button:active							{ top: 1px; }
+	.small.button, .small.button:visited 			{ font-size: 11px}
+	.button, .button:visited,
+	.medium.button, .medium.button:visited 		{ font-size: 13px; 
+												  font-weight: bold; 
+												  line-height: 1; 
+												  text-shadow: 0 -1px 1px rgba(0,0,0,0.25); 
+												  color:#fff;
+												  }
+												  
+	.large.button, .large.button:visited 			{ font-size: 14px; 
+													  padding: 8px 14px 9px; }
+													  
+	.super.button, .super.button:visited 			{ font-size: 34px; 
+													  padding: 8px 14px 9px; }
+	
+	.pink.button, .pink.button:visited		{ background-color: #e22092; }
+	.pink.button:hover							{ background-color: #c81e82; }
+	.green.button, .green.button:visited		{ background-color: #91bd09; }
+	.green.button:hover						    { background-color: #749a02; }
+	.red.button, .red.button:visited			{ background-color: #e62727; }
+	.red.button:hover							{ background-color: #cf2525; }
+	.orange.button, .orange.button:visited		{ background-color: #ff5c00; }
+	.orange.button:hover						{ background-color: #d45500; }
+	.blue.button, .blue.button:visited		    { background-color: #2981e4; }
+	.blue.button:hover							{ background-color: #2575cf; }
+	.yellow.button, .yellow.button:visited		{ background-color: #ffb515; }
+	.yellow.button:hover						{ background-color: #fc9200; }
+	.gray.button, .gray.button:visited		{ background-color: #636363; width:80px; height:18px; text-align:center; vertical-align:text-top; }
+	.gray.button:hover						{ background-color: #acacac; }
+   
+   
+.elgg-icon-admin-settings
+{
+    background-position: 0 -755px !important;
+    background: url('/Resources/elgg_sprites.png') no-repeat scroll left center transparent;
+    height: 16px;
+    width: 16px;
+    float: left;
+}  
+   
+.elgg-icon-settings {
+    background-position: 0 -775px !important;
+    background: url('/Resources/elgg_sprites.png') no-repeat scroll left center transparent;
+    height: 16px;
+    width: 16px;
+    float: left;
+}
+
+#settings
+{
+    float: right;
+    margin-right: 10px;
+    margin-top: -30px;
+}
+
+#settings a:visited
+{  
+    color: Orange !important;
+}
+
+.adminLeftMenu
+{
+    text-align: right;
+    width: 540px !important;
+}
+
+.adminLeftMenu h1
+{
+    padding-right: 20px;
+}
+
+.adminBody
+{
+    margin-left: 360px;
+    padding-left: 30px;
+}
+
+
+.failureNotification li
+{
+    list-style: none !important;
+}
+
+.statusMsg
+{
+    color: Red;
+}
+
+.createUserMsg
+{
+    float: right;
+    margin-right: 340px;
+    margin-top: 230px;
+}
+
+.addUserBtn
+{
+    float: left;
+    margin-left: 300px;
+    margin-top: -40px;
+}
+
+.duplicateUserMsg
+{
+    margin-left: 35px;
+    padding-bottom: 20px;
+}
+
+.sideBarNavigation{
+    float: right;
+    margin-right: 50px;
+    text-align: left;
+}
+
+.admin_settings
+{
+    float: left;
+    padding-right: 20px;
+}
+<<<<<<< HEAD
+
+.news-head hr
+{
+    background-color: #EBEBEB;
+    border-color: #EBEBEB;
+    border-style: solid;
+    color: #EBEBEB;
+}
+
+.news-head h2
+{
+    font-size: 2em;
+}
+
+
+.gridViewList
+{
+    margin-left: 10px;
+}
+
+.news-item-labels {
+    color: #666666;
+    font-style: normal;
+    margin-bottom: 30px;
+    margin-top: 2px;
+    padding-top: 15px;
+    text-transform: uppercase;
+}
+
+.news-body
+{
+    width: 600px;
+}
+
+.news-image
+{
+    float: left;
+}
+
+.news-image img
+{
+    max-height: 150px;
+    max-width: 150px;
+}
+=======
+>>>>>>> 50475939bc5dd2385e1dfa6320d0926ab666f8a5

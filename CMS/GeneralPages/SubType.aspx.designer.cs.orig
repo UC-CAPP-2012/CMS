@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CMS.CMSPages {
+namespace CMS.GeneralPages {
     
     
-    public partial class Category {
+    public partial class SubType {
         
         /// <summary>
         /// InsertLinkButton control.
@@ -22,22 +22,22 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.LinkButton InsertLinkButton;
         
         /// <summary>
-        /// GridViewCategory control.
+        /// SubtypeGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewCategory;
+        protected global::System.Web.UI.WebControls.GridView SubtypeGridView;
         
         /// <summary>
-        /// ObjectDataSourceCategory control.
+        /// SubtypeObjectDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSourceCategory;
+        protected global::System.Web.UI.WebControls.ObjectDataSource SubtypeObjectDataSource;
         
         /// <summary>
         /// ScriptManager1 control.
@@ -49,13 +49,13 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// CategoryMultiView control.
+        /// SubtypeMultiView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView CategoryMultiView;
+        protected global::System.Web.UI.WebControls.MultiView SubtypeMultiView;
         
         /// <summary>
         /// DetailView control.
@@ -244,6 +244,9 @@ namespace CMS.CMSPages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+<<<<<<< HEAD
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator InsertRequiredFieldValidator;
+=======
         protected global::AjaxControlToolkit.ConfirmButtonExtender ConfirmButtonExtender2;
         
         /// <summary>
@@ -254,5 +257,33 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button InsertCancelButton;
+        
+        /// <summary>
+        /// SubtypeGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView SubtypeGridView;
+        
+        /// <summary>
+        /// SubtypeObjectDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource SubtypeObjectDataSource;
+        
+        /// <summary>
+        /// InsertLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton InsertLinkButton;
+>>>>>>> 50475939bc5dd2385e1dfa6320d0926ab666f8a5
     }
 }
