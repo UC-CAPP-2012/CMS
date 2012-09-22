@@ -15,25 +15,27 @@ body
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
     margin: 0px; padding: 0px;
     color: #696969;    
-    position: absolute;
     top: 0; left: 0; bottom: 0;
     width:100%; height:100%;
 }
 
+
+
 a:link, a:visited
 {
-    color: #034af3;
+    font-weight: bolder;
+    color: orange;
 }
 
 a:hover
 {
-    color: #1d60ff;
+    color: white;
     text-decoration: none;
 }
 
 a:active
 {
-    color: #034af3;
+    color: orange;
 }
 
 p
@@ -60,6 +62,7 @@ h1
     font-size: 1.6em;
     padding-bottom: 0px;
     margin-bottom: 0px;
+    font-weight: bold;
 }
 
 h2
@@ -96,32 +99,23 @@ first child of the left and right table columns */
 
 .page
 {
-    width: 100%; height:100%;
     background-color: #fff;
-    margin:0; padding:0;
 }
 
 .header
 {
-    position: relative;
-    margin:0px;  padding: 0px;
-    width: 100%; height:140px;
+    width: 100%; 
     background: #272727;
 }
 
 .main
 {
-    height:100%; width:100%;    
+    min-height:800px;
 }
 
 .contents
 {
-    position:inherit;
-    float:left;
     overflow:auto; 
-    width:100%;  
-    height:100%;  
-    padding-bottom: 25px;
 }
 
 .leftCol
@@ -132,10 +126,10 @@ first child of the left and right table columns */
 
 .footer
 {
-    position: absolute;
-    width: 100%; height: 30px; bottom:0; left:0;
-    background-color:#272727;
-    margin-top:-25px;    
+    height: 30px;
+    padding-top: 10px;
+    background-color:#272727;  
+    margin-top: -10px;
 }
 
 .footer p
@@ -152,22 +146,15 @@ first child of the left and right table columns */
 ----------------------------------------------------------*/
 .mainMenu
 {
-    position: absolute; float:left; display:table-cell;
-    width:100%; height:42px; top:95px; left:0px;    
-    margin:0; padding:0;
-    background-color:#272727;
-    line-height:42px;       
-    text-align:center; vertical-align: bottom;  
+    padding-top: 15px;
+    text-align: center;
 }
 
 
 .mainUnderLine
 {
-    position: absolute; float:left;
-    width:100%; height:8px; top:132px; left:0px;
     background-color:#acacac;  
-    margin:0; padding:0;  
-    clear:both;
+    height: 8px;
     box-shadow: 0px 3px 3px #888888;
     -moz-box-shadow:0px 3px 3px #888888;
 	-webkit-box-shadow:0px 3px 3px #888888;
@@ -179,12 +166,8 @@ first child of the left and right table columns */
 ----------------------------------------------------------*/
 .contentLeftMenu
 {
-    position:absolute; 
-    top:140px; left:0px; bottom:30px;
     width:200px; 
-    background-color:#acacac;
-    overflow-y:hidden;
-    padding-left:20px;
+    float: left;
 }
 
 .contentLeftMenu h1
@@ -193,32 +176,173 @@ first child of the left and right table columns */
     font-family:Calibri;
     font-weight:bold;
     color:#fff;
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    text-shadow: 1px -2px 2px rgba(0,0,0,0.25);
+    margin-bottom: 20px;
+    margin-left:20px;
     
+}
+
+.contentLeftMenu a, a:visited
+{
+    font-size:1.2em;
+    font-family:Calibri;
+    color:#636363;
+    font-weight:bold;
+    text-decoration:none;
+    margin-left:20px;
+    margin-bottom: 5px;
+}
+
+.contentLeftMenu a:hover
+{
+    color:#000;
+    text-decoration:underline;
+    cursor:pointer;    
+}
+
+.wrapper2
+{
+    background-color: #F7F7DE;
+    box-shadow: 0 0 10px #555555 inset;
+    margin-left: 200px;
+    margin-top: -8px;
+}
+.wrapper2Settings
+{
+    margin-left: 200px;
+    margin-top: -8px;
+}
+
+.wrapper1
+{
+    background: none repeat scroll 0 0 #ACACAC;
+    box-shadow: 0 0 10px #555555 inset;
 }
 
 .contentList
 {
-    position:absolute; float:left;
-    top:140px; left:200px; bottom:30px;
-    width:400px;
-    background-color:#f7f7de;
-    overflow-y: auto;
+    float:left;
+    width:360px;
+    margin-left: 8px;
+    margin-top: 20px;
+}
 
-}
-.contentDetailWrapper
-{
-    position:absolute; 
-    top:140px; left:0px; bottom:30px;
-    width: 100%;
-    background-color:#fff;
-    overflow-y: auto;
-}
+.category.contentList       {   width:223px;    }
+.event.contentList          {   width:223px;    }
+.news.contentList           {   width:223px;    }
+.poi.contentList            {   width:450px;    }
+.subtype.contentList        {   width:223px;    }
+.tour.contentList           {   width:223px;    }
+.user.contentList           {   width:223px;    }
+
+
 .contentDetail
 {
-   margin: 10px 10px 10px 610px;    
+   background: none repeat scroll 0 0 white;
+    box-shadow: 0 0 10px #555555 inset;
+    margin: 10px 0 10px 400px;
+    padding: 20px;
+    min-height: 800px;
 }
 
+.contentDetail h1
+{
+    margin-top:0px;    
+}
+
+.contentDetail h3
+{
+    color:#272727;
+    font-size:1.2em;
+    font-weight:bold;    
+}
+
+.detailButtons
+{
+    float:right;
+    margin: 0 100px 0 0;   
+}
+
+.bottom.detailButtons
+{
+    margin: 30px 10% 20px 0;
+}
+
+.category.contentDetail     {   margin-left: 493px;  }
+.event.contentDetail        {   margin-left: 493px;  }
+.news.contentDetail         {   margin-left: 493px;  }
+.poi.contentDetail          {   margin-left: 690px;  }
+.subtype.contentDetail      {   margin-left: 493px;  }
+.tour.contentDetail         {   margin-left: 493px;  }
+.user.contentDetail         {   margin-left: 493px;  }
+.admin.contentDetail        {   margin-left: 493px;  }
+
+.validationError
+{
+    margin:0 0 0 170px;
+    padding: 0;
+    color:Red;    
+    font-size:0.9em;
+}
+
+.label
+{
+    position:relative;
+    float:left;
+    text-align:right; 
+    margin-right:10px;  
+    vertical-align: top; 
+}
+
+.textBoxWatermark
+{   
+    background-color:#e4e2e2;   
+    color: #908f8f;
+}
+
+.noText.textBoxWatermark
+{
+    color:#e4e2e2;
+}
+
+.map
+{
+    width:400px;
+    height:250px;
+    background-color:#272727;
+    margin-left:166px;
+}
+
+/* Rating */
+
+.Rating
+{
+    position:relative;
+    float:left;
+}
+
+.ratingStar {
+    font-size: 0pt;
+    width: 25px;
+    height: 25px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.filledRatingStar {
+    background-image: url(/Resources/FilledStar.png);
+}
+
+.emptyRatingStar {
+    background-image: url(/Resources/EmptyStar.png);
+}
+
+.savedRatingStar {
+    background-image: url(/Resources/SavedStar.png);
+}
 
 /* FORM ELEMENTS   
 ----------------------------------------------------------*/
@@ -264,7 +388,11 @@ input.passwordEntry
 
 div.accountInfo
 {
-    width: 42%;
+    width: 45% !important;
+    border: 1px dashed;
+    border-radius: 10px 10px 10px 10px;
+    padding-bottom: 20px;
+    width: 60%;
 }
 
 /* MISC  
@@ -276,8 +404,7 @@ div.accountInfo
 }
 
 .title
-{
-    position:relative; float: left;    
+{    
     width: 100%; height:90px;    
     border-bottom: 3px dashed #aeaeae;
     text-align: center;
@@ -291,6 +418,7 @@ div.accountInfo
     letter-spacing:2px;
     color:#fff;
     vertical-align:middle;
+    margin-top:0px;
 }
 
 .capitalTitle
@@ -443,17 +571,14 @@ div.accountInfo
 	background: #222 url(overlay.png) repeat-x; 
 	display: inline-block; 
 	padding: 5px 10px 6px;
-	margin:0; 
 	color: #fff; 
 	text-decoration: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
 	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-	border-bottom: 1px solid rgba(0,0,0,0.25);
-	position: relative;
 	cursor: pointer
 }
  
@@ -490,30 +615,135 @@ div.accountInfo
 	.gray.button:hover						{ background-color: #acacac; }
    
    
-   
-.elgg-icon-settings {
+.elgg-icon-admin-settings
+{
     background-position: 0 -755px !important;
     background: url('/Resources/elgg_sprites.png') no-repeat scroll left center transparent;
     height: 16px;
-    margin: 15px 2px 0;
+    width: 16px;
+    float: left;
+}  
+   
+.elgg-icon-settings {
+    background-position: 0 -775px !important;
+    background: url('/Resources/elgg_sprites.png') no-repeat scroll left center transparent;
+    height: 16px;
     width: 16px;
     float: left;
 }
 
-#adminSettings
+#settings
 {
     float: right;
     margin-right: 10px;
-    margin-top: -45px;
+    margin-top: -30px;
+}
+
+#settings a:visited
+{  
+    color: Orange !important;
 }
 
 .adminLeftMenu
 {
-    width: 380px !important;
+    text-align: right;
+    width: 540px !important;
+}
+
+.adminLeftMenu h1
+{
+    padding-right: 20px;
 }
 
 .adminBody
 {
-    left: 400px;
-    width: 800px;
+    margin-left: 360px;
+    padding-left: 30px;
+}
+
+
+.failureNotification li
+{
+    list-style: none !important;
+}
+
+.statusMsg
+{
+    color: Red;
+}
+
+.createUserMsg
+{
+    float: right;
+    margin-right: 340px;
+    margin-top: 230px;
+}
+
+.addUserBtn
+{
+    float: left;
+    margin-left: 300px;
+    margin-top: -40px;
+}
+
+.duplicateUserMsg
+{
+    margin-left: 35px;
+    padding-bottom: 20px;
+}
+
+.sideBarNavigation{
+    float: right;
+    margin-right: 50px;
+    text-align: left;
+}
+
+.admin_settings
+{
+    float: left;
+    padding-right: 20px;
+}
+
+.news-head hr
+{
+    background-color: #EBEBEB;
+    border-color: #EBEBEB;
+    border-style: solid;
+    color: #EBEBEB;
+}
+
+.news-head h2
+{
+    font-size: 2em;
+}
+
+
+.gridViewList
+{
+    margin-left: 10px;
+}
+
+.news-item-labels {
+    color: #666666;
+    font-style: normal;
+    margin-bottom: 30px;
+    margin-top: 2px;
+    padding-top: 15px;
+    text-transform: uppercase;
+}
+
+.news-body
+{
+    width: 600px;
+}
+
+.news-image
+{
+    float: left;
+}
+
+.news-image img
+{
+    max-height: 150px;
+    max-width: 150px;
 }
