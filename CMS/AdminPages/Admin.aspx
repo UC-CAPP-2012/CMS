@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<div class="wrapper1">
     <div class="contentLeftMenu adminLeftMenu">
         <h1> Administrator </h1>
         <div class="sideBarNavigation">
@@ -11,7 +12,9 @@
         </ul>
         </div>
     </div>
-    <div class="contentList  adminBody">
+
+    <div class="wrapper2Settings">
+    <div class="contentDetail  adminBody">
         <h1>Remove User</h1>
         <hr />
         
@@ -55,6 +58,8 @@
     </div>
     
     
+</div>  
+</div>    
     
 </asp:Content>
 

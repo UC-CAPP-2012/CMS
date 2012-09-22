@@ -9,10 +9,63 @@
     //Don't run suver side code and do nothing when cancel button on confirmation is clicked.
     function CancelClick() {}
 </script>
-
+<div class="wrapper1">
+    <!-- The menu on the left -->
+    <div class="contentLeftMenu">
+        <h1> Category </h1>
+        <asp:LinkButton ID="InsertLinkButton" runat="server" onclick="InsertLinkButton_Click"> Insert New Category </asp:LinkButton>
+    </div>
+    <div class="wrapper2">
+    <!-- Data List -->
+    <div class="contentList">
+        <asp:GridView ID="GridViewCategory" runat="server" AllowSorting="True" 
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
+            BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CategoryID" 
+            DataSourceID="ObjectDataSourceCategory" ForeColor="Black"  CssClass="gridViewList"
+            GridLines="Vertical" onrowdatabound="GridViewCategory_RowDataBound" 
+            onselectedindexchanged="GridViewCategory_SelectedIndexChanged">
+            <AlternatingRowStyle BackColor="White"  />
+            <Columns>           
+                    <asp:CommandField SelectText="" ShowSelectButton="True" />
+                    <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" 
+                        InsertVisible="False" ReadOnly="True" SortExpression="CategoryID" 
+                        Visible="False" >
+                    <ItemStyle Width="80px" />
+                    </asp:BoundField>
+                    <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" 
+                        SortExpression="CategoryName" >
+                    <ItemStyle Width="200px" />
+                    </asp:BoundField>
+            </Columns>
+            <FooterStyle BackColor="#CCCC99" />
+            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#F7F7DE"  />
+            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#FBFBF2" />
+            <SortedAscendingHeaderStyle BackColor="#848384" />
+            <SortedDescendingCellStyle BackColor="#EAEAD3" />
+            <SortedDescendingHeaderStyle BackColor="#575357" />
+        </asp:GridView>
+        <asp:ObjectDataSource ID="ObjectDataSourceCategory" runat="server" 
+            DeleteMethod="DeleteCategory" InsertMethod="InsertCategory" 
+            SelectMethod="getAllCategory" TypeName="CMS.BLL.CMSBLClass" 
+            UpdateMethod="UpdateCategory" 
+            OldValuesParameterFormatString="original_{0}">
+            <DeleteParameters>
+                <asp:Parameter Name="original_CategoryID" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="categoryName" Type="String" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="categoryName" Type="String" />
+                <asp:Parameter Name="original_CategoryID" Type="Int32" />
+            </UpdateParameters>
+        </asp:ObjectDataSource>
+    </div>
     <!-- Data Detail -->
-    <div class="contentDetailWrapper">
-        <div class="contentDetail category">
+        <div class="contentDetail">
             <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="CategoryMultiView" runat="server">
 
@@ -71,60 +124,9 @@
                 </asp:View>
             </asp:MultiView>
         </div>
+        </div>
     </div>
+    
 
-    <!-- Data List -->
-    <div class="contentList category">
-        <asp:GridView ID="GridViewCategory" runat="server" AllowSorting="True" 
-            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
-            BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CategoryID" 
-            DataSourceID="ObjectDataSourceCategory" ForeColor="Black" 
-            GridLines="Vertical" onrowdatabound="GridViewCategory_RowDataBound" 
-            onselectedindexchanged="GridViewCategory_SelectedIndexChanged">
-            <AlternatingRowStyle BackColor="White"  />
-            <Columns>           
-                    <asp:CommandField SelectText="" ShowSelectButton="True" />
-                    <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" 
-                        InsertVisible="False" ReadOnly="True" SortExpression="CategoryID" 
-                        Visible="False" >
-                    <ItemStyle Width="80px" />
-                    </asp:BoundField>
-                    <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" 
-                        SortExpression="CategoryName" >
-                    <ItemStyle Width="200px" />
-                    </asp:BoundField>
-            </Columns>
-            <FooterStyle BackColor="#CCCC99" />
-            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-            <RowStyle BackColor="#F7F7DE"  />
-            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#FBFBF2" />
-            <SortedAscendingHeaderStyle BackColor="#848384" />
-            <SortedDescendingCellStyle BackColor="#EAEAD3" />
-            <SortedDescendingHeaderStyle BackColor="#575357" />
-        </asp:GridView>
-        <asp:ObjectDataSource ID="ObjectDataSourceCategory" runat="server" 
-            DeleteMethod="DeleteCategory" InsertMethod="InsertCategory" 
-            SelectMethod="getAllCategory" TypeName="CMS.BLL.CMSBLClass" 
-            UpdateMethod="UpdateCategory" 
-            OldValuesParameterFormatString="original_{0}">
-            <DeleteParameters>
-                <asp:Parameter Name="original_CategoryID" Type="Int32" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="categoryName" Type="String" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="categoryName" Type="String" />
-                <asp:Parameter Name="original_CategoryID" Type="Int32" />
-            </UpdateParameters>
-        </asp:ObjectDataSource>
-    </div>
-
-    <!-- The menu on the left -->
-    <div class="contentLeftMenu">
-        <h1> Category </h1>
-        <asp:LinkButton ID="InsertLinkButton" runat="server" onclick="InsertLinkButton_Click"> Insert New Category </asp:LinkButton>
-    </div>
+    
 </asp:Content>

@@ -2,6 +2,7 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+<div class="wrapper1">
 <div class="contentLeftMenu adminLeftMenu">
         <h1> Administrator </h1>
         
@@ -12,7 +13,8 @@
         </ul>
         </div>
     </div>
-    <div class="contentList  adminBody">
+    <div class="wrapper2Settings">
+    <div class="contentDetail  adminBody">
     <h1>
                         Create a New Account
                     </h1>
@@ -110,5 +112,6 @@
                         <asp:Label runat="server" ID="duplicateUserMsg" CssClass="statusMsg duplicateUserMsg" Text="" ></asp:Label>
     
     </div>
-    
+    </div>
+    </div>
 </asp:Content>

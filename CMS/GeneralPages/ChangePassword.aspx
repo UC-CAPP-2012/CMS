@@ -4,11 +4,13 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+<div class="wrapper1">
 <div class="contentLeftMenu adminLeftMenu">
         <h1> Settings </h1>
         
     </div>
-    <div class="contentList  adminBody">
+    <div class="wrapper2Settings">
+    <div class="contentDetail  adminBody">
     <h2>
         Change Password
     </h2>
@@ -65,5 +67,6 @@
         </ChangePasswordTemplate>
     </asp:ChangePassword>
 </div>
-    
+</div>  
+</div>    
 </asp:Content>

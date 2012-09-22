@@ -35,6 +35,8 @@ namespace CMS.BLL
         DAL.CMSDBDataSetTableAdapters.UserTableAdapter userTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.UserTableAdapter();
 
+        DAL.CMSDBDataSetTableAdapters.NewsTableAdapter newsTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.NewsTableAdapter();
 
         /*********************************************************************
          * Category data access
@@ -208,6 +210,35 @@ namespace CMS.BLL
         public int InsertMedia(int ItemID, String MediaURL, String MediaType)
         {
             return mediaTableAdapter.Insert(ItemID, MediaURL, MediaType);
+        }
+
+
+        /*********************************************************************
+        * News data access
+        *********************************************************************/
+        public DAL.CMSDBDataSet.NewsDataTable getAllNews()
+        {
+            return newsTableAdapter.GetData();
+        }
+
+        public int UpdateNews(String newsHeading, DateTime newsDateTime, String newsBody, String newsMediaURL, String newsPublisher,int original_NewsID)
+        {
+            return newsTableAdapter.Update(newsHeading, newsDateTime, newsBody, newsMediaURL, newsPublisher, original_NewsID);
+        }
+
+        public int DeleteNews(int original_NewsID)
+        {
+            return newsTableAdapter.Delete(original_NewsID);
+        }
+
+        public int InsertNews(String newsHeading, DateTime newsDateTime, String newsBody, String newsMediaURL, String newsPublisher)
+        {
+            return newsTableAdapter.Insert(newsHeading, newsDateTime, newsBody, newsMediaURL, newsPublisher);
+        }
+
+        public DAL.CMSDBDataSet.NewsRow getNewsById(int Id)
+        {
+            return (DAL.CMSDBDataSet.NewsRow)newsTableAdapter.GetNewsByID(Id).Rows[0];
         }
     }
 }
