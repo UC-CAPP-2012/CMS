@@ -80,7 +80,96 @@
     google.maps.event.addDomListener(window, 'load', initialize);
      //]]>
 </script>
-    <div class="contentDetailWrapper" id="addPOILoad">
+        <div class="wrapper1">
+        <div class="contentLeftMenu">
+        <h1> Point Of Interest </h1>
+        <ul>
+            <li><span style="margin-left: -1em;"/><asp:LinkButton ID="InsertLinkButton" runat="server" CausesValidation="False"
+                onclick="InsertLinkButton_Click"> Insert New POI </asp:LinkButton></li>
+        </ul>
+    </div>
+    <div class="wrapper2>
+    <div class="contentList poi">
+        <asp:GridView ID="POIGridView" runat="server" AllowSorting="True" 
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
+            BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ItemID"
+            DataSourceID="POIObjectDataSource" ForeColor="Black" GridLines="Vertical" 
+            Width="37%" onrowdatabound="POIGridView_RowDataBound" 
+            onselectedindexchanged="POIGridView_SelectedIndexChanged">
+            <AlternatingRowStyle BackColor="White" />
+            <Columns>
+                <asp:CommandField SelectText="" ShowSelectButton="True" />
+                <asp:BoundField DataField="ItemID" HeaderText="ItemID" InsertVisible="False" 
+                    SortExpression="ItemID" Visible="False" />
+                <asp:BoundField DataField="ItemName" HeaderText="POI Name" 
+                    SortExpression="ItemName">
+                </asp:BoundField>
+                <asp:BoundField DataField="CategoryName" HeaderText="Category" 
+                    SortExpression="CategoryName">
+                </asp:BoundField>
+                <asp:BoundField DataField="Suburb" HeaderText="Suburb" SortExpression="Suburb">
+                <ItemStyle/>
+                </asp:BoundField>
+            </Columns>
+            <FooterStyle BackColor="#CCCC99" />
+            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#F7F7DE" />
+            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#FBFBF2" />
+            <SortedAscendingHeaderStyle BackColor="#848384" />
+            <SortedDescendingCellStyle BackColor="#EAEAD3" />
+            <SortedDescendingHeaderStyle BackColor="#575357" />
+        </asp:GridView>
+        <asp:ObjectDataSource ID="POIObjectDataSource" runat="server"
+            DeleteMethod="DeletePOI" InsertMethod="InsertPOI" SelectMethod="getAllPOIList" 
+            TypeName="CMS.BLL.CMSBLClass" UpdateMethod="UpdatePOI">
+            <DeleteParameters>
+                <asp:Parameter Name="Original_ItemID" Type="Int32" />
+                <asp:Parameter Name="Original_CategoryID" Type="Int32" />
+                <asp:Parameter Name="Original_SubtypeID" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="ItemName" Type="String" />
+                <asp:Parameter Name="Details" Type="String" />
+                <asp:Parameter Name="Cost" Type="Decimal" />
+                <asp:Parameter Name="Rating" Type="Int32" />
+                <asp:Parameter Name="Phone" Type="Int32" />
+                <asp:Parameter Name="Website" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
+                <asp:Parameter Name="OpeningHours" Type="String" />
+                <asp:Parameter Name="StreetNo" Type="String" />
+                <asp:Parameter Name="StreetName" Type="String" />
+                <asp:Parameter Name="Latitute" Type="Int32" />
+                <asp:Parameter Name="Longitute" Type="Int32" />
+                <asp:Parameter Name="Postcode" Type="Int32" />
+                <asp:Parameter Name="Suburb" Type="String" />
+                <asp:Parameter Name="SubtypeID" Type="Int32" />
+                <asp:Parameter Name="CategoryID" Type="Int32" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="ItemName" Type="String" />
+                <asp:Parameter Name="Details" Type="String" />
+                <asp:Parameter Name="Cost" Type="Decimal" />
+                <asp:Parameter Name="Rating" Type="Int32" />
+                <asp:Parameter Name="Phone" Type="Int32" />
+                <asp:Parameter Name="Website" Type="String" />
+                <asp:Parameter Name="Email" Type="String" />
+                <asp:Parameter Name="OpeningHours" Type="String" />
+                <asp:Parameter Name="StreetNo" Type="String" />
+                <asp:Parameter Name="StreetName" Type="String" />
+                <asp:Parameter Name="Latitute" Type="Int32" />
+                <asp:Parameter Name="Longitute" Type="Int32" />
+                <asp:Parameter Name="Postcode" Type="Int32" />
+                <asp:Parameter Name="Suburb" Type="String" />
+                <asp:Parameter Name="SubtypeID" Type="Int32" />
+                <asp:Parameter Name="CategoryID" Type="Int32" />
+                <asp:Parameter Name="Original_SubtypeID" Type="Int32" />
+                <asp:Parameter Name="Original_ItemID" Type="Int32" />
+                <asp:Parameter Name="Original_CategoryID" Type="Int32" />
+            </UpdateParameters>
+        </asp:ObjectDataSource>
+    </div>
         <div class="contentDetail poi">
             <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="POIMultiView" runat="server">
@@ -311,95 +400,8 @@
             </asp:MultiView>
         </div>
     </div>
-    <div class="contentList poi">
-        <asp:GridView ID="POIGridView" runat="server" AllowSorting="True" 
-            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
-            BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ItemID"
-            DataSourceID="POIObjectDataSource" ForeColor="Black" GridLines="Vertical" 
-            Width="100%" onrowdatabound="POIGridView_RowDataBound" 
-            onselectedindexchanged="POIGridView_SelectedIndexChanged">
-            <AlternatingRowStyle BackColor="White" />
-            <Columns>
-                <asp:CommandField SelectText="" ShowSelectButton="True" />
-                <asp:BoundField DataField="ItemID" HeaderText="ItemID" InsertVisible="False" 
-                    SortExpression="ItemID" Visible="False" />
-                <asp:BoundField DataField="ItemName" HeaderText="POI Name" 
-                    SortExpression="ItemName">
-                </asp:BoundField>
-                <asp:BoundField DataField="CategoryName" HeaderText="Category" 
-                    SortExpression="CategoryName">
-                </asp:BoundField>
-                <asp:BoundField DataField="Suburb" HeaderText="Suburb" SortExpression="Suburb">
-                <ItemStyle/>
-                </asp:BoundField>
-            </Columns>
-            <FooterStyle BackColor="#CCCC99" />
-            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-            <RowStyle BackColor="#F7F7DE" />
-            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#FBFBF2" />
-            <SortedAscendingHeaderStyle BackColor="#848384" />
-            <SortedDescendingCellStyle BackColor="#EAEAD3" />
-            <SortedDescendingHeaderStyle BackColor="#575357" />
-        </asp:GridView>
-        <asp:ObjectDataSource ID="POIObjectDataSource" runat="server"
-            DeleteMethod="DeletePOI" InsertMethod="InsertPOI" SelectMethod="getAllPOIList" 
-            TypeName="CMS.BLL.CMSBLClass" UpdateMethod="UpdatePOI">
-            <DeleteParameters>
-                <asp:Parameter Name="Original_ItemID" Type="Int32" />
-                <asp:Parameter Name="Original_CategoryID" Type="Int32" />
-                <asp:Parameter Name="Original_SubtypeID" Type="Int32" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="ItemName" Type="String" />
-                <asp:Parameter Name="Details" Type="String" />
-                <asp:Parameter Name="Cost" Type="Decimal" />
-                <asp:Parameter Name="Rating" Type="Int32" />
-                <asp:Parameter Name="Phone" Type="Int32" />
-                <asp:Parameter Name="Website" Type="String" />
-                <asp:Parameter Name="Email" Type="String" />
-                <asp:Parameter Name="OpeningHours" Type="String" />
-                <asp:Parameter Name="StreetNo" Type="String" />
-                <asp:Parameter Name="StreetName" Type="String" />
-                <asp:Parameter Name="Latitute" Type="Int32" />
-                <asp:Parameter Name="Longitute" Type="Int32" />
-                <asp:Parameter Name="Postcode" Type="Int32" />
-                <asp:Parameter Name="Suburb" Type="String" />
-                <asp:Parameter Name="SubtypeID" Type="Int32" />
-                <asp:Parameter Name="CategoryID" Type="Int32" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="ItemName" Type="String" />
-                <asp:Parameter Name="Details" Type="String" />
-                <asp:Parameter Name="Cost" Type="Decimal" />
-                <asp:Parameter Name="Rating" Type="Int32" />
-                <asp:Parameter Name="Phone" Type="Int32" />
-                <asp:Parameter Name="Website" Type="String" />
-                <asp:Parameter Name="Email" Type="String" />
-                <asp:Parameter Name="OpeningHours" Type="String" />
-                <asp:Parameter Name="StreetNo" Type="String" />
-                <asp:Parameter Name="StreetName" Type="String" />
-                <asp:Parameter Name="Latitute" Type="Int32" />
-                <asp:Parameter Name="Longitute" Type="Int32" />
-                <asp:Parameter Name="Postcode" Type="Int32" />
-                <asp:Parameter Name="Suburb" Type="String" />
-                <asp:Parameter Name="SubtypeID" Type="Int32" />
-                <asp:Parameter Name="CategoryID" Type="Int32" />
-                <asp:Parameter Name="Original_SubtypeID" Type="Int32" />
-                <asp:Parameter Name="Original_ItemID" Type="Int32" />
-                <asp:Parameter Name="Original_CategoryID" Type="Int32" />
-            </UpdateParameters>
-        </asp:ObjectDataSource>
     </div>
-    <div class="contentLeftMenu">
-        <h1> Point Of Interest </h1>
-        <ul>
-            <li><span style="margin-left: -1em;"/><asp:LinkButton ID="InsertLinkButton" runat="server" CausesValidation="False"
-                onclick="InsertLinkButton_Click"> Insert New POI </asp:LinkButton></li>
-        </ul>
-    </div>       
           
-    </span>       
+    </span>
           
 </asp:Content>
