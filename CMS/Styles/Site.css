@@ -19,6 +19,8 @@ body
     width:100%; height:100%;
 }
 
+
+
 a:link, a:visited
 {
     font-weight: bolder;
@@ -176,6 +178,7 @@ first child of the left and right table columns */
     color:#fff;
     text-shadow: 1px -2px 2px rgba(0,0,0,0.25);
     margin-bottom: 20px;
+    margin-left:20px;
     
 }
 
@@ -204,7 +207,6 @@ first child of the left and right table columns */
     margin-left: 200px;
     margin-top: -8px;
 }
-
 .wrapper2Settings
 {
     margin-left: 200px;
@@ -228,7 +230,7 @@ first child of the left and right table columns */
 .category.contentList       {   width:223px;    }
 .event.contentList          {   width:223px;    }
 .news.contentList           {   width:223px;    }
-.poi.contentList            {   width:223px;    }
+.poi.contentList            {   width:450px;    }
 .subtype.contentList        {   width:223px;    }
 .tour.contentList           {   width:223px;    }
 .user.contentList           {   width:223px;    }
@@ -243,13 +245,9 @@ first child of the left and right table columns */
     min-height: 800px;
 }
 
-.contentDetail h2
+.contentDetail h1
 {
-    color:#272727;
-    font-size:1.3em;
-    font-weight:bold; 
-    padding:0;
-    margin:0 0 10px 0;   
+    margin-top:0px;    
 }
 
 .contentDetail h3
@@ -261,15 +259,19 @@ first child of the left and right table columns */
 
 .detailButtons
 {
-    margin: 5px 5px 20px 0;
-    border-color: Gray;
-    border-radius: 8px;
+    float:right;
+    margin: 0 100px 0 0;   
+}
+
+.bottom.detailButtons
+{
+    margin: 30px 10% 20px 0;
 }
 
 .category.contentDetail     {   margin-left: 493px;  }
 .event.contentDetail        {   margin-left: 493px;  }
 .news.contentDetail         {   margin-left: 493px;  }
-.poi.contentDetail          {   margin-left: 493px;  }
+.poi.contentDetail          {   margin-left: 690px;  }
 .subtype.contentDetail      {   margin-left: 493px;  }
 .tour.contentDetail         {   margin-left: 493px;  }
 .user.contentDetail         {   margin-left: 493px;  }
@@ -277,7 +279,7 @@ first child of the left and right table columns */
 
 .validationError
 {
-    margin:0 0 5px 160px;
+    margin:0 0 0 170px;
     padding: 0;
     color:Red;    
     font-size:0.9em;
@@ -285,11 +287,62 @@ first child of the left and right table columns */
 
 .label
 {
+    position:relative;
+    float:left;
     text-align:right; 
-    margin-left:5px;   
+    margin-right:10px;  
+    vertical-align: top; 
 }
 
+.textBoxWatermark
+{   
+    background-color:#e4e2e2;   
+    color: #908f8f;
+}
 
+.noText.textBoxWatermark
+{
+    color:#e4e2e2;
+}
+
+.map
+{
+    width:400px;
+    height:250px;
+    background-color:#272727;
+    margin-left:166px;
+}
+
+/* Rating */
+
+.Rating
+{
+    position:relative;
+    float:left;
+}
+
+.ratingStar {
+    font-size: 0pt;
+    width: 25px;
+    height: 25px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.filledRatingStar {
+    background-image: url(/Resources/FilledStar.png);
+}
+
+.emptyRatingStar {
+    background-image: url(/Resources/EmptyStar.png);
+}
+
+.savedRatingStar {
+    background-image: url(/Resources/SavedStar.png);
+}
 
 /* FORM ELEMENTS   
 ----------------------------------------------------------*/
@@ -365,6 +418,7 @@ div.accountInfo
     letter-spacing:2px;
     color:#fff;
     vertical-align:middle;
+    margin-top:0px;
 }
 
 .capitalTitle

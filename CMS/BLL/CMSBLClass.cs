@@ -17,6 +17,9 @@ namespace CMS.BLL
         DAL.CMSDBDataSetTableAdapters.EventTableAdapter eventTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.EventTableAdapter();
 
+        DAL.CMSDBDataSetTableAdapters.EventListTableAdapter eventListTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.EventListTableAdapter();
+
         DAL.CMSDBDataSetTableAdapters.ItemTableAdapter itemTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.ItemTableAdapter();
 
@@ -28,6 +31,9 @@ namespace CMS.BLL
 
         DAL.CMSDBDataSetTableAdapters.POITableAdapter poiTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.POITableAdapter();
+
+        DAL.CMSDBDataSetTableAdapters.POIListTableAdapter poiListTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.POIListTableAdapter();
 
         DAL.CMSDBDataSetTableAdapters.SubtypeTableAdapter subtypeTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.SubtypeTableAdapter();
@@ -91,14 +97,19 @@ namespace CMS.BLL
          * POI data access
          *********************************************************************/
 
-        public DAL.CMSDBDataSet.POIItemDataTable getAllPOI()
+        public DAL.CMSDBDataSet.POIListDataTable getAllPOIList()
         {
-            return poiItemTableAdapter.GetDataAll();
+            return poiListTableAdapter.GetDataAll();
         }
 
-        public int UpdatePOI(String ItemName, String Details, Decimal Cost, int Rating, int Phone, String Website, String Email,
-            String OpeningHours, String StreetNo, String StreetName, int Latitute, int Longitute, int Postcode, String Suburb, 
-            int SubtypeID, int CategoryID, int Original_SubtypeID, int Original_ItemID, int Original_CategoryID)
+        public DAL.CMSDBDataSet.POIItemRow getPOIByItemID(int ItemID)
+        {
+            return (DAL.CMSDBDataSet.POIItemRow)poiItemTableAdapter.GetDataByItemID(ItemID).Rows[0];
+        }
+
+        public int UpdatePOI(String ItemName, String Details, decimal Cost, int Rating, int? Phone, String Website, String Email,
+            String OpeningHours, String StreetNo, String StreetName, double Latitute, double Longitute, int Postcode, String Suburb, 
+            int? SubtypeID, int CategoryID, int? Original_SubtypeID, int Original_ItemID, int Original_CategoryID)
         {
             if (poiTableAdapter.Update(CategoryID, Original_ItemID, Original_CategoryID) > 0)
             {
@@ -117,14 +128,16 @@ namespace CMS.BLL
             return 0;
         }
 
-        public int InsertPOI(String ItemName, String Details, Decimal Cost, int Rating, int Phone, String Website, String Email,
-            String OpeningHours, String StreetNo, String StreetName, int Latitute, int Longitute, int Postcode, String Suburb,
-            int SubtypeID,int CategoryID)
+        public int InsertPOI(String ItemName, String Details, decimal Cost, int Rating, int? Phone, String Website, String Email,
+            String OpeningHours, String StreetNo, String StreetName, double Latitute, double Longitute, int Postcode, String Suburb,
+            int? SubtypeID,int CategoryID)
         {
+            
             if (itemTableAdapter.Insert(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, StreetNo,
-                    StreetName, Latitute, Longitute, Postcode, Suburb, SubtypeID) > 0)
+                    StreetName, Latitute, Longitute, Postcode, Suburb, SubtypeID)>0)
             {
-                return poiTableAdapter.Insert(CategoryID);
+                int? ItemID = itemTableAdapter.GetNewlyAddedID();
+                return poiTableAdapter.InsertNewPOI(ItemID, CategoryID);
             }
             return 0;
         }
@@ -134,14 +147,19 @@ namespace CMS.BLL
          * Event data access
          *********************************************************************/
 
-        public DAL.CMSDBDataSet.EventItemDataTable getAllEvent()
+        public DAL.CMSDBDataSet.EventListDataTable getAllEventList()
         {
-            return eventItemTableAdapter.GetDataAll();
+            return eventListTableAdapter.GetDataAll();
         }
 
-        public int UpdateEvent(String ItemName, String Details, Decimal Cost, int Rating, int Phone, String Website, String Email,
+        public DAL.CMSDBDataSet.EventItemRow getEventByItemID(int ItemID)
+        {
+            return (DAL.CMSDBDataSet.EventItemRow)eventItemTableAdapter.GetDataByItemID(ItemID).Rows[0];
+        }
+
+        public int UpdateEvent(String ItemName, String Details, decimal Cost, int Rating, int? Phone, String Website, String Email,
             String OpeningHours, String StreetNo, String StreetName, int Latitute, int Longitute, int Postcode, String Suburb,
-            int SubtypeID, DateTime EventStartDate, DateTime EventEndDate, int Original_SubtypeID, int Original_ItemID)
+            int? SubtypeID, DateTime EventStartDate, DateTime EventEndDate, int? Original_SubtypeID, int Original_ItemID)
         {
             if (eventTableAdapter.Update(EventStartDate, EventEndDate, Original_ItemID) > 0)
             {
@@ -160,14 +178,15 @@ namespace CMS.BLL
             return 0;
         }
 
-        public int InsertEvent(String ItemName, String Details, Decimal Cost, int Rating, int Phone, String Website, String Email,
+        public int InsertEvent(String ItemName, String Details, decimal Cost, int Rating, int? Phone, String Website, String Email,
             String OpeningHours, String StreetNo, String StreetName, int Latitute, int Longitute, int Postcode, String Suburb,
-            int SubtypeID, DateTime EventStartDate, DateTime EventEndDate)
+            int? SubtypeID, DateTime EventStartDate, DateTime EventEndDate)
         {
             if (itemTableAdapter.Insert(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, StreetNo,
                     StreetName, Latitute, Longitute, Postcode, Suburb, SubtypeID) > 0)
             {
-                return eventTableAdapter.Insert(EventStartDate, EventEndDate);
+                int? ItemID = itemTableAdapter.GetNewlyAddedID();
+                return eventTableAdapter.InsertNewItem(ItemID,EventStartDate, EventEndDate);
             }
             return 0;
         }

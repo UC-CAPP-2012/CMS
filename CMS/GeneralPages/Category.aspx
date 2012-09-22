@@ -71,56 +71,72 @@
 
                 <!-- default detail display -->
                 <asp:View ID="DetailView" runat="server">
-                    <asp:Button ID="UpdateButton" runat="server" Text="Update" Width="100px" 
-                        onclick="UpdateButton_Click" CssClass="detailButtons" />
-                    <asp:Button ID="DeleteButton" runat="server" Text="Delete" Width="100px" 
-                        onclick="DeleteButton_Click" CssClass="detailButtons"/>                
-                    <asp:ConfirmButtonExtender ID="DeleteButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
-                        runat="server" ConfirmText="Are you sure you want to delete the selected category?" 
-                        Enabled="True" TargetControlID="DeleteButton">
-                    </asp:ConfirmButtonExtender>
-                    <h2> Category Details </h2>  
-                    <asp:Label ID="NameLabel" runat="server" CssClass="label" Text="Category Name : " Font-Bold="True" Width="150px"></asp:Label>
+                    <h1> Category Details
+                        <span class = "detailButtons">
+                            <asp:Button ID="UpdateButton" runat="server" Text="Update" Width="70px" onclick="UpdateButton_Click" />
+                            <asp:Button ID="DeleteButton" runat="server" Text="Delete" Width="70px" onclick="DeleteButton_Click"/>                
+                            <asp:ConfirmButtonExtender ID="DeleteButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
+                                runat="server" ConfirmText="Are you sure you want to delete the selected category?" 
+                                Enabled="True" TargetControlID="DeleteButton">
+                            </asp:ConfirmButtonExtender>                  
+                        </span>
+                    </h1>
+                    <hr />
+                    <asp:Label ID="NameLabel" runat="server" CssClass="label" Font-Bold="True" 
+                        Text="Category Name : " Width="150px"></asp:Label>
                     <asp:Label ID="NameDataLabel" runat="server"></asp:Label>
+                      
                 </asp:View>
 
                 <!-- update display (Visible when update button is clicked) -->
                 <asp:View ID="UpdateView" runat="server">
-                    <asp:Button ID="SubmitButton" runat="server" Text="Submit Update" Width="120px" 
-                        CssClass="detailButtons" onclick="SubmitButton_Click"  />
-                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" OnClientCancel="CancelClick"
-                        runat="server" ConfirmText="Do you want to submit the update?" Enabled="True" 
-                        TargetControlID="SubmitButton" ConfirmOnFormSubmit="True">
-                    </asp:ConfirmButtonExtender>
-                    <asp:Button ID="CancelButton" runat="server" Text="Cancel" Width="70px" 
-                        CssClass="detailButtons" onclick="CancelButton_Click" CausesValidation="False" />
-                    <h2> Update Category Details </h2>  
+                    <h1> Update Category Details </h1> 
+                    <hr /> 
                     <asp:Label ID="NameUpdateLabel" CssClass="label" runat="server" Text="Category Name : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="NameTextBox" runat="server" Width="250px"></asp:TextBox> 
+                    <asp:TextBoxWatermarkExtender ID="NameTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
+                        runat="server" Enabled="True" TargetControlID="NameTextBox" WatermarkText="enter">
+                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError">             
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorCategoryName" runat="server" 
                         ErrorMessage="Category name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
                     </p>
+                    <div class="detailButtons bottom">
+                        <asp:Button ID="SubmitButton" runat="server" Text="Submit Update" Width="120px" 
+                            onclick="SubmitButton_Click"  />
+                        <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" OnClientCancel="CancelClick"
+                            runat="server" ConfirmText="Do you want to submit the update?" Enabled="True" 
+                            TargetControlID="SubmitButton" ConfirmOnFormSubmit="True">
+                        </asp:ConfirmButtonExtender>
+                        <asp:Button ID="CancelButton" runat="server" Text="Cancel" Width="70px" 
+                            onclick="CancelButton_Click" CausesValidation="False" />
+                    </div>
                 </asp:View>
 
                 <!-- insert new display (Visible when insert link button is clicked) -->
                 <asp:View ID="InsertView" runat="server">
-                    <asp:Button ID="SubmitNewButton" runat="server" Text="Insert New" Width="100px" 
-                        CssClass="detailButtons" onclick="SubmitNewButton_Click" />
-                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender2" OnClientCancel="CancelClick"
-                        runat="server" ConfirmText="Do you want to submit the new category?" Enabled="True" 
-                        TargetControlID="SubmitNewButton" ConfirmOnFormSubmit="True">
-                    </asp:ConfirmButtonExtender>
-                    <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
-                        CssClass="detailButtons" CausesValidation="False" 
-                        onclick="InsertCancelButton_Click" />
-                    <h2> Insert New Category </h2>
+                    <h1> Insert New Category </h1>
+                    <hr />
                     <asp:Label ID="InsertNameLabel" CssClass="label" runat="server" Text="Category Name : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="InsertNameTextBox" runat="server" Width="250px"></asp:TextBox> 
+                    <asp:TextBoxWatermarkExtender ID="InsertNameTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
+                        runat="server" Enabled="True" TargetControlID="InsertNameTextBox" WatermarkText="enter">
+                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError">             
                         <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
                         ErrorMessage="Category name is required." ControlToValidate="InsertNameTextBox" SetFocusOnError="True" />
                     </p>
+                    <div class="detailButtons bottom">
+                        <asp:Button ID="SubmitNewButton" runat="server" Text="Confirm" Width="100px" 
+                            onclick="SubmitNewButton_Click" />
+                        <asp:ConfirmButtonExtender ID="ConfirmButtonExtender2" OnClientCancel="CancelClick"
+                            runat="server" ConfirmText="Do you want to submit the new category?" Enabled="True" 
+                            TargetControlID="SubmitNewButton" ConfirmOnFormSubmit="True">
+                        </asp:ConfirmButtonExtender>
+                        <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
+                            CausesValidation="False" 
+                            onclick="InsertCancelButton_Click" />
+                    </div>
                 </asp:View>
             </asp:MultiView>
         </div>
@@ -129,4 +145,8 @@
     
 
     
+            <li><span style="margin-left: -1em;"/><asp:LinkButton ID="InsertLinkButton" runat="server" CausesValidation="False"
+            onclick="InsertLinkButton_Click"> Insert New Category </asp:LinkButton></li>        
+        </ul>
+   
 </asp:Content>

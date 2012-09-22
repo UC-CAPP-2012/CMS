@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +17,7 @@ namespace CMS
             
             if (!Page.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~/Index.aspx");
+                //Response.Redirect("~/Index.aspx");
             }
 
             if(Page.User.IsInRole("Admin")){

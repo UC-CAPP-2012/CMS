@@ -65,7 +65,7 @@ namespace CMS.CMSPages
 
         protected void InsertLinkButton_Click(object sender, EventArgs e)
         {
-            this.CategoryMultiView.ActiveViewIndex = 2;
+            this.CategoryMultiView.ActiveViewIndex = 2;        
         }
 
         protected void SubmitNewButton_Click(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace CMS.CMSPages
 
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
-            this.CategoryMultiView.ActiveViewIndex = 0;
+            this.CategoryMultiView.ActiveViewIndex = -1;
         }
 
     }

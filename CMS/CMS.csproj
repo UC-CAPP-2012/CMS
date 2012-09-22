@@ -98,6 +98,9 @@
     <Content Include="Resources\ccapp-banner.png" />
     <Content Include="Resources\ccapp-logo.png" />
     <Content Include="Resources\elgg_sprites.png" />
+    <Content Include="Resources\EmptyStar.png" />
+    <Content Include="Resources\FilledStar.png" />
+    <Content Include="Resources\SavedStar.png" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
