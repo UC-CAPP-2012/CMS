@@ -21,8 +21,9 @@
             AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
             BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="SubtypeID" 
             DataSourceID="SubtypeObjectDataSource" ForeColor="Black" GridLines="Vertical" 
-            onrowdatabound="SubtypeGridView_RowDataBound" CssClass="gridViewList"
-            onselectedindexchanged="SubtypeGridView_SelectedIndexChanged">
+            onrowdatabound="SubtypeGridView_RowDataBound" CssClass="gridViewList categoryList"
+            onselectedindexchanged="SubtypeGridView_SelectedIndexChanged" 
+            Width="221px">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField SelectText="" ShowSelectButton="True" />

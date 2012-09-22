@@ -88,13 +88,13 @@
                 onclick="InsertLinkButton_Click"> Insert New POI </asp:LinkButton></li>
         </ul>
     </div>
-    <div class="wrapper2>
+    <div class="wrapper2">
     <div class="contentList poi">
         <asp:GridView ID="POIGridView" runat="server" AllowSorting="True" 
             AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
             BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ItemID"
             DataSourceID="POIObjectDataSource" ForeColor="Black" GridLines="Vertical" 
-            Width="37%" onrowdatabound="POIGridView_RowDataBound" 
+            Width="122%" onrowdatabound="POIGridView_RowDataBound" 
             onselectedindexchanged="POIGridView_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>

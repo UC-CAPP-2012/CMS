@@ -21,9 +21,10 @@
         <asp:GridView ID="GridViewCategory" runat="server" AllowSorting="True" 
             AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
             BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CategoryID" 
-            DataSourceID="ObjectDataSourceCategory" ForeColor="Black"  CssClass="gridViewList"
+            DataSourceID="ObjectDataSourceCategory" ForeColor="Black"  CssClass="gridViewList categoryList"
             GridLines="Vertical" onrowdatabound="GridViewCategory_RowDataBound" 
-            onselectedindexchanged="GridViewCategory_SelectedIndexChanged">
+            onselectedindexchanged="GridViewCategory_SelectedIndexChanged" 
+            Width="251px">
             <AlternatingRowStyle BackColor="White"  />
             <Columns>           
                     <asp:CommandField SelectText="" ShowSelectButton="True" />

@@ -19,7 +19,7 @@
             AllowSorting="True" AutoGenerateColumns="False" BackColor="White" 
             BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" 
             DataKeyNames="NewsID" DataSourceID="ObjectDataSourceNews" ForeColor="Black" 
-            GridLines="Vertical"  Width="358px"  CssClass="gridViewList"
+            GridLines="Vertical"  Width="451px"  CssClass="gridViewList"
             onrowdatabound="GridViewNews_RowDataBound" 
             onselectedindexchanged="GridViewNews_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
