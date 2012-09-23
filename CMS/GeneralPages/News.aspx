@@ -127,7 +127,7 @@
                             <asp:FileUpload ID="NewsImageUpload" runat="server" />
                             <asp:Button ID="btnUpload" runat="server" onclick="btnUpload_Click" 
                                 Text="Upload" />
-                            <asp:Label ID="StatusLabel" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                            <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
                         </div>
                         <div class="news-image news-image-update"><asp:Image ID="NewsImageUpdate" runat="server" /></div>
                         <div  class="news-body-update">
@@ -171,7 +171,7 @@
                             <asp:FileUpload ID="InsertNewsImageUpload" runat="server" />
                             <asp:Button ID="btnInsertNewsUpload" runat="server" 
                                 Text="Upload" onclick="btnInsertNewsUpload_Click" />
-                            <asp:Label ID="InsertStatusLabel" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                            <asp:Label ID="InsertStatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
                         </div>
                         <div class="news-image news-image-update"><asp:Image ID="InsertNewsImage" runat="server" /></div>
                         <div  class="news-body-update">

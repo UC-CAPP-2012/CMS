@@ -120,20 +120,36 @@ namespace CMS.CMSPages
             {
                 try
                 {
+                    if (NewsImageUpload.PostedFile.ContentType == "image/jpeg" ||
+                       NewsImageUpload.PostedFile.ContentType == "image/png" ||
+                       NewsImageUpload.PostedFile.ContentType == "image/gif")
+                    {
                         if (NewsImageUpload.PostedFile.ContentLength < 102400)
                         {
-                            string filename = NewsImageUpload.FileName;
-                            NewsImageUpload.SaveAs(Server.MapPath("~/Media/") +filename);
-                            this.NewsImageUpdate.ImageUrl = "../Media/" + filename;
+                            Random rand = new Random((int)DateTime.Now.Ticks);
+                            int numIterations = 0;
+                            numIterations = rand.Next(1000000000, 2147483647);
+                            long NowInBinary = DateTime.Today.ToBinary();
+                            NewsImageUpload.SaveAs(Server.MapPath("~/Media/") + numIterations.ToString() + NowInBinary.ToString()  + NewsImageUpload.FileName);
+                            this.NewsImageUpdate.ImageUrl = "../Media/" + numIterations.ToString() + NowInBinary.ToString()  + NewsImageUpload.FileName;
                         }
                         else
-                            StatusLabel.Text = "Upload status: The file has to be less than 100 kb!";
-                   
+                        {
+                            StatusLabel.Text = "The file has to be less than 100 kb!";
+                        }
+                    }
+                    else
+                    {
+                        StatusLabel.Text = "Only JPEG, PNG and GIF files are accepted!";
+                    }
                 }
                 catch (Exception ex)
                 {
                     StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
                 }
+            }
+            else{
+                StatusLabel.Text = "Please select a file to upload.";
             }
         }
 
@@ -149,20 +165,38 @@ namespace CMS.CMSPages
             {
                 try
                 {
-                    if (InsertNewsImageUpload.PostedFile.ContentLength < 102400)
+                    if (InsertNewsImageUpload.PostedFile.ContentType == "image/jpeg" ||
+                       InsertNewsImageUpload.PostedFile.ContentType == "image/png" ||
+                       InsertNewsImageUpload.PostedFile.ContentType == "image/gif")
                     {
-                        string filename = InsertNewsImageUpload.FileName;
-                        InsertNewsImageUpload.SaveAs(Server.MapPath("~/Media/") + filename);
-                        this.InsertNewsImage.ImageUrl = "../Media/" + filename;
+                        if (InsertNewsImageUpload.PostedFile.ContentLength < 102400)
+                        {
+                            Random rand = new Random((int)DateTime.Now.Ticks);
+                            int numIterations = 0;
+                            numIterations = rand.Next(1000000000, 2147483647);
+                            long NowInBinary = DateTime.Today.ToBinary();
+                            InsertNewsImageUpload.SaveAs(Server.MapPath("~/Media/") + numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName);
+                            this.InsertNewsImage.ImageUrl = "../Media/" + numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName;
+                        }
+                        else
+                        {
+                            InsertStatusLabel.Text = "The file has to be less than 100 kb!";
+                        }
                     }
                     else
-                        InsertStatusLabel.Text = "Upload status: The file has to be less than 100 kb!";
+                    {
+                        InsertStatusLabel.Text = "Only JPEG, PNG and GIF files are accepted!";
+                    }
 
                 }
                 catch (Exception ex)
                 {
                     InsertStatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
                 }
+            }
+            else
+            {
+                InsertStatusLabel.Text = "Please select a file to upload.";
             }
         }
 

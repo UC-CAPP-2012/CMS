@@ -778,3 +778,8 @@ div.accountInfo
     height: 150px;
     margin-left: 140px;
 }
+
+.imageUpload{
+    float: right;
+    margin-right: 530px;
+}
