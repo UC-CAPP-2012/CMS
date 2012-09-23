@@ -89,7 +89,7 @@
                     </asp:ConfirmButtonExtender>
                     <div class="news-head">
                         <h2 runat="server" id="newsTitle" class="news-title"></h2>
-                        <hr>
+                        <hr/>
                     </div>  
                     <div runat="server" id="newsLabel" class="news-item-labels"> </div>
                     <div class="news-content">
@@ -146,7 +146,7 @@
                     <asp:Button ID="SubmitNewButton" runat="server" Text="Insert New" Width="100px" 
                         CssClass="detailButtons" onclick="SubmitNewButton_Click" />
                     <asp:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server" OnClientCancel="CancelClick"
-                        runat="server" ConfirmText="Do you want to add this news article?" Enabled="True" 
+                     ConfirmText="Do you want to add this news article?" Enabled="True" 
                         TargetControlID="SubmitNewButton" ConfirmOnFormSubmit="True">
                     </asp:ConfirmButtonExtender>
                     <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
