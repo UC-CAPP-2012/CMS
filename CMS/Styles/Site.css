@@ -110,7 +110,7 @@ first child of the left and right table columns */
 
 .main
 {
-    min-height:600px;
+    min-height:800px;
 }
 
 .contents
@@ -187,7 +187,7 @@ first child of the left and right table columns */
 {
     font-size:1.2em;
     font-family:Calibri;
-    color:#636363;
+    color:White;
     font-weight:bold;
     text-decoration:none;
     margin-left:20px;
@@ -247,7 +247,7 @@ first child of the left and right table columns */
     box-shadow: 0 0 10px #555555 inset;
     margin: 10px 0 10px 500px;
     padding: 20px;
-    min-height: 600px;
+    min-height: 800px;
 }
 
 .contentDetail h1
@@ -697,7 +697,6 @@ div.accountInfo
 
 .sideBarNavigation{
     float: right;
-    margin-right: 50px;
     text-align: left;
 }
 

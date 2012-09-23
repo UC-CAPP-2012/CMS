@@ -13,5 +13,20 @@ namespace CMS.CMSPages
         {
 
         }
+
+        protected void AllUsersButton_Click(object sender, EventArgs e)
+        {
+            this.UsersMultiView.ActiveViewIndex = 0;
+        }
+
+        protected void SubcribedUsersButton_Click(object sender, EventArgs e)
+        {
+            this.UsersMultiView.ActiveViewIndex = 1;
+        }
+
+        protected void UnsubcribedUsersButton_Click(object sender, EventArgs e)
+        {
+            this.UsersMultiView.ActiveViewIndex = 2;
+        }
     }
 }

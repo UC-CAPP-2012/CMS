@@ -201,6 +201,16 @@ namespace CMS.BLL
             return userTableAdapter.GetData();
         }
 
+        public DAL.CMSDBDataSet.UserDataTable getAllSubcribedUsers()
+        {
+            return userTableAdapter.GetAllSubcribedUsers();
+        }
+
+        public DAL.CMSDBDataSet.UserDataTable getAllUnsubcribedUsers()
+        {
+            return userTableAdapter.GetAllUnsubscribedUsers();
+        }
+
 
         /*********************************************************************
          * Media data access

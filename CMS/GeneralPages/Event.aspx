@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
 //<![CDATA[
     //Don't run suver side code and do nothing when cancel button on confirmation is clicked.
@@ -98,7 +98,8 @@
                     BorderStyle="None" BorderWidth="1px" CellPadding="4" Width="100%"
                     DataSourceID="EventObjectDataSource" ForeColor="Black" DataKeyNames="ItemID"
                     GridLines="Vertical" onrowdatabound="EventGridView_RowDataBound" 
-                    onselectedindexchanged="EventGridView_SelectedIndexChanged">
+                    onselectedindexchanged="EventGridView_SelectedIndexChanged" 
+                    AllowPaging="True">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:CommandField SelectText="" ShowSelectButton="True">

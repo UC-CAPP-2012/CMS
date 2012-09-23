@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
 //<![CDATA[
     //Don't run suver side code and do nothing when cancel button on confirmation is clicked.
@@ -95,7 +95,8 @@
             BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ItemID"
             DataSourceID="POIObjectDataSource" ForeColor="Black" GridLines="Vertical" 
             Width="100%" onrowdatabound="POIGridView_RowDataBound" 
-            onselectedindexchanged="POIGridView_SelectedIndexChanged">
+            onselectedindexchanged="POIGridView_SelectedIndexChanged" 
+            AllowPaging="True">
             <AlternatingRowStyle BackColor="White"/>
             <Columns>
                 <asp:CommandField SelectText="" ShowSelectButton="True">

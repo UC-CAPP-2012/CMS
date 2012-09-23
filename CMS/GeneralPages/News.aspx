@@ -15,9 +15,13 @@
     <div class="wrapper1">
     <div class="contentLeftMenu">
         <h1> News </h1>
-        <asp:LinkButton ID="InsertLinkButton" runat="server" 
+        <ul>
+                <li><span style="margin-left: -1em;"/>
+                    <asp:LinkButton ID="InsertLinkButton" runat="server" 
             onclick="InsertLinkButton_Click"> 
-            Add a News Article </asp:LinkButton>
+            Add a News Article </asp:LinkButton></li>
+            </ul>
+        
     </div>
     <div class="wrapper2">
     <div class="contentList news">
