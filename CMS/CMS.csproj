@@ -94,6 +94,7 @@
     <Content Include="GeneralPages\Tour.aspx" />
     <Content Include="GeneralPages\User.aspx" />
     <Content Include="Index.aspx" />
+    <Content Include="Media\default-news-image.png" />
     <Content Include="Resources\button-hover.png" />
     <Content Include="Resources\ccapp-banner.png" />
     <Content Include="Resources\ccapp-logo.png" />

@@ -743,10 +743,38 @@ div.accountInfo
 .news-image
 {
     float: left;
+    padding-right: 20px;
 }
 
 .news-image img
 {
     max-height: 150px;
     max-width: 150px;
+}
+
+.newsUpdateForm
+{
+    margin-top:30px;
+}
+
+.newBodyEditor
+{
+    width: 500px;
+    margin-left: 160px;
+}
+
+.news-image-upload
+{
+    margin-left: -150px;
+}
+
+.news-body-update{
+    margin-top: 190px;
+}
+
+.news-image-update
+{
+    width: 150px;
+    height: 150px;
+    margin-left: 140px;
 }

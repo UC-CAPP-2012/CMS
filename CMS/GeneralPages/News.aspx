@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="News.aspx.cs" Inherits="CMS.CMSPages.News" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit.HTMLEditor"
+    TagPrefix="asp" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -12,6 +15,9 @@
     <div class="wrapper1">
     <div class="contentLeftMenu">
         <h1> News </h1>
+        <asp:LinkButton ID="InsertLinkButton" runat="server" 
+            onclick="InsertLinkButton_Click"> 
+            Add a News Article </asp:LinkButton>
     </div>
     <div class="wrapper2">
     <div class="contentList">
@@ -102,13 +108,37 @@
                     </asp:ConfirmButtonExtender>
                     <asp:Button ID="CancelButton" runat="server" Text="Cancel" Width="70px" 
                         CssClass="detailButtons" onclick="CancelButton_Click" CausesValidation="False" />
-                    <h2> Update Category Details </h2>  
-                    <asp:Label ID="NameUpdateLabel" CssClass="label" runat="server" Text="Category Name : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="NameTextBox" runat="server" Width="250px"></asp:TextBox> 
-                    <p class="validationError">             
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorCategoryName" runat="server" 
-                        ErrorMessage="Category name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
-                    </p>
+                    <h2> Update News Details </h2> 
+                    <div class="newsUpdateForm"> 
+                        <asp:Label ID="TitleUpdateLabel" CssClass="label" runat="server" Text="Title: " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="NameTextBox" runat="server" Width="250px"></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidatorTitle" runat="server" 
+                            ErrorMessage="News Title is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
+                        </p>
+                        <asp:Label ID="PublisherUpdateLabel" CssClass="label" runat="server" Text="Publisher: " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="PublisherTextBox" runat="server" Width="250px"></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidatorPublisher" runat="server" 
+                            ErrorMessage="News Publisher is required." ControlToValidate="PublisherTextBox" SetFocusOnError="True" />
+                        </p>
+                        <asp:Label ID="ImageUpdateLabel" CssClass="label" runat="server" Text="Image: " Font-Bold="True" Width="150px" ></asp:Label>
+                        <div class="news-image-upload">
+                            <asp:FileUpload ID="NewsImageUpload" runat="server" />
+                            <asp:Button ID="btnUpload" runat="server" onclick="btnUpload_Click" 
+                                Text="Upload" />
+                            <asp:Label ID="StatusLabel" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                        </div>
+                        <div class="news-image news-image-update"><asp:Image ID="NewsImageUpdate" runat="server" /></div>
+                        <div  class="news-body-update">
+                            <asp:Label ID="BodyUpdateLabel" CssClass="label" runat="server" Text="Body: " Font-Bold="True" Width="150px" ></asp:Label>
+                            <asp:Editor ID="NewsBodyEditor" runat="server" CssClass="newBodyEditor" 
+                                BorderStyle="Ridge"/>
+                            <asp:Label ID="UpdateNewsNoContentStatus" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                        </div>
+                        
+                    </div>
+
                 </asp:View>
 
                 <!-- insert new display (Visible when insert link button is clicked) -->
@@ -116,19 +146,42 @@
                     <asp:Button ID="SubmitNewButton" runat="server" Text="Insert New" Width="100px" 
                         CssClass="detailButtons" onclick="SubmitNewButton_Click" />
                     <asp:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server" OnClientCancel="CancelClick"
-                        runat="server" ConfirmText="Do you want to submit the new category?" Enabled="True" 
+                        runat="server" ConfirmText="Do you want to add this news article?" Enabled="True" 
                         TargetControlID="SubmitNewButton" ConfirmOnFormSubmit="True">
                     </asp:ConfirmButtonExtender>
                     <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
                         CssClass="detailButtons" CausesValidation="False" 
                         onclick="InsertCancelButton_Click" />
                     <h2> Insert New Category </h2>
-                    <asp:Label ID="InsertNameLabel" CssClass="label" runat="server" Text="Category Name : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="InsertNameTextBox" runat="server" Width="250px"></asp:TextBox> 
-                    <p class="validationError">             
-                        <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
-                        ErrorMessage="Category name is required." ControlToValidate="InsertNameTextBox" SetFocusOnError="True" />
-                    </p>
+                    <div class="newsUpdateForm"> 
+                        <asp:Label ID="Label1" CssClass="label" runat="server" Text="Title: " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="InsertNewsTitle" runat="server" Width="250px"></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                            ErrorMessage="News Title is required." ControlToValidate="InsertNewsTitle" SetFocusOnError="True" />
+                        </p>
+                        <asp:Label ID="Label2" CssClass="label" runat="server" Text="Publisher: " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="InsertNewsPublisher" runat="server" Width="250px"></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                            ErrorMessage="News Publisher is required." ControlToValidate="InsertNewsPublisher" SetFocusOnError="True" />
+                        </p>
+                        <asp:Label ID="Label3" CssClass="label" runat="server" Text="Image: " Font-Bold="True" Width="150px" ></asp:Label>
+                        <div class="news-image-upload">
+                            <asp:FileUpload ID="InsertNewsImageUpload" runat="server" />
+                            <asp:Button ID="btnInsertNewsUpload" runat="server" 
+                                Text="Upload" onclick="btnInsertNewsUpload_Click" />
+                            <asp:Label ID="InsertStatusLabel" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                        </div>
+                        <div class="news-image news-image-update"><asp:Image ID="InsertNewsImage" runat="server" /></div>
+                        <div  class="news-body-update">
+                            <asp:Label ID="Label5" CssClass="label" runat="server" Text="Body: " Font-Bold="True" Width="150px" ></asp:Label>
+                            <asp:Editor ID="InsertNewsEditor" runat="server" CssClass="newBodyEditor" 
+                                BorderStyle="Ridge"/>
+                            <asp:Label ID="InsertNewsNoContentStatus" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                        </div>
+                        
+                    </div>
                 </asp:View>
             </asp:MultiView>
         </div>
