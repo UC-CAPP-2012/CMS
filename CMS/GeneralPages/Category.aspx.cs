@@ -65,6 +65,7 @@ namespace CMS.CMSPages
 
         protected void InsertLinkButton_Click(object sender, EventArgs e)
         {
+            this.InsertNameTextBox.Text = "";
             this.CategoryMultiView.ActiveViewIndex = 2;        
         }
 

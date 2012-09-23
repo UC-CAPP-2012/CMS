@@ -11,57 +11,58 @@
 <div class="wrapper1">
     <div class="contentLeftMenu">
         <h1> Subtype </h1>
-        <asp:LinkButton ID="InsertLinkButton" runat="server" 
-            onclick="InsertLinkButton_Click"> 
-            Insert New Subtype </asp:LinkButton>
+        <ul>
+            <li><span style="margin-left: -1em;"/><asp:LinkButton ID="InsertLinkButton" runat="server"  onclick="InsertLinkButton_Click"> 
+                Insert New Subtype </asp:LinkButton></li>
+        </ul>
     </div>
     <div class="wrapper2">
-    <div class="contentList">
-        <asp:GridView ID="SubtypeGridView" runat="server" AllowSorting="True" 
-            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
-            BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="SubtypeID" 
-            DataSourceID="SubtypeObjectDataSource" ForeColor="Black" GridLines="Vertical" 
-            onrowdatabound="SubtypeGridView_RowDataBound" CssClass="gridViewList categoryList"
-            onselectedindexchanged="SubtypeGridView_SelectedIndexChanged" 
-            Width="221px">
-            <AlternatingRowStyle BackColor="White" />
-            <Columns>
-                <asp:CommandField SelectText="" ShowSelectButton="True" />
-                <asp:BoundField DataField="SubtypeID" HeaderText="SubtypeID" 
-                    InsertVisible="False" ReadOnly="True" SortExpression="SubtypeID" 
-                    Visible="False" />
-                <asp:BoundField DataField="SubtypeName" HeaderText="SubtypeName" 
-                    SortExpression="SubtypeName">
-                <ItemStyle Width="200px" />
-                </asp:BoundField>
-            </Columns>
-            <FooterStyle BackColor="#CCCC99" />
-            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-            <RowStyle BackColor="#F7F7DE" />
-            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#FBFBF2" />
-            <SortedAscendingHeaderStyle BackColor="#848384" />
-            <SortedDescendingCellStyle BackColor="#EAEAD3" />
-            <SortedDescendingHeaderStyle BackColor="#575357" />
-        </asp:GridView>
-        <asp:ObjectDataSource ID="SubtypeObjectDataSource" runat="server" 
-            DeleteMethod="DeleteSubtype" InsertMethod="InsertSubtype" 
-            SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass" 
-            UpdateMethod="UpdateSubtype">
-            <DeleteParameters>
-                <asp:Parameter Name="original_SubtypeID" Type="Int32" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="subtypeName" Type="String" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="subtypeName" Type="String" />
-                <asp:Parameter Name="original_SubtypeID" Type="Int32" />
-            </UpdateParameters>
-        </asp:ObjectDataSource>
-    </div>
-        <div class="contentDetail">
+        <div class="contentList subtype">
+            <asp:GridView ID="SubtypeGridView" runat="server" AllowSorting="True" 
+                AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
+                BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="SubtypeID" 
+                DataSourceID="SubtypeObjectDataSource" ForeColor="Black" GridLines="Vertical" 
+                onrowdatabound="SubtypeGridView_RowDataBound" 
+                onselectedindexchanged="SubtypeGridView_SelectedIndexChanged" Width="100%">
+                <AlternatingRowStyle BackColor="White" />
+                <Columns>
+                    <asp:CommandField SelectText="" ShowSelectButton="True" >
+                    <ItemStyle Width="5px" />
+                    </asp:CommandField>
+                    <asp:BoundField DataField="SubtypeID" HeaderText="SubtypeID" 
+                        InsertVisible="False" ReadOnly="True" SortExpression="SubtypeID" 
+                        Visible="False" />
+                    <asp:BoundField DataField="SubtypeName" HeaderText="SubtypeName" 
+                        SortExpression="SubtypeName">
+                    </asp:BoundField>
+                </Columns>
+                <FooterStyle BackColor="#CCCC99" />
+                <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+                <RowStyle BackColor="#F7F7DE" />
+                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#FBFBF2" />
+                <SortedAscendingHeaderStyle BackColor="#848384" />
+                <SortedDescendingCellStyle BackColor="#EAEAD3" />
+                <SortedDescendingHeaderStyle BackColor="#575357" />
+            </asp:GridView>
+            <asp:ObjectDataSource ID="SubtypeObjectDataSource" runat="server" 
+                DeleteMethod="DeleteSubtype" InsertMethod="InsertSubtype" 
+                SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass" 
+                UpdateMethod="UpdateSubtype">
+                <DeleteParameters>
+                    <asp:Parameter Name="original_SubtypeID" Type="Int32" />
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="subtypeName" Type="String" />
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="subtypeName" Type="String" />
+                    <asp:Parameter Name="original_SubtypeID" Type="Int32" />
+                </UpdateParameters>
+            </asp:ObjectDataSource>
+        </div>
+        <div class="contentDetail subtype">
             <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="SubtypeMultiView" runat="server">
                 <!-- default detail display -->
@@ -135,5 +136,7 @@
         </div>
         
     </div>
+    
+</span>
     
 </asp:Content>

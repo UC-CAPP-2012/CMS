@@ -13,21 +13,25 @@
     <!-- The menu on the left -->
     <div class="contentLeftMenu">
         <h1> Category </h1>
-        <asp:LinkButton ID="InsertLinkButton" runat="server" onclick="InsertLinkButton_Click"> Insert New Category </asp:LinkButton>
+        <ul>
+            <li><span style="margin-left: -1em;"/><asp:LinkButton ID="InsertLinkButton" runat="server" onclick="InsertLinkButton_Click"> 
+                Insert New Category </asp:LinkButton></li>
+        </ul>
     </div>
     <div class="wrapper2">
     <!-- Data List -->
-    <div class="contentList">
+    <div class="contentList category">
         <asp:GridView ID="GridViewCategory" runat="server" AllowSorting="True" 
             AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
             BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="CategoryID" 
-            DataSourceID="ObjectDataSourceCategory" ForeColor="Black"  CssClass="gridViewList categoryList"
+            DataSourceID="ObjectDataSourceCategory" ForeColor="Black" 
             GridLines="Vertical" onrowdatabound="GridViewCategory_RowDataBound" 
-            onselectedindexchanged="GridViewCategory_SelectedIndexChanged" 
-            Width="251px">
+            onselectedindexchanged="GridViewCategory_SelectedIndexChanged" Width="100%">
             <AlternatingRowStyle BackColor="White"  />
             <Columns>           
-                    <asp:CommandField SelectText="" ShowSelectButton="True" />
+                    <asp:CommandField SelectText="" ShowSelectButton="True" >
+                        <ItemStyle Width="5px" />
+                    </asp:CommandField>
                     <asp:BoundField DataField="CategoryID" HeaderText="CategoryID" 
                         InsertVisible="False" ReadOnly="True" SortExpression="CategoryID" 
                         Visible="False" >
@@ -35,7 +39,6 @@
                     </asp:BoundField>
                     <asp:BoundField DataField="CategoryName" HeaderText="CategoryName" 
                         SortExpression="CategoryName" >
-                    <ItemStyle Width="200px" />
                     </asp:BoundField>
             </Columns>
             <FooterStyle BackColor="#CCCC99" />
@@ -66,7 +69,7 @@
         </asp:ObjectDataSource>
     </div>
     <!-- Data Detail -->
-        <div class="contentDetail">
+        <div class="contentDetail category">
             <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="CategoryMultiView" runat="server">
 
@@ -143,4 +146,5 @@
         </div>
         </div>
     </div>
+</span>
 </asp:Content>

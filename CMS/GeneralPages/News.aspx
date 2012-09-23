@@ -20,12 +20,12 @@
             Add a News Article </asp:LinkButton>
     </div>
     <div class="wrapper2">
-    <div class="contentList">
+    <div class="contentList news">
         <asp:GridView ID="GridViewNews" runat="server" AllowPaging="True" 
             AllowSorting="True" AutoGenerateColumns="False" BackColor="White" 
             BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" 
             DataKeyNames="NewsID" DataSourceID="ObjectDataSourceNews" ForeColor="Black" 
-            GridLines="Vertical"  Width="451px"  CssClass="gridViewList"
+            GridLines="Vertical"  Width="100%"
             onrowdatabound="GridViewNews_RowDataBound" 
             onselectedindexchanged="GridViewNews_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
@@ -73,7 +73,7 @@
         </asp:ObjectDataSource>
     </div>
     <!-- Data Detail -->
-        <div class="contentDetail">
+        <div class="contentDetail news">
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="NewsMultiView" runat="server">
 

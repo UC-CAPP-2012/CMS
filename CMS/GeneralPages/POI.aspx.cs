@@ -45,6 +45,9 @@ namespace CMS.CMSPages
             this.AddressDataLabel.Text = row["StreetNo"].ToString() + " " + row["StreetName"].ToString()
                                         + ", " + row["Suburb"].ToString();
 
+            this.LatitudeHiddenField.Value = row["Latitude"].ToString();
+            this.LongitudeHiddenField.Value = row["Longitude"].ToString();
+
             this.CategoryIDHiddenField.Value = row["CategoryID"].ToString();
             this.SubtypeIDHiddenField.Value = row["SubtypeID"].ToString();
 
@@ -153,6 +156,9 @@ namespace CMS.CMSPages
             this.AddressTextBox.Text = row["StreetNo"].ToString() + " " + row["StreetName"].ToString()
                                         + ", " + row["Suburb"].ToString();
 
+            this.LatitudeHiddenField.Value = row["Latitude"].ToString();
+            this.LongitudeHiddenField.Value = row["Longitude"].ToString();
+
             this.ButtonMultiView.ActiveViewIndex = 0;
             this.POIMultiView.ActiveViewIndex = 1;
         }
@@ -179,7 +185,11 @@ namespace CMS.CMSPages
                 address = address.Remove(0, address.IndexOf(" ") + 1);
                 String streetName = address.Substring(0, address.IndexOf(","));
                 address = address.Remove(0, address.IndexOf(",") + 2);
-                String suburb = address.Substring(0, address.IndexOf(","));
+                String suburb;
+                if (address.Contains(","))
+                    suburb = address.Substring(0, address.IndexOf(","));
+                else
+                    suburb = address;
 
                 //convert inputs into correct format.
                 decimal cost = Convert.ToDecimal(this.CostTextBox.Text);

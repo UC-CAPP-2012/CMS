@@ -79,6 +79,7 @@ namespace CMS.GeneralPages
 
         protected void InsertLinkButton_Click(object sender, EventArgs e)
         {
+            this.InsertNameTextBox.Text = "";
             this.SubtypeMultiView.ActiveViewIndex = 2;
         }
     }

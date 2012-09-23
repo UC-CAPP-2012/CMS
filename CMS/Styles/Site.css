@@ -110,7 +110,7 @@ first child of the left and right table columns */
 
 .main
 {
-    min-height:800px;
+    min-height:600px;
 }
 
 .contents
@@ -168,6 +168,7 @@ first child of the left and right table columns */
 {
     width:200px; 
     float: left;
+
 }
 
 .contentLeftMenu h1
@@ -223,26 +224,30 @@ first child of the left and right table columns */
 {
     float:left;
     width:460px;
-    margin-left: 8px;
-    margin-top: 20px;
 }
 
-.category.contentList       {   width:223px;    }
-.event.contentList          {   width:223px;    }
-.news.contentList           {   width:223px;    }
-.poi.contentList            {   margin-left: 20px; width: 460px;    }
-.subtype.contentList        {   width:223px;    }
+.contentList table
+{
+    box-shadow: inset 19px 20px 10px -20px #555555;
+    border-left-color:Black;
+}
+
+.category.contentList       {   width:250px;    }
+.event.contentList          {   width:450px;    }
+.news.contentList           {   width:450px;    }
+.poi.contentList            {   width:450px;    }
+.subtype.contentList        {   width:250px;    }
 .tour.contentList           {   width:223px;    }
 .user.contentList           {   width:223px;    }
 
 
 .contentDetail
 {
-   background: none repeat scroll 0 0 white;
+    background: none repeat scroll 0 0 white;    
     box-shadow: 0 0 10px #555555 inset;
     margin: 10px 0 10px 500px;
     padding: 20px;
-    min-height: 800px;
+    min-height: 600px;
 }
 
 .contentDetail h1
@@ -268,11 +273,11 @@ first child of the left and right table columns */
     margin: 30px 10% 20px 0;
 }
 
-.category.contentDetail     {   margin-left: 493px;  }
-.event.contentDetail        {   margin-left: 493px;  }
-.news.contentDetail         {   margin-left: 493px;  }
-.poi.contentDetail          {   margin-left: 590px;  }
-.subtype.contentDetail      {   margin-left: 493px;  }
+.category.contentDetail     {   margin-left: 250px;  }
+.event.contentDetail        {   margin-left: 450px;  }
+.news.contentDetail         {   margin-left: 450px;  }
+.poi.contentDetail          {   margin-left: 450px;  }
+.subtype.contentDetail      {   margin-left: 250px;  }
 .tour.contentDetail         {   margin-left: 493px;  }
 .user.contentDetail         {   margin-left: 493px;  }
 .admin.contentDetail        {   margin-left: 493px;  }

@@ -108,13 +108,13 @@ namespace CMS.BLL
         }
 
         public int UpdatePOI(String ItemName, String Details, decimal Cost, int Rating, int? Phone, String Website, String Email,
-            String OpeningHours, String StreetNo, String StreetName, double Latitute, double Longitute, int Postcode, String Suburb, 
+            String OpeningHours, String StreetNo, String StreetName, double Latitude, double Longitude, int Postcode, String Suburb, 
             int? SubtypeID, int CategoryID, int? Original_SubtypeID, int Original_ItemID, int Original_CategoryID)
         {
             if (poiTableAdapter.Update(CategoryID, Original_ItemID, Original_CategoryID) > 0)
             {
                 return itemTableAdapter.Update(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, StreetNo,
-                    StreetName, Latitute, Longitute, Postcode, Suburb, SubtypeID, Original_ItemID, Original_SubtypeID);
+                    StreetName, Latitude, Longitude, Postcode, Suburb, SubtypeID, Original_ItemID, Original_SubtypeID);
             }
             return 0;
         }
@@ -129,14 +129,14 @@ namespace CMS.BLL
         }
 
         public int InsertPOI(String ItemName, String Details, decimal Cost, int Rating, int? Phone, String Website, String Email,
-            String OpeningHours, String StreetNo, String StreetName, double Latitute, double Longitute, int Postcode, String Suburb,
+            String OpeningHours, String StreetNo, String StreetName, double Latitude, double Longitude, int Postcode, String Suburb,
             int? SubtypeID,int CategoryID)
         {
             
             if (itemTableAdapter.Insert(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, StreetNo,
-                    StreetName, Latitute, Longitute, Postcode, Suburb, SubtypeID)>0)
+                    StreetName, Latitude, Longitude, Postcode, Suburb, SubtypeID)>0)
             {
-                int? ItemID = itemTableAdapter.GetNewlyAddedID();
+                int? ItemID = itemTableAdapter.getNewlyAddedID();
                 return poiTableAdapter.InsertNewPOI(ItemID, CategoryID);
             }
             return 0;
@@ -158,13 +158,13 @@ namespace CMS.BLL
         }
 
         public int UpdateEvent(String ItemName, String Details, decimal Cost, int Rating, int? Phone, String Website, String Email,
-            String OpeningHours, String StreetNo, String StreetName, int Latitute, int Longitute, int Postcode, String Suburb,
+            String OpeningHours, String StreetNo, String StreetName, double Latitude, double Longitude, int Postcode, String Suburb,
             int? SubtypeID, DateTime EventStartDate, DateTime EventEndDate, int? Original_SubtypeID, int Original_ItemID)
         {
             if (eventTableAdapter.Update(EventStartDate, EventEndDate, Original_ItemID) > 0)
             {
                 return itemTableAdapter.Update(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, StreetNo,
-                    StreetName, Latitute, Longitute, Postcode, Suburb, SubtypeID, Original_ItemID, Original_SubtypeID);
+                    StreetName, Latitude, Longitude, Postcode, Suburb, SubtypeID, Original_ItemID, Original_SubtypeID);
             }
             return 0;
         }
@@ -179,13 +179,13 @@ namespace CMS.BLL
         }
 
         public int InsertEvent(String ItemName, String Details, decimal Cost, int Rating, int? Phone, String Website, String Email,
-            String OpeningHours, String StreetNo, String StreetName, int Latitute, int Longitute, int Postcode, String Suburb,
+            String OpeningHours, String StreetNo, String StreetName, double Latitude, double Longitude, int Postcode, String Suburb,
             int? SubtypeID, DateTime EventStartDate, DateTime EventEndDate)
         {
             if (itemTableAdapter.Insert(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, StreetNo,
-                    StreetName, Latitute, Longitute, Postcode, Suburb, SubtypeID) > 0)
+                    StreetName, Latitude, Longitude, Postcode, Suburb, SubtypeID) > 0)
             {
-                int? ItemID = itemTableAdapter.GetNewlyAddedID();
+                int? ItemID = itemTableAdapter.getNewlyAddedID();
                 return eventTableAdapter.InsertNewItem(ItemID,EventStartDate, EventEndDate);
             }
             return 0;
