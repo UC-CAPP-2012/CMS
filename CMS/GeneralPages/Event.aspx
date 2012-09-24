@@ -94,13 +94,12 @@
         <div class="wrapper2">
             <div class="contentList event">
                 <asp:GridView ID="EventGridView" runat="server" AllowSorting="True" 
-                    AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
-                    BorderStyle="None" BorderWidth="1px" CellPadding="4" Width="100%"
-                    DataSourceID="EventObjectDataSource" ForeColor="Black" DataKeyNames="ItemID"
-                    GridLines="Vertical" onrowdatabound="EventGridView_RowDataBound" 
+                    AutoGenerateColumns="False" CellPadding="4" Width="100%"
+                    DataSourceID="EventObjectDataSource" ForeColor="#333333" DataKeyNames="ItemID"
+                    GridLines="None" onrowdatabound="EventGridView_RowDataBound" 
                     onselectedindexchanged="EventGridView_SelectedIndexChanged" 
                     AllowPaging="True">
-                    <AlternatingRowStyle BackColor="White" />
+                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:CommandField SelectText="" ShowSelectButton="True">
                         <ItemStyle Width="5px" />
@@ -114,15 +113,16 @@
                         <asp:BoundField DataField="Suburb" HeaderText="Suburb" 
                             SortExpression="Suburb" />
                     </Columns>
-                    <FooterStyle BackColor="#CCCC99" />
-                    <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-                    <RowStyle BackColor="#F7F7DE" />
-                    <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-                    <SortedAscendingCellStyle BackColor="#FBFBF2" />
-                    <SortedAscendingHeaderStyle BackColor="#848384" />
-                    <SortedDescendingCellStyle BackColor="#EAEAD3" />
-                    <SortedDescendingHeaderStyle BackColor="#575357" />
+                    <EditRowStyle BackColor="#999999" />
+                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                    <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                    <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                    <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
                 <asp:ObjectDataSource ID="EventObjectDataSource" runat="server" 
                     DeleteMethod="DeleteEvent" InsertMethod="InsertEvent" 
