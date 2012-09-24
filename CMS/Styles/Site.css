@@ -349,6 +349,11 @@ first child of the left and right table columns */
     background-image: url(/Resources/SavedStar.png);
 }
 
+.ajax__fileupload
+{
+    width:400px;    
+}
+
 /* FORM ELEMENTS   
 ----------------------------------------------------------*/
 

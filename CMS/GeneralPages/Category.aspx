@@ -99,9 +99,6 @@
                     <hr /> 
                     <asp:Label ID="NameUpdateLabel" CssClass="label" runat="server" Text="Category Name : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="NameTextBox" runat="server" Width="250px"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="NameTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="NameTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError">             
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorCategoryName" runat="server" 
                         ErrorMessage="Category name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />

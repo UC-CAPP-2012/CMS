@@ -113,9 +113,6 @@
                     <hr />
                     <asp:Label ID="InsertNameLabel" CssClass="label" runat="server" Text="Subtype Name : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="InsertNameTextBox" runat="server" Width="250px"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="InsertNameTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="InsertNameTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError">             
                         <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
                         ErrorMessage="Subtype name is required." ControlToValidate="InsertNameTextBox" SetFocusOnError="True" />

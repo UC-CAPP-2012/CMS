@@ -44,8 +44,7 @@ namespace CMS.CMSPages
             this.RatingData.CurrentRating = Convert.ToInt32(row["Rating"].ToString());
             this.DescriptionDataLabel.Text = row["Details"].ToString();
             this.PostcodeDataLabel.Text = row["Postcode"].ToString();
-            this.AddressDataLabel.Text = row["StreetNo"].ToString() + " " + row["StreetName"].ToString()
-                                        + ", " + row["Suburb"].ToString();
+            this.AddressDataLabel.Text = row["Address"].ToString();
 
             this.LatitudeHiddenField.Value = row["Latitude"].ToString();
             this.LongitudeHiddenField.Value = row["Longitude"].ToString();
@@ -83,16 +82,11 @@ namespace CMS.CMSPages
             {
                 // get streetNo, streetName, suburb from address
                 String address = this.AddressTextBox.Text;
-                String streetNo = address.Substring(0, address.IndexOf(" "));
-                int a = address.IndexOf(" ");
-                address = address.Remove(0, address.IndexOf(" ") + 1);
-                String streetName = address.Substring(0, address.IndexOf(","));
-                address = address.Remove(0, address.IndexOf(",") + 2);
-                String suburb = address.Substring(0, address.IndexOf(","));
+                String suburb = address.Remove(0, address.IndexOf(",") + 2);
+                suburb = suburb.Substring(0, suburb.IndexOf(","));
 
                 //convert inputs into correct format.
                 decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
-                int? phoneNo = Convert.ToInt32(this.PhoneTextBox.Text);
                 double latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
                 double longitude = Convert.ToDouble(this.LongitudeHiddenField.Value);
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
@@ -101,8 +95,8 @@ namespace CMS.CMSPages
                 DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text);
 
                 dataAccess.InsertEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
-                    cost, this.Rating.CurrentRating, phoneNo, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
-                    this.OpeningHoursTextBox.Text, streetNo, streetName, latitude, longitude, postCode,
+                    cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
+                    this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
                     suburb, subtypeID,startDate, endDate);
 
                 this.EventGridView.DataBind();
@@ -130,11 +124,6 @@ namespace CMS.CMSPages
                 Int32 num;
                 isNum = Int32.TryParse(this.PostcodeTextBox.Text, out num);
             }
-            if (senderID.Equals("PhoneTextBox_CustomValidator"))
-            {
-                Int32 num;
-                isNum = Int32.TryParse(this.PhoneTextBox.Text, out num);
-            }
             e.IsValid = isNum;
         }
 
@@ -155,8 +144,7 @@ namespace CMS.CMSPages
             this.Rating.CurrentRating = Convert.ToInt32(row["Rating"].ToString());
             this.DescriptionTextBox.Text = row["Details"].ToString();
             this.PostcodeTextBox.Text = row["Postcode"].ToString();
-            this.AddressTextBox.Text = row["StreetNo"].ToString() + " " + row["StreetName"].ToString()
-                                        + ", " + row["Suburb"].ToString();
+            this.AddressTextBox.Text = row["Address"].ToString();
 
             this.LatitudeHiddenField.Value = row["Latitude"].ToString();
             this.LongitudeHiddenField.Value = row["Longitude"].ToString();
@@ -181,16 +169,8 @@ namespace CMS.CMSPages
             {
                 // get streetNo, streetName, suburb from address
                 String address = this.AddressTextBox.Text;
-                String streetNo = address.Substring(0, address.IndexOf(" "));
-                int a = address.IndexOf(" ");
-                address = address.Remove(0, address.IndexOf(" ") + 1);
-                String streetName = address.Substring(0, address.IndexOf(","));
-                address = address.Remove(0, address.IndexOf(",") + 2);
-                String suburb;
-                if(address.Contains(","))
-                    suburb = address.Substring(0, address.IndexOf(","));
-                else
-                    suburb = address;
+                String suburb = address.Remove(0, address.IndexOf(",") + 2);
+                suburb = suburb.Substring(0, suburb.IndexOf(","));
 
                 DateTimeFormatInfo format = new DateTimeFormatInfo();
                 format.ShortDatePattern = "dd/MMMM/yyyy";
@@ -201,7 +181,6 @@ namespace CMS.CMSPages
 
                 //convert inputs into correct format.
                 decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
-                int? phoneNo = Convert.ToInt32(this.PhoneTextBox.Text);
                 double latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
                 double longitude = Convert.ToDouble(this.LongitudeHiddenField.Value);
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
@@ -210,8 +189,8 @@ namespace CMS.CMSPages
                 int itemID = Convert.ToInt32(this.EventGridView.SelectedDataKey.Value);
 
                 dataAccess.UpdateEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
-                    cost, this.Rating.CurrentRating, phoneNo, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
-                    this.OpeningHoursTextBox.Text, streetNo, streetName, latitude, longitude, postCode,
+                    cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
+                    this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
                     suburb, subtypeID, startDate, endDate, originalSubtypeID, itemID);
 
                 this.EventGridView.DataBind();

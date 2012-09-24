@@ -78,6 +78,7 @@
         setupClickListener('changetype-geocode', ['geocode']);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+
      //]]>
 </script>
         <div class="wrapper1">
@@ -139,12 +140,11 @@
                 <asp:Parameter Name="Details" Type="String" />
                 <asp:Parameter Name="Cost" Type="Decimal" />
                 <asp:Parameter Name="Rating" Type="Int32" />
-                <asp:Parameter Name="Phone" Type="Int32" />
+                <asp:Parameter Name="Phone" Type="String" />
                 <asp:Parameter Name="Website" Type="String" />
                 <asp:Parameter Name="Email" Type="String" />
                 <asp:Parameter Name="OpeningHours" Type="String" />
-                <asp:Parameter Name="StreetNo" Type="String" />
-                <asp:Parameter Name="StreetName" Type="String" />
+                <asp:Parameter Name="Address" Type="String" />
                 <asp:Parameter Name="Latitude" Type="Double" />
                 <asp:Parameter Name="Longitude" Type="Double" />
                 <asp:Parameter Name="Postcode" Type="Int32" />
@@ -157,12 +157,11 @@
                 <asp:Parameter Name="Details" Type="String" />
                 <asp:Parameter Name="Cost" Type="Decimal" />
                 <asp:Parameter Name="Rating" Type="Int32" />
-                <asp:Parameter Name="Phone" Type="Int32" />
+                <asp:Parameter Name="Phone" Type="String" />
                 <asp:Parameter Name="Website" Type="String" />
                 <asp:Parameter Name="Email" Type="String" />
                 <asp:Parameter Name="OpeningHours" Type="String" />
-                <asp:Parameter Name="StreetNo" Type="String" />
-                <asp:Parameter Name="StreetName" Type="String" />
+                <asp:Parameter Name="Address" Type="String" />
                 <asp:Parameter Name="Latitude" Type="Double" />
                 <asp:Parameter Name="Longitude" Type="Double" />
                 <asp:Parameter Name="Postcode" Type="Int32" />
@@ -261,9 +260,6 @@
                     <!-- Name -->
                     <asp:Label ID="NameLabel" CssClass="label" runat="server" Text="POI Name : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="NameTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="NameTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="NameTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError">             
                         <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
                         ErrorMessage="POI name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
@@ -284,37 +280,22 @@
                     <!-- Phone -->
                     <asp:Label ID="PhoneLabel" CssClass="label" runat="server" Text="Phone : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="PhoneTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="PhoneTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="PhoneTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender><br /><br />
-                    <p class="validationError">             
-                        <asp:CustomValidator ID="PhoneTextBox_CustomValidator" runat="server" ErrorMessage="Phone should include only numbers."
-                        onservervalidate="numberInputValidate" ControlToValidate="PhoneTextBox"></asp:CustomValidator>
-                    </p>
+                    <br /><br />
                     <!-- Email -->
                     <asp:Label ID="EmailLabel" CssClass="label" runat="server" Text="Email : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="EmailTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="EmailTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="EmailTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender><br /><br />
+                    <br /><br />
                     <!-- Website -->
                     <asp:Label ID="WebsiteLabel" CssClass="label" runat="server" Text="Website : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="WebsiteTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="WebsiteTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="WebsiteTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender><br /><br />
+                    <br /><br />
                     <!-- Opening Hours -->
                     <asp:Label ID="OpeningHoursLabel" CssClass="label" runat="server" Text="Opening Hours : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="OpeningHoursTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="OpeningHoursTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="OpeningHoursTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender><br /><br />
+                    <br /><br />
                     <!-- Cost -->
                     <asp:Label ID="CostLabel" CssClass="label" runat="server" Text="Cost : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="CostTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="CostTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="CostTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError">             
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                         ErrorMessage="Cost is required." ControlToValidate="CostTextBox" SetFocusOnError="True" />
@@ -329,9 +310,6 @@
                     <!-- Detailed Description -->
                     <asp:Label ID="DescriptionLabel" CssClass="label" runat="server" Text="Detailed description : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="DescriptionTextBox" runat="server" Width="400px" TextMode="MultiLine" Height="100px" ></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="DescriptionTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="DescriptionTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError">             
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                         ErrorMessage="Detailed description is required." ControlToValidate="DescriptionTextBox" SetFocusOnError="True" />
@@ -339,9 +317,6 @@
                     <!--Postcode -->
                     <asp:Label ID="PostcodeLabel" CssClass="label" runat="server" Text="Postcode : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="PostcodeTextBox" runat="server" Width="60px" onkeydown = "return (event.keyCode!=13);" MaxLength="4"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="PostCodeTextBox_TextBoxWatermarkExtender" runat="server" Enabled="True" 
-                        TargetControlID="PostcodeTextBox" WatermarkText="postcode" WatermarkCssClass="textBoxWatermark">
-                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError"> 
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                         ErrorMessage="Postcode is required." ControlToValidate="PostcodeTextBox" SetFocusOnError="True" />
@@ -352,9 +327,6 @@
                     <!-- Address -->
                     <asp:Label ID="AddressLabel" CssClass="label" runat="server" Text="Address : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="AddressTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="StNumTextBox_TextBoxWatermarkExtender" runat="server" Enabled="True" 
-                        TargetControlID="AddressTextBox" WatermarkText="address" WatermarkCssClass="textBoxWatermark">
-                    </asp:TextBoxWatermarkExtender>
                     <p class="validationError">             
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                         ErrorMessage="Address is required." ControlToValidate="AddressTextBox" SetFocusOnError="True" />
@@ -363,16 +335,11 @@
                     </div><br />
                     <!-- Images -->
                     <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="ImageTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="ImageTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="ImageTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender><br /><br />
+                    <asp:FileUpload ID="FileUpload" runat="server" />
+                        <br /><br />
                     <!-- YouTube Video -->
                     <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <asp:TextBoxWatermarkExtender ID="VideoTextBox_TextBoxWatermarkExtender" WatermarkCssClass="textBoxWatermark noText"
-                        runat="server" Enabled="True" TargetControlID="VideoTextBox" WatermarkText="enter">
-                    </asp:TextBoxWatermarkExtender>
 
                     <!-- Buttons -->
                     <div class="detailButtons bottom">
@@ -405,11 +372,5 @@
         </div>
     </div>
     </div>
-          
-    
-          
-    </span>
-          
-    
-          
+        
 </asp:Content>

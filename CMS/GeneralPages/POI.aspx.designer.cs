@@ -382,15 +382,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.TextBox NameTextBox;
         
         /// <summary>
-        /// NameTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender NameTextBox_TextBoxWatermarkExtender;
-        
-        /// <summary>
         /// InsertRequiredFieldValidator control.
         /// </summary>
         /// <remarks>
@@ -472,24 +463,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.TextBox PhoneTextBox;
         
         /// <summary>
-        /// PhoneTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender PhoneTextBox_TextBoxWatermarkExtender;
-        
-        /// <summary>
-        /// PhoneTextBox_CustomValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator PhoneTextBox_CustomValidator;
-        
-        /// <summary>
         /// EmailLabel control.
         /// </summary>
         /// <remarks>
@@ -506,15 +479,6 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EmailTextBox;
-        
-        /// <summary>
-        /// EmailTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender EmailTextBox_TextBoxWatermarkExtender;
         
         /// <summary>
         /// WebsiteLabel control.
@@ -535,15 +499,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.TextBox WebsiteTextBox;
         
         /// <summary>
-        /// WebsiteTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender WebsiteTextBox_TextBoxWatermarkExtender;
-        
-        /// <summary>
         /// OpeningHoursLabel control.
         /// </summary>
         /// <remarks>
@@ -562,15 +517,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.TextBox OpeningHoursTextBox;
         
         /// <summary>
-        /// OpeningHoursTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender OpeningHoursTextBox_TextBoxWatermarkExtender;
-        
-        /// <summary>
         /// CostLabel control.
         /// </summary>
         /// <remarks>
@@ -587,15 +533,6 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CostTextBox;
-        
-        /// <summary>
-        /// CostTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender CostTextBox_TextBoxWatermarkExtender;
         
         /// <summary>
         /// RequiredFieldValidator1 control.
@@ -652,15 +589,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.TextBox DescriptionTextBox;
         
         /// <summary>
-        /// DescriptionTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender DescriptionTextBox_TextBoxWatermarkExtender;
-        
-        /// <summary>
         /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
@@ -686,15 +614,6 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PostcodeTextBox;
-        
-        /// <summary>
-        /// PostCodeTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender PostCodeTextBox_TextBoxWatermarkExtender;
         
         /// <summary>
         /// RequiredFieldValidator5 control.
@@ -733,15 +652,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.TextBox AddressTextBox;
         
         /// <summary>
-        /// StNumTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender StNumTextBox_TextBoxWatermarkExtender;
-        
-        /// <summary>
         /// RequiredFieldValidator3 control.
         /// </summary>
         /// <remarks>
@@ -760,22 +670,13 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Label ImageLabel;
         
         /// <summary>
-        /// ImageTextBox control.
+        /// FileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ImageTextBox;
-        
-        /// <summary>
-        /// ImageTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender ImageTextBox_TextBoxWatermarkExtender;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload;
         
         /// <summary>
         /// VideoLabel control.
@@ -794,15 +695,6 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox VideoTextBox;
-        
-        /// <summary>
-        /// VideoTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender VideoTextBox_TextBoxWatermarkExtender;
         
         /// <summary>
         /// ButtonMultiView control.
