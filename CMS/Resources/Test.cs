@@ -7,5 +7,6 @@ namespace CMS.Resources
 {
     public class Test
     {
+        //salma's test
     }
 }
