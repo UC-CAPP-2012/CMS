@@ -792,3 +792,8 @@ div.accountInfo
     float: right;
     margin-right: 530px;
 }
+
+.hidden
+{
+    display: none;
+}

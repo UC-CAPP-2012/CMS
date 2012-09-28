@@ -10,7 +10,7 @@ namespace CMS.CMSPages
     public partial class News : System.Web.UI.Page
     {
         BLL.CMSBLClass dataAccess = new BLL.CMSBLClass();
-
+        public string fileName;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -24,6 +24,7 @@ namespace CMS.CMSPages
             this.NewsMultiView.ActiveViewIndex = 1;
             this.NameTextBox.Text = this.GridViewNews.SelectedRow.Cells[1].Text;
             this.PublisherTextBox.Text = this.GridViewNews.SelectedRow.Cells[3].Text;
+            this.AuthorTextBox.Text = this.GridViewNews.SelectedRow.Cells[4].Text;
             var News = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
             this.NewsImageUpdate.ImageUrl = News.NewsMediaURL;
             this.NewsBodyEditor.Content = News.NewsBody; 
@@ -32,7 +33,9 @@ namespace CMS.CMSPages
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             int id = (Int32)this.GridViewNews.SelectedDataKey.Value;
+            var News = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
             dataAccess.DeleteNews(id);
+            System.IO.File.Delete(Server.MapPath("~/Media/" + News.NewsMediaURL.Split('/')[2]));
             this.GridViewNews.DataBind();
             this.NewsMultiView.ActiveViewIndex = -1;
 
@@ -45,10 +48,16 @@ namespace CMS.CMSPages
                 string title = NameTextBox.Text;
                 DateTime publishedDate = DateTime.Today;
                 string body = NewsBodyEditor.Content;
-                string newsImageUrl = NewsImageUpdate.ImageUrl;
                 string newsPublisher = PublisherTextBox.Text;
+                string newsAuthor = AuthorTextBox.Text;
+                string newsImageUrl = "../Media/" + NewsImageUpdate.ImageUrl.Split('/')[2];
 
-                dataAccess.UpdateNews(title, publishedDate, body, newsImageUrl, newsPublisher, (Int32)this.GridViewNews.SelectedDataKey.Value);
+                var NewsItem = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
+                System.IO.File.Delete(Server.MapPath("~/Media/" + NewsItem.NewsMediaURL.Split('/')[2]));
+                dataAccess.UpdateNews(title, publishedDate, body, newsImageUrl, newsPublisher, newsAuthor, (Int32)this.GridViewNews.SelectedDataKey.Value);
+                System.IO.File.Move(Server.MapPath("~/Temp_Media/" + NewsImageUploadFileName.Value), Server.MapPath("~/Media/" + NewsImageUploadFileName.Value));
+                DeleteAllTempFiles();
+
                 this.GridViewNews.DataBind();
                 var News = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
                 this.newsTitle.InnerText = this.GridViewNews.SelectedRow.Cells[1].Text;
@@ -80,11 +89,12 @@ namespace CMS.CMSPages
                 string title = InsertNewsTitle.Text;
                 DateTime publishedDate = DateTime.Today;
                 string body = InsertNewsEditor.Content;
-                string newsImageUrl = InsertNewsImage.ImageUrl;
                 string newsPublisher = InsertNewsPublisher.Text;
-
-                int result = dataAccess.InsertNews(title, publishedDate, body, newsImageUrl, newsPublisher);
-
+                string newsAuthor = InsertNewsAuthor.Text;
+                string newsImageUrl = "../Media/" + InsertNewsImage.ImageUrl.Split('/')[2];
+                int result = dataAccess.InsertNews(title, publishedDate, body, newsImageUrl, newsPublisher, newsAuthor);
+                System.IO.File.Move(Server.MapPath("~/Temp_Media/" + InsertNewsImageName.Value), Server.MapPath("~/Media/" + InsertNewsImageName.Value));
+                DeleteAllTempFiles();
                 this.GridViewNews.DataBind();
                 this.NewsMultiView.ActiveViewIndex = -1;
             }
@@ -101,6 +111,8 @@ namespace CMS.CMSPages
                 e.Row.Attributes.Add("onmouseover", "this.originalstyle=this.style.backgroundColor;this.style.backgroundColor='#f8c9c7'");
                 e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=this.originalstyle;");
                 e.Row.Attributes.Add("onclick", Page.ClientScript.GetPostBackEventReference(GridViewNews, "Select$" + e.Row.RowIndex.ToString()));
+                e.Row.Cells[2].Text = Convert.ToDateTime(e.Row.Cells[2].Text).ToShortDateString();
+
             }
         }
 
@@ -109,13 +121,14 @@ namespace CMS.CMSPages
             this.NewsMultiView.ActiveViewIndex = 0;
             var News = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
             this.newsTitle.InnerText = this.GridViewNews.SelectedRow.Cells[1].Text;
-            this.newsLabel.InnerHtml = "<span>"+Convert.ToDateTime(this.GridViewNews.SelectedRow.Cells[2].Text).ToShortDateString()+"</span> | <span>"+this.GridViewNews.SelectedRow.Cells[3].Text+"</span>";
+            this.newsLabel.InnerHtml = "<span>"+Convert.ToDateTime(this.GridViewNews.SelectedRow.Cells[2].Text).ToShortDateString()+"</span> | <span>"+this.GridViewNews.SelectedRow.Cells[3].Text+"</span> | <span>"+this.GridViewNews.SelectedRow.Cells[4].Text+"</span>";
             this.newsBody.InnerHtml = News.NewsBody;
             this.newsImage.InnerHtml ="<img alt='"+this.GridViewNews.SelectedRow.Cells[1].Text+"' title='"+this.GridViewNews.SelectedRow.Cells[1].Text+"' src='"+News.NewsMediaURL+"'/>";
         }
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
+            StatusLabel.Text = "";
             if (NewsImageUpload.HasFile)
             {
                 try
@@ -130,8 +143,10 @@ namespace CMS.CMSPages
                             int numIterations = 0;
                             numIterations = rand.Next(1000000000, 2147483647);
                             long NowInBinary = DateTime.Today.ToBinary();
-                            NewsImageUpload.SaveAs(Server.MapPath("~/Media/") + numIterations.ToString() + NowInBinary.ToString()  + NewsImageUpload.FileName);
-                            this.NewsImageUpdate.ImageUrl = "../Media/" + numIterations.ToString() + NowInBinary.ToString()  + NewsImageUpload.FileName;
+                            DeleteAllTempFiles();
+                            NewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + NowInBinary.ToString() + NewsImageUpload.FileName);
+                            this.NewsImageUpdate.ImageUrl = "../Temp_Media/" + numIterations.ToString() + NowInBinary.ToString() + NewsImageUpload.FileName;
+                            NewsImageUploadFileName.Value = numIterations.ToString() + NowInBinary.ToString() + NewsImageUpload.FileName;
                         }
                         else
                         {
@@ -161,6 +176,7 @@ namespace CMS.CMSPages
 
         protected void btnInsertNewsUpload_Click(object sender, EventArgs e)
         {
+            InsertStatusLabel.Text = "";
             if (InsertNewsImageUpload.HasFile)
             {
                 try
@@ -169,18 +185,20 @@ namespace CMS.CMSPages
                        InsertNewsImageUpload.PostedFile.ContentType == "image/png" ||
                        InsertNewsImageUpload.PostedFile.ContentType == "image/gif")
                     {
-                        if (InsertNewsImageUpload.PostedFile.ContentLength < 102400)
+                        if (InsertNewsImageUpload.PostedFile.ContentLength < 51200)
                         {
                             Random rand = new Random((int)DateTime.Now.Ticks);
                             int numIterations = 0;
                             numIterations = rand.Next(1000000000, 2147483647);
                             long NowInBinary = DateTime.Today.ToBinary();
-                            InsertNewsImageUpload.SaveAs(Server.MapPath("~/Media/") + numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName);
-                            this.InsertNewsImage.ImageUrl = "../Media/" + numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName;
+                            DeleteAllTempFiles();
+                            InsertNewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName);
+                            this.InsertNewsImage.ImageUrl = "../Temp_Media/" + numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName;
+                            InsertNewsImageName.Value = numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName;
                         }
                         else
                         {
-                            InsertStatusLabel.Text = "The file has to be less than 100 kb!";
+                            InsertStatusLabel.Text = "The file has to be less than 50 kb!";
                         }
                     }
                     else
@@ -200,5 +218,10 @@ namespace CMS.CMSPages
             }
         }
 
+        public void DeleteAllTempFiles()
+        {
+            foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../Temp_Media")))
+            System.IO.File.Delete(f);
+        }
     }
 }
