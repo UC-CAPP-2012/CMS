@@ -102,6 +102,13 @@
     <Content Include="Resources\EmptyStar.png" />
     <Content Include="Resources\FilledStar.png" />
     <Content Include="Resources\SavedStar.png" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.MetaData.js" />
+    <Content Include="Scripts\jquery.MultiFile.js" />
+    <Content Include="Scripts\jquery.MultiFile.pack.js" />
+    <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />

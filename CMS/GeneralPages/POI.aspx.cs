@@ -51,6 +51,8 @@ namespace CMS.CMSPages
             this.SubtypeIDHiddenField.Value = row["SubtypeID"].ToString();
 
             this.POIMultiView.ActiveViewIndex = 0;
+
+
         }
 
         protected void InsertLinkButton_Click(object sender, EventArgs e)
@@ -93,9 +95,16 @@ namespace CMS.CMSPages
                 int categotyID = Convert.ToInt32(this.CategoryDropDownList.SelectedValue);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
 
-                dataAccess.InsertPOI(this.NameTextBox.Text, this.DescriptionTextBox.Text,
+                int newItemId= dataAccess.InsertPOI(this.NameTextBox.Text, this.DescriptionTextBox.Text,
                     cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode, suburb, subtypeID, categotyID);
+                int count = ImageUploadFileName.Value.Split(';').Length;
+                for (int i = 0; i < count-1; i++)
+                {
+                    string filename = ImageUploadFileName.Value.Split(';')[i];
+                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images");
+                    System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
+                }
 
                 this.POIGridView.DataBind();
                 this.POIMultiView.ActiveViewIndex = -1;
@@ -191,6 +200,62 @@ namespace CMS.CMSPages
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             this.POIMultiView.ActiveViewIndex = 0;
-        }  
+        }
+
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StatusLabel.Text = "";
+                // Get the HttpFileCollection
+                HttpFileCollection hfc = Request.Files;
+                DeleteAllTempFiles();
+                for (int i = 0; i < hfc.Count; i++)
+                {
+                    HttpPostedFile hpf = hfc[i];
+                    if (hpf.ContentType == "image/jpeg" ||
+                       hpf.ContentType == "image/png" ||
+                       hpf.ContentType == "image/gif")
+                    {
+                        if (hpf.ContentLength < 51200)
+                        {
+
+                            Random rand = new Random((int)DateTime.Now.Ticks);
+                            int numIterations = 0;
+                            numIterations = rand.Next(1000000000, 2147483647);
+                            Guid id = new Guid();
+
+                            //-- Create new GUID and echo to the console
+                            id = Guid.NewGuid();
+                            hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
+                            ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
+                            Response.Write("<b>File: </b>" + hpf.FileName + "  <b>Size:</b> " +
+                                hpf.ContentLength + "  <b>Type:</b> " + hpf.ContentType + " Uploaded Successfully <br/>");
+                        }
+                        else
+                        {
+                            StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
+                            DeleteAllTempFiles();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        StatusLabel.Text = "Only JPEG, PNG and GIF files are accepted!";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+            }
+        }
+
+        public void DeleteAllTempFiles()
+        {
+            foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../Temp_Media")))
+                System.IO.File.Delete(f);
+        }
     }
 }

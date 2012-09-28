@@ -4,6 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
+        <script src="../Scripts/jquery.MultiFile.js" type="text/javascript"></script>
 <script type="text/javascript">
 //<![CDATA[
     //Don't run suver side code and do nothing when cancel button on confirmation is clicked.
@@ -86,7 +88,7 @@
         <h1> Point Of Interest </h1>
         <ul>
             <li><span style="margin-left: -1em;" /><asp:LinkButton D="InsertLinkButton" runat="server" CausesValidation="False"
-                    onclick="InsertLinkButton_Click"> Insert New Event</asp:LinkButton></li>
+                    onclick="InsertLinkButton_Click"> Insert New POI</asp:LinkButton></li>
         </ul>
         </div>
     <div class="wrapper2">
@@ -333,14 +335,20 @@
                     </p>                    
                     <div class="map" id="map">
                     </div><br />
-                    <!-- Images -->
-                    <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:FileUpload ID="FileUpload" runat="server" />
-                        <br /><br />
+                    
+                        
                     <!-- YouTube Video -->
                     <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                    <br /><br />
 
+                    <!-- Images -->
+                    <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:Label ID="Label6" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
+                    <asp:Button ID="btnUpload" runat="server" Text="Upload All" CssClass="poiUploadBtn" onclick="btnUpload_Click" />
+            <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                   <asp:HiddenField ID="ImageUploadFileName" runat="server" />
                     <!-- Buttons -->
                     <div class="detailButtons bottom">
                         <asp:MultiView ID="ButtonMultiView" runat="server">
@@ -372,5 +380,7 @@
         </div>
     </div>
     </div>
+        
+    </span>
         
 </asp:Content>

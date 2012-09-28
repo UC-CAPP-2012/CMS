@@ -137,7 +137,8 @@ namespace CMS.BLL
                     Latitude, Longitude, Postcode, Suburb, SubtypeID)>0)
             {
                 int? ItemID = itemTableAdapter.getNewlyAddedItemID();
-                return poiTableAdapter.InsertNewPOI(ItemID, CategoryID);
+                poiTableAdapter.InsertNewPOI(ItemID, CategoryID);
+                return Convert.ToInt32(ItemID);
             }
             return 0;
         }

@@ -10,7 +10,6 @@ namespace CMS.CMSPages
     public partial class News : System.Web.UI.Page
     {
         BLL.CMSBLClass dataAccess = new BLL.CMSBLClass();
-        public string fileName;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -142,11 +141,14 @@ namespace CMS.CMSPages
                             Random rand = new Random((int)DateTime.Now.Ticks);
                             int numIterations = 0;
                             numIterations = rand.Next(1000000000, 2147483647);
-                            long NowInBinary = DateTime.Today.ToBinary();
+                            Guid id = new Guid();
+
+                            //-- Create new GUID and echo to the console
+                            id = Guid.NewGuid();
                             DeleteAllTempFiles();
-                            NewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + NowInBinary.ToString() + NewsImageUpload.FileName);
-                            this.NewsImageUpdate.ImageUrl = "../Temp_Media/" + numIterations.ToString() + NowInBinary.ToString() + NewsImageUpload.FileName;
-                            NewsImageUploadFileName.Value = numIterations.ToString() + NowInBinary.ToString() + NewsImageUpload.FileName;
+                            NewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + NewsImageUpload.FileName);
+                            this.NewsImageUpdate.ImageUrl = "../Temp_Media/" + numIterations.ToString() + id.ToString() + NewsImageUpload.FileName;
+                            NewsImageUploadFileName.Value = numIterations.ToString() + id.ToString() + NewsImageUpload.FileName;
                         }
                         else
                         {
@@ -190,11 +192,14 @@ namespace CMS.CMSPages
                             Random rand = new Random((int)DateTime.Now.Ticks);
                             int numIterations = 0;
                             numIterations = rand.Next(1000000000, 2147483647);
-                            long NowInBinary = DateTime.Today.ToBinary();
+                            Guid id = new Guid();
+
+                            //-- Create new GUID and echo to the console
+                            id = Guid.NewGuid();
                             DeleteAllTempFiles();
-                            InsertNewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName);
-                            this.InsertNewsImage.ImageUrl = "../Temp_Media/" + numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName;
-                            InsertNewsImageName.Value = numIterations.ToString() + NowInBinary.ToString() + InsertNewsImageUpload.FileName;
+                            InsertNewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + InsertNewsImageUpload.FileName);
+                            this.InsertNewsImage.ImageUrl = "../Temp_Media/" + numIterations.ToString() + id.ToString() + InsertNewsImageUpload.FileName;
+                            InsertNewsImageName.Value = numIterations.ToString() + id.ToString() + InsertNewsImageUpload.FileName;
                         }
                         else
                         {
