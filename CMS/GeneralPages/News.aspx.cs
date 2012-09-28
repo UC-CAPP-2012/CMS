@@ -26,7 +26,11 @@ namespace CMS.CMSPages
             this.AuthorTextBox.Text = this.GridViewNews.SelectedRow.Cells[4].Text;
             var News = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
             this.NewsImageUpdate.ImageUrl = News.NewsMediaURL;
-            this.NewsBodyEditor.Content = News.NewsBody; 
+            this.NewsBodyEditor.Content = News.NewsBody;
+            if (!News.NewsMediaURL.StartsWith("../Media/default-news-image.png"))
+            {
+                btnRemove.Visible = true;
+            }
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)
@@ -34,7 +38,10 @@ namespace CMS.CMSPages
             int id = (Int32)this.GridViewNews.SelectedDataKey.Value;
             var News = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
             dataAccess.DeleteNews(id);
-            System.IO.File.Delete(Server.MapPath("~/Media/" + News.NewsMediaURL.Split('/')[2]));
+            if (!News.NewsMediaURL.StartsWith("../Media/default-news-image.png"))
+            {
+                System.IO.File.Delete(Server.MapPath("~/Media/" + News.NewsMediaURL.Split('/')[2]));
+            }
             this.GridViewNews.DataBind();
             this.NewsMultiView.ActiveViewIndex = -1;
 
@@ -52,9 +59,14 @@ namespace CMS.CMSPages
                 string newsImageUrl = "../Media/" + NewsImageUpdate.ImageUrl.Split('/')[2];
 
                 var NewsItem = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
-                System.IO.File.Delete(Server.MapPath("~/Media/" + NewsItem.NewsMediaURL.Split('/')[2]));
+                if (!newsImageUrl.StartsWith("../Media/default-news-image.png"))
+                {
+                    System.IO.File.Move(Server.MapPath("~/Temp_Media/" + NewsImageUploadFileName.Value), Server.MapPath("~/Media/" + NewsImageUploadFileName.Value));
+                    System.IO.File.Delete(Server.MapPath("~/Media/" + NewsItem.NewsMediaURL.Split('/')[2]));
+                }
+                
                 dataAccess.UpdateNews(title, publishedDate, body, newsImageUrl, newsPublisher, newsAuthor, (Int32)this.GridViewNews.SelectedDataKey.Value);
-                System.IO.File.Move(Server.MapPath("~/Temp_Media/" + NewsImageUploadFileName.Value), Server.MapPath("~/Media/" + NewsImageUploadFileName.Value));
+                
                 DeleteAllTempFiles();
 
                 this.GridViewNews.DataBind();
@@ -92,7 +104,9 @@ namespace CMS.CMSPages
                 string newsAuthor = InsertNewsAuthor.Text;
                 string newsImageUrl = "../Media/" + InsertNewsImage.ImageUrl.Split('/')[2];
                 int result = dataAccess.InsertNews(title, publishedDate, body, newsImageUrl, newsPublisher, newsAuthor);
-                System.IO.File.Move(Server.MapPath("~/Temp_Media/" + InsertNewsImageName.Value), Server.MapPath("~/Media/" + InsertNewsImageName.Value));
+                if(!newsImageUrl.StartsWith("../Media/default-news-image.png")){
+                    System.IO.File.Move(Server.MapPath("~/Temp_Media/" + InsertNewsImageName.Value), Server.MapPath("~/Media/" + InsertNewsImageName.Value));
+                }
                 DeleteAllTempFiles();
                 this.GridViewNews.DataBind();
                 this.NewsMultiView.ActiveViewIndex = -1;
@@ -118,6 +132,8 @@ namespace CMS.CMSPages
         protected void GridViewNews_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.NewsMultiView.ActiveViewIndex = 0;
+            btnRemove.Visible = false;
+            btnInsertNewsRemove.Visible = false;
             var News = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
             this.newsTitle.InnerText = this.GridViewNews.SelectedRow.Cells[1].Text;
             this.newsLabel.InnerHtml = "<span>"+Convert.ToDateTime(this.GridViewNews.SelectedRow.Cells[2].Text).ToShortDateString()+"</span> | <span>"+this.GridViewNews.SelectedRow.Cells[3].Text+"</span> | <span>"+this.GridViewNews.SelectedRow.Cells[4].Text+"</span>";
@@ -149,6 +165,7 @@ namespace CMS.CMSPages
                             NewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + NewsImageUpload.FileName);
                             this.NewsImageUpdate.ImageUrl = "../Temp_Media/" + numIterations.ToString() + id.ToString() + NewsImageUpload.FileName;
                             NewsImageUploadFileName.Value = numIterations.ToString() + id.ToString() + NewsImageUpload.FileName;
+                            btnRemove.Visible = true;
                         }
                         else
                         {
@@ -174,6 +191,7 @@ namespace CMS.CMSPages
         {
             this.NewsMultiView.ActiveViewIndex = 2;
             this.InsertNewsImage.ImageUrl = "../Media/default-news-image.png";
+            btnInsertNewsRemove.Visible = false;
         }
 
         protected void btnInsertNewsUpload_Click(object sender, EventArgs e)
@@ -200,6 +218,7 @@ namespace CMS.CMSPages
                             InsertNewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + InsertNewsImageUpload.FileName);
                             this.InsertNewsImage.ImageUrl = "../Temp_Media/" + numIterations.ToString() + id.ToString() + InsertNewsImageUpload.FileName;
                             InsertNewsImageName.Value = numIterations.ToString() + id.ToString() + InsertNewsImageUpload.FileName;
+                            btnInsertNewsRemove.Visible = true;
                         }
                         else
                         {
@@ -227,6 +246,20 @@ namespace CMS.CMSPages
         {
             foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../Temp_Media")))
             System.IO.File.Delete(f);
+        }
+
+        protected void btnInsertNewsRemove_Click(object sender, EventArgs e)
+        {
+            this.InsertNewsImage.ImageUrl = "../Media/default-news-image.png";
+            InsertNewsImageName.Value = "../Media/default-news-image.png";
+            DeleteAllTempFiles();
+        }
+
+        protected void btnRemove_Click(object sender, EventArgs e)
+        {
+            this.NewsImageUpdate.ImageUrl = "../Media/default-news-image.png";
+            NewsImageUploadFileName.Value = "../Media/default-news-image.png";
+            DeleteAllTempFiles();
         }
     }
 }

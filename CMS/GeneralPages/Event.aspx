@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+<script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
+        <script src="../Scripts/jquery.MultiFile.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
 //<![CDATA[
@@ -245,11 +246,11 @@
                         </p>
                         <p>
                             <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
-                            <asp:Label ID="ImageDataLabel" runat="server" Text="Not implemented yet"></asp:Label>
-                        </p>
+                            <div runat="server" id="eventImages"></div>
+                       </p>
                         <p>
                             <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
-                            <asp:Label ID="VideoDataLabel" runat="server" Text="Not implemented yet"></asp:Label>
+                            <div runat="server" id="eventVideo"></div>
                         </p>
                         <asp:HiddenField ID="SubtypeIDHiddenField" runat="server" />
                     </asp:View>
@@ -292,6 +293,8 @@
                             <asp:CalendarExtender ID="StartDateTextBox_CalendarExtender" runat="server" 
                                 Enabled="True" TargetControlID="StartDateTextBox" Format="dd/MMMM/yyyy">
                             </asp:CalendarExtender>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                            ErrorMessage="Start date is required." ControlToValidate="StartDateTextBox" SetFocusOnError="True" />
                         <br /><br />
                         <!-- End Date -->
                         <asp:Label ID="EndDateLabel" CssClass="label" runat="server" Text="End Date : " Font-Bold="True" Width="150px" ></asp:Label>
@@ -300,6 +303,9 @@
                             <asp:CalendarExtender ID="EndDateTextBox_CalendarExtender" runat="server" 
                                 Enabled="True" TargetControlID="EndDateTextBox" Format="dd/MMMM/yyyy">
                             </asp:CalendarExtender>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                            ErrorMessage="End date is required." ControlToValidate="EndDateTextBox" SetFocusOnError="True" />
+                            <span style="margin-left: -105px;"/>
                         <br /><br />
                         <!-- Opening Hours -->
                         <asp:Label ID="OpeningHoursLabel" CssClass="label" runat="server" Text="Opening Hours : " Font-Bold="True" Width="150px" ></asp:Label>
@@ -345,13 +351,18 @@
                         </p>                    
                         <div class="map" id="map">
                         </div><br />
-                        <!-- Images -->
-                        <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
-                        <asp:TextBox ID="ImageTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                        <br /><br />
                         <!-- YouTube Video -->
                         <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <br /><br />
+                        <!-- Images -->
+                    <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:Label ID="Label6" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
+                    <asp:Button ID="btnUpload" runat="server" Text="Upload All" CssClass="poiUploadBtn" onclick="btnUpload_Click" />
+            <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                   <div runat="server" id="eventsImagesAddUpdate"></div>
+                   <asp:HiddenField ID="ImageUploadFileName" runat="server" />
                         <!-- Buttons -->
                         <div class="detailButtons bottom">
                             <asp:MultiView ID="ButtonMultiView" runat="server">
@@ -384,5 +395,7 @@
     
         </div>
     </div>
+    
     </span>
+    
 </asp:Content>

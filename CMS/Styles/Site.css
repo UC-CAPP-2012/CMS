@@ -270,7 +270,7 @@ first child of the left and right table columns */
 
 
 .category.contentDetail     {   margin-left: 250px;  }
-.event.contentDetail        {   margin-left: 450px;  }
+.event.contentDetail        {   margin-left: 450px; padding-bottom: 50px;}
 .news.contentDetail         {   margin-left: 450px;  }
 .poi.contentDetail          {   margin-left: 450px; padding-bottom: 50px; }
 .subtype.contentDetail      {   margin-left: 250px;  }
@@ -761,6 +761,13 @@ div.accountInfo
 {
     max-height: 150px;
     max-width: 150px;
+}
+
+.itemImage
+{
+    max-height: 150px;
+    max-width: 150px;
+    padding-left: 10px;
 }
 
 .newsUpdateForm

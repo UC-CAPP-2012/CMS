@@ -283,6 +283,15 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
+        /// btnRemove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRemove;
+        
+        /// <summary>
         /// StatusLabel control.
         /// </summary>
         /// <remarks>
@@ -488,6 +497,15 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnInsertNewsUpload;
+        
+        /// <summary>
+        /// btnInsertNewsRemove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInsertNewsRemove;
         
         /// <summary>
         /// InsertStatusLabel control.

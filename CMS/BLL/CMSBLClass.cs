@@ -187,7 +187,8 @@ namespace CMS.BLL
                     Latitude, Longitude, Postcode, Suburb, SubtypeID) > 0)
             {
                 int? ItemID = itemTableAdapter.getNewlyAddedItemID();
-                return eventTableAdapter.InsertNewItem(ItemID,EventStartDate, EventEndDate);
+                eventTableAdapter.InsertNewItem(ItemID,EventStartDate, EventEndDate);
+                return Convert.ToInt32(ItemID);
             }
             return 0;
         }

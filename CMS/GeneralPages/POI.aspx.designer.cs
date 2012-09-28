@@ -310,13 +310,13 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Label DetailImageLabel;
         
         /// <summary>
-        /// ImageDataLabel control.
+        /// poiImages control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ImageDataLabel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl poiImages;
         
         /// <summary>
         /// DetailVideoLabel control.
@@ -328,13 +328,13 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Label DetailVideoLabel;
         
         /// <summary>
-        /// VideoDataLabel control.
+        /// poiVideo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label VideoDataLabel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl poiVideo;
         
         /// <summary>
         /// CategoryIDHiddenField control.
@@ -722,6 +722,15 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label StatusLabel;
+        
+        /// <summary>
+        /// poiImagesAddUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl poiImagesAddUpdate;
         
         /// <summary>
         /// ImageUploadFileName control.

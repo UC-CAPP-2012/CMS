@@ -242,13 +242,16 @@
                         <asp:Label ID="DetailAddressLabel" runat="server" CssClass="label" Font-Bold="True" Text="Address : " Width="150px"></asp:Label>
                         <asp:Label ID="AddressDataLabel" runat="server"></asp:Label>
                     </p>
+                    
+                    
                     <p>
                         <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
-                        <asp:Label ID="ImageDataLabel" runat="server" Text="Not implemented yet"></asp:Label>
+                        <div runat="server" id="poiImages"></div>
                     </p>
+
                     <p>
                         <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
-                        <asp:Label ID="VideoDataLabel" runat="server" Text="Not implemented yet"></asp:Label>
+                        <div runat="server" id="poiVideo"></div>
                     </p>
                     <asp:HiddenField ID="CategoryIDHiddenField" runat="server" />
                     <asp:HiddenField ID="SubtypeIDHiddenField" runat="server" />
@@ -348,6 +351,7 @@
                     <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
                     <asp:Button ID="btnUpload" runat="server" Text="Upload All" CssClass="poiUploadBtn" onclick="btnUpload_Click" />
             <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+            <div runat="server" id="poiImagesAddUpdate"></div>
                    <asp:HiddenField ID="ImageUploadFileName" runat="server" />
                     <!-- Buttons -->
                     <div class="detailButtons bottom">
@@ -381,6 +385,6 @@
     </div>
     </div>
         
-    </span>
+    
         
 </asp:Content>

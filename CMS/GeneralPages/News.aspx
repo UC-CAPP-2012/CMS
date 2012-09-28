@@ -142,6 +142,8 @@
                             <asp:FileUpload ID="NewsImageUpload" runat="server" />
                             <asp:Button ID="btnUpload" runat="server" onclick="btnUpload_Click" 
                                 Text="Upload" />
+                                <asp:Button ID="btnRemove" runat="server" 
+                                Text="Remove" onclick="btnRemove_Click" Visible="False" />
                             <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
                             <asp:HiddenField ID="NewsImageUploadFileName" runat="server" />
                         </div>
@@ -194,8 +196,11 @@
                             <asp:FileUpload ID="InsertNewsImageUpload" runat="server" />
                             <asp:Button ID="btnInsertNewsUpload" runat="server" 
                                 Text="Upload" onclick="btnInsertNewsUpload_Click" />
+                                <asp:Button ID="btnInsertNewsRemove" runat="server" 
+                                Text="Remove" onclick="btnInsertNewsRemove_Click" Visible="False"  />
                             <asp:Label ID="InsertStatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
                             <asp:HiddenField ID="InsertNewsImageName" runat="server" />
+
                         </div>
                         <div class="news-image news-image-update"><asp:Image ID="InsertNewsImage" runat="server" /></div>
                         <div  class="news-body-update">
@@ -211,5 +216,7 @@
         </div>
     </div>
     </div>
+    
     </span>
+    
 </asp:Content>
