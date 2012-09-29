@@ -1,9 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="POI.aspx.cs" Inherits="CMS.CMSPages.POI" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="POI.aspx.cs" Inherits="CMS.CMSPages.POI" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
+        <script src="../Scripts/jquery.MultiFile.js" type="text/javascript"></script>
 <script type="text/javascript">
 //<![CDATA[
     //Don't run suver side code and do nothing when cancel button on confirmation is clicked.
@@ -86,18 +88,19 @@
         <h1> Point Of Interest </h1>
         <ul>
             <li><span style="margin-left: -1em;" /><asp:LinkButton D="InsertLinkButton" runat="server" CausesValidation="False"
-                    onclick="InsertLinkButton_Click"> Insert New Event</asp:LinkButton></li>
+                    onclick="InsertLinkButton_Click"> Insert New POI</asp:LinkButton></li>
         </ul>
         </div>
     <div class="wrapper2">
     <div class="contentList poi">
         <asp:GridView ID="POIGridView" runat="server" AllowSorting="True" 
-            AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ItemID"
-            DataSourceID="POIObjectDataSource" ForeColor="#333333" GridLines="None" 
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
+            BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ItemID"
+            DataSourceID="POIObjectDataSource" ForeColor="Black" GridLines="Vertical" 
             Width="100%" onrowdatabound="POIGridView_RowDataBound" 
             onselectedindexchanged="POIGridView_SelectedIndexChanged" 
             AllowPaging="True">
-            <AlternatingRowStyle BackColor="White" ForeColor="#284775"/>
+            <AlternatingRowStyle BackColor="White"/>
             <Columns>
                 <asp:CommandField SelectText="" ShowSelectButton="True">
                 <ItemStyle Width="5px" />
@@ -115,16 +118,15 @@
                     SortExpression="Suburb">
                 </asp:BoundField>
             </Columns>
-            <EditRowStyle BackColor="#999999" />
-            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#E9E7E2" />
-            <SortedAscendingHeaderStyle BackColor="#506C8C" />
-            <SortedDescendingCellStyle BackColor="#FFFDF8" />
-            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            <FooterStyle BackColor="#CCCC99" />
+            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle BackColor="#F7F7DE" />
+            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#FBFBF2" />
+            <SortedAscendingHeaderStyle BackColor="#848384" />
+            <SortedDescendingCellStyle BackColor="#EAEAD3" />
+            <SortedDescendingHeaderStyle BackColor="#575357" />
         </asp:GridView>
         <asp:ObjectDataSource ID="POIObjectDataSource" runat="server"
             DeleteMethod="DeletePOI" InsertMethod="InsertPOI" SelectMethod="getAllPOIList" 
@@ -240,13 +242,16 @@
                         <asp:Label ID="DetailAddressLabel" runat="server" CssClass="label" Font-Bold="True" Text="Address : " Width="150px"></asp:Label>
                         <asp:Label ID="AddressDataLabel" runat="server"></asp:Label>
                     </p>
+                    
+                    
                     <p>
                         <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
-                        <asp:Label ID="ImageDataLabel" runat="server" Text="Not implemented yet"></asp:Label>
+                        <div runat="server" id="poiImages"></div>
                     </p>
+
                     <p>
                         <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
-                        <asp:Label ID="VideoDataLabel" runat="server" Text="Not implemented yet"></asp:Label>
+                        <div runat="server" id="poiVideo"></div>
                     </p>
                     <asp:HiddenField ID="CategoryIDHiddenField" runat="server" />
                     <asp:HiddenField ID="SubtypeIDHiddenField" runat="server" />
@@ -333,14 +338,21 @@
                     </p>                    
                     <div class="map" id="map">
                     </div><br />
-                    <!-- Images -->
-                    <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:AjaxFileUpload ID="AjaxFileUpload1" runat="server" />
-                        <br /><br />
+                    
+                        
                     <!-- YouTube Video -->
                     <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                    <br /><br />
 
+                    <!-- Images -->
+                    <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:Label ID="Label6" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
+                    <asp:Button ID="btnUpload" runat="server" Text="Upload All" CssClass="poiUploadBtn" onclick="btnUpload_Click" />
+            <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+            <div runat="server" id="poiImagesAddUpdate"></div>
+                   <asp:HiddenField ID="ImageUploadFileName" runat="server" />
                     <!-- Buttons -->
                     <div class="detailButtons bottom">
                         <asp:MultiView ID="ButtonMultiView" runat="server">
@@ -373,6 +385,6 @@
     </div>
     </div>
         
-    </span>
+    
         
 </asp:Content>

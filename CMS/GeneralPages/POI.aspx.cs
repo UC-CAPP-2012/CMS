@@ -28,6 +28,8 @@ namespace CMS.CMSPages
 
         protected void POIGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            poiImages.InnerHtml = "";
+            poiVideo.InnerHtml = "";
             int id = (Int32)this.POIGridView.SelectedDataKey.Value;
             DAL.CMSDBDataSet.POIItemRow row = dataAccess.getPOIByItemID(id);
 
@@ -51,6 +53,33 @@ namespace CMS.CMSPages
             this.SubtypeIDHiddenField.Value = row["SubtypeID"].ToString();
 
             this.POIMultiView.ActiveViewIndex = 0;
+            bool hasVideo=false;
+            bool hasImages = false;
+            var media = dataAccess.getMediaByItemID(id);
+            string[] separator = { "v=" };
+            foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
+            {
+                if (mediaRow.MediaType == "Images")
+                {
+                    poiImages.InnerHtml += "<img class='itemImage' src='" + mediaRow.MediaURL + "' />";
+                    hasImages = true;
+                }
+                else
+                {
+                    poiVideo.InnerHtml = "<iframe width='560' height='315' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
+ + "' frameborder='0' allowfullscreen></iframe>";
+                    //poiVideo.InnerHtml="<iframe width='560' height='315' src='http://www.youtube.com/embed/g8evyE9TuYk' frameborder='0' allowfullscreen></iframe>";
+                    hasVideo = true;               
+                }
+            }
+            
+            if(!hasImages){
+                poiImages.InnerHtml="This POI does not have any images.";
+            }
+
+            if(!hasVideo){
+                poiVideo.InnerHtml = "This POI does not have any video.";
+            }
         }
 
         protected void InsertLinkButton_Click(object sender, EventArgs e)
@@ -93,9 +122,21 @@ namespace CMS.CMSPages
                 int categotyID = Convert.ToInt32(this.CategoryDropDownList.SelectedValue);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
 
-                dataAccess.InsertPOI(this.NameTextBox.Text, this.DescriptionTextBox.Text,
+                int newItemId= dataAccess.InsertPOI(this.NameTextBox.Text, this.DescriptionTextBox.Text,
                     cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode, suburb, subtypeID, categotyID);
+                int count = ImageUploadFileName.Value.Split(';').Length;
+                for (int i = 0; i < count-1; i++)
+                {
+                    string filename = ImageUploadFileName.Value.Split(';')[i];
+                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images");
+                    System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
+                }
+
+                if (VideoTextBox.Text.Length > 0)
+                {
+                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video");
+                }
 
                 this.POIGridView.DataBind();
                 this.POIMultiView.ActiveViewIndex = -1;
@@ -127,6 +168,7 @@ namespace CMS.CMSPages
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
+            poiImagesAddUpdate.InnerHtml = "";
             int id = (Int32)this.POIGridView.SelectedDataKey.Value;
             DAL.CMSDBDataSet.POIItemRow row = dataAccess.getPOIByItemID(id);
             this.NameTextBox.Text = row["ItemName"].ToString();
@@ -144,7 +186,19 @@ namespace CMS.CMSPages
 
             this.LatitudeHiddenField.Value = row["Latitude"].ToString();
             this.LongitudeHiddenField.Value = row["Longitude"].ToString();
+            var media = dataAccess.getMediaByItemID(id);
+            foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
+            {
+                if (mediaRow.MediaType == "Images")
+                {
+                    poiImagesAddUpdate.InnerHtml += "<img class='itemImage' src='" + mediaRow.MediaURL + "' id='" + mediaRow.MediaURL + "' />";
+                }
+                else
+                {
+                    this.VideoTextBox.Text = mediaRow.MediaURL;
+                }
 
+            }
             this.ButtonMultiView.ActiveViewIndex = 0;
             this.POIMultiView.ActiveViewIndex = 1;
         }
@@ -152,6 +206,7 @@ namespace CMS.CMSPages
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             int itemID = (Int32)this.POIGridView.SelectedDataKey.Value;
+            dataAccess.DeleteMediaByItemID(itemID);
             dataAccess.DeletePOI(itemID, Convert.ToInt32(this.CategoryIDHiddenField.Value),
                                 Convert.ToInt32(this.SubtypeIDHiddenField.Value));
             this.POIGridView.DataBind();
@@ -182,7 +237,30 @@ namespace CMS.CMSPages
                     cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
                     suburb, subtypeID, categotyID, originalSubtypeID, itemID, originalCategoryID);
+                dataAccess.DeleteMediaByItemID(itemID);
 
+                var media = dataAccess.getMediaByItemID(itemID);
+                foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
+                {
+                    if (mediaRow.MediaType == "Images")
+                    {
+                        System.IO.File.Delete(Server.MapPath("~/Media/" + mediaRow.MediaURL.Split('/')[2]));
+                    }
+                    
+                }
+                
+                int count = ImageUploadFileName.Value.Split(';').Length;
+                for (int i = 0; i < count - 1; i++)
+                {
+                    string filename = ImageUploadFileName.Value.Split(';')[i];
+                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images");
+                    System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
+                }
+
+                if (VideoTextBox.Text.Length > 0)
+                {
+                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video");
+                }
                 this.POIGridView.DataBind();
                 this.POIMultiView.ActiveViewIndex = -1;
             }
@@ -191,6 +269,68 @@ namespace CMS.CMSPages
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             this.POIMultiView.ActiveViewIndex = 0;
-        }  
+        }
+
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StatusLabel.Text = "";
+                poiImagesAddUpdate.InnerHtml += "";
+                // Get the HttpFileCollection
+                HttpFileCollection hfc = Request.Files;
+                DeleteAllTempFiles();
+                for (int i = 0; i < hfc.Count; i++)
+                {
+                    HttpPostedFile hpf = hfc[i];
+                    if (hpf.ContentType == "image/jpeg" ||
+                       hpf.ContentType == "image/png" ||
+                       hpf.ContentType == "image/gif")
+                    {
+                        if (hpf.ContentLength < 51200)
+                        {
+
+                            Random rand = new Random((int)DateTime.Now.Ticks);
+                            int numIterations = 0;
+                            numIterations = rand.Next(1000000000, 2147483647);
+                            Guid id = new Guid();
+
+                            //-- Create new GUID and echo to the console
+                            id = Guid.NewGuid();
+                            hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
+                            ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
+                            poiImagesAddUpdate.InnerHtml += "<img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() + hpf.FileName + "' id='"+numIterations.ToString() + id.ToString() + hpf.FileName+"' />";
+                        }
+                        else
+                        {
+                            StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
+                            DeleteAllTempFiles();
+                            poiImagesAddUpdate.InnerHtml = "";
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        StatusLabel.Text = "Only JPEG, PNG and GIF files are accepted!";
+                        DeleteAllTempFiles();
+                        poiImagesAddUpdate.InnerHtml = "";
+                        break;
+                    }
+                    StatusLabel.Text = "Uploaded Successfully.";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+            }
+        }
+
+
+        public void DeleteAllTempFiles()
+        {
+            foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../Temp_Media")))
+                System.IO.File.Delete(f);
+        }
     }
 }

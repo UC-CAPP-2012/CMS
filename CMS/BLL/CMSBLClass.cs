@@ -137,7 +137,8 @@ namespace CMS.BLL
                     Latitude, Longitude, Postcode, Suburb, SubtypeID)>0)
             {
                 int? ItemID = itemTableAdapter.getNewlyAddedItemID();
-                return poiTableAdapter.InsertNewPOI(ItemID, CategoryID);
+                poiTableAdapter.InsertNewPOI(ItemID, CategoryID);
+                return Convert.ToInt32(ItemID);
             }
             return 0;
         }
@@ -186,7 +187,8 @@ namespace CMS.BLL
                     Latitude, Longitude, Postcode, Suburb, SubtypeID) > 0)
             {
                 int? ItemID = itemTableAdapter.getNewlyAddedItemID();
-                return eventTableAdapter.InsertNewItem(ItemID,EventStartDate, EventEndDate);
+                eventTableAdapter.InsertNewItem(ItemID,EventStartDate, EventEndDate);
+                return Convert.ToInt32(ItemID);
             }
             return 0;
         }
@@ -250,9 +252,9 @@ namespace CMS.BLL
             return newsTableAdapter.GetData();
         }
 
-        public int UpdateNews(String newsHeading, DateTime newsDateTime, String newsBody, String newsMediaURL, String newsPublisher,int original_NewsID)
+        public int UpdateNews(String newsHeading, DateTime newsDateTime, String newsBody, String newsMediaURL, String newsPublisher, String newsAuthor, int original_NewsID)
         {
-            return newsTableAdapter.Update(newsHeading, newsDateTime, newsBody, newsMediaURL, newsPublisher, original_NewsID);
+            return newsTableAdapter.Update(newsHeading, newsDateTime, newsBody, newsMediaURL, newsPublisher, newsAuthor, original_NewsID);
         }
 
         public int DeleteNews(int original_NewsID)
@@ -260,9 +262,9 @@ namespace CMS.BLL
             return newsTableAdapter.Delete(original_NewsID);
         }
 
-        public int InsertNews(String newsHeading, DateTime newsDateTime, String newsBody, String newsMediaURL, String newsPublisher)
+        public int InsertNews(String newsHeading, DateTime newsDateTime, String newsBody, String newsMediaURL, String newsPublisher, String newsAuthor)
         {
-            return newsTableAdapter.Insert(newsHeading, newsDateTime, newsBody, newsMediaURL, newsPublisher);
+            return newsTableAdapter.Insert(newsHeading, newsDateTime, newsBody, newsMediaURL, newsPublisher, newsAuthor);
         }
 
         public DAL.CMSDBDataSet.NewsRow getNewsById(int Id)

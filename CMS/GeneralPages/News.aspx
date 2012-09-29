@@ -34,13 +34,15 @@
             onselectedindexchanged="GridViewNews_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:CommandField ShowSelectButton="True"  SelectText="" />
+                <asp:CommandField SelectText="" ShowSelectButton="True" />
                 <asp:BoundField DataField="NewsHeading" HeaderText="Title" 
                     SortExpression="NewsHeading" />
                 <asp:BoundField DataField="NewsDateTime" HeaderText="Published Date" 
                     SortExpression="NewsDateTime" />
                 <asp:BoundField DataField="NewsPublisher" HeaderText="Publisher" 
                     SortExpression="NewsPublisher" />
+                <asp:BoundField DataField="NewsAuthor" HeaderText="Author" 
+                    SortExpression="NewsAuthor" />
             </Columns>
             <FooterStyle BackColor="#CCCC99" />
             <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
@@ -65,6 +67,7 @@
                 <asp:Parameter Name="newsBody" Type="String" />
                 <asp:Parameter Name="newsMediaURL" Type="String" />
                 <asp:Parameter Name="newsPublisher" Type="String" />
+                <asp:Parameter Name="newsAuthor" Type="String" />
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter Name="newsHeading" Type="String" />
@@ -72,6 +75,7 @@
                 <asp:Parameter Name="newsBody" Type="String" />
                 <asp:Parameter Name="newsMediaURL" Type="String" />
                 <asp:Parameter Name="newsPublisher" Type="String" />
+                <asp:Parameter Name="newsAuthor" Type="String" />
                 <asp:Parameter Name="original_NewsID" Type="Int32" />
             </UpdateParameters>
         </asp:ObjectDataSource>
@@ -126,12 +130,22 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidatorPublisher" runat="server" 
                             ErrorMessage="News Publisher is required." ControlToValidate="PublisherTextBox" SetFocusOnError="True" />
                         </p>
+                        <asp:Label ID="AuthorUpdateLabel" CssClass="label" runat="server" Text="Author: " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="AuthorTextBox" runat="server" Width="250px"></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                            ErrorMessage="News Author is required." ControlToValidate="AuthorTextBox" SetFocusOnError="True" />
+                        </p>
                         <asp:Label ID="ImageUpdateLabel" CssClass="label" runat="server" Text="Image: " Font-Bold="True" Width="150px" ></asp:Label>
                         <div class="news-image-upload">
+                         <asp:Label ID="Label6" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
                             <asp:FileUpload ID="NewsImageUpload" runat="server" />
                             <asp:Button ID="btnUpload" runat="server" onclick="btnUpload_Click" 
                                 Text="Upload" />
+                                <asp:Button ID="btnRemove" runat="server" 
+                                Text="Remove" onclick="btnRemove_Click" Visible="False" />
                             <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                            <asp:HiddenField ID="NewsImageUploadFileName" runat="server" />
                         </div>
                         <div class="news-image news-image-update"><asp:Image ID="NewsImageUpdate" runat="server" /></div>
                         <div  class="news-body-update">
@@ -170,12 +184,23 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                             ErrorMessage="News Publisher is required." ControlToValidate="InsertNewsPublisher" SetFocusOnError="True" />
                         </p>
+                        <asp:Label ID="Label7" CssClass="label" runat="server" Text="Author: " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="InsertNewsAuthor" runat="server" Width="250px"></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                            ErrorMessage="News Author is required." ControlToValidate="InsertNewsAuthor" SetFocusOnError="True" />
+                        </p>
                         <asp:Label ID="Label3" CssClass="label" runat="server" Text="Image: " Font-Bold="True" Width="150px" ></asp:Label>
                         <div class="news-image-upload">
+                            <asp:Label ID="Label4" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
                             <asp:FileUpload ID="InsertNewsImageUpload" runat="server" />
                             <asp:Button ID="btnInsertNewsUpload" runat="server" 
                                 Text="Upload" onclick="btnInsertNewsUpload_Click" />
+                                <asp:Button ID="btnInsertNewsRemove" runat="server" 
+                                Text="Remove" onclick="btnInsertNewsRemove_Click" Visible="False"  />
                             <asp:Label ID="InsertStatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
+                            <asp:HiddenField ID="InsertNewsImageName" runat="server" />
+
                         </div>
                         <div class="news-image news-image-update"><asp:Image ID="InsertNewsImage" runat="server" /></div>
                         <div  class="news-body-update">
@@ -191,4 +216,7 @@
         </div>
     </div>
     </div>
+    
+    </span>
+    
 </asp:Content>

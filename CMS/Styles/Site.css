@@ -268,20 +268,22 @@ first child of the left and right table columns */
     margin: 0 100px 0 0;   
 }
 
-.bottom.detailButtons
-{
-    margin: 30px 10% 20px 0;
-}
 
 .category.contentDetail     {   margin-left: 250px;  }
-.event.contentDetail        {   margin-left: 450px;  }
+.event.contentDetail        {   margin-left: 450px; padding-bottom: 50px;}
 .news.contentDetail         {   margin-left: 450px;  }
-.poi.contentDetail          {   margin-left: 450px;  }
+.poi.contentDetail          {   margin-left: 450px; padding-bottom: 50px; }
 .subtype.contentDetail      {   margin-left: 250px;  }
 .tour.contentDetail         {   margin-left: 493px;  }
 .user.contentDetail         {   margin-left: 493px;  }
 .admin.contentDetail        {   margin-left: 493px;  }
 
+.poiUploadBtn
+{
+    float: left;
+    margin-left: 380px;
+    margin-top: -24px;
+}
 .validationError
 {
     margin:0 0 0 170px;
@@ -761,6 +763,13 @@ div.accountInfo
     max-width: 150px;
 }
 
+.itemImage
+{
+    max-height: 150px;
+    max-width: 150px;
+    padding-left: 10px;
+}
+
 .newsUpdateForm
 {
     margin-top:30px;
@@ -791,4 +800,9 @@ div.accountInfo
 .imageUpload{
     float: right;
     margin-right: 530px;
+}
+
+.hidden
+{
+    display: none;
 }
