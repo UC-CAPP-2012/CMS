@@ -39,7 +39,7 @@
                 map.fitBounds(place.geometry.viewport);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(15);  // Why 17? Because it looks good.
+                map.setZoom(15); 
             }
 
             document.getElementById('MainContent_LatitudeHiddenField').setAttribute('value', place.geometry.location.lat());
@@ -94,13 +94,12 @@
     <div class="wrapper2">
     <div class="contentList poi">
         <asp:GridView ID="POIGridView" runat="server" AllowSorting="True" 
-            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
-            BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ItemID"
-            DataSourceID="POIObjectDataSource" ForeColor="Black" GridLines="Vertical" 
+            AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ItemID"
+            DataSourceID="POIObjectDataSource" ForeColor="#333333" GridLines="None" 
             Width="100%" onrowdatabound="POIGridView_RowDataBound" 
             onselectedindexchanged="POIGridView_SelectedIndexChanged" 
             AllowPaging="True">
-            <AlternatingRowStyle BackColor="White"/>
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775"/>
             <Columns>
                 <asp:CommandField SelectText="" ShowSelectButton="True">
                 <ItemStyle Width="5px" />
@@ -118,15 +117,16 @@
                     SortExpression="Suburb">
                 </asp:BoundField>
             </Columns>
-            <FooterStyle BackColor="#CCCC99" />
-            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-            <RowStyle BackColor="#F7F7DE" />
-            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#FBFBF2" />
-            <SortedAscendingHeaderStyle BackColor="#848384" />
-            <SortedDescendingCellStyle BackColor="#EAEAD3" />
-            <SortedDescendingHeaderStyle BackColor="#575357" />
+            <EditRowStyle BackColor="#999999" />
+            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
         <asp:ObjectDataSource ID="POIObjectDataSource" runat="server"
             DeleteMethod="DeletePOI" InsertMethod="InsertPOI" SelectMethod="getAllPOIList" 
@@ -195,35 +195,35 @@
                     <hr />
                     <p>
                         <asp:Label ID="DetailNameLabel" runat="server" CssClass="label" Font-Bold="True" Text="POI Name : " Width="150px"></asp:Label>
-                        <asp:Label ID="NameDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="NameDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailCategoryLabel" runat="server" CssClass="label" Font-Bold="True" Text="Category : " Width="150px"></asp:Label>
-                        <asp:Label ID="CategoryDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="CategoryDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailSubtypeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Subtype : " Width="150px"></asp:Label>
-                        <asp:Label ID="SubtypeDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="SubtypeDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailPhoneLabel" runat="server" CssClass="label" Font-Bold="True" Text="Phone : " Width="150px"></asp:Label>
-                        <asp:Label ID="PhoneDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="PhoneDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailEmailLabel" runat="server" CssClass="label" Font-Bold="True" Text="Email : " Width="150px"></asp:Label>
-                        <asp:Label ID="EmailDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="EmailDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailWebsiteLabel" runat="server" CssClass="label" Font-Bold="True" Text="Website : " Width="150px"></asp:Label>
-                        <asp:Label ID="WebsiteDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="WebsiteDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailOpeningHoursLabel" runat="server" CssClass="label" Font-Bold="True" Text="Opening Hours : " Width="150px"></asp:Label>
-                        <asp:Label ID="OpeningHoursDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="OpeningHoursDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailCostLabel" runat="server" CssClass="label" Font-Bold="True" Text="Cost : " Width="150px"></asp:Label>
-                        <asp:Label ID="CostDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="CostDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailRatingLabel" runat="server" CssClass="label" Font-Bold="True" Text="Rating : " Width="150px"></asp:Label>
@@ -232,26 +232,23 @@
                     </p>
                     <p>
                         <asp:Label ID="DetailDescriptionLabel" runat="server" CssClass="label" Font-Bold="True" Text="Detailed Description : " Width="150px"></asp:Label>
-                        <asp:Label ID="DescriptionDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="DescriptionDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailPostcodeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Postcode : " Width="150px"></asp:Label>
-                        <asp:Label ID="PostcodeDataLabel" runat="server"></asp:Label>
+                        <asp:Label ID="PostcodeDataLabel" runat="server" Width="480px"></asp:Label>
                     </p>
                     <p>
                         <asp:Label ID="DetailAddressLabel" runat="server" CssClass="label" Font-Bold="True" Text="Address : " Width="150px"></asp:Label>
-                        <asp:Label ID="AddressDataLabel" runat="server"></asp:Label>
-                    </p>
-                    
-                    
+                        <asp:Label ID="AddressDataLabel" runat="server" Width="480px"></asp:Label>
+                    </p>                   
                     <p>
                         <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
-                        <div runat="server" id="poiImages"></div>
+                        <div runat="server" id="poiImages" Width="480px"></div>
                     </p>
-
                     <p>
                         <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
-                        <div runat="server" id="poiVideo"></div>
+                        <div runat="server" id="poiVideo" Width="480px"></div>
                     </p>
                     <asp:HiddenField ID="CategoryIDHiddenField" runat="server" />
                     <asp:HiddenField ID="SubtypeIDHiddenField" runat="server" />
@@ -331,14 +328,39 @@
                     </p> 
                     <!-- Address -->
                     <asp:Label ID="AddressLabel" CssClass="label" runat="server" Text="Address : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="AddressTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <p class="validationError">             
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                        ErrorMessage="Address is required." ControlToValidate="AddressTextBox" SetFocusOnError="True" />
-                    </p>                    
-                    <div class="map" id="map">
-                    </div><br />
-                    
+                    <div class="AddressMaster">                        
+                        <asp:LinkButton ID="AutoLinkButton" runat="server" CssClass="tabButton" 
+                            Text="Auto Address" BackColor="LightGray" CausesValidation="false" 
+                            onclick="AutoLinkButton_Click"></asp:LinkButton>
+                        <asp:LinkButton ID="ManualLinkButton" runat="server" CssClass="tabButton" 
+                            Text="Manual Address" BackColor="Gray" CausesValidation="false" 
+                            onclick="ManualLinkButton_Click"></asp:LinkButton>
+                        <div class="Address">
+                            <asp:MultiView ID="AddressMultiView" runat="server">
+                                <asp:View ID="AutoView" runat="server"><br/>
+                                    <asp:TextBox ID="AddressTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                                    <asp:CustomValidator ID="AutoAddressTextBox_CustomValidator" runat="server" ErrorMessage="Input valid address using autocompletion."
+                                        onservervalidate="numberInputValidate" ControlToValidate="AddressTextBox" ValidateEmptyText="True" ForeColor="Red"></asp:CustomValidator>
+                                    <div class="map" id="map"></div>
+                                </asp:View>
+                                <asp:View ID="ManualView" runat="server">
+                                    <asp:Label ID="Label1" runat="server" Text="Street No : " Width="100px" style="text-align: right"></asp:Label>
+                                    <asp:TextBox ID="ManualStNoTextBox" runat="server" Width="30px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                    <asp:Label ID="Label2" runat="server" Text="Street Name : " Width="100px" style="text-align: right"></asp:Label>
+                                    <asp:TextBox ID="ManualStNameTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                    <asp:Label ID="Label3" runat="server" Text="Suburb : " Width="100px" style="text-align: right"></asp:Label>
+                                    <asp:TextBox ID="ManualSuburbTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                    <asp:Label ID="Label4" runat="server" Text="Latitude : " Width="100px" style="text-align: right"></asp:Label>
+                                    <asp:TextBox ID="ManualLatTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                    <asp:Label ID="Label5" runat="server" Text="Longitude : " Width="100px" style="text-align: right"></asp:Label>
+                                    <asp:TextBox ID="ManualLogTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                    <asp:CustomValidator ID="ManualAddressTextBox_CustomValidator" runat="server" ErrorMessage="All address fields are required for manual address."
+                                        onservervalidate="numberInputValidate" ControlToValidate="ManualStNoTextBox"  ValidateEmptyText="True" ForeColor="Red"></asp:CustomValidator>
+                                </asp:View>
+                            </asp:MultiView>
+                        </div>
+                    </div>
+                                       
                         
                     <!-- YouTube Video -->
                     <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
@@ -384,6 +406,10 @@
         </div>
     </div>
     </div>
+        
+    
+        
+    </span>
         
     
         

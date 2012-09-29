@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Globalization;
+using System.Drawing;
 
 namespace CMS.CMSPages
 {
@@ -14,7 +15,8 @@ namespace CMS.CMSPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+                this.AddressMultiView.ActiveViewIndex = 0;
         }
 
         protected void EventGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -69,7 +71,7 @@ namespace CMS.CMSPages
                 else
                 {
                     eventVideo.InnerHtml = "<iframe width='560' height='315' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
- + "' frameborder='0' allowfullscreen></iframe>";
+                                                + "' frameborder='0' allowfullscreen></iframe>";
                     //poiVideo.InnerHtml="<iframe width='560' height='315' src='http://www.youtube.com/embed/g8evyE9TuYk' frameborder='0' allowfullscreen></iframe>";
                     hasVideo = true;
                 }
@@ -108,19 +110,36 @@ namespace CMS.CMSPages
         //confirm insert
         protected void InsertButton_Click(object sender, EventArgs e)
         {
-            if ((this.NameTextBox.Text.Length > 0) && (this.DescriptionTextBox.Text.Length > 0)
-                && (this.CostTextBox.Text.Length > 0) && (this.LatitudeHiddenField.Value.Length > 0)
-                && (this.LongitudeHiddenField.Value.Length > 0) && this.StartDateTextBox.Text.Length > 0 && this.EndDateTextBox.Text.Length > 0)
+            if ((this.DescriptionTextBox.Text.Length > 0) && (this.CostTextBox.Text.Length > 0) 
+                && (this.StartDateTextBox.Text.Length > 0) && (this.EndDateTextBox.Text.Length > 0)
+                && this.AutoAddressTextBox_CustomValidator.IsValid && this.ManualAddressTextBox_CustomValidator.IsValid)
             {
                 // get streetNo, streetName, suburb from address
-                String address = this.AddressTextBox.Text;
-                String suburb = address.Remove(0, address.IndexOf(",") + 2);
-                suburb = suburb.Substring(0, suburb.IndexOf(","));
+                String address;
+                String suburb;
+                double latitude;
+                double longitude;
+
+                if (this.AddressMultiView.ActiveViewIndex == 0)
+                {
+                    address = this.AddressTextBox.Text;
+                    suburb = address.Remove(0, address.IndexOf(",") + 2);
+                    suburb = suburb.Substring(0, suburb.IndexOf(","));
+                    latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
+                    longitude = Convert.ToDouble(this.LongitudeHiddenField.Value);
+
+                }
+                else
+                {
+                    address = this.ManualStNoTextBox.Text + " " + this.ManualStNameTextBox.Text + ", "
+                                    + this.ManualSuburbTextBox.Text + ", Australian Capital Territory";
+                    suburb = this.ManualSuburbTextBox.Text;
+                    latitude = Convert.ToDouble(this.ManualLatTextBox.Text);
+                    longitude = Convert.ToDouble(this.ManualLogTextBox.Text);
+                }
 
                 //convert inputs into correct format.
                 decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
-                double latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
-                double longitude = Convert.ToDouble(this.LongitudeHiddenField.Value);
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
                 DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text);
@@ -153,8 +172,7 @@ namespace CMS.CMSPages
         {
             this.EventMultiView.ActiveViewIndex = -1;
         }
-
-
+        
         protected void numberInputValidate(object sender, ServerValidateEventArgs e)
         {
             String senderID = ((CustomValidator)sender).ID;
@@ -169,11 +187,47 @@ namespace CMS.CMSPages
                 Int32 num;
                 isNum = Int32.TryParse(this.PostcodeTextBox.Text, out num);
             }
+            if (senderID.Equals("AutoAddressTextBox_CustomValidator"))
+            {
+                if (this.AddressMultiView.ActiveViewIndex == 1)
+                {
+                    isNum = true;
+                }
+                if ((this.AddressMultiView.ActiveViewIndex == 0) && (this.AddressTextBox.Text.Length > 0) &&
+                    (this.LatitudeHiddenField.Value.Length > 0) && (this.LongitudeHiddenField.Value.Length > 0))
+                {
+                    isNum = true;
+                }
+            }
+            if (senderID.Equals("ManualAddressTextBox_CustomValidator"))
+            {
+                Int32 intNum;
+                double doubleNum;
+
+                if (this.AddressMultiView.ActiveViewIndex == 0)
+                {
+                    isNum = true;
+                }
+                if ((this.AddressMultiView.ActiveViewIndex == 1)
+                    && (this.ManualStNoTextBox.Text.Length > 0) && Int32.TryParse(this.ManualStNoTextBox.Text, out intNum)
+                    && (this.ManualStNameTextBox.Text.Length > 0) && (this.ManualSuburbTextBox.Text.Length > 0)
+                    && (this.ManualLatTextBox.Text.Length > 0) && Double.TryParse(this.ManualLatTextBox.Text, out doubleNum)
+                    && (this.ManualLogTextBox.Text.Length > 0) && Double.TryParse(this.ManualLogTextBox.Text, out doubleNum))
+                {
+                    isNum = true;
+                }
+            }
             e.IsValid = isNum;
         }
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
+            this.AddressMultiView.ActiveViewIndex = 0;
+            this.ManualLatTextBox.Text = "";
+            this.ManualLogTextBox.Text = "";
+            this.ManualStNoTextBox.Text = "";
+            this.ManualStNameTextBox.Text = "";
+            this.ManualSuburbTextBox.Text = "";
             int id = (Int32)this.EventGridView.SelectedDataKey.Value;
             DAL.CMSDBDataSet.EventItemRow row = dataAccess.getEventByItemID(id);
 
@@ -223,14 +277,32 @@ namespace CMS.CMSPages
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            if ((this.NameTextBox.Text.Length > 0) && (this.DescriptionTextBox.Text.Length > 0)
-                && (this.CostTextBox.Text.Length > 0) && (this.LatitudeHiddenField.Value.Length > 0)
-                && (this.LongitudeHiddenField.Value.Length > 0))
+            if ((this.DescriptionTextBox.Text.Length > 0) && (this.CostTextBox.Text.Length > 0)
+                && this.AutoAddressTextBox_CustomValidator.IsValid && this.ManualAddressTextBox_CustomValidator.IsValid)
             {
                 // get streetNo, streetName, suburb from address
-                String address = this.AddressTextBox.Text;
-                String suburb = address.Remove(0, address.IndexOf(",") + 2);
-                suburb = suburb.Substring(0, suburb.IndexOf(","));
+                String address;
+                String suburb;
+                double latitude;
+                double longitude;
+
+                if (this.AddressMultiView.ActiveViewIndex == 0)
+                {
+                    address = this.AddressTextBox.Text;
+                    suburb = address.Remove(0, address.IndexOf(",") + 2);
+                    suburb = suburb.Substring(0, suburb.IndexOf(","));
+                    latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
+                    longitude = Convert.ToDouble(this.LongitudeHiddenField.Value);
+
+                }
+                else
+                {
+                    address = this.ManualStNoTextBox.Text + " " + this.ManualStNameTextBox.Text + ", "
+                        + this.ManualSuburbTextBox.Text + ", Australian Capital Territory";
+                    suburb = this.ManualSuburbTextBox.Text;
+                    latitude = Convert.ToDouble(this.ManualLatTextBox.Text);
+                    longitude = Convert.ToDouble(this.ManualLogTextBox.Text);
+                }
 
                 DateTimeFormatInfo format = new DateTimeFormatInfo();
                 format.ShortDatePattern = "dd/MMMM/yyyy";
@@ -241,8 +313,6 @@ namespace CMS.CMSPages
 
                 //convert inputs into correct format.
                 decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
-                double latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
-                double longitude = Convert.ToDouble(this.LongitudeHiddenField.Value);
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
                 int? originalSubtypeID = Convert.ToInt32(this.SubtypeIDHiddenField.Value);
@@ -343,6 +413,20 @@ namespace CMS.CMSPages
         {
             foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../Temp_Media")))
                 System.IO.File.Delete(f);
+        }
+
+        protected void AutoLinkButton_Click(object sender, EventArgs e)
+        {
+            this.AutoLinkButton.BackColor = Color.LightGray;
+            this.ManualLinkButton.BackColor = Color.Gray;
+            this.AddressMultiView.ActiveViewIndex = 0;
+        }
+
+        protected void ManualLinkButton_Click(object sender, EventArgs e)
+        {
+            this.AutoLinkButton.BackColor = Color.Gray;
+            this.ManualLinkButton.BackColor = Color.LightGray;
+            this.AddressMultiView.ActiveViewIndex = 1;
         }
     }
 }

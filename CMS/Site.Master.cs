@@ -36,12 +36,6 @@ namespace CMS
             string fileName = file[file.Length - 1];
             switch (fileName)
             {
-                case "Default.aspx":
-                    this.LinkButtonHome.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");     
-                    break;
-                case "default.aspx":
-                    this.LinkButtonHome.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
-                    break;
                 case "Category.aspx":
                     this.LinkButtonCategory.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
                     break;

@@ -26,7 +26,7 @@
             DataSourceID="ObjectDataSourceCategory" ForeColor="#333333" 
             GridLines="None" onrowdatabound="GridViewCategory_RowDataBound" 
             onselectedindexchanged="GridViewCategory_SelectedIndexChanged" 
-            Width="100%" AllowPaging="True">
+            Width="100%">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775"  />
             <Columns>           
                     <asp:CommandField SelectText="" ShowSelectButton="True" >

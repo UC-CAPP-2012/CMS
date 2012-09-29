@@ -34,8 +34,6 @@
             
             <div class="mainMenu">
                 <div class="navigation-links">
-                    <asp:LinkButton ID="LinkButtonHome" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > Home </asp:LinkButton>
                     <asp:LinkButton ID="LinkButtonCategory" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > Category </asp:LinkButton>
                     <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
