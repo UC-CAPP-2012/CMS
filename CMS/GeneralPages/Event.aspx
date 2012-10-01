@@ -387,14 +387,48 @@
                         <div>
                             <asp:Label ID="Label6" runat="server" Text="Max Size: 50kb, Allowed Type: JPEG, PNG, GIF" 
                                     CssClass="imgLabel"></asp:Label><br />
-                            <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
+                            <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi" accept="jpeg|jpg|gif|png"/>
                             <asp:Button ID="btnUpload" runat="server" Text="Upload All"  CssClass="poiUploadBtn"  onclick="btnUpload_Click" CausesValidation="False" />
                         </div>
                         <div class="imgUploadResult">
                             <asp:Label ID="StatusLabel" runat="server" Text="" ForeColor="Red" ></asp:Label>
                             <div runat="server" id="eventsImagesAddUpdate"></div>
                         </div>
+                       <asp:HiddenField ID="ImageDeleteFileName" runat="server" />
+                        <asp:HiddenField ID="CurrentImagesFileName" runat="server" />
+                        <asp:HiddenField ID="ImageUploadDelete" runat="server" />
                        <asp:HiddenField ID="ImageUploadFileName" runat="server" />
+                       <script type="text/javascript">
+
+
+                           $(document).ready(function () {
+                               $('.delete-image').live('click', function () {
+                                   var id = $(this).attr('rel');
+                                   $('#MainContent_FileUpload').attr('maxlength', parseInt($('#MainContent_FileUpload').attr('maxlength')) + 1);
+                                   $('#MainContent_ImageDeleteFileName').val($('#MainContent_ImageDeleteFileName').val() + id + ';');
+                                   var filename = $('#MainContent_CurrentImagesFileName').val();
+
+                                   $('#MainContent_CurrentImagesFileName').val(filename.replace(id + ';', ""));
+                                   var div = document.getElementById("MainContent_eventsImagesAddUpdate");
+                                   var olddiv = document.getElementById(id);
+                                   div.removeChild(olddiv);
+                                   $('#MainContent_ImageUploadDelete').val("1");
+                               });
+
+                               $('.upload-images').live('click', function () {
+                                   var id = $(this).attr('rel');
+                                   $('#MainContent_FileUpload').attr('maxlength', parseInt($('#MainContent_FileUpload').attr('maxlength')) + 1);
+                                   var filename = $('#MainContent_ImageUploadFileName').val();
+                                   $('#MainContent_ImageUploadFileName').val(filename.replace(id + ';', ""));
+                                   var div = document.getElementById("MainContent_eventsImagesAddUpdate");
+                                   var olddiv = document.getElementById(id);
+                                   div.removeChild(olddiv);
+                                   $('#MainContent_ImageUploadDelete').val("1");
+                               });
+                           });
+
+
+                        </script>
                         <!-- Buttons -->
                         <div class="detailButtons bottom">
                             <asp:MultiView ID="ButtonMultiView" runat="server">
@@ -428,6 +462,5 @@
         </div>
     </div>
     
-    </span>
     
 </asp:Content>

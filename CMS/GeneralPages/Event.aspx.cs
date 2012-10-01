@@ -71,7 +71,7 @@ namespace CMS.CMSPages
                 else
                 {
                     eventVideo.InnerHtml = "<iframe width='460' height='260' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
-                                                + "' frameborder='0' allowfullscreen></iframe>";                    
+                                                + "' frameborder='0' allowfullscreen></iframe>";
                     hasVideo = true;
                 }
             }
@@ -103,8 +103,10 @@ namespace CMS.CMSPages
             this.AddressTextBox.Text = "";
             this.StatusLabel.Text = "";
             this.VideoTextBox.Text = "";
+            ImageUploadFileName.Value = "";
             this.eventsImagesAddUpdate.InnerHtml = "";
-
+            FileUpload.Attributes.Remove("maxlength");
+            FileUpload.Attributes.Add("maxlength", (5).ToString());
             this.ButtonMultiView.ActiveViewIndex = 1;
             this.EventMultiView.ActiveViewIndex = 1;
         }
@@ -148,7 +150,7 @@ namespace CMS.CMSPages
                 int newItemId = dataAccess.InsertEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
                     cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
-                    suburb, subtypeID,startDate, endDate);
+                    suburb, subtypeID, startDate, endDate);
 
                 int count = ImageUploadFileName.Value.Split(';').Length;
                 for (int i = 0; i < count - 1; i++)
@@ -162,7 +164,7 @@ namespace CMS.CMSPages
                 {
                     dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null);
                 }
-
+                CurrentImagesFileName.Value = "";
                 this.EventGridView.DataBind();
                 this.EventMultiView.ActiveViewIndex = -1;
             }
@@ -172,7 +174,7 @@ namespace CMS.CMSPages
         {
             this.EventMultiView.ActiveViewIndex = -1;
         }
-        
+
         protected void numberInputValidate(object sender, ServerValidateEventArgs e)
         {
             String senderID = ((CustomValidator)sender).ID;
@@ -222,6 +224,11 @@ namespace CMS.CMSPages
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
+            CurrentImagesFileName.Value = "";
+            StatusLabel.Text = "";
+            ImageUploadFileName.Value = "";
+            ImageDeleteFileName.Value = "";
+            eventsImagesAddUpdate.InnerHtml = "";
             this.EditTitleLabel.Text = "Update Event";
             this.AddressMultiView.ActiveViewIndex = 0;
             this.ManualLatTextBox.Text = "";
@@ -249,12 +256,17 @@ namespace CMS.CMSPages
             this.LatitudeHiddenField.Value = row["Latitude"].ToString();
             this.LongitudeHiddenField.Value = row["Longitude"].ToString();
 
+            int numOfMedia = dataAccess.CountImagesMediaByItemId(id);
+            FileUpload.Attributes.Remove("maxlength");
+            FileUpload.Attributes.Add("maxlength", (5 - numOfMedia).ToString());
+
             var media = dataAccess.getMediaByItemID(id);
             foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
             {
                 if (mediaRow.MediaType == "Images")
                 {
-                    eventsImagesAddUpdate.InnerHtml += "<img class='itemImage' src='" + mediaRow.MediaURL + "' id='" + mediaRow.MediaURL + "' />";
+                    CurrentImagesFileName.Value += mediaRow.MediaURL.Split('/')[2] + ';';
+                    eventsImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + mediaRow.MediaURL.Split('/')[2] + "' ><img class='itemImage' src='" + mediaRow.MediaURL + "'/><a class='delete-image' rel='" + mediaRow.MediaURL.Split('/')[2] + "'><div class='close_image' title='close'></div></a></div>";
                 }
                 else
                 {
@@ -322,24 +334,24 @@ namespace CMS.CMSPages
                     cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
                     suburb, subtypeID, startDate, endDate, originalSubtypeID, itemID);
-                dataAccess.DeleteMediaByItemID(itemID);
 
-                var media = dataAccess.getMediaByItemID(itemID);
-                foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
+                int imageDeleteCount = ImageDeleteFileName.Value != "" ? ImageDeleteFileName.Value.Split(';').Length : 0;
+                for (int y = 0; y < imageDeleteCount - 1; y++)
                 {
-                    if (mediaRow.MediaType == "Images")
-                    {
-                        System.IO.File.Delete(Server.MapPath("~/Media/" + mediaRow.MediaURL.Split('/')[2]));
-                    }
-
+                    string deletedFilename = ImageDeleteFileName.Value.Split(';')[y];
+                    dataAccess.DeleteMediaByMediaURL(itemID, "../Media/" + deletedFilename);
+                    System.IO.File.Delete(Server.MapPath("~/Media/" + deletedFilename));
                 }
-                int count = ImageUploadFileName.Value.Split(';').Length;
+
+                int count = ImageUploadFileName.Value != "" ? ImageUploadFileName.Value.Split(';').Length : 0;
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
                     dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images", null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
+
+                dataAccess.DeleteVideoMediaByItemId(itemID);
 
                 if (VideoTextBox.Text.Length > 0)
                 {
@@ -360,48 +372,61 @@ namespace CMS.CMSPages
             try
             {
                 StatusLabel.Text = "";
-                eventsImagesAddUpdate.InnerHtml += "";
+                // eventsImagesAddUpdate.InnerHtml += "";
+
+                int count = ImageUploadFileName.Value != "" ? ImageUploadFileName.Value.Split(';').Length : 0;
+                if (count - 1 > 0 || ImageUploadDelete.Value == "1")
+                {
+                    eventsImagesAddUpdate.InnerHtml = "";
+                    int countExisting = CurrentImagesFileName.Value.Split(';').Length;
+                    for (int x = 0; x < countExisting - 1; x++)
+                    {
+                        eventsImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + CurrentImagesFileName.Value.Split(';')[x] + "' ><img class='itemImage' src='../Media/" +
+                        CurrentImagesFileName.Value.Split(';')[x] + "' id='" + CurrentImagesFileName.Value.Split(';')[x] + "' /><a class='upload-images' rel='" + CurrentImagesFileName.Value.Split(';')[x] + "'><div class='close_image ' title='close'></div></a></div>";
+                    }
+                }
+                for (int i = 0; i < count - 1; i++)
+                {
+                    string filename = ImageUploadFileName.Value.Split(';')[i];
+                    string target = "<div class='poi-images'  id='" + filename + "' ><img class='itemImage' src='../Temp_Media/" +
+                        filename + "' id='" + filename + "' /><a class='upload-images' rel='" + filename + "'><div class='close_image ' title='close'></div></a></div>";
+                    eventsImagesAddUpdate.InnerHtml += target;
+                }
+
                 // Get the HttpFileCollection
                 HttpFileCollection hfc = Request.Files;
-                DeleteAllTempFiles();
                 for (int i = 0; i < hfc.Count; i++)
                 {
                     HttpPostedFile hpf = hfc[i];
-                    if (hpf.ContentType == "image/jpeg" ||
-                       hpf.ContentType == "image/png" ||
-                       hpf.ContentType == "image/gif")
+
+                    if (hpf.ContentLength < 51200)
                     {
-                        if (hpf.ContentLength < 51200)
-                        {
 
-                            Random rand = new Random((int)DateTime.Now.Ticks);
-                            int numIterations = 0;
-                            numIterations = rand.Next(1000000000, 2147483647);
-                            Guid id = new Guid();
+                        Random rand = new Random((int)DateTime.Now.Ticks);
+                        int numIterations = 0;
+                        numIterations = rand.Next(1000000000, 2147483647);
+                        Guid id = new Guid();
 
-                            //-- Create new GUID and echo to the console
-                            id = Guid.NewGuid();
-                            hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
-                            ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
-                            eventsImagesAddUpdate.InnerHtml += "<img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() + hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' />";
-                        }
-                        else
-                        {
-                            StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
-                            DeleteAllTempFiles();
-                            eventsImagesAddUpdate.InnerHtml = "";
-                            break;
-                        }
+                        //-- Create new GUID and echo to the console
+                        id = Guid.NewGuid();
+
+                        hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
+                        ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
+                        eventsImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' ><img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() +
+                            hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName + "'><div class='close_image ' title='close'></div></a></div>";
                     }
                     else
                     {
-                        StatusLabel.Text = "Only JPEG, PNG and GIF files are accepted!";
+                        StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
                         DeleteAllTempFiles();
                         eventsImagesAddUpdate.InnerHtml = "";
                         break;
                     }
-                    StatusLabel.Text = "Uploaded Successfully.";
+
                 }
+                FileUpload.Attributes.Remove("maxlength");
+                FileUpload.Attributes.Add("maxlength", (5 - hfc.Count).ToString());
+                StatusLabel.Text = "Uploaded Successfully.";
             }
             catch (Exception ex)
             {
