@@ -895,6 +895,33 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl poiImagesAddUpdate;
         
         /// <summary>
+        /// ImageDeleteFileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ImageDeleteFileName;
+        
+        /// <summary>
+        /// CurrentImagesFileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField CurrentImagesFileName;
+        
+        /// <summary>
+        /// ImageUploadDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ImageUploadDelete;
+        
+        /// <summary>
         /// ImageUploadFileName control.
         /// </summary>
         /// <remarks>

@@ -239,9 +239,24 @@ namespace CMS.BLL
             return mediaTableAdapter.DeleteByItemID(ItemID);
         }
 
+        public int DeleteMediaByMediaURL(int ItemID, string MediaURL)
+        {
+            return mediaTableAdapter.DeleteByMediaURL( MediaURL, ItemID);
+        }
+
         public int DeleteMedia(int Original_MediaID)
         {
             return mediaTableAdapter.Delete(Original_MediaID);
+        }
+
+        public int CountImagesMediaByItemId(int ItemID)
+        {
+            return Convert.ToInt32(mediaTableAdapter.CountImagesMediaByItemId(ItemID));
+        }
+
+        public int DeleteVideoMediaByItemId(int ItemID)
+        {
+            return mediaTableAdapter.DeleteVideoMedia(ItemID);
         }
 
         public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID)
