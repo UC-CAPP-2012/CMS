@@ -341,12 +341,14 @@ first child of the left and right table columns */
     font-size:0.9em;
 }
 
+.location.validationError
+{
+    margin:0;
+}
+
 .tap.validationError
 {
     margin:0 0 0 100px;
-    padding: 0;
-    color:Red;    
-    font-size:0.9em;
 }
 
 .label

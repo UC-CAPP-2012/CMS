@@ -562,6 +562,24 @@ namespace CMS.GeneralPages {
         protected global::System.Web.UI.WebControls.View ViewView;
         
         /// <summary>
+        /// UpdateLocationItemButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdateLocationItemButton;
+        
+        /// <summary>
+        /// DeleteLocationItemButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DeleteLocationItemButton;
+        
+        /// <summary>
         /// EditLocationGridView control.
         /// </summary>
         /// <remarks>
@@ -569,24 +587,6 @@ namespace CMS.GeneralPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView EditLocationGridView;
-        
-        /// <summary>
-        /// EditLocationObjectDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource EditLocationObjectDataSource;
-        
-        /// <summary>
-        /// ConfirmButtonExtender2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ConfirmButtonExtender ConfirmButtonExtender2;
         
         /// <summary>
         /// AddView control.
@@ -616,13 +616,13 @@ namespace CMS.GeneralPages {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// LocatinNameTextBox control.
+        /// LocationNameTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LocatinNameTextBox;
+        protected global::System.Web.UI.WebControls.TextBox LocationNameTextBox;
         
         /// <summary>
         /// LocatinNameTextBox_CustomValidator control.
@@ -643,22 +643,13 @@ namespace CMS.GeneralPages {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// SequenceTextBox control.
+        /// SeqDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SequenceTextBox;
-        
-        /// <summary>
-        /// SequenceTextBox_CustomValidator3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator SequenceTextBox_CustomValidator3;
+        protected global::System.Web.UI.WebControls.DropDownList SeqDropDownList;
         
         /// <summary>
         /// Label4 control.
@@ -731,6 +722,69 @@ namespace CMS.GeneralPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField LongitudeHiddenField;
+        
+        /// <summary>
+        /// DeletedLocationIDHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField DeletedLocationIDHiddenField;
+        
+        /// <summary>
+        /// DeletedLocationIndexHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField DeletedLocationIndexHiddenField;
+        
+        /// <summary>
+        /// InsertedLocationIndexHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField InsertedLocationIndexHiddenField;
+        
+        /// <summary>
+        /// EditLocationIndexHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField EditLocationIndexHiddenField;
+        
+        /// <summary>
+        /// EditLocationIDHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField EditLocationIDHiddenField;
+        
+        /// <summary>
+        /// SelectedLocationIndexHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField SelectedLocationIndexHiddenField;
+        
+        /// <summary>
+        /// SelectedLocationIDHiddenField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField SelectedLocationIDHiddenField;
         
         /// <summary>
         /// LocationButtonMultiView control.
@@ -812,6 +866,15 @@ namespace CMS.GeneralPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CancelInsertLocationButton;
+        
+        /// <summary>
+        /// LocationListErrorLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LocationListErrorLabel;
         
         /// <summary>
         /// ButtonMultiView control.

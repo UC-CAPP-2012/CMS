@@ -186,17 +186,19 @@
                             ForeColor="Black" GridLines="None"  Width="500px">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
-                                <asp:BoundField DataField="TourSeqNum" HeaderText="Seq" 
-                                    SortExpression="TourSeqNum" />
+                                <asp:BoundField DataField="TourSeqNum" HeaderText="Sequence" 
+                                    SortExpression="TourSeqNum" >
+                                <ItemStyle Width="50px" />
+                                </asp:BoundField>
                                 <asp:BoundField DataField="LocationName" HeaderText="Location Name" 
                                     SortExpression="LocationName" />
-                                <asp:BoundField DataField="Address" HeaderText="Address" 
-                                    SortExpression="Address" />
+                                <asp:BoundField DataField="Suburb" HeaderText="Suburb" 
+                                    SortExpression="Suburb" />
                             </Columns>
                             <FooterStyle BackColor="#CCCC99" />
                             <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-                            <RowStyle BackColor="#F7F7DE" />
+                            <RowStyle BackColor="#F7F7DE" HorizontalAlign="Center" />
                             <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
                             <SortedAscendingCellStyle BackColor="#FBFBF2" />
                             <SortedAscendingHeaderStyle BackColor="#848384" />
@@ -288,93 +290,74 @@
                             onclick="AddNewLinkButton_Click"></asp:LinkButton>
                         <div class="Location">
                             <asp:MultiView ID="LocationMultiView" runat="server" ActiveViewIndex="0">
-                                <asp:View ID="ViewView" runat="server"><br/>
+                                <asp:View ID="ViewView" runat="server">
+                                    <div style="text-align:right; margin-bottom:10px;">
+                                        <asp:Button ID="UpdateLocationItemButton" runat="server" Text="Update" Width="70px" 
+                                        CausesValidation="False" onclick="UpdateLocationItemButton_Click" Enabled ="false" />
+                                        <asp:Button ID="DeleteLocationItemButton" runat="server" Text="Delete" Width="70px" 
+                                        CausesValidation="False" onclick="DeleteLocationItemButton_Click" Enabled ="false" />
+                                    </div>
                                     <asp:GridView ID="EditLocationGridView" runat="server" AllowSorting="True" 
                                         AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
                                         BorderStyle="None" BorderWidth="1px" CellPadding="4" 
-                                        DataKeyNames="TourLocationID" DataSourceID="EditLocationObjectDataSource" 
+                                        DataKeyNames="TourLocationID" 
                                         ForeColor="Black" GridLines="None"  Width="600px"
-                                        onrowdatabound="EditLocationGridView_RowDataBound" >
+                                        onrowdatabound="EditLocationGridView_RowDataBound"
+                                        onselectedindexchanged="EditLocationGridView_SelectedIndexChanged">
                                         <AlternatingRowStyle BackColor="White" />
                                         <Columns>
                                             <asp:CommandField SelectText="" ShowSelectButton="True">
                                             <ItemStyle Width="5px" />
                                             </asp:CommandField>
-                                            <asp:BoundField DataField="TourLocationID" HeaderText="TourLocationID" SortExpression="TourLocationID" ReadOnly="True">
+                                            <asp:BoundField DataField="TourLocationID" HeaderText="TourLocationID" ReadOnly="True">
                                                 <HeaderStyle CssClass="hidden"></HeaderStyle>
                                                 <ItemStyle CssClass="hidden"></ItemStyle>
                                             </asp:BoundField>
-                                            <asp:BoundField DataField="TourID" HeaderText="TourID" SortExpression="TourID" >
+                                            <asp:BoundField DataField="TourID" HeaderText="TourID" >
                                                 <HeaderStyle CssClass="hidden"></HeaderStyle>
                                                 <ItemStyle CssClass="hidden"></ItemStyle>
                                             </asp:BoundField>
-                                            <asp:BoundField DataField="TourSeqNum" HeaderText="Seq" SortExpression="TourSeqNum" >
+                                            <asp:BoundField DataField="TourSeqNum" HeaderText="Seq" >
                                             <ItemStyle Width="40px" />
                                             </asp:BoundField>
-                                            <asp:BoundField DataField="LocationName" HeaderText="Location Name" SortExpression="LocationName" >
-                                            <ItemStyle Width="80px" />
+                                            <asp:BoundField DataField="LocationName" HeaderText="Location Name">
                                             </asp:BoundField>
-                                            <asp:BoundField DataField="Latitude" HeaderText="Latitude" SortExpression="Latitude" >
+                                            <asp:BoundField DataField="Latitude" HeaderText="Latitude">
                                                 <HeaderStyle CssClass="hidden"></HeaderStyle>
                                                 <ItemStyle CssClass="hidden"></ItemStyle>
                                             </asp:BoundField>
-                                            <asp:BoundField DataField="Longitude" HeaderText="Longitude" SortExpression="Longitude" >
+                                            <asp:BoundField DataField="Longitude" HeaderText="Longitude" >
                                                 <HeaderStyle CssClass="hidden"></HeaderStyle>
                                                 <ItemStyle CssClass="hidden"></ItemStyle>
                                             </asp:BoundField>
-                                            <asp:BoundField DataField="Postcode" HeaderText="Postcode" SortExpression="Postcode" >
+                                            <asp:BoundField DataField="Postcode" HeaderText="Postcode">
                                             <ItemStyle Width="40px" />
                                             </asp:BoundField>
-                                            <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address" >
-                                            </asp:BoundField>
-                                            <asp:BoundField DataField="Suburb" HeaderText="Suburb" SortExpression="Suburb" >
+                                            <asp:BoundField DataField="Address" HeaderText="Address">
                                                 <HeaderStyle CssClass="hidden"></HeaderStyle>
                                                 <ItemStyle CssClass="hidden"></ItemStyle>
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="Suburb" HeaderText="Suburb" >
                                             </asp:BoundField>                                            
-                                            <asp:CommandField ButtonType="Button" SelectText="" ShowDeleteButton="True">
-                                            <ItemStyle Width="40px" />
-                                            </asp:CommandField>
                                         </Columns>
                                         <FooterStyle BackColor="#CCCC99" />
                                         <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
                                         <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-                                        <RowStyle BackColor="#F7F7DE" />
+                                        <RowStyle BackColor="#F7F7DE" HorizontalAlign="Center" />
                                         <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-                                        <SortedAscendingCellStyle BackColor="#FBFBF2" />
-                                        <SortedAscendingHeaderStyle BackColor="#848384" />
-                                        <SortedDescendingCellStyle BackColor="#EAEAD3" />
-                                        <SortedDescendingHeaderStyle BackColor="#575357" />
-                                    </asp:GridView>
-                                    <asp:ObjectDataSource ID="EditLocationObjectDataSource" runat="server" 
-                                        DeleteMethod="deleteTourLocationByID" SelectMethod="getTourLocationByTourID" 
-                                        TypeName="CMS.BLL.CMSBLClass" 
-                                        OldValuesParameterFormatString="original_{0}">
-                                        <DeleteParameters>
-                                            <asp:Parameter Name="TourLocationID" Type="Int32" />
-                                        </DeleteParameters>
-                                        <SelectParameters>
-                                            <asp:ControlParameter ControlID="TourIDHiddenField" Name="TourID" 
-                                                PropertyName="Value" Type="Int32" />
-                                        </SelectParameters>
-                                    </asp:ObjectDataSource>                                    
+                                    </asp:GridView>  
                                 </asp:View>
                                 <asp:View ID="AddView" runat="server">
                                     <h2> <asp:Label ID="EditLocationTitle" runat="server"></asp:Label> </h2>
                                     <asp:Label ID="Label2" runat="server" Text="Location Name : " Width="100px" style="text-align: right"></asp:Label>
-                                    <asp:TextBox ID="LocatinNameTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                    <asp:TextBox ID="LocationNameTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
                                     <p class="validationError tap"> 
                                         <asp:CustomValidator ID="LocatinNameTextBox_CustomValidator" runat="server" ErrorMessage="Location name is required."
-                                            ControlToValidate="LocatinNameTextBox"  ValidateEmptyText="True"
+                                            ControlToValidate="LocationNameTextBox"  ValidateEmptyText="True"
                                            onservervalidate="LocatinNameTextBox_CustomValidator_ServerValidate"></asp:CustomValidator>
                                     </p>
                                     <asp:Label ID="Label3" runat="server" Text="Sequence : " Width="100px" style="text-align: right"></asp:Label>
-                                    <asp:TextBox ID="SequenceTextBox" runat="server" Width="50px" 
-                                        onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
-                                    <p class="validationError tap"> 
-                                        <asp:CustomValidator ID="SequenceTextBox_CustomValidator3" runat="server" ErrorMessage="Valid sequence is required."
-                                            onservervalidate="SequenceTextBox_CustomValidator3_ServerValidate" 
-                                            ControlToValidate="SequenceTextBox"  ValidateEmptyText="True" ></asp:CustomValidator>
-                                    </p>
+                                    <asp:DropDownList ID="SeqDropDownList" Width="56px" runat="server"></asp:DropDownList><br/><br/>
                                     <asp:Label ID="Label4" runat="server" Text="Postcode : " Width="100px" style="text-align: right"></asp:Label>
                                     <asp:TextBox ID="PostcodeTextBox" runat="server" Width="50px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>                                    
                                     <p class="validationError tap"> 
@@ -392,6 +375,13 @@
                                     <div class="map location" id="map"></div>
                                     <asp:HiddenField ID="LatitudeHiddenField" runat="server"/>
                                     <asp:HiddenField ID="LongitudeHiddenField" runat="server" />
+                                    <asp:HiddenField ID="DeletedLocationIDHiddenField" runat="server" />
+                                    <asp:HiddenField ID="DeletedLocationIndexHiddenField" runat="server" />
+                                    <asp:HiddenField ID="InsertedLocationIndexHiddenField" runat="server" />
+                                    <asp:HiddenField ID="EditLocationIndexHiddenField" runat="server" />
+                                    <asp:HiddenField ID="EditLocationIDHiddenField" runat="server" />
+                                    <asp:HiddenField ID="SelectedLocationIndexHiddenField" runat="server" />
+                                    <asp:HiddenField ID="SelectedLocationIDHiddenField" runat="server" />
                                     <div class="locationButtons">
                                         <asp:MultiView ID="LocationButtonMultiView" runat="server">
                                             <asp:View ID="AddLocationView" runat="server">
@@ -421,6 +411,9 @@
                                 </asp:View>
                             </asp:MultiView>
                         </div>
+                        <p class="validationError location">
+                            <asp:Label ID="LocationListErrorLabel" runat="server" Text="At least one location is required." Visible="false" ></asp:Label>
+                        </p>
                     </div>
                     <!-- Buttons -->
                     <div class="detailButtons bottom">

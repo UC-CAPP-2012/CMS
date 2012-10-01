@@ -292,20 +292,57 @@ namespace CMS.BLL
             return (DAL.CMSDBDataSet.TourRow)tourTableAdapter.GetDataByID(TourID).Rows[0];
         }
 
+
+        public int updateTour(String TourName, String TourDetail, Decimal TourCost, String TourPhone, String TourWebsite, 
+            String TourEmail, int TourID)
+        {
+            return tourTableAdapter.UpdateByTourID(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, TourID);
+        }
+
+        public int insertTour(String TourName, String TourDetail, Decimal TourCost, String TourPhone, String TourWebsite, String TourEmail)
+        {
+            return tourTableAdapter.Insert(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail);        
+        }
+
+        public int getNewlyInsertedTourID()
+        {
+            return (int)tourTableAdapter.getNewlyAddedTourID();
+        }
+
+        public int deleteTour(int TourID)
+        {
+            tourLocationTableAdapter.DeleteByTourID(TourID);
+            return tourTableAdapter.Delete(TourID);
+        }
+
+        /*********************************************************************
+        * Tour Location data access
+        *********************************************************************/
+
         public DAL.CMSDBDataSet.TourLocationDataTable getTourLocationByTourID(int TourID)
         {
             return tourLocationTableAdapter.GetDataByTourID(TourID);
         }
 
-        public int deleteTourLocationByID(int TourLocationID, int original_TourLocationID)
+        public int deleteTourLocationByLocationID(int TourLocationID)
         {
-            return tourLocationTableAdapter.Delete(original_TourLocationID);
+            return tourLocationTableAdapter.Delete(TourLocationID);
         }
 
-        public int insertTourLocation(int TourID, short TourSeqNum, String LocationName, Double Latitude, Double Longitude, 
+        public int insertTourLocation(int TourID, short TourSeqNum, String LocationName, double Latitude, double Longitude, 
             String Address, String Suburb, short Postcode)
         {
             return tourLocationTableAdapter.Insert(TourID, TourSeqNum, LocationName, Latitude, Longitude, Address, Suburb, Postcode);        
         }
+
+        public int updateTourLocation(int TourID, short TourSeqNum, String LocationName, double Latitude, double Longitude, String Address, 
+                String Suburb, short Postcode, int Original_TourLocationID)
+        {
+            return tourLocationTableAdapter.UpdateByTourLocationID(TourID, TourSeqNum, LocationName, Latitude, Longitude, Address, 
+                Suburb, Postcode, Original_TourLocationID);
+        }
+
+        
+
     }
 }
