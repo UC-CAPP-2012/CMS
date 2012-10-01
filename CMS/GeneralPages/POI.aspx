@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
     <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
-        <script src="../Scripts/jquery.MultiFile.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.MultiFile.js" type="text/javascript"></script>
 <script type="text/javascript">
 //<![CDATA[
     //Don't run suver side code and do nothing when cancel button on confirmation is clicked.
@@ -87,7 +87,7 @@
         <div class="contentLeftMenu">
         <h1> Point Of Interest </h1>
         <ul>
-            <li><span style="margin-left: -1em;" /><asp:LinkButton D="InsertLinkButton" runat="server" CausesValidation="False"
+            <li><span style="margin-left: -1em;" /><asp:LinkButton ID="InsertLinkButton" runat="server" CausesValidation="False"
                     onclick="InsertLinkButton_Click"> Insert New POI</asp:LinkButton></li>
         </ul>
         </div>
@@ -176,241 +176,243 @@
             </UpdateParameters>
         </asp:ObjectDataSource>
     </div>
+        
         <div class="contentDetail poi">
-            <asp:ScriptManager ID="ScriptManager1" runat="server"/>
-            <asp:MultiView ID="POIMultiView" runat="server">
+            <div class="contentDetailWrapper">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"/>
+                <asp:MultiView ID="POIMultiView" runat="server">
 
-                <!-- default detail display -->
-                <asp:View ID="DetailView" runat="server">
-                    <h1> Point Of Interest Details
-                        <span class = "detailButtons">
-                            <asp:Button ID="UpdateButton" runat="server" Text="Update" Width="70px" onclick="UpdateButton_Click" />
-                            <asp:Button ID="DeleteButton" runat="server" Text="Delete" Width="70px" onclick="DeleteButton_Click"/>                
-                            <asp:ConfirmButtonExtender ID="DeleteButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
-                                runat="server" ConfirmText="Are you sure you want to delete the selected POI?" 
-                                Enabled="True" TargetControlID="DeleteButton">
-                            </asp:ConfirmButtonExtender>                  
-                        </span>
-                    </h1>
-                    <hr />
-                    <p>
-                        <asp:Label ID="DetailNameLabel" runat="server" CssClass="label" Font-Bold="True" Text="POI Name : " Width="150px"></asp:Label>
-                        <asp:Label ID="NameDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailCategoryLabel" runat="server" CssClass="label" Font-Bold="True" Text="Category : " Width="150px"></asp:Label>
-                        <asp:Label ID="CategoryDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailSubtypeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Subtype : " Width="150px"></asp:Label>
-                        <asp:Label ID="SubtypeDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailPhoneLabel" runat="server" CssClass="label" Font-Bold="True" Text="Phone : " Width="150px"></asp:Label>
-                        <asp:Label ID="PhoneDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailEmailLabel" runat="server" CssClass="label" Font-Bold="True" Text="Email : " Width="150px"></asp:Label>
-                        <asp:Label ID="EmailDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailWebsiteLabel" runat="server" CssClass="label" Font-Bold="True" Text="Website : " Width="150px"></asp:Label>
-                        <asp:Label ID="WebsiteDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailOpeningHoursLabel" runat="server" CssClass="label" Font-Bold="True" Text="Opening Hours : " Width="150px"></asp:Label>
-                        <asp:Label ID="OpeningHoursDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailCostLabel" runat="server" CssClass="label" Font-Bold="True" Text="Cost : " Width="150px"></asp:Label>
-                        <asp:Label ID="CostDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailRatingLabel" runat="server" CssClass="label" Font-Bold="True" Text="Rating : " Width="150px"></asp:Label>
-                        <asp:Rating ID="RatingData" runat="server" MaxRating="5"  StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
-                                CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating" ReadOnly="True"></asp:Rating><br/>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailDescriptionLabel" runat="server" CssClass="label" Font-Bold="True" Text="Detailed Description : " Width="150px"></asp:Label>
-                        <asp:Label ID="DescriptionDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailPostcodeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Postcode : " Width="150px"></asp:Label>
-                        <asp:Label ID="PostcodeDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailAddressLabel" runat="server" CssClass="label" Font-Bold="True" Text="Address : " Width="150px"></asp:Label>
-                        <asp:Label ID="AddressDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>                   
-                    <p>
-                        <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
-                        <div runat="server" id="poiImages" Width="480px"></div>
-                    </p>
-                    <p>
-                        <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
-                        <div runat="server" id="poiVideo" Width="480px"></div>
-                    </p>
-                    <asp:HiddenField ID="CategoryIDHiddenField" runat="server" />
-                    <asp:HiddenField ID="SubtypeIDHiddenField" runat="server" />
-                </asp:View>
-
-                <!-- insert and update new display (Visible when insert link button is clicked
-                                or update button is clicked) -->
-                <asp:View ID="InsertView" runat="server">
-                        <h1> Insert New Point Of Interest </h1> 
+                    <!-- default detail display -->
+                    <asp:View ID="DetailView" runat="server">
+                        <h1> Point Of Interest Details
+                            <span class = "detailButtons">
+                                <asp:Button ID="UpdateButton" runat="server" Text="Update" Width="70px" onclick="UpdateButton_Click" />
+                                <asp:Button ID="DeleteButton" runat="server" Text="Delete" Width="70px" onclick="DeleteButton_Click"/>                
+                                <asp:ConfirmButtonExtender ID="DeleteButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
+                                    runat="server" ConfirmText="Are you sure you want to delete the selected POI?" 
+                                    Enabled="True" TargetControlID="DeleteButton">
+                                </asp:ConfirmButtonExtender>                  
+                            </span>
+                        </h1>
                         <hr />
-                    <!-- Name -->
-                    <asp:Label ID="NameLabel" CssClass="label" runat="server" Text="POI Name : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="NameTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <p class="validationError">             
-                        <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
-                        ErrorMessage="POI name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
-                    </p>
-                    <!-- Category -->
-                    <asp:Label ID="InsertCategoryLabel" CssClass="label" runat="server" Text="Category : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:DropDownList ID="CategoryDropDownList" runat="server" Width="405px" DataSourceID="CategoryObjectDataSource" 
-                    DataTextField="CategoryName" DataValueField="CategoryID"/>
-                    <asp:ObjectDataSource ID="CategoryObjectDataSource" runat="server" 
-                        SelectMethod="getAllCategory" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource><br /><br />
-                    <!-- Subtype -->
-                    <asp:Label ID="SubTypeLabel" CssClass="label" runat="server" Text="Subtype : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:DropDownList ID="SubtypeDropDownList" runat="server" 
-                        DataSourceID="SubtypeObjectDataSource" DataTextField="SubtypeName" DataValueField="SubtypeID" Width="405px">
-                    </asp:DropDownList>
-                    <asp:ObjectDataSource ID="SubtypeObjectDataSource" runat="server" 
-                        SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource><br /><br />
-                    <!-- Phone -->
-                    <asp:Label ID="PhoneLabel" CssClass="label" runat="server" Text="Phone : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="PhoneTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <br /><br />
-                    <!-- Email -->
-                    <asp:Label ID="EmailLabel" CssClass="label" runat="server" Text="Email : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="EmailTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <br /><br />
-                    <!-- Website -->
-                    <asp:Label ID="WebsiteLabel" CssClass="label" runat="server" Text="Website : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="WebsiteTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <br /><br />
-                    <!-- Opening Hours -->
-                    <asp:Label ID="OpeningHoursLabel" CssClass="label" runat="server" Text="Opening Hours : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="OpeningHoursTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <br /><br />
-                    <!-- Cost -->
-                    <asp:Label ID="CostLabel" CssClass="label" runat="server" Text="Cost : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="CostTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <p class="validationError">             
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                        ErrorMessage="Cost is required." ControlToValidate="CostTextBox" SetFocusOnError="True" />
-                        <span style="margin-left: -105px;"/>
-                        <asp:CustomValidator ID="CostTextBox_CustomValidator" runat="server" ErrorMessage="Cost should include only numbers."
-                        onservervalidate="numberInputValidate" ControlToValidate="CostTextBox"></asp:CustomValidator>
-                    </p>
-                    <!-- Rating -->
-                    <asp:Label ID="RatingLabel" CssClass="label" runat="server" Text="Rating : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:Rating ID="Rating" runat="server" MaxRating="5"  StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
-                            CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating"></asp:Rating><br /><br />        
-                    <!-- Detailed Description -->
-                    <asp:Label ID="DescriptionLabel" CssClass="label" runat="server" Text="Detailed description : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="DescriptionTextBox" runat="server" Width="400px" TextMode="MultiLine" Height="100px" ></asp:TextBox> 
-                    <p class="validationError">             
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                        ErrorMessage="Detailed description is required." ControlToValidate="DescriptionTextBox" SetFocusOnError="True" />
-                    </p>
-                    <!--Postcode -->
-                    <asp:Label ID="PostcodeLabel" CssClass="label" runat="server" Text="Postcode : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="PostcodeTextBox" runat="server" Width="60px" onkeydown = "return (event.keyCode!=13);" MaxLength="4"></asp:TextBox> 
-                    <p class="validationError"> 
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                        ErrorMessage="Postcode is required." ControlToValidate="PostcodeTextBox" SetFocusOnError="True" />
-                        <span style="margin-left: -115px;"/>
-                        <asp:CustomValidator ID="PostcodeTextBox_CustomValidator" runat="server" ErrorMessage="Postcode should be 4 digit numbers."
-                        onservervalidate="numberInputValidate" ControlToValidate="PostcodeTextBox"></asp:CustomValidator>
-                    </p> 
-                    <!-- Address -->
-                    <asp:Label ID="AddressLabel" CssClass="label" runat="server" Text="Address : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <div class="AddressMaster">                        
-                        <asp:LinkButton ID="AutoLinkButton" runat="server" CssClass="tabButton" 
-                            Text="Auto Address" BackColor="LightGray" CausesValidation="false" 
-                            onclick="AutoLinkButton_Click"></asp:LinkButton>
-                        <asp:LinkButton ID="ManualLinkButton" runat="server" CssClass="tabButton" 
-                            Text="Manual Address" BackColor="Gray" CausesValidation="false" 
-                            onclick="ManualLinkButton_Click"></asp:LinkButton>
-                        <div class="Address">
-                            <asp:MultiView ID="AddressMultiView" runat="server">
-                                <asp:View ID="AutoView" runat="server"><br/>
-                                    <asp:TextBox ID="AddressTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                                    <asp:CustomValidator ID="AutoAddressTextBox_CustomValidator" runat="server" ErrorMessage="Input valid address using autocompletion."
-                                        onservervalidate="numberInputValidate" ControlToValidate="AddressTextBox" ValidateEmptyText="True" ForeColor="Red"></asp:CustomValidator>
-                                    <div class="map" id="map"></div>
+                        <p>
+                            <asp:Label ID="DetailNameLabel" runat="server" CssClass="label" Font-Bold="True" Text="POI Name : " Width="150px"></asp:Label>
+                            <asp:Label ID="NameDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailCategoryLabel" runat="server" CssClass="label" Font-Bold="True" Text="Category : " Width="150px"></asp:Label>
+                            <asp:Label ID="CategoryDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailSubtypeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Subtype : " Width="150px"></asp:Label>
+                            <asp:Label ID="SubtypeDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailPhoneLabel" runat="server" CssClass="label" Font-Bold="True" Text="Phone : " Width="150px"></asp:Label>
+                            <asp:Label ID="PhoneDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailEmailLabel" runat="server" CssClass="label" Font-Bold="True" Text="Email : " Width="150px"></asp:Label>
+                            <asp:Label ID="EmailDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailWebsiteLabel" runat="server" CssClass="label" Font-Bold="True" Text="Website : " Width="150px"></asp:Label>
+                            <asp:Label ID="WebsiteDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailOpeningHoursLabel" runat="server" CssClass="label" Font-Bold="True" Text="Opening Hours : " Width="150px"></asp:Label>
+                            <asp:Label ID="OpeningHoursDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailCostLabel" runat="server" CssClass="label" Font-Bold="True" Text="Cost : " Width="150px"></asp:Label>
+                            <asp:Label ID="CostDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailRatingLabel" runat="server" CssClass="label" Font-Bold="True" Text="Rating : " Width="150px"></asp:Label>
+                            <asp:Rating ID="RatingData" runat="server" MaxRating="5"  StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
+                                    CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating" ReadOnly="True"></asp:Rating><br/>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailDescriptionLabel" runat="server" CssClass="label" Font-Bold="True" Text="Detailed Description : " Width="150px"></asp:Label>
+                            <asp:Label ID="DescriptionDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailPostcodeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Postcode : " Width="150px"></asp:Label>
+                            <asp:Label ID="PostcodeDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailAddressLabel" runat="server" CssClass="label" Font-Bold="True" Text="Address : " Width="150px"></asp:Label>
+                            <asp:Label ID="AddressDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>                   
+                        <p>
+                            <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
+                            <div runat="server" id="poiImages" width="460px"></div>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
+                            <div runat="server" id="poiVideo" width="460px"></div>
+                        </p>
+                        <asp:HiddenField ID="CategoryIDHiddenField" runat="server" />
+                        <asp:HiddenField ID="SubtypeIDHiddenField" runat="server" />
+                    </asp:View>
+
+                    <!-- insert and update new display (Visible when insert link button is clicked
+                                    or update button is clicked) -->
+                    <asp:View ID="InsertView" runat="server">
+                            <h1> <asp:Label ID="EditTitleLabel" runat="server"></asp:Label></h1> 
+                            <hr />
+                        <!-- Name -->
+                        <asp:Label ID="NameLabel" CssClass="label" runat="server" Text="POI Name : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="NameTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
+                            ErrorMessage="POI name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
+                        </p>
+                        <!-- Category -->
+                        <asp:Label ID="InsertCategoryLabel" CssClass="label" runat="server" Text="Category : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:DropDownList ID="CategoryDropDownList" runat="server" Width="405px" DataSourceID="CategoryObjectDataSource" 
+                        DataTextField="CategoryName" DataValueField="CategoryID"/>
+                        <asp:ObjectDataSource ID="CategoryObjectDataSource" runat="server" 
+                            SelectMethod="getAllCategory" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource><br /><br />
+                        <!-- Subtype -->
+                        <asp:Label ID="SubTypeLabel" CssClass="label" runat="server" Text="Subtype : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:DropDownList ID="SubtypeDropDownList" runat="server" 
+                            DataSourceID="SubtypeObjectDataSource" DataTextField="SubtypeName" DataValueField="SubtypeID" Width="405px">
+                        </asp:DropDownList>
+                        <asp:ObjectDataSource ID="SubtypeObjectDataSource" runat="server" 
+                            SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource><br /><br />
+                        <!-- Phone -->
+                        <asp:Label ID="PhoneLabel" CssClass="label" runat="server" Text="Phone : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="PhoneTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <br /><br />
+                        <!-- Email -->
+                        <asp:Label ID="EmailLabel" CssClass="label" runat="server" Text="Email : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="EmailTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <br /><br />
+                        <!-- Website -->
+                        <asp:Label ID="WebsiteLabel" CssClass="label" runat="server" Text="Website : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="WebsiteTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <br /><br />
+                        <!-- Opening Hours -->
+                        <asp:Label ID="OpeningHoursLabel" CssClass="label" runat="server" Text="Opening Hours : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="OpeningHoursTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <br /><br />
+                        <!-- Cost -->
+                        <asp:Label ID="CostLabel" CssClass="label" runat="server" Text="Cost : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="CostTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                            ErrorMessage="Cost is required." ControlToValidate="CostTextBox" SetFocusOnError="True" />
+                            <span style="margin-left: -105px;"/>
+                            <asp:CustomValidator ID="CostTextBox_CustomValidator" runat="server" ErrorMessage="Cost should include only numbers."
+                            onservervalidate="numberInputValidate" ControlToValidate="CostTextBox"></asp:CustomValidator>
+                        </p>
+                        <!-- Rating -->
+                        <asp:Label ID="RatingLabel" CssClass="label" runat="server" Text="Rating : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:Rating ID="Rating" runat="server" MaxRating="5"  StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
+                                CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating"></asp:Rating><br /><br />        
+                        <!-- Detailed Description -->
+                        <asp:Label ID="DescriptionLabel" CssClass="label" runat="server" Text="Detailed description : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="DescriptionTextBox" runat="server" Width="400px" TextMode="MultiLine" Height="100px" ></asp:TextBox> 
+                        <p class="validationError">             
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                            ErrorMessage="Detailed description is required." ControlToValidate="DescriptionTextBox" SetFocusOnError="True" />
+                        </p>
+                        <!--Postcode -->
+                        <asp:Label ID="PostcodeLabel" CssClass="label" runat="server" Text="Postcode : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="PostcodeTextBox" runat="server" Width="60px" onkeydown = "return (event.keyCode!=13);" MaxLength="4"></asp:TextBox> 
+                        <p class="validationError"> 
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                            ErrorMessage="Postcode is required." ControlToValidate="PostcodeTextBox" SetFocusOnError="True" />
+                            <span style="margin-left: -115px;"/>
+                            <asp:CustomValidator ID="PostcodeTextBox_CustomValidator" runat="server" ErrorMessage="Postcode should be 4 digit numbers."
+                            onservervalidate="numberInputValidate" ControlToValidate="PostcodeTextBox"></asp:CustomValidator>
+                        </p> 
+                        <!-- Address -->
+                        <asp:Label ID="AddressLabel" CssClass="label" runat="server" Text="Address : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <div class="AddressMaster">                        
+                            <asp:LinkButton ID="AutoLinkButton" runat="server" CssClass="tabButton" 
+                                Text="Auto Address" BackColor="LightGray" CausesValidation="false" 
+                                onclick="AutoLinkButton_Click"></asp:LinkButton>
+                            <asp:LinkButton ID="ManualLinkButton" runat="server" CssClass="tabButton" 
+                                Text="Manual Address" BackColor="Gray" CausesValidation="false" 
+                                onclick="ManualLinkButton_Click"></asp:LinkButton>
+                            <div class="Address">
+                                <asp:MultiView ID="AddressMultiView" runat="server">
+                                    <asp:View ID="AutoView" runat="server"><br/>
+                                        <asp:TextBox ID="AddressTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                                        <asp:CustomValidator ID="AutoAddressTextBox_CustomValidator" runat="server" ErrorMessage="Input valid address using autocompletion."
+                                            onservervalidate="numberInputValidate" ControlToValidate="AddressTextBox" ValidateEmptyText="True" ForeColor="Red"></asp:CustomValidator>
+                                        <div class="map" id="map"></div>
+                                    </asp:View>
+                                    <asp:View ID="ManualView" runat="server">
+                                        <asp:Label ID="Label1" runat="server" Text="Street No : " Width="100px" style="text-align: right"></asp:Label>
+                                        <asp:TextBox ID="ManualStNoTextBox" runat="server" Width="30px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                        <asp:Label ID="Label2" runat="server" Text="Street Name : " Width="100px" style="text-align: right"></asp:Label>
+                                        <asp:TextBox ID="ManualStNameTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                        <asp:Label ID="Label3" runat="server" Text="Suburb : " Width="100px" style="text-align: right"></asp:Label>
+                                        <asp:TextBox ID="ManualSuburbTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                        <asp:Label ID="Label4" runat="server" Text="Latitude : " Width="100px" style="text-align: right"></asp:Label>
+                                        <asp:TextBox ID="ManualLatTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                        <asp:Label ID="Label5" runat="server" Text="Longitude : " Width="100px" style="text-align: right"></asp:Label>
+                                        <asp:TextBox ID="ManualLogTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
+                                        <asp:CustomValidator ID="ManualAddressTextBox_CustomValidator" runat="server" ErrorMessage="All address fields are required for manual address."
+                                            onservervalidate="numberInputValidate" ControlToValidate="ManualStNoTextBox"  ValidateEmptyText="True" ForeColor="Red"></asp:CustomValidator>
+                                    </asp:View>
+                                </asp:MultiView>
+                            </div>
+                        </div>                                      
+                        
+                        <!-- YouTube Video -->
+                        <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <br /><br />
+
+                        <!-- Images -->
+                        <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <div>
+                            <asp:Label ID="Label6" runat="server" Text="Max Size: 50kb, Allowed Type: JPEG, PNG, GIF" 
+                                    CssClass="imgLabel"></asp:Label><br />
+                            <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
+                            <asp:Button ID="btnUpload" runat="server" Text="Upload All"  CssClass="poiUploadBtn"  onclick="btnUpload_Click" CausesValidation="False" />
+                        </div>
+                        <div class="imgUploadResult">
+                            <asp:Label ID="StatusLabel" runat="server" Text="" ForeColor="Red" ></asp:Label>
+                            <div runat="server" id="poiImagesAddUpdate"></div>
+                        </div>
+                       <asp:HiddenField ID="ImageUploadFileName" runat="server" />
+                        <!-- Buttons -->
+                        <div class="detailButtons bottom">
+                            <asp:MultiView ID="ButtonMultiView" runat="server">
+                                <asp:View ID="UpdateButtonView" runat="server">                            
+                                    <asp:Button ID="SubmitButton" runat="server" Text="Submit Update" Width="120px" 
+                                        onclick="SubmitButton_Click"  />
+                                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" OnClientCancel="CancelClick"
+                                        runat="server" ConfirmText="Do you want to submit the update?" Enabled="True" 
+                                        TargetControlID="SubmitButton" ConfirmOnFormSubmit="True">
+                                    </asp:ConfirmButtonExtender>
+                                    <asp:Button ID="CancelButton" runat="server" Text="Cancel" Width="70px" 
+                                        onclick="CancelButton_Click" CausesValidation="False" />
                                 </asp:View>
-                                <asp:View ID="ManualView" runat="server">
-                                    <asp:Label ID="Label1" runat="server" Text="Street No : " Width="100px" style="text-align: right"></asp:Label>
-                                    <asp:TextBox ID="ManualStNoTextBox" runat="server" Width="30px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
-                                    <asp:Label ID="Label2" runat="server" Text="Street Name : " Width="100px" style="text-align: right"></asp:Label>
-                                    <asp:TextBox ID="ManualStNameTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
-                                    <asp:Label ID="Label3" runat="server" Text="Suburb : " Width="100px" style="text-align: right"></asp:Label>
-                                    <asp:TextBox ID="ManualSuburbTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
-                                    <asp:Label ID="Label4" runat="server" Text="Latitude : " Width="100px" style="text-align: right"></asp:Label>
-                                    <asp:TextBox ID="ManualLatTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
-                                    <asp:Label ID="Label5" runat="server" Text="Longitude : " Width="100px" style="text-align: right"></asp:Label>
-                                    <asp:TextBox ID="ManualLogTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox><br/>
-                                    <asp:CustomValidator ID="ManualAddressTextBox_CustomValidator" runat="server" ErrorMessage="All address fields are required for manual address."
-                                        onservervalidate="numberInputValidate" ControlToValidate="ManualStNoTextBox"  ValidateEmptyText="True" ForeColor="Red"></asp:CustomValidator>
+                                <asp:View ID="InsertButtonView" runat="server">
+                                    <asp:Button ID="InsertButton" runat="server" Text="Confirm" Width="100px"  onclick="InsertButton_Click" />
+                                    <asp:ConfirmButtonExtender ID="InsertButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
+                                        runat="server" ConfirmText="Do you want to submit the new point of interest?" Enabled="True" 
+                                        TargetControlID="InsertButton" ConfirmOnFormSubmit="True">
+                                    </asp:ConfirmButtonExtender>
+                                    <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
+                                        CausesValidation="False" onclick="InsertCancelButton_Click" />                    
                                 </asp:View>
                             </asp:MultiView>
                         </div>
-                    </div>
-                                       
-                        
-                    <!-- YouTube Video -->
-                    <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <br /><br />
-
-                    <!-- Images -->
-                    <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:Label ID="Label6" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
-                    <asp:Button ID="btnUpload" runat="server" Text="Upload All" CssClass="poiUploadBtn" onclick="btnUpload_Click" />
-            <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
-            <div runat="server" id="poiImagesAddUpdate"></div>
-                   <asp:HiddenField ID="ImageUploadFileName" runat="server" />
-                    <!-- Buttons -->
-                    <div class="detailButtons bottom">
-                        <asp:MultiView ID="ButtonMultiView" runat="server">
-                            <asp:View ID="UpdateButtonView" runat="server">                            
-                                <asp:Button ID="SubmitButton" runat="server" Text="Submit Update" Width="120px" 
-                                    onclick="SubmitButton_Click"  />
-                                <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" OnClientCancel="CancelClick"
-                                    runat="server" ConfirmText="Do you want to submit the update?" Enabled="True" 
-                                    TargetControlID="SubmitButton" ConfirmOnFormSubmit="True">
-                                </asp:ConfirmButtonExtender>
-                                <asp:Button ID="CancelButton" runat="server" Text="Cancel" Width="70px" 
-                                    onclick="CancelButton_Click" CausesValidation="False" />
-                            </asp:View>
-                            <asp:View ID="InsertButtonView" runat="server">
-                                <asp:Button ID="InsertButton" runat="server" Text="Confirm" Width="100px"  onclick="InsertButton_Click" />
-                                <asp:ConfirmButtonExtender ID="InsertButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
-                                    runat="server" ConfirmText="Do you want to submit the new point of interest?" Enabled="True" 
-                                    TargetControlID="InsertButton" ConfirmOnFormSubmit="True">
-                                </asp:ConfirmButtonExtender>
-                                <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
-                                    CausesValidation="False" onclick="InsertCancelButton_Click" />                    
-                            </asp:View>
-                        </asp:MultiView>
-                    </div>
-                    <asp:HiddenField ID="LatitudeHiddenField" runat="server"/>
-                    <asp:HiddenField ID="LongitudeHiddenField" runat="server" />
-                </asp:View>
-            </asp:MultiView>
+                        <asp:HiddenField ID="LatitudeHiddenField" runat="server"/>
+                        <asp:HiddenField ID="LongitudeHiddenField" runat="server" />
+                    </asp:View>
+                </asp:MultiView>
+            </div>
         </div>
-    </div>
-    </div>
+    </div>   
         
-    
-        
-    </span>
-        
-    
+            </span>   
         
 </asp:Content>

@@ -63,6 +63,7 @@
             </asp:ObjectDataSource>
         </div>
         <div class="contentDetail subtype">
+            <div class="contentDetailWrapper">
             <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="SubtypeMultiView" runat="server">
                 <!-- default detail display -->
@@ -131,7 +132,7 @@
             </asp:MultiView>
         </div>
         </div>
-        
+        </div>        
     </div>
     
 </span>

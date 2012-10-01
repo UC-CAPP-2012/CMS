@@ -71,6 +71,7 @@
     </div>
     <!-- Data Detail -->
         <div class="contentDetail category">
+            <div class="contentDetailWrapper">
             <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="CategoryMultiView" runat="server">
 
@@ -141,6 +142,7 @@
                     </div>
                 </asp:View>
             </asp:MultiView>
+        </div>
         </div>
         </div>
     </div>

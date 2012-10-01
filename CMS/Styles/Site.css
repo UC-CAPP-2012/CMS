@@ -115,7 +115,8 @@ first child of the left and right table columns */
 
 .contents
 {
-    overflow:auto; 
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 
 .leftCol
@@ -237,7 +238,7 @@ first child of the left and right table columns */
 .news.contentList           {   width:450px;    }
 .poi.contentList            {   width:450px;    }
 .subtype.contentList        {   width:250px;    }
-.tour.contentList           {   width:223px;    }
+.tour.contentList           {   width:250px;    }
 .user.contentList           {   width:223px;    }
 
 
@@ -248,6 +249,19 @@ first child of the left and right table columns */
     margin: 10px 0 10px 500px;
     padding: 20px;
     min-height: 800px;
+    overflow:auto;     
+}
+
+.contentDetailWrapper
+{
+    position:relative;
+    float:left;
+    min-width:620px;
+}
+
+.tour.contentDetailWrapper
+{
+    min-width:820px;
 }
 
 .contentDetail h1
@@ -268,25 +282,68 @@ first child of the left and right table columns */
     margin: 0 100px 0 0;   
 }
 
+.bottom.detailButtons
+{
+    position:relative;
+    margin-right:20px;
+    margin-top:20px;
+}
+
 
 .category.contentDetail     {   margin-left: 250px;  }
 .event.contentDetail        {   margin-left: 450px; padding-bottom: 50px;}
 .news.contentDetail         {   margin-left: 450px;  }
 .poi.contentDetail          {   margin-left: 450px; padding-bottom: 50px; }
 .subtype.contentDetail      {   margin-left: 250px;  }
-.tour.contentDetail         {   margin-left: 493px;  }
+.tour.contentDetail         {   margin-left: 250px;  }
 .user.contentDetail         {   margin-left: 493px;  }
 .admin.contentDetail        {   margin-left: 493px;  }
 
 .poiUploadBtn
 {
+    position:relative;
     float: left;
-    margin-left: 380px;
-    margin-top: -24px;
 }
+
+.MultiFile-wrap
+{
+    float:left;
+    position:relative;
+    width:240px;  
+    margin-left:160px  ;
+}
+
+.MultiFile-list
+{
+    width:400px;    
+}
+
+.imgLabel
+{
+    position:relative;
+    float:left;
+    color:Black;
+}
+
+.imgUploadResult
+{
+    position:relative;
+    float:left;
+    margin-left:160px;  
+    width:500px;
+}
+
 .validationError
 {
     margin:0 0 0 170px;
+    padding: 0;
+    color:Red;    
+    font-size:0.9em;
+}
+
+.tap.validationError
+{
+    margin:0 0 0 100px;
     padding: 0;
     color:Red;    
     font-size:0.9em;
@@ -314,10 +371,17 @@ first child of the left and right table columns */
 
 .map
 {
+    
     width:400px;
     height:250px;
     background-color:#272727;
 }
+
+.location.map
+{
+    margin-left:105px;    
+}
+
 .AddressMaster
 {
     margin-bottom:20px;    
@@ -342,6 +406,42 @@ first child of the left and right table columns */
     cursor:pointer;
     text-decoration:none;
     font-weight:normal;
+}
+
+
+.LocationMaster
+{
+    position:relative;
+    float:left;
+    margin-bottom:20px;
+    margin-left:160px;    
+}
+
+.Location
+{
+    background-color:LightGray;
+    min-height:30px;
+    width:600px;  
+    padding:10px;    
+}
+
+ .LocationMaster a, .LocationMaster a:visited
+ { 
+    font-size: 13px; 
+    line-height: 14px; 
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25); 
+    color:Black;
+    padding: 1px 10px 1px;
+    cursor:pointer;
+    text-decoration:none;
+    font-weight:normal;
+}
+
+.locationButtons
+{
+    margin-top:10px;
+    margin-right:10px; 
+    text-align:right;   
 }
 
 /* Rating */

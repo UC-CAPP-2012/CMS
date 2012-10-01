@@ -82,6 +82,7 @@
     </div>
     <!-- Data Detail -->
         <div class="contentDetail news">
+            <div class="contentDetailWrapper">
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="NewsMultiView" runat="server">
 
@@ -213,6 +214,7 @@
                     </div>
                 </asp:View>
             </asp:MultiView>
+        </div>
         </div>
     </div>
     </div>

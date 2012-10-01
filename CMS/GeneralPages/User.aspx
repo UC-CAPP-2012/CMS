@@ -15,6 +15,7 @@
         </div>
         <div class="wrapper2Settings">
             <div class="contentDetail  adminBody">
+                <div class="contentDetailWrapper">
                 <asp:MultiView ID="UsersMultiView" runat="server" ActiveViewIndex="0">
                     <asp:View ID="UsersView" runat="server">
                     <h1>All Users</h1>
@@ -116,7 +117,7 @@
                     </asp:View>
                 </asp:MultiView>
             </div>
-    
+            </div>    
         </div>
     </div>
 </asp:Content>

@@ -68,7 +68,7 @@ namespace CMS.CMSPages
                 }
                 else
                 {
-                    poiVideo.InnerHtml = "<iframe width='560' height='315' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
+                    poiVideo.InnerHtml = "<iframe width='460' height='260' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
                                         + "' frameborder='0' allowfullscreen></iframe>";
                     //poiVideo.InnerHtml="<iframe width='560' height='315' src='http://www.youtube.com/embed/g8evyE9TuYk' frameborder='0' allowfullscreen></iframe>";
                     hasVideo = true;               
@@ -98,7 +98,10 @@ namespace CMS.CMSPages
             this.DescriptionTextBox.Text = "";
             this.PostcodeTextBox.Text = "";
             this.AddressTextBox.Text = "";
-
+            this.EditTitleLabel.Text = "Insert New Point Of Interest";
+            this.StatusLabel.Text = "";
+            this.VideoTextBox.Text = "";
+            this.poiImagesAddUpdate.InnerHtml = "";
             this.ButtonMultiView.ActiveViewIndex = 1;
             this.POIMultiView.ActiveViewIndex = 1;            
             
@@ -107,8 +110,7 @@ namespace CMS.CMSPages
         //confirm insert
         protected void InsertButton_Click(object sender, EventArgs e)
         {
-            if ((this.DescriptionTextBox.Text.Length > 0) && (this.CostTextBox.Text.Length > 0)
-                && this.AutoAddressTextBox_CustomValidator.IsValid && this.ManualAddressTextBox_CustomValidator.IsValid)
+            if (this.Page.IsValid)
             { 
                 // get streetNo, streetName, suburb from address
                 String address;
@@ -146,13 +148,13 @@ namespace CMS.CMSPages
                 for (int i = 0; i < count-1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images");
+                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images", null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video");
+                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null);
                 }
 
                 this.POIGridView.DataBind();
@@ -214,6 +216,7 @@ namespace CMS.CMSPages
 
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
+            this.EditTitleLabel.Text = "Update Point Of Interest";
             this.AddressMultiView.ActiveViewIndex = 0;
             this.ManualLatTextBox.Text = "";
             this.ManualLogTextBox.Text = "";
@@ -259,16 +262,14 @@ namespace CMS.CMSPages
         {
             int itemID = (Int32)this.POIGridView.SelectedDataKey.Value;
             dataAccess.DeleteMediaByItemID(itemID);
-            dataAccess.DeletePOI(itemID, Convert.ToInt32(this.CategoryIDHiddenField.Value),
-                                Convert.ToInt32(this.SubtypeIDHiddenField.Value));
+            dataAccess.DeletePOI(itemID, Convert.ToInt32(this.SubtypeIDHiddenField.Value));
             this.POIGridView.DataBind();
             this.POIMultiView.ActiveViewIndex = -1;
         }
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            if ((this.DescriptionTextBox.Text.Length > 0) && (this.CostTextBox.Text.Length > 0)
-                && this.AutoAddressTextBox_CustomValidator.IsValid && this.ManualAddressTextBox_CustomValidator.IsValid)
+            if (this.Page.IsValid)
             {
                 // get streetNo, streetName, suburb from address
                 String address;
@@ -321,13 +322,13 @@ namespace CMS.CMSPages
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images");
+                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images", null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video");
+                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null);
                 }
                 this.POIGridView.DataBind();
                 this.POIMultiView.ActiveViewIndex = -1;

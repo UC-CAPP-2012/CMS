@@ -176,6 +176,7 @@
                 </asp:ObjectDataSource>
             </div>
             <div class="contentDetail event">
+                <div class="contentDetailWrapper">
                 <asp:ScriptManager ID="ScriptManager1" runat="server"/>
                 <asp:MultiView ID="EventMultiView" runat="server">
                     <!-- default detail display -->
@@ -193,39 +194,39 @@
                         <hr />
                         <p>
                             <asp:Label ID="DetailNameLabel" runat="server" CssClass="label" Font-Bold="True" Text="Event Name : " Width="150px"></asp:Label>
-                            <asp:Label ID="NameDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="NameDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailSubtypeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Subtype : " Width="150px"></asp:Label>
-                            <asp:Label ID="SubtypeDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="SubtypeDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailPhoneLabel" runat="server" CssClass="label" Font-Bold="True" Text="Phone : " Width="150px"></asp:Label>
-                            <asp:Label ID="PhoneDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="PhoneDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailEmailLabel" runat="server" CssClass="label" Font-Bold="True" Text="Email : " Width="150px"></asp:Label>
-                            <asp:Label ID="EmailDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="EmailDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailWebsiteLabel" runat="server" CssClass="label" Font-Bold="True" Text="Website : " Width="150px"></asp:Label>
-                            <asp:Label ID="WebsiteDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="WebsiteDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailStartDateLabel" runat="server" CssClass="label" Font-Bold="True" Text="Start Date : " Width="150px"></asp:Label>
-                            <asp:Label ID="StartDateDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="StartDateDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailEndDateLabel" runat="server" CssClass="label" Font-Bold="True" Text="End Date: " Width="150px"></asp:Label>
-                            <asp:Label ID="EndDateDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="EndDateDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailOpeningHoursLabel" runat="server" CssClass="label" Font-Bold="True" Text="Opening Hours : " Width="150px"></asp:Label>
-                            <asp:Label ID="OpeningHoursDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="OpeningHoursDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailCostLabel" runat="server" CssClass="label" Font-Bold="True" Text="Cost : " Width="150px"></asp:Label>
-                            <asp:Label ID="CostDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="CostDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailRatingLabel" runat="server" CssClass="label" Font-Bold="True" Text="Rating : " Width="150px"></asp:Label>
@@ -234,23 +235,23 @@
                         </p>
                         <p>
                             <asp:Label ID="DetailDescriptionLabel" runat="server" CssClass="label" Font-Bold="True" Text="Detailed Description : " Width="150px"></asp:Label>
-                            <asp:Label ID="DescriptionDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="DescriptionDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailPostcodeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Postcode : " Width="150px"></asp:Label>
-                            <asp:Label ID="PostcodeDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="PostcodeDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailAddressLabel" runat="server" CssClass="label" Font-Bold="True" Text="Address : " Width="150px"></asp:Label>
-                            <asp:Label ID="AddressDataLabel" runat="server" Width="480px"></asp:Label>
+                            <asp:Label ID="AddressDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
-                            <div runat="server" id="eventImages" Width="480px"></div>
+                            <div runat="server" id="eventImages" Width="460px"></div>
                        </p>
                         <p>
                             <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
-                            <div runat="server" id="eventVideo" Width="480px"></div>
+                            <div runat="server" id="eventVideo" Width="460px"></div>
                         </p>
                         <asp:HiddenField ID="SubtypeIDHiddenField" runat="server" />
                     </asp:View>
@@ -258,14 +259,14 @@
                     <!-- insert and update new display (Visible when insert link button is clicked
                                     or update button is clicked) -->
                     <asp:View ID="InsertView" runat="server">
-                            <h1> Insert New Event </h1> 
+                            <h1> <asp:Label ID="EditTitleLabel" runat="server"></asp:Label> </h1> 
                             <hr />
                         <!-- Name -->
                         <asp:Label ID="NameLabel" CssClass="label" runat="server" Text="Event Name : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="NameTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
                         <p class="validationError">             
                             <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
-                            ErrorMessage="POI name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
+                            ErrorMessage="Event name is required." ControlToValidate="NameTextBox" SetFocusOnError="True" />
                         </p>
                         <!-- Subtype -->
                         <asp:Label ID="SubTypeLabel" CssClass="label" runat="server" Text="Subtype : " Font-Bold="True" Width="150px" ></asp:Label>
@@ -343,7 +344,7 @@
                             onservervalidate="numberInputValidate" ControlToValidate="PostcodeTextBox"></asp:CustomValidator>
                         </p> 
                         <!-- Address -->
-                                            <asp:Label ID="AddressLabel" CssClass="label" runat="server" Text="Address : " Font-Bold="True" Width="150px" ></asp:Label>
+                    <asp:Label ID="AddressLabel" CssClass="label" runat="server" Text="Address : " Font-Bold="True" Width="150px" ></asp:Label>
                     <div class="AddressMaster">                        
                         <asp:LinkButton ID="AutoLinkButton" runat="server" CssClass="tabButton" 
                             Text="Auto Address" BackColor="LightGray" CausesValidation="false" 
@@ -380,14 +381,20 @@
                         <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
                         <br /><br />
+
                         <!-- Images -->
-                    <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:Label ID="Label6" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
-                    <asp:Button ID="btnUpload" runat="server" Text="Upload All" CssClass="poiUploadBtn" onclick="btnUpload_Click" />
-            <asp:Label ID="StatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
-                   <div runat="server" id="eventsImagesAddUpdate"></div>
-                   <asp:HiddenField ID="ImageUploadFileName" runat="server" />
+                        <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <div>
+                            <asp:Label ID="Label6" runat="server" Text="Max Size: 50kb, Allowed Type: JPEG, PNG, GIF" 
+                                    CssClass="imgLabel"></asp:Label><br />
+                            <asp:FileUpload ID="FileUpload" runat="server" maxlength="5" class="multi"  />
+                            <asp:Button ID="btnUpload" runat="server" Text="Upload All"  CssClass="poiUploadBtn"  onclick="btnUpload_Click" CausesValidation="False" />
+                        </div>
+                        <div class="imgUploadResult">
+                            <asp:Label ID="StatusLabel" runat="server" Text="" ForeColor="Red" ></asp:Label>
+                            <div runat="server" id="eventsImagesAddUpdate"></div>
+                        </div>
+                       <asp:HiddenField ID="ImageUploadFileName" runat="server" />
                         <!-- Buttons -->
                         <div class="detailButtons bottom">
                             <asp:MultiView ID="ButtonMultiView" runat="server">
@@ -404,7 +411,7 @@
                                 <asp:View ID="InsertButtonView" runat="server">
                                     <asp:Button ID="InsertButton" runat="server" Text="Confirm" Width="100px"  onclick="InsertButton_Click" />
                                     <asp:ConfirmButtonExtender ID="InsertButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
-                                        runat="server" ConfirmText="Do you want to submit the new point of interest?" Enabled="True" 
+                                        runat="server" ConfirmText="Do you want to submit the new event?" Enabled="True" 
                                         TargetControlID="InsertButton" ConfirmOnFormSubmit="True">
                                     </asp:ConfirmButtonExtender>
                                     <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
@@ -417,7 +424,7 @@
                     </asp:View>
                 </asp:MultiView>
             </div>
-    
+            </div>
         </div>
     </div>
     
