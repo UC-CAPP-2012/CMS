@@ -50,6 +50,8 @@
                         </asp:GridView>
                         <asp:ObjectDataSource ID="UsersObjectDataSource" runat="server" 
                             SelectMethod="getAllUsers" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource>
+                        <div class="export-xml-btns"><asp:Button ID="btnAllUsersXML" runat="server" Text="Export to XML" 
+                            onclick="btnAllUsersXML_Click" /></div>
                     </asp:View>
                     <asp:View ID="SubcribedUsersView" runat="server">
                     <h1>All Subcribed Users</h1>
@@ -82,6 +84,8 @@
                         </asp:GridView>
                         <asp:ObjectDataSource ID="SubcribedUsersObjectDataSource" runat="server" 
                             SelectMethod="getAllSubcribedUsers" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource>
+                            <div class="export-xml-btns"><asp:Button ID="btnSubcribedUsersXML" runat="server" 
+                                    Text="Export to XML" onclick="btnSubcribedUsersXML_Click"  /></div>
                     </asp:View>
                     <asp:View ID="UnsubcribedUsersView" runat="server">
                     <h1>All Unsubcribed Users</h1>
@@ -114,10 +118,11 @@
                         </asp:GridView>
                         <asp:ObjectDataSource ID="UnsubcribedUsersObjectDataSource" runat="server" 
                             SelectMethod="getAllUnsubcribedUsers" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource>
+                            <div class="export-xml-btns"><asp:Button ID="btnUnsubcribedUsersXML" runat="server" 
+                                    Text="Export to XML" onclick="btnUnsubcribedUsersXML_Click"/></div>
                     </asp:View>
                 </asp:MultiView>
             </div>
             </div>    
         </div>
-    </div>
 </asp:Content>

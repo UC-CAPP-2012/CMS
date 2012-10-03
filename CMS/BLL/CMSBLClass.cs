@@ -353,7 +353,7 @@ namespace CMS.BLL
         public int updateTourLocation(int TourID, short TourSeqNum, String LocationName, double Latitude, double Longitude, String Address, 
                 String Suburb, short Postcode, int Original_TourLocationID)
         {
-            return tourLocationTableAdapter.UpdateByTourLocationID(TourID, TourSeqNum, LocationName, Latitude, Longitude, Address, 
+            return tourLocationTableAdapter.UpdateByTourLocationID(TourID, TourSeqNum, LocationName, Convert.ToDecimal(Latitude), Convert.ToDecimal(Longitude), Address, 
                 Suburb, Postcode, Original_TourLocationID);
         }
 

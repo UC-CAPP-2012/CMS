@@ -76,6 +76,15 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.ObjectDataSource UsersObjectDataSource;
         
         /// <summary>
+        /// btnAllUsersXML control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAllUsersXML;
+        
+        /// <summary>
         /// SubcribedUsersView control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.ObjectDataSource SubcribedUsersObjectDataSource;
         
         /// <summary>
+        /// btnSubcribedUsersXML control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubcribedUsersXML;
+        
+        /// <summary>
         /// UnsubcribedUsersView control.
         /// </summary>
         /// <remarks>
@@ -128,5 +146,14 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource UnsubcribedUsersObjectDataSource;
+        
+        /// <summary>
+        /// btnUnsubcribedUsersXML control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUnsubcribedUsersXML;
     }
 }

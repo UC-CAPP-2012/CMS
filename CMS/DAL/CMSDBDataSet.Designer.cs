@@ -13003,9 +13003,9 @@ WHERE  (Item.ItemID LIKE ?)";
             this._commandCollection[3].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[4] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = "UPDATE `TourLocation` SET `TourID` = ?, `TourSeqNum` = ?, `LocationName` = ?, `La" +
-                "titude` = ?, `Longitude` = ?, `Address` = ?, `Suburb` = ?, `Postcode` = ? WHERE " +
-                "((`TourLocationID` = ?))";
+            this._commandCollection[4].CommandText = "UPDATE       TourLocation\r\nSET                TourID = ?, TourSeqNum = ?, Locatio" +
+                "nName = ?, Latitude = ?, Longitude = ?, Address = ?, Suburb = ?, Postcode = ?\r\nW" +
+                "HERE        (TourLocationID = ?)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourSeqNum", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourSeqNum", global::System.Data.DataRowVersion.Current, false, null));
@@ -13272,8 +13272,7 @@ WHERE  (Item.ItemID LIKE ?)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateByTourLocationID(int TourID, short TourSeqNum, string LocationName, double Latitude, double Longitude, string Address, string Suburb, global::System.Nullable<short> Postcode, int Original_TourLocationID)
-        {
+        public virtual int UpdateByTourLocationID(int TourID, short TourSeqNum, string LocationName, decimal Latitude, decimal Longitude, string Address, string Suburb, global::System.Nullable<short> Postcode, int Original_TourLocationID) {
             global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[4];
             command.Parameters[0].Value = ((int)(TourID));
             command.Parameters[1].Value = ((short)(TourSeqNum));

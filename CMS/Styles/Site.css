@@ -950,3 +950,8 @@ div.accountInfo
 {
     display: none;
 }
+
+.export-xml-btns
+{
+    padding-top: 15px;
+}
