@@ -229,6 +229,11 @@ namespace CMS.BLL
             return mediaTableAdapter.GetDataByItemID(ItemID);
         }
 
+        public DAL.CMSDBDataSet.MediaDataTable getMediaByTourID(int TourID)
+        {
+            return mediaTableAdapter.GetDataByTourID(TourID);
+        }
+
         public int UpdateMedia(int? ItemID, String MediaURL, String MediaType, int? TourID, int Original_MediaID)
         {
             return mediaTableAdapter.Update(ItemID, MediaURL, MediaType, TourID, Original_MediaID);
@@ -239,9 +244,19 @@ namespace CMS.BLL
             return mediaTableAdapter.DeleteByItemID(ItemID);
         }
 
+        public int DeleteMediaByTourID(int TourID)
+        {
+            return mediaTableAdapter.DeleteByTourID(TourID);
+        }
+
         public int DeleteMediaByMediaURL(int ItemID, string MediaURL)
         {
             return mediaTableAdapter.DeleteByMediaURL( MediaURL, ItemID);
+        }
+
+        public int DeleteMediaByMediaURLAndTourID(int TourID, string MediaURL)
+        {
+            return mediaTableAdapter.DeleteByMediaURLAndTourID(MediaURL, TourID);
         }
 
         public int DeleteMedia(int Original_MediaID)
@@ -254,9 +269,19 @@ namespace CMS.BLL
             return Convert.ToInt32(mediaTableAdapter.CountImagesMediaByItemId(ItemID));
         }
 
+        public int CountImagesMediaByTourID(int TourID)
+        {
+            return Convert.ToInt32(mediaTableAdapter.CountImagesMediaByTourID(TourID));
+        }
+
         public int DeleteVideoMediaByItemId(int ItemID)
         {
             return mediaTableAdapter.DeleteVideoMedia(ItemID);
+        }
+
+        public int DeleteVideoMediaByTourId(int TourID)
+        {
+            return mediaTableAdapter.DeleteVideoMediaByTourID(TourID);
         }
 
         public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID)
@@ -353,7 +378,7 @@ namespace CMS.BLL
         public int updateTourLocation(int TourID, short TourSeqNum, String LocationName, double Latitude, double Longitude, String Address, 
                 String Suburb, short Postcode, int Original_TourLocationID)
         {
-            return tourLocationTableAdapter.UpdateByTourLocationID(TourID, TourSeqNum, LocationName, Convert.ToDecimal(Latitude), Convert.ToDecimal(Longitude), Address, 
+            return tourLocationTableAdapter.UpdateByTourLocationID(TourID, TourSeqNum, LocationName, Latitude, Longitude, Address, 
                 Suburb, Postcode, Original_TourLocationID);
         }
 

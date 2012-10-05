@@ -27,3 +27,5 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
+CMS/App_Data/ASPNETDB.MDF
+CMS/App_Data/aspnetdb_log.LDF

@@ -98,6 +98,7 @@ namespace CMS.CMSPages
             this.PostcodeTextBox.Text = "";
             this.AddressTextBox.Text = "";
             this.EditTitleLabel.Text = "Insert New Point Of Interest";
+
             this.StatusLabel.Text = "";
             this.VideoTextBox.Text = "";
             ImageUploadFileName.Value = "";
