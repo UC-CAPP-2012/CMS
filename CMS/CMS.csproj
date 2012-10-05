@@ -98,6 +98,7 @@
     <Content Include="Resources\button-hover.png" />
     <Content Include="Resources\ccapp-banner.png" />
     <Content Include="Resources\ccapp-logo.png" />
+    <Content Include="Resources\cross.png" />
     <Content Include="Resources\elgg_sprites.png" />
     <Content Include="Resources\EmptyStar.png" />
     <Content Include="Resources\FilledStar.png" />

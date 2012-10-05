@@ -25,17 +25,21 @@ body
     float: left;
     padding-bottom: 30px;
     padding-right: 30px;
+    position:relative;
+    padding-top: 10px;
 } 
     
 
 .delete-image, .upload-images
 {
+    background: url("/Resources/cross.png") no-repeat scroll 4px center white;
     border: 2px solid black;
     border-radius: 15px 15px 15px 15px;
     box-shadow: 0 1px 5px 1px #333333;
+    float: right;
     padding: 8px !important;
-    float:right;
-    
+    position: absolute;
+    right: 50px;
 }
 
 a:link, a:visited
