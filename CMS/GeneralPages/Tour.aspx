@@ -258,12 +258,12 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                         ErrorMessage="Detailed description is required." ControlToValidate="DescriptionTextBox" SetFocusOnError="True" />
                     </p>                                       
-                        
+                   <div class="clear"></div>     
                     <!-- YouTube Video -->
                     <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
                     <br /><br />
-
+                    <div class="clear"></div>
                     <!-- Images -->
                     <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
                     <div>
@@ -311,9 +311,10 @@
 
 
                     </script>
-
+                    <div class="clear"></div>
                     <!-- Tour Locations -->
                     <asp:Label ID="Label1" CssClass="label" runat="server" Text="Tour Locations : " Font-Bold="True" Width="150px" ></asp:Label>
+                    <div class="clear"></div>
                     <div class="LocationMaster">                        
                         <asp:LinkButton ID="ViewLinkButton" runat="server" CssClass="tabButton" 
                             Text="View List" BackColor="LightGray" CausesValidation="false" 
@@ -406,6 +407,7 @@
                                             ControlToValidate="AddressTextBox" ValidateEmptyText="True"></asp:CustomValidator>
                                     </p>
                                     <div class="map location" id="map"></div>
+                                    <div class="clear"></div><br/>
                                     <asp:HiddenField ID="LatitudeHiddenField" runat="server"/>
                                     <asp:HiddenField ID="LongitudeHiddenField" runat="server" />
                                     <asp:HiddenField ID="DeletedLocationIDHiddenField" runat="server" />
@@ -448,6 +450,7 @@
                             <asp:Label ID="LocationListErrorLabel" runat="server" Text="At least one location is required." Visible="false" ></asp:Label>
                         </p>
                     </div>
+                    <div class="clear"></div>
                     <!-- Buttons -->
                     <div class="detailButtons bottom">
                         <asp:MultiView ID="ButtonMultiView" runat="server">

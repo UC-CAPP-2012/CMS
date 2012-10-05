@@ -151,13 +151,13 @@ namespace CMS.CMSPages
                 for (int i = 0; i < count-1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images", null);
+                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images", null, null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null);
+                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null, null);
                 }
                 CurrentImagesFileName.Value = "";
                 this.POIGridView.DataBind();
@@ -330,14 +330,14 @@ namespace CMS.CMSPages
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images", null);
+                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images", null, null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 dataAccess.DeleteVideoMediaByItemId(itemID);
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null);
+                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null, null);
                 }
                 this.POIGridView.DataBind();
                 this.POIMultiView.ActiveViewIndex = -1;

@@ -252,14 +252,14 @@ namespace CMS.GeneralPages
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(null, "../Media/" + filename, "Images", TourID);
+                    dataAccess.InsertMedia(null, "../Media/" + filename, "Images", TourID, null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 dataAccess.DeleteVideoMediaByTourId(TourID);
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID);
+                    dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID, null);
                 }
 
                 this.TourGridView.DataBind();
@@ -368,13 +368,13 @@ namespace CMS.GeneralPages
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(null, "../Media/" + filename, "Images", TourID);
+                    dataAccess.InsertMedia(null, "../Media/" + filename, "Images", TourID, null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID);
+                    dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID, null);
                 }
                 CurrentImagesFileName.Value = "";
 

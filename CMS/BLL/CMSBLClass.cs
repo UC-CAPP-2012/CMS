@@ -234,9 +234,14 @@ namespace CMS.BLL
             return mediaTableAdapter.GetDataByTourID(TourID);
         }
 
-        public int UpdateMedia(int? ItemID, String MediaURL, String MediaType, int? TourID, int Original_MediaID)
+        public DAL.CMSDBDataSet.MediaDataTable getMediaByTourLocationID(int TourLocationID)
         {
-            return mediaTableAdapter.Update(ItemID, MediaURL, MediaType, TourID, Original_MediaID);
+            return mediaTableAdapter.GetDataByTourLocationID(TourLocationID);
+        }
+
+        public int UpdateMedia(int? ItemID, String MediaURL, String MediaType, int? TourID, int? TourLocationID, int Original_MediaID)
+        {
+            return mediaTableAdapter.Update(ItemID, MediaURL, MediaType, TourID, TourLocationID, Original_MediaID);
         }
 
         public int DeleteMediaByItemID(int ItemID)
@@ -249,6 +254,11 @@ namespace CMS.BLL
             return mediaTableAdapter.DeleteByTourID(TourID);
         }
 
+        public int DeleteMediaByTourLocationID(int TourLocationID)
+        {
+            return mediaTableAdapter.DeleteByTourLocationID(TourLocationID);
+        }
+        
         public int DeleteMediaByMediaURL(int ItemID, string MediaURL)
         {
             return mediaTableAdapter.DeleteByMediaURL( MediaURL, ItemID);
@@ -257,6 +267,11 @@ namespace CMS.BLL
         public int DeleteMediaByMediaURLAndTourID(int TourID, string MediaURL)
         {
             return mediaTableAdapter.DeleteByMediaURLAndTourID(MediaURL, TourID);
+        }
+
+        public int DeleteMediaByMediaURLAndTourLocationID(int TourLocationID, string MediaURL)
+        {
+            return mediaTableAdapter.DeleteByMediaURLAndTourLocationID(MediaURL, TourLocationID);
         }
 
         public int DeleteMedia(int Original_MediaID)
@@ -274,6 +289,11 @@ namespace CMS.BLL
             return Convert.ToInt32(mediaTableAdapter.CountImagesMediaByTourID(TourID));
         }
 
+        public int CountImagesMediaByTourLocationID(int TourLocationID)
+        {
+            return Convert.ToInt32(mediaTableAdapter.CountImagesMediaByTourLocationID(TourLocationID));
+        }
+
         public int DeleteVideoMediaByItemId(int ItemID)
         {
             return mediaTableAdapter.DeleteVideoMedia(ItemID);
@@ -284,9 +304,14 @@ namespace CMS.BLL
             return mediaTableAdapter.DeleteVideoMediaByTourID(TourID);
         }
 
-        public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID)
+        public int DeleteVideoMediaByTourLocationId(int Location)
         {
-            return mediaTableAdapter.Insert(ItemID, MediaURL, MediaType, TourID);
+            return mediaTableAdapter.DeleteVideoMediaByTourLocationID(Location);
+        }
+
+        public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID, int? TourLocationID)
+        {
+            return mediaTableAdapter.Insert(ItemID, MediaURL, MediaType, TourID, TourLocationID);
         }
 
 
@@ -364,6 +389,12 @@ namespace CMS.BLL
             return tourLocationTableAdapter.GetDataByTourID(TourID);
         }
 
+        public DAL.CMSDBDataSet.TourLocationRow getTourLocationByTourLocationID(int TourLocationID)
+        {
+            return (DAL.CMSDBDataSet.TourLocationRow) tourLocationTableAdapter.GetDataByTourLocationID(TourLocationID).Rows[0];
+        }
+
+
         public int deleteTourLocationByLocationID(int TourLocationID)
         {
             return tourLocationTableAdapter.Delete(TourLocationID);
@@ -381,8 +412,5 @@ namespace CMS.BLL
             return tourLocationTableAdapter.UpdateByTourLocationID(TourID, TourSeqNum, LocationName, Latitude, Longitude, Address, 
                 Suburb, Postcode, Original_TourLocationID);
         }
-
-        
-
     }
 }
