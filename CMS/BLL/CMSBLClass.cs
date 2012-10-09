@@ -412,5 +412,15 @@ namespace CMS.BLL
             return tourLocationTableAdapter.UpdateByTourLocationID(TourID, TourSeqNum, LocationName, Latitude, Longitude, Address, 
                 Suburb, Postcode, Original_TourLocationID);
         }
+
+        public int getTourLocationIDByTourIDAndTourSeqNum(int tourID, short tourSeqNum)
+        {
+            return Convert.ToInt32(tourLocationTableAdapter.getTourLocationIDByTourIDAndSeqNum(tourID, tourSeqNum));
+        }
+
+        public int deleteTourLocationByTourID(int tourID)
+        {
+            return tourLocationTableAdapter.DeleteByTourID(tourID);
+        }
     }
 }

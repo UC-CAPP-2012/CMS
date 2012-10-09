@@ -29,6 +29,15 @@ body
     padding-top: 10px;
 } 
     
+.location-images
+{
+    width: 150px;   
+    float: left;
+    padding-bottom: 30px;
+    padding-right: 30px;
+    position:relative;
+    padding-top: 10px;
+} 
 
 .delete-image, .upload-images
 {
@@ -39,7 +48,19 @@ body
     float: right;
     padding: 8px !important;
     position: absolute;
-    right: 50px;
+    right: 20px;
+}
+
+.location-delete-image, .location-upload-images
+{
+    background: url("/Resources/cross.png") no-repeat scroll 4px center white;
+    border: 2px solid black;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 0 1px 5px 1px #333333;
+    float: right;
+    padding: 8px !important;
+    position: absolute;
+    right: 20px;
 }
 
 a:link, a:visited
@@ -324,15 +345,29 @@ first child of the left and right table columns */
 {
     position:relative;
     float: left;
+    margin-left:50px;
+}
+
+.locationUploadBtn
+{
+    position:relative;
+    float: left;
 }
 
 .MultiFile-wrap
 {
     float:left;
     position:relative;
-    width:240px;  
+    width:190px;  
     margin-left:160px  ;
 }
+
+.location.multi 
+{
+    margin-left:-50px  ;
+    margin-right:-50px;
+}
+
 
 .MultiFile-list
 {
@@ -351,6 +386,14 @@ first child of the left and right table columns */
     position:relative;
     float:left;
     margin-left:160px;  
+    width:500px;
+}
+
+.location.imgUploadResult
+{
+    position:relative;
+    float:left;
+    margin-left:110px;  
     width:500px;
 }
 
@@ -440,6 +483,13 @@ first child of the left and right table columns */
     margin-left:160px;    
 }
 
+.LocationViewMaster
+{
+    position:relative;
+    float:left;
+    margin-bottom:20px;
+}
+
 .Location
 {
     background-color:LightGray;
@@ -460,11 +510,29 @@ first child of the left and right table columns */
     font-weight:normal;
 }
 
+ .LocationViewMaster a, .LocationViewMaster a:visited
+ { 
+    font-size: 13px; 
+    line-height: 13px; 
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25); 
+    color:Black;
+    padding: 1px 10px 1px;
+    cursor:pointer;
+    text-decoration:none;
+    font-weight:normal;
+}
+
 .locationButtons
 {
     margin-top:10px;
     margin-right:10px; 
     text-align:right;   
+}
+
+.notabled, .notabled:visited, .notabled:active
+{
+    cursor:default !important;  
+    color:Black;  
 }
 
 /* Rating */

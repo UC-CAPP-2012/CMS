@@ -33,6 +33,16 @@ namespace CMS.GeneralPages
         {
             poiImages.InnerHtml = "";
             poiVideo.InnerHtml = "";
+
+            this.EditLocationGridView.DataBind();
+            this.LocationGridView.DataBind();
+            this.EditLocationGridView.DataBind();
+            this.LocationMultiView.ActiveViewIndex = 0;
+            this.LocationViewMultiView.ActiveViewIndex = 0;
+
+            this.ViewListLinkButton.BackColor = Color.LightGray;
+            this.ViewDetailLinkButton.BackColor = Color.Gray;
+
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
             DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
             this.NameDataLabel.Text = tour["TourName"].ToString();
@@ -42,9 +52,9 @@ namespace CMS.GeneralPages
             this.CostDataLabel.Text = tour["TourCost"].ToString();
             this.DescriptionDataLabel.Text = tour["TourDetail"].ToString();
             this.TourIDHiddenField.Value = tour["TourID"].ToString();
-            this.LocationGridView.DataBind();            
-            this.TourMultiView.ActiveViewIndex = 0;
-
+            this.LocationGridView.DataBind();
+            this.LocationGridView.SelectedIndex = -1;
+            this.TourMultiView.ActiveViewIndex = 0;            
             bool hasVideo = false;
             bool hasImages = false;
             var media = dataAccess.getMediaByTourID(TourID);
@@ -84,10 +94,11 @@ namespace CMS.GeneralPages
                 lst.Add(item);
             }
 
+
             this.SeqDropDownList.DataSource = lst;
             this.SeqDropDownList.DataBind();
 
-            this.TourIDHiddenField.Value = "";
+            this.TourIDHiddenField.Value = "-1";
             this.EditLocationGridView.DataBind();
             this.NameTextBox.Text = "";
             this.PhoneTextBox.Text = "";
@@ -101,16 +112,27 @@ namespace CMS.GeneralPages
             this.LocationNameTextBox.Text = "";
             this.SeqDropDownList.SelectedIndex = 0;
 
-            this.StatusLabel.Text = "";
             this.VideoTextBox.Text = "";
-            ImageUploadFileName.Value = "";
-            this.poiImagesAddUpdate.InnerHtml = "";
             FileUpload.Attributes.Remove("maxlength");
             FileUpload.Attributes.Add("maxlength", (5).ToString());
+
+            CurrentImagesFileName.Value = "";
+            StatusLabel.Text = "";
+            ImageUploadFileName.Value = "";
+            ImageDeleteFileName.Value = "";
+            poiImagesAddUpdate.InnerHtml = "";
+
+            AddedImagesHiddenField.Value = "";
+            DeletedImagesHiddenField.Value = "";
+            AddedImagesForNewLocationHiddenField.Value = "";
+            LocationImagesList.InnerHtml = "";
+            AddedVideosForNewLocationHiddenField.Value = "";
+            AddedVideosHiddenField.Value = "";
 
             this.EditTitleLabel.Text = "Insert New Tour";
             this.ViewLinkButton.BackColor = Color.Gray;
             this.AddNewLinkButton.BackColor = Color.LightGray;
+            
             this.LocationMultiView.ActiveViewIndex = 1;
             this.LocationButtonMultiView.ActiveViewIndex = 1;
             this.ButtonMultiView.ActiveViewIndex = 1;
@@ -124,11 +146,18 @@ namespace CMS.GeneralPages
             ImageUploadFileName.Value = "";
             ImageDeleteFileName.Value = "";
             poiImagesAddUpdate.InnerHtml = "";
-            int TourID = Convert.ToInt32(this.TourIDHiddenField.Value);
+
+            AddedImagesHiddenField.Value = "";
+            DeletedImagesHiddenField.Value = "";
+            AddedImagesForNewLocationHiddenField.Value = "";
+            AddedVideosForNewLocationHiddenField.Value = "";
+            AddedVideosHiddenField.Value = "";
+
+            int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
             locationTable = dataAccess.getTourLocationByTourID(TourID);
             this.EditLocationGridView.DataSource = locationTable;
             this.EditLocationGridView.DataBind();
-            DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(Convert.ToInt32(this.TourIDHiddenField.Value));
+            DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
             this.EditTitleLabel.Text = "Update Tour";
             this.NameTextBox.Text = tour["TourName"].ToString();
             this.PhoneTextBox.Text = tour["TourPhone"].ToString();
@@ -157,6 +186,8 @@ namespace CMS.GeneralPages
             }
 
             this.LocationMultiView.ActiveViewIndex = 0;
+            this.ViewLinkButton.BackColor = Color.LightGray;
+            this.AddNewLinkButton.BackColor = Color.Gray;
             this.ButtonMultiView.ActiveViewIndex = 0;
             this.TourMultiView.ActiveViewIndex = 1;
         }
@@ -164,6 +195,12 @@ namespace CMS.GeneralPages
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             int tourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
+            DAL.CMSDBDataSet.TourLocationDataTable locations = dataAccess.getTourLocationByTourID(tourID);
+            foreach (DAL.CMSDBDataSet.TourLocationRow row in locations.Rows)
+            {
+                dataAccess.DeleteMediaByTourLocationID(Convert.ToInt32(row["TourLocationID"].ToString()));
+            }
+            dataAccess.deleteTourLocationByTourID(tourID);
             dataAccess.DeleteMediaByTourID(tourID);
             dataAccess.deleteTour(tourID);
             this.TourGridView.DataBind();
@@ -225,6 +262,7 @@ namespace CMS.GeneralPages
                     {
                         if (!id.Equals(""))
                         {
+                            dataAccess.DeleteMediaByTourLocationID(Convert.ToInt32(id));
                             dataAccess.deleteTourLocationByLocationID(Convert.ToInt32(id));
                         }
                     }
@@ -236,9 +274,11 @@ namespace CMS.GeneralPages
                 String TourPhone = this.PhoneTextBox.Text;
                 String TourWebsite = WebsiteTextBox.Text;
                 String TourEmail = this.EmailTextBox.Text;
-                int TourID = Convert.ToInt32(this.TourIDHiddenField.Value);
+                int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
 
                 dataAccess.updateTour(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, TourID);
+
+                //TourImages
 
                 int imageDeleteCount = ImageDeleteFileName.Value != "" ? ImageDeleteFileName.Value.Split(';').Length : 0;
                 for (int y = 0; y < imageDeleteCount - 1; y++)
@@ -262,13 +302,82 @@ namespace CMS.GeneralPages
                     dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID, null);
                 }
 
+                //LocationImages
+                int locationImageDeleteCount = DeletedImagesHiddenField.Value != "" ? DeletedImagesHiddenField.Value.Split(';').Length : 0;
+                for (int y = 0; y < locationImageDeleteCount - 1; y++)
+                {
+                    int locationID = Convert.ToInt32(DeletedImagesHiddenField.Value.Split(';')[y].Split('/')[0]);
+                    string deletedFilename = DeletedImagesHiddenField.Value.Split(';')[y].Split('/')[1];
+                    dataAccess.DeleteMediaByMediaURLAndTourLocationID(locationID, "../Media/" + deletedFilename);
+                    System.IO.File.Delete(Server.MapPath("~/Media/" + deletedFilename));
+                }
+
+                int locationCount = AddedImagesHiddenField.Value != "" ? AddedImagesHiddenField.Value.Split(';').Length : 0;
+                for (int i = 0; i < locationCount - 1; i++)
+                {
+                    int locationID = Convert.ToInt32(AddedImagesHiddenField.Value.Split(';')[i].Split('/')[0]);
+                    string filename = AddedImagesHiddenField.Value.Split(';')[i].Split('/')[1];
+                    if (!this.DeletedImagesHiddenField.Value.Contains(filename))
+                    {
+                        dataAccess.InsertMedia(null, "../Media/" + filename, "Images", null, locationID);
+                        System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
+                    }
+                }                
+                
+                foreach(string locationImg in AddedImagesForNewLocationHiddenField.Value.Split('@'))
+                {
+                    if (locationImg.Length > 0)
+                    {
+                        int tourID = Convert.ToInt32(locationImg.Split('+')[0]);
+                        short seq = Convert.ToInt16(locationImg.Split('+')[1]);
+                        int locationID = dataAccess.getTourLocationIDByTourIDAndTourSeqNum(tourID, seq);
+                        foreach (string img in locationImg.Split('+')[2].Split(';'))
+                        {
+                            if (img.Length > 0)
+                            {
+                                string filename = img.Split('/')[1];
+                                if (!this.DeletedImagesHiddenField.Value.Contains(filename))
+                                {
+                                    dataAccess.InsertMedia(null, "../Media/" + filename, "Images", null, locationID);
+                                    System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                foreach (string video in AddedVideosHiddenField.Value.Split(';'))
+                {
+                    if (video.Length > 0)
+                    {
+                        int locationID = Convert.ToInt32(video.Split('#')[0]);
+                        string videoURL = video.Split('#')[1];
+                        dataAccess.DeleteVideoMediaByTourId(locationID);
+                        dataAccess.InsertMedia(null, videoURL, "Video", null, locationID);
+                    }
+                }
+
+                foreach (string video in AddedVideosForNewLocationHiddenField.Value.Split(';'))
+                {
+                    if (video.Length > 0)
+                    {
+                        int tourId = Convert.ToInt32(video.Split('#')[0]);
+                        short seq = Convert.ToInt16(video.Split('#')[1]);
+                        int locationID = dataAccess.getTourLocationIDByTourIDAndTourSeqNum(tourId, seq);
+                        dataAccess.DeleteVideoMediaByTourId(locationID);
+                        dataAccess.InsertMedia(null, video.Split('#')[3], "Video", null, locationID);
+                    }
+                }
+
                 this.TourGridView.DataBind();
                 this.LocationGridView.DataBind();
                 this.DeletedLocationIDHiddenField.Value = "";
                 this.DeletedLocationIndexHiddenField.Value = "";
                 this.InsertedLocationIndexHiddenField.Value = "";
+
                 Session.Remove("LocationTable");
                 this.TourMultiView.ActiveViewIndex = -1;
+
             }
             else
             {
@@ -277,6 +386,7 @@ namespace CMS.GeneralPages
                 else
                     this.LocationListErrorLabel.Visible = false;
             }
+
         }
 
         //cancel update
@@ -359,11 +469,13 @@ namespace CMS.GeneralPages
                     {
                         if (!id.Equals(""))
                         {
+                            dataAccess.DeleteMediaByTourLocationID(Convert.ToInt32(id));
                             dataAccess.deleteTourLocationByLocationID(Convert.ToInt32(id));
                         }
                     }
                 }
 
+                //tourImages
                 int count = ImageUploadFileName.Value.Split(';').Length;
                 for (int i = 0; i < count - 1; i++)
                 {
@@ -377,6 +489,55 @@ namespace CMS.GeneralPages
                     dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID, null);
                 }
                 CurrentImagesFileName.Value = "";
+                
+                //locationImages
+                foreach (string locationImg in AddedImagesForNewLocationHiddenField.Value.Split('@'))
+                {
+                    if (locationImg.Length > 0)
+                    {
+                        if (locationImg.Split('+')[0].Equals("-1"))
+                        {
+                            short seq = Convert.ToInt16(locationImg.Split('+')[1]);
+                            int locationID = dataAccess.getTourLocationIDByTourIDAndTourSeqNum(TourID, seq);
+                            foreach (string img in locationImg.Split('+')[2].Split(';'))
+                            {
+                                if (img.Length > 0)
+                                {
+                                    string filename = img.Split('/')[1];
+                                    if (!this.DeletedImagesHiddenField.Value.Contains(filename))
+                                    {
+                                        dataAccess.InsertMedia(null, "../Media/" + filename, "Images", null, locationID);
+                                        System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                foreach (string video in AddedVideosHiddenField.Value.Split(';'))
+                {
+                    if (video.Length > 0)
+                    {
+                        int locationID = Convert.ToInt32(video.Split('#')[0]);
+                        string videoURL = video.Split('#')[1];
+                        dataAccess.DeleteVideoMediaByTourId(locationID);
+                        dataAccess.InsertMedia(null, videoURL, "Video", null, locationID);
+                    }
+                }
+
+                foreach (string video in AddedVideosForNewLocationHiddenField.Value.Split(';'))
+                {
+                    if (video.Length > 0)
+                    {
+                        short seq = Convert.ToInt16(video.Split('#')[1]);
+                        int locationID = dataAccess.getTourLocationIDByTourIDAndTourSeqNum(TourID, seq);
+                        dataAccess.DeleteVideoMediaByTourId(locationID);
+                        dataAccess.InsertMedia(null, video.Split('#')[3], "Video", null, locationID);
+                    }
+                }
+
+                CurrentImagesHiddenField.Value = "";
 
                 this.TourGridView.DataBind();
                 this.LocationGridView.DataBind();
@@ -436,37 +597,51 @@ namespace CMS.GeneralPages
 
                 // Get the HttpFileCollection
                 HttpFileCollection hfc = Request.Files;
+                bool uploadStatus = true;
 
                 for (int i = 0; i < hfc.Count; i++)
                 {
-                    HttpPostedFile hpf = hfc[i];
-
-                    if (hpf.ContentLength < 51200)
+                    if (hfc.AllKeys[i].Equals("ctl00$MainContent$FileUpload"))
                     {
+                        HttpPostedFile hpf = hfc[i];
 
-                        Random rand = new Random((int)DateTime.Now.Ticks);
-                        int numIterations = 0;
-                        numIterations = rand.Next(1000000000, 2147483647);
-                        Guid id = new Guid();
-
-                        //-- Create new GUID and echo to the console
-                        id = Guid.NewGuid();
-                        hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
-                        ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
-                        poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' ><img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() +
-                            hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName + "'><div class='close_image ' title='close'></div></a></div>";
-                    }
-                    else
-                    {
-                        StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
-                        DeleteAllTempFiles();
-                        poiImagesAddUpdate.InnerHtml = "";
-                        break;
+                        if (!(hpf.ContentLength < 51200))
+                        {
+                            uploadStatus = false;
+                        }
                     }
                 }
-                FileUpload.Attributes.Remove("maxlength");
-                FileUpload.Attributes.Add("maxlength", (5 - hfc.Count).ToString());
-                StatusLabel.Text = "Uploaded Successfully.";
+                if (uploadStatus)
+                {
+                    for (int i = 0; i < hfc.Count; i++)
+                    {
+                        if (hfc.AllKeys[i].Equals("ctl00$MainContent$FileUpload"))
+                        {
+                            HttpPostedFile hpf = hfc[i];
+
+                            Random rand = new Random((int)DateTime.Now.Ticks);
+                            int numIterations = 0;
+                            numIterations = rand.Next(1000000000, 2147483647);
+                            Guid id = new Guid();
+
+                            //-- Create new GUID and echo to the console
+                            id = Guid.NewGuid();
+                            hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
+                            ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
+                            poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' ><img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() +
+                                hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName 
+                                + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName 
+                                + "'><div class='close_image ' title='close'></div></a></div>";                           
+                        }                        
+                    }
+                    FileUpload.Attributes.Remove("maxlength");
+                    FileUpload.Attributes.Add("maxlength", (5 - hfc.Count).ToString());
+                    StatusLabel.Text = "Uploaded Successfully.";
+                }
+                else
+                {
+                    StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
+                }
             }
             catch (Exception ex)
             {
@@ -491,6 +666,7 @@ namespace CMS.GeneralPages
             this.LocationMultiView.ActiveViewIndex = 0;
         }
 
+        //add location
         protected void AddNewLinkButton_Click(object sender, EventArgs e)
         {
             List<ListItem> lst = new List<ListItem>();
@@ -502,18 +678,37 @@ namespace CMS.GeneralPages
             this.SeqDropDownList.DataSource = lst;
             this.SeqDropDownList.DataBind();
 
-            if (Session["LocationTable"] == null)
-                locationTable = dataAccess.getTourLocationByTourID(Convert.ToInt32(this.TourIDHiddenField.Value));
-            else
-                locationTable = Session["LocationTable"] as DAL.CMSDBDataSet.TourLocationDataTable;
-
-            foreach (DAL.CMSDBDataSet.TourLocationRow row in locationTable)
+            if (this.TourIDHiddenField.Value != "-1")
             {
-                if (!this.DeletedLocationIDHiddenField.Value.Contains(row["TourLocationID"].ToString()))
+                if (Session["LocationTable"] == null)
+                    locationTable = dataAccess.getTourLocationByTourID(Convert.ToInt32(this.TourIDHiddenField.Value));
+                else
+                    locationTable = Session["LocationTable"] as DAL.CMSDBDataSet.TourLocationDataTable;
+
+                foreach (DAL.CMSDBDataSet.TourLocationRow row in locationTable)
                 {
-                    SeqDropDownList.Items[Convert.ToInt32(row["TourSeqNum"].ToString()) - 1].Enabled = false;
+                    if (!this.DeletedLocationIDHiddenField.Value.Contains(row["TourLocationID"].ToString()))
+                    {
+                        SeqDropDownList.Items[Convert.ToInt32(row["TourSeqNum"].ToString()) - 1].Enabled = false;
+                    }
                 }
             }
+
+            this.LocationVideoTextBox.Text = "";
+            CurrentImagesHiddenField.Value = "";
+            TempAddedImagesHiddenField.Value = "";
+            TempDeletedImagesHiddenField.Value = "";
+            TempAddedImagesForNewLocationHiddenField.Value = "";
+
+            LocationImageUploadStatusLabel.Text = "";
+            LocationImagesList.InnerHtml = "";
+            AddedVideosHiddenField.Value = "";
+            AddedVideosForNewLocationHiddenField.Value = "";
+            SelectedLocationIDHiddenField.Value = "";
+            SelectedLocationIndexHiddenField.Value = "";
+
+            LocationFileUpload.Attributes.Remove("maxlength");
+            LocationFileUpload.Attributes.Add("maxlength", (5).ToString());
 
             this.AddressTextBox.Text = "";
             this.PostcodeTextBox.Text = "";
@@ -525,6 +720,7 @@ namespace CMS.GeneralPages
             this.LocationButtonMultiView.ActiveViewIndex = 1;
         }
 
+        //update confirm
         protected void UpdateLocationButton_Click(object sender, EventArgs e)
         {
             if (this.AddressTextBox_CustomValidator.IsValid && this.CostTextBox_CustomValidator.IsValid
@@ -576,6 +772,21 @@ namespace CMS.GeneralPages
                         }
                     }
                 }
+
+                this.AddedImagesHiddenField.Value += this.TempAddedImagesHiddenField.Value;
+                this.DeletedImagesHiddenField.Value += this.TempDeletedImagesHiddenField.Value;
+
+                this.AddedImagesForNewLocationHiddenField.Value += tourID + "+" + sequence + "+"
+                                                                + this.TempAddedImagesForNewLocationHiddenField.Value + "@";
+
+                if (!this.SelectedLocationIDHiddenField.Value.Equals("-1"))
+                    this.AddedVideosHiddenField.Value += this.SelectedLocationIDHiddenField.Value+"#"+this.LocationVideoTextBox.Text + ";";
+                else
+                    this.AddedVideosForNewLocationHiddenField.Value += tourID + "#" + sequence + "#"
+                                                                + this.SelectedLocationIDHiddenField.Value + "#" + this.LocationVideoTextBox.Text + ";";
+
+
+
                 this.AddNewLinkButton.Text = "Add New";
                 this.ViewLinkButton.BackColor = Color.LightGray;
                 this.AddNewLinkButton.BackColor = Color.Gray;
@@ -583,11 +794,16 @@ namespace CMS.GeneralPages
             }
         }
 
+        //cancel update
         protected void CancelUpdateLocationButton_Click(object sender, EventArgs e)
         {
+            this.TempAddedImagesHiddenField.Value = "";
+            this.TempDeletedImagesHiddenField.Value = "";
+            this.TempAddedImagesForNewLocationHiddenField.Value = "";
             this.LocationMultiView.ActiveViewIndex = 0;
         }
 
+        //insert confirm
         protected void InsertLocationButton_Click(object sender, EventArgs e)
         {
             if(this.AddressTextBox_CustomValidator.IsValid && this.CostTextBox_CustomValidator.IsValid 
@@ -595,12 +811,15 @@ namespace CMS.GeneralPages
             {
                 int tourID;
                 if (this.ButtonMultiView.ActiveViewIndex == 0)
-                    tourID = Convert.ToInt32(this.TourIDHiddenField.Value);
+                {
+                    tourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
+                }
                 else
                 {
-                    tourID = -1;
-                    this.TourIDHiddenField.Value = tourID.ToString();
+                    tourID = -1;                    
                 }
+
+                this.TourIDHiddenField.Value = tourID.ToString();
 
                 Decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
                 short sequence = Convert.ToInt16(this.SeqDropDownList.SelectedItem.ToString());
@@ -612,7 +831,7 @@ namespace CMS.GeneralPages
 
                 if (Session["LocationTable"] == null)
                 {
-                    if(this.TourIDHiddenField.Value != "")
+                    if(this.TourIDHiddenField.Value != "-1")
                         locationTable = dataAccess.getTourLocationByTourID(Convert.ToInt32(this.TourIDHiddenField.Value));
                     else
                         locationTable = new DAL.CMSDBDataSet.TourLocationDataTable();
@@ -648,14 +867,27 @@ namespace CMS.GeneralPages
                     }
                 }
 
+                this.AddedImagesHiddenField.Value += this.TempAddedImagesHiddenField.Value;
+                this.DeletedImagesHiddenField.Value += this.TempDeletedImagesHiddenField.Value;
+
+                this.AddedImagesForNewLocationHiddenField.Value += this.TourIDHiddenField.Value + "+" + sequence + "+"
+                                                                + this.TempAddedImagesForNewLocationHiddenField.Value + "@";
+
+                this.AddedVideosForNewLocationHiddenField.Value += this.TourIDHiddenField.Value + "#" + sequence + "#"
+                                                                + "-1" + "#" + this.LocationVideoTextBox.Text + ";";
+
                 this.ViewLinkButton.BackColor = Color.LightGray;
                 this.AddNewLinkButton.BackColor = Color.Gray;
                 this.LocationMultiView.ActiveViewIndex = 0;
             }
         }
 
+        //cancel insert
         protected void CancelInsertLocationButton_Click(object sender, EventArgs e)
         {
+            this.TempAddedImagesHiddenField.Value = "";
+            this.TempDeletedImagesHiddenField.Value = "";
+            this.TempAddedImagesForNewLocationHiddenField.Value = "";
             this.LocationMultiView.ActiveViewIndex = 0;
         }
 
@@ -713,8 +945,7 @@ namespace CMS.GeneralPages
             else
                 args.IsValid = false;
         }
-
-
+        
         protected void DeleteLocationItemButton_Click(object sender, EventArgs e)
         {
             int tourLocationID = Convert.ToInt32(this.EditLocationGridView.SelectedDataKey.Value);
@@ -727,8 +958,18 @@ namespace CMS.GeneralPages
 
         protected void UpdateLocationItemButton_Click(object sender, EventArgs e)
         {
-            this.SelectedLocationIDHiddenField.Value = this.EditLocationGridView.SelectedDataKey.Value.ToString();
+            int tourID = Convert.ToInt32(this.TourIDHiddenField.Value);
+            int locationID = Convert.ToInt32(this.EditLocationGridView.SelectedDataKey.Value);
+            this.SelectedLocationIDHiddenField.Value = locationID.ToString();
             this.SelectedLocationIndexHiddenField.Value = this.EditLocationGridView.SelectedIndex.ToString();
+            
+            CurrentImagesHiddenField.Value = "";            
+            TempAddedImagesHiddenField.Value = "";
+            TempDeletedImagesHiddenField.Value = "";
+            TempAddedImagesForNewLocationHiddenField.Value = "";
+            LocationImageUploadStatusLabel.Text = "";
+            LocationImagesList.InnerHtml = "";
+            AddedVideosHiddenField.Value = "";
 
             List<ListItem> lst = new List<ListItem>();
             for (int i = 1; i < 11; i++)
@@ -739,8 +980,9 @@ namespace CMS.GeneralPages
             this.SeqDropDownList.DataSource = lst;
             this.SeqDropDownList.DataBind();
 
+
             if (Session["LocationTable"] == null)
-                locationTable = dataAccess.getTourLocationByTourID(Convert.ToInt32(this.TourIDHiddenField.Value));
+                locationTable = dataAccess.getTourLocationByTourID(tourID);
             else
                 locationTable = Session["LocationTable"] as DAL.CMSDBDataSet.TourLocationDataTable;
 
@@ -764,11 +1006,244 @@ namespace CMS.GeneralPages
             this.LatitudeHiddenField.Value = this.EditLocationGridView.Rows[this.EditLocationGridView.SelectedIndex].Cells[5].Text;
             this.LongitudeHiddenField.Value = this.EditLocationGridView.Rows[this.EditLocationGridView.SelectedIndex].Cells[6].Text;
 
+            var media = dataAccess.getMediaByTourLocationID(locationID);
+            LocationImageUploadDelete.Value = "0";
+            int numOfMedia = dataAccess.CountImagesMediaByTourLocationID(locationID);
+            LocationFileUpload.Attributes.Remove("maxlength");
+            LocationFileUpload.Attributes.Add("maxlength", (5 - numOfMedia).ToString());
+            foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
+            {
+                if (mediaRow.MediaType == "Images")
+                {
+                    if (!this.DeletedImagesHiddenField.Value.Contains(mediaRow.MediaURL.Split('/')[2]))
+                    {
+                        String img = locationID + "/" + mediaRow.MediaURL.Split('/')[2];
+                        CurrentImagesHiddenField.Value += img+";";
+                        LocationImagesList.InnerHtml += "<div class='location-images'  id='" + img 
+                            + "' ><img class='itemImage' src='" + mediaRow.MediaURL + "'/><a class='location-delete-image' rel='" 
+                            + img + "'><div class='location-close-image' title='close'></div></a></div>";
+                    }
+                }
+                else
+                {
+                    this.LocationVideoTextBox.Text = mediaRow.MediaURL;
+                }
+            }
+            
+            if (this.AddedImagesHiddenField.Value.Contains(locationID.ToString() + "/"))
+            {
+                foreach (string img in this.AddedImagesHiddenField.Value.Split(';'))
+                {
+                    if (img.Split('/')[0].Equals(locationID.ToString()))
+                    {
+                        LocationImagesList.InnerHtml += "<div class='location-images'  id='" + img
+                                    + "' ><img class='itemImage' src='../Temp_Media/" + img.Split('/')[1] + "'/><a class='location-delete-image' rel='"
+                                    + img + "'><div class='location-close-image' title='close'></div></a></div>";
+                    }
+                }
+            }
+
+            if (this.AddedImagesForNewLocationHiddenField.Value.Contains(tourID+"+"+(seq+1)+"+-1/"))
+            {
+                foreach (string img in this.AddedImagesForNewLocationHiddenField.Value.Split('@'))
+                {
+                    if (img.Length > 0)
+                    {
+                        if ((img.Split('+')[0].Equals(tourID.ToString())) && (img.Split('+')[1].Equals((seq+1).ToString())))
+                        {
+                            foreach(string id in img.Split('+')[2].Split(';'))
+                            {
+                                if ((id.Length > 0) && !(this.DeletedImagesHiddenField.Value.Contains(id.Split('/')[1])))
+                                {
+                                    LocationImagesList.InnerHtml += "<div class='location-images'  id='" + id
+                                        + "' ><img class='itemImage' src='../Temp_Media/" + id.Split('/')[1] + "'/><a class='location-delete-image' rel='"
+                                        + id + "'><div class='location-close-image' title='close'></div></a></div>";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             this.AddNewLinkButton.Text = "Update";
             this.ViewLinkButton.BackColor = Color.Gray;
             this.AddNewLinkButton.BackColor = Color.LightGray;
             this.LocationButtonMultiView.ActiveViewIndex = 0;
             this.LocationMultiView.ActiveViewIndex = 1;
+        }
+
+        protected void LocationGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType.Equals(DataControlRowType.DataRow))
+            {
+                e.Row.Attributes.Add("onmouseover", "this.originalstyle=this.style.backgroundColor;this.style.backgroundColor='#f8c9c7'");
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=this.originalstyle;");
+                e.Row.Attributes.Add("onclick", Page.ClientScript.GetPostBackEventReference(LocationGridView, "Select$" + e.Row.RowIndex.ToString()));
+            }
+        }
+
+        protected void LocationGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.LocationGridView.SelectedIndex >= 0)
+            {
+                this.ViewLocationDetailButton.Enabled = true;
+            }
+        }
+
+        protected void ViewListLinkButton_Click(object sender, EventArgs e)
+        {
+            this.ViewListLinkButton.BackColor = Color.LightGray;
+            this.ViewDetailLinkButton.BackColor = Color.Gray;
+            this.ViewLocationDetailButton.Enabled = false;
+
+            this.LocationGridView.DataBind();
+            this.LocationGridView.SelectedIndex = -1;
+
+            this.LocationGridView.SelectedIndex = -1;
+            this.LocationViewMultiView.ActiveViewIndex = 0;
+        }
+
+        protected void ViewLocationDetailButton_Click(object sender, EventArgs e)
+        {
+            locationImages.InnerHtml = "";
+            locationVideo.InnerHtml = "";
+            int selectedLocationID = Convert.ToInt32(this.LocationGridView.SelectedDataKey.Value);
+
+            bool hasVideo = false;
+            bool hasImages = false;
+            var media = dataAccess.getMediaByTourLocationID(selectedLocationID);
+            string[] separator = { "v=" };
+
+            foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
+            {
+                if (mediaRow.MediaType == "Images")
+                {
+                    locationImages.InnerHtml += "<img class='itemImage' src='" + mediaRow.MediaURL + "' />";
+                    hasImages = true;
+                }
+                else
+                {
+                    locationVideo.InnerHtml = "<iframe width='460' height='260' src='http://www.youtube.com/embed/" 
+                        + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
+                        + "' frameborder='0' allowfullscreen></iframe>";
+                    hasVideo = true;
+                }
+            }
+
+            if (!hasImages)
+                locationImages.InnerHtml = "This Location does not have any images.";
+
+            if (!hasVideo)
+                locationVideo.InnerHtml = "This Location does not have any video.";
+
+            DAL.CMSDBDataSet.TourLocationRow location = dataAccess.getTourLocationByTourLocationID(selectedLocationID);
+            this.LocationNameLabel.Text = location["LocationName"].ToString();
+            this.LocationSeqLabel.Text = location["TourSeqNum"].ToString();
+            this.LocationPostcodeLabel.Text = location["Postcode"].ToString();
+            this.LocationAddressLabel.Text = location["Address"].ToString();
+
+            this.ViewListLinkButton.BackColor = Color.Gray;
+            this.ViewDetailLinkButton.BackColor = Color.LightGray;
+            this.LocationViewMultiView.ActiveViewIndex = 1;
+
+        }
+
+        protected void LocationUploadButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LocationImageUploadStatusLabel.Text = "";
+
+                int count = TempAddedImagesHiddenField.Value != "" ? TempAddedImagesHiddenField.Value.Split(';').Length : 0;
+                if (count - 1 > 0 || LocationImageUploadDelete.Value == "1")
+                {
+                    LocationImagesList.InnerHtml = "";
+                    int countExisting = CurrentImagesHiddenField.Value.Split(';').Length;
+                    for (int x = 0; x < countExisting - 1; x++)
+                    {
+                        LocationImagesList.InnerHtml += "<div class='location-images'  id='" 
+                            + CurrentImagesHiddenField.Value.Split(';')[x] 
+                            + "' ><img class='itemImage' src='../Media/" 
+                            + CurrentImagesHiddenField.Value.Split(';')[x].Split('/')[1] 
+                            + "' id='" + CurrentImagesHiddenField.Value.Split(';')[x]
+                            + "' /><a class='location-upload-images' rel='" + CurrentImagesHiddenField.Value.Split(';')[x]
+                            + "'><div class='location-close-image ' title='close'></div></a></div>";
+                    }
+                }
+                for (int i = 0; i < count - 1; i++)
+                {
+                    string filename = TempAddedImagesHiddenField.Value.Split(';')[i];
+                    string target = "<div class='location-images'  id='" + filename + "' ><img class='itemImage' src='../Temp_Media/" 
+                        + filename.Split('/')[1] + "' id='" + filename + "' /><a class='location-upload-images' rel='" 
+                        + filename + "'><div class='location-close-image ' title='close'></div></a></div>";
+                    LocationImagesList.InnerHtml += target;
+                }
+
+                // Get the HttpFileCollection
+                HttpFileCollection hfc = Request.Files;
+                string locationID;
+
+                if(this.SelectedLocationIDHiddenField.Value.Length == 0)
+                    locationID = "-1";
+                else
+                    locationID = this.SelectedLocationIDHiddenField.Value;
+
+                bool uploadStatus = true;
+
+                for (int i = 0; i < hfc.Count; i++)
+                {
+                    if (hfc.AllKeys[i].Equals("ctl00$MainContent$LocationFileUpload"))
+                    {
+                        HttpPostedFile hpf = hfc[i];
+                        if (!(hpf.ContentLength < 51200))
+                        {
+                            uploadStatus = false;
+                        }
+                    }
+                }
+
+                if (uploadStatus)
+                {
+                    for (int i = 0; i < hfc.Count; i++)
+                    {
+                        if (hfc.AllKeys[i].Equals("ctl00$MainContent$LocationFileUpload"))
+                        {
+                            HttpPostedFile hpf = hfc[i];
+                            if (hpf.ContentLength < 51200)
+                            {
+                                Random rand = new Random((int)DateTime.Now.Ticks);
+                                int numIterations = 0;
+                                numIterations = rand.Next(1000000000, 2147483647);
+                                Guid id = new Guid();
+
+                                //-- Create new GUID and echo to the console
+                                id = Guid.NewGuid();
+                                hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
+                                String newImage = locationID + "/" + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
+                                if (locationID.Equals("-1"))
+                                    TempAddedImagesForNewLocationHiddenField.Value += newImage;
+                                else
+                                    TempAddedImagesHiddenField.Value += newImage;
+                                LocationImagesList.InnerHtml += "<div class='location-images'  id='" + newImage.Split(';')[0]
+                                    + "' ><img class='itemImage' src='../Temp_Media/" + newImage.Split(';')[0].Split('/')[1]
+                                    + "' id='" + newImage.Split(';')[0] + "' /><a class='location-upload-images' rel='" + newImage.Split(';')[0]
+                                    + "'><div class='location-close-image ' title='close'></div></a></div>";
+                            }                           
+                        }                        
+                    }
+                    FileUpload.Attributes.Remove("maxlength");
+                    FileUpload.Attributes.Add("maxlength", (5 - hfc.Count).ToString());
+                    LocationImageUploadStatusLabel.Text = "Uploaded Successfully.";
+                }
+                else
+                {
+                    LocationImageUploadStatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+            }
         }
     }
 }

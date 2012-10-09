@@ -170,49 +170,97 @@
                     </p>                            
                     <p>
                         <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
-                        <div runat="server" id="poiImages" width="460px"></div>
                     </p>
+                    <div runat="server" id="poiImages" width="460px"></div><br/>
                     <p>
-                        <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
-                        <div runat="server" id="poiVideo" width="460px"></div>
+                        <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label" 
+                            Enabled="False" Font-Bold="True" Text="Video : " Width="150px"></asp:Label>
                     </p>
-                        <asp:Label ID="LocationLabel" runat="server" CssClass="label" Enabled="False" 
-                            Font-Bold="True" Text="Tour Locations : " Width="150px"></asp:Label>
-                        <asp:GridView ID="LocationGridView" runat="server" AllowSorting="True" 
-                            AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
-                            BorderStyle="None" BorderWidth="1px" CellPadding="4" 
-                            DataKeyNames="TourLocationID" DataSourceID="LocationObjectDataSource" 
-                            ForeColor="Black" GridLines="None"  Width="500px">
-                            <AlternatingRowStyle BackColor="White" />
-                            <Columns>
-                                <asp:BoundField DataField="TourSeqNum" HeaderText="Sequence" 
-                                    SortExpression="TourSeqNum" >
-                                <ItemStyle Width="50px" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="LocationName" HeaderText="Location Name" 
-                                    SortExpression="LocationName" />
-                                <asp:BoundField DataField="Suburb" HeaderText="Suburb" 
-                                    SortExpression="Suburb" />
-                            </Columns>
-                            <FooterStyle BackColor="#CCCC99" />
-                            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-                            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-                            <RowStyle BackColor="#F7F7DE" HorizontalAlign="Center" />
-                            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-                            <SortedAscendingCellStyle BackColor="#FBFBF2" />
-                            <SortedAscendingHeaderStyle BackColor="#848384" />
-                            <SortedDescendingCellStyle BackColor="#EAEAD3" />
-                            <SortedDescendingHeaderStyle BackColor="#575357" />
-                        </asp:GridView>
-                        <asp:ObjectDataSource ID="LocationObjectDataSource" runat="server" 
-                            SelectMethod="getTourLocationByTourID" TypeName="CMS.BLL.CMSBLClass" 
-                            OldValuesParameterFormatString="original_{0}">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="TourIDHiddenField" Name="TourID" 
-                                    PropertyName="Value" Type="Int32" />
-                            </SelectParameters>
-                        </asp:ObjectDataSource>
-                    </p>
+                    <div ID="poiVideo" runat="server" width="460px"></div><br/>
+                    <!-- Location view -->
+                    <asp:Label ID="LocationLabel" runat="server" CssClass="label" Enabled="False" 
+                        Font-Bold="True" Text="Tour Locations : " Width="150px"></asp:Label>
+                    <div class="LocationViewMaster">
+                        <asp:LinkButton ID="ViewListLinkButton" runat="server"
+                            Text="Location List" BackColor="LightGray" CausesValidation="false" onclick="ViewListLinkButton_Click"></asp:LinkButton>
+                        <asp:LinkButton ID="ViewDetailLinkButton" runat="server" CssClass="notabled"
+                            Text="Location Detail" BackColor="Gray" CausesValidation="false" Enabled="false"></asp:LinkButton>
+                        <div class="Location">
+                            <asp:MultiView ID="LocationViewMultiView" runat="server" ActiveViewIndex="0">
+                            <asp:View ID="LocationListView" runat="server">
+                                <div style="text-align:right; margin-bottom:10px;">
+                                    <asp:Button ID="ViewLocationDetailButton" runat="server" Text="View Detail" Width="100px" 
+                                    CausesValidation="False" onclick="ViewLocationDetailButton_Click" Enabled ="false" />
+                                </div>
+                                <asp:GridView ID="LocationGridView" runat="server" AllowSorting="True" 
+                                    AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" 
+                                    BorderStyle="None" BorderWidth="1px" CellPadding="4" 
+                                    DataKeyNames="TourLocationID" DataSourceID="LocationObjectDataSource" 
+                                    ForeColor="Black" GridLines="None" 
+                                    onrowdatabound="LocationGridView_RowDataBound" 
+                                    onselectedindexchanged="LocationGridView_SelectedIndexChanged" Width="100%">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <Columns>
+                                        <asp:CommandField SelectText="" ShowSelectButton="True">
+                                        <ItemStyle Width="5px" />
+                                        </asp:CommandField>
+                                        <asp:BoundField DataField="TourSeqNum" HeaderText="Sequence" 
+                                            SortExpression="TourSeqNum">
+                                        <ItemStyle Width="50px" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="LocationName" HeaderText="Location Name" 
+                                            SortExpression="LocationName" />
+                                        <asp:BoundField DataField="Suburb" HeaderText="Suburb" 
+                                            SortExpression="Suburb" />
+                                    </Columns>
+                                    <FooterStyle BackColor="#CCCC99" />
+                                    <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+                                    <RowStyle BackColor="#F7F7DE" HorizontalAlign="Center" />
+                                    <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                                    <SortedAscendingCellStyle BackColor="#FBFBF2" />
+                                    <SortedAscendingHeaderStyle BackColor="#848384" />
+                                    <SortedDescendingCellStyle BackColor="#EAEAD3" />
+                                    <SortedDescendingHeaderStyle BackColor="#575357" />
+                                </asp:GridView>
+                                <asp:ObjectDataSource ID="LocationObjectDataSource" runat="server" 
+                                    OldValuesParameterFormatString="original_{0}" 
+                                    SelectMethod="getTourLocationByTourID" TypeName="CMS.BLL.CMSBLClass">
+                                    <SelectParameters>
+                                        <asp:ControlParameter ControlID="TourIDHiddenField" Name="TourID" 
+                                            PropertyName="Value" Type="Int32" />
+                                    </SelectParameters>
+                                </asp:ObjectDataSource>
+                            </asp:View>
+                            <asp:View ID="LocationDetailView" runat="server">
+                                <p>
+                                    <asp:Label ID="Label8" runat="server" CssClass="label" Font-Bold="True" Text="Location Name : " Width="100px"></asp:Label>
+                                    <asp:Label ID="LocationNameLabel" runat="server" Width="460px"></asp:Label>
+                                </p>
+                                <p>
+                                    <asp:Label ID="Label12" runat="server" CssClass="label" Font-Bold="True" Text="Sequence : " Width="100px"></asp:Label>
+                                    <asp:Label ID="LocationSeqLabel" runat="server" Width="460px"></asp:Label>
+                                </p>
+                                <p>
+                                    <asp:Label ID="Label11" runat="server" CssClass="label" Font-Bold="True" Text="Postcode : " Width="100px"></asp:Label>
+                                    <asp:Label ID="LocationPostcodeLabel" runat="server" Width="460px"></asp:Label>
+                                </p>
+                                <p>
+                                    <asp:Label ID="Label7" runat="server" CssClass="label" Font-Bold="True" Text="Address : " Width="100px"></asp:Label>
+                                    <asp:Label ID="LocationAddressLabel" runat="server" Width="460px"></asp:Label>
+                                </p>                            
+                                <p>
+                                    <asp:Label ID="Label9" runat="server" CssClass="label" Font-Bold="True" Text="Video : " Width="100px"></asp:Label>
+                                </p>
+                                <div ID="locationVideo" runat="server" width="460px"></div><br/>
+                                <p>
+                                    <asp:Label ID="Label10" runat="server" CssClass="label" Enabled="False" Font-Bold="True" Text="Images : " Width="100px"></asp:Label>
+                                </p>
+                                <div ID="locationImages" runat="server" width="460px"></div><br/>
+                            </asp:View>
+                        </asp:MultiView>
+                        </div>
+                    </div>
                     <asp:HiddenField ID="TourIDHiddenField" runat="server" />
                 </asp:View>
 
@@ -408,6 +456,67 @@
                                     </p>
                                     <div class="map location" id="map"></div>
                                     <div class="clear"></div><br/>
+
+                                    <!-- YouTube Video -->
+                                    <asp:Label ID="LocationVideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="100px" ></asp:Label>
+                                    <asp:TextBox ID="LocationVideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                                    <br /><br />
+
+                                    <!-- Images -->
+                                    <asp:Label ID="LocationImagesLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="100px" ></asp:Label>
+                                    <div>
+                                        <asp:Label ID="Label15" runat="server" Text="Max Size: 50kb, Allowed Type: JPEG, PNG, GIF" 
+                                                CssClass="imgLabel"></asp:Label><br />
+                                        <asp:FileUpload ID="LocationFileUpload" runat="server" maxlength="5" class="multi location" accept="jpeg|jpg|gif|png" />
+                                        <asp:Button ID="LocationUploadButton" runat="server" Text="Upload All"  CssClass="locationUploadBtn"  
+                                            onclick="LocationUploadButton_Click" CausesValidation="False" />
+                                    </div>
+                                    <div class="imgUploadResult location">
+                                        <asp:Label ID="LocationImageUploadStatusLabel" runat="server" Text="" ForeColor="Red" ></asp:Label>
+                                        <div runat="server" id="LocationImagesList"></div>
+                                    </div> 
+
+                                    <asp:HiddenField ID="AddedImagesHiddenField" runat="server" />
+                                    <asp:HiddenField ID="AddedImagesForNewLocationHiddenField" runat="server" />
+                                    <asp:HiddenField ID="DeletedImagesHiddenField" runat="server" />
+                                    <asp:HiddenField ID="TempAddedImagesHiddenField" runat="server" />
+                                    <asp:HiddenField ID="TempAddedImagesForNewLocationHiddenField" runat="server" />
+                                    <asp:HiddenField ID="TempDeletedImagesHiddenField" runat="server" />
+                                    <asp:HiddenField ID="AddedVideosHiddenField" runat="server" />
+                                    <asp:HiddenField ID="AddedVideosForNewLocationHiddenField" runat="server" />
+                                    <asp:HiddenField ID="CurrentImagesHiddenField" runat="server" />
+                                    <asp:HiddenField ID="LocationImageUploadDelete" runat="server" />
+
+
+                                    <script type="text/javascript">
+                                        $(document).ready(function () {
+                                            $('.location-delete-image').live('click', function () {
+                                                var id = $(this).attr('rel');
+                                                $('#MainContent_LocationFileUpload').attr('maxlength', parseInt($('#MainContent_LocationFileUpload').attr('maxlength')) + 1);
+                                                $('#MainContent_TempDeletedImagesHiddenField').val($('#MainContent_TempDeletedImagesHiddenField').val() + id + ';');
+                                                var filename = $('#MainContent_CurrentImagesHiddenField').val();
+
+                                                $('#MainContent_CurrentImagesHiddenField').val(filename.replace(id + ';', ""));
+                                                var div = document.getElementById("MainContent_LocationImagesList");
+                                                var olddiv = document.getElementById(id);
+                                                div.removeChild(olddiv);
+                                                $('#MainContent_LocationImageUploadDelete').val("1");
+                                            });
+
+                                            $('.location-upload-images').live('click', function () {
+                                                var id = $(this).attr('rel');
+                                                $('#MainContent_LocationFileUpload').attr('maxlength', parseInt($('#MainContent_LocationFileUpload').attr('maxlength')) + 1);
+                                                var filename = $('#MainContent_TempAddedImagesHiddenField').val();
+                                                $('#MainContent_TempAddedImagesHiddenField').val(filename.replace(id + ';', ""));
+                                                var div = document.getElementById("MainContent_LocationImagesList");
+                                                var olddiv = document.getElementById(id);
+                                                div.removeChild(olddiv);
+                                                $('#MainContent_LocationImageUploadDelete').val("1");
+                                            });
+                                        });
+                                    </script>
+
+                                    <div class="clear"></div><br/>
                                     <asp:HiddenField ID="LatitudeHiddenField" runat="server"/>
                                     <asp:HiddenField ID="LongitudeHiddenField" runat="server" />
                                     <asp:HiddenField ID="DeletedLocationIDHiddenField" runat="server" />
@@ -482,5 +591,4 @@
         </div>
     </div>
 </div>
-    </span>
 </asp:Content>
