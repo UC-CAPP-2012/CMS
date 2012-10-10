@@ -678,13 +678,17 @@ namespace CMS.GeneralPages
             this.SeqDropDownList.DataSource = lst;
             this.SeqDropDownList.DataBind();
 
-            if (this.TourIDHiddenField.Value != "-1")
-            {
-                if (Session["LocationTable"] == null)
-                    locationTable = dataAccess.getTourLocationByTourID(Convert.ToInt32(this.TourIDHiddenField.Value));
-                else
-                    locationTable = Session["LocationTable"] as DAL.CMSDBDataSet.TourLocationDataTable;
 
+            if (Session["LocationTable"] == null)
+            {
+                if (!this.TourIDHiddenField.Value.Equals("-1"))
+                    locationTable = dataAccess.getTourLocationByTourID(Convert.ToInt32(this.TourIDHiddenField.Value));
+            }
+            else
+                locationTable = Session["LocationTable"] as DAL.CMSDBDataSet.TourLocationDataTable;
+
+            if (locationTable != null)
+            {
                 foreach (DAL.CMSDBDataSet.TourLocationRow row in locationTable)
                 {
                     if (!this.DeletedLocationIDHiddenField.Value.Contains(row["TourLocationID"].ToString()))
