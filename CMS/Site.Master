@@ -38,6 +38,8 @@
                             CssClass="medium button gray" > Category </asp:LinkButton>
                     <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > Sub Type </asp:LinkButton>
+                    <asp:LinkButton ID="LinkButtonMajorRegion" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                            CssClass="medium button gray" > Major Region </asp:LinkButton>
                     <asp:LinkButton ID="LinkButtonPOI" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > POI </asp:LinkButton>
                     <asp:LinkButton ID="LinkButtonEvent" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"

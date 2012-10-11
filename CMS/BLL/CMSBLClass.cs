@@ -47,8 +47,11 @@ namespace CMS.BLL
         DAL.CMSDBDataSetTableAdapters.TourTableAdapter tourTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.TourTableAdapter();
 
-        DAL.CMSDBDataSetTableAdapters.TourLocationTableAdapter tourLocationTableAdapter
-            = new DAL.CMSDBDataSetTableAdapters.TourLocationTableAdapter();
+        DAL.CMSDBDataSetTableAdapters.POITourTableAdapter poiTourTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.POITourTableAdapter();
+
+        DAL.CMSDBDataSetTableAdapters.MajorRegionTableAdapter majorRegionTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.MajorRegionTableAdapter();
 
         /*********************************************************************
          * Category data access
@@ -73,6 +76,7 @@ namespace CMS.BLL
         {
             return categoryTableAdapter.Insert(categoryName);
         }
+
 
         /*********************************************************************
          * Sub Type data access
@@ -100,6 +104,31 @@ namespace CMS.BLL
 
 
         /*********************************************************************
+        * MajorRegion data access
+        *********************************************************************/
+
+        public DAL.CMSDBDataSet.MajorRegionDataTable getAllMajorRegion()
+        {
+            return majorRegionTableAdapter.GetData();
+        }
+
+        public int UpdateMajorRegion(String MajorRegionName, int Original_MajorRegionID)
+        {
+            return majorRegionTableAdapter.Update(MajorRegionName, Original_MajorRegionID);
+        }
+
+        public int DeleteMajorRegion(int Original_MajorRegionID)
+        {
+            return majorRegionTableAdapter.Delete(Original_MajorRegionID);
+        }
+
+        public int InsertMajorRegion(String MajorRegionName)
+        {
+            return majorRegionTableAdapter.Insert(MajorRegionName);
+        }
+
+
+        /*********************************************************************
          * POI data access
          *********************************************************************/
 
@@ -113,34 +142,34 @@ namespace CMS.BLL
             return (DAL.CMSDBDataSet.POIItemRow)poiItemTableAdapter.GetDataByItemID(ItemID).Rows[0];
         }
 
-        public int UpdatePOI(String ItemName, String Details, decimal Cost, int Rating, String Phone, String Website, String Email,
+        public int UpdatePOI(String ItemName, String Details, int Cost, String Phone, String Website, String Email,
             String OpeningHours, String Address, double Latitude, double Longitude, int Postcode, String Suburb, 
-            int? SubtypeID, int CategoryID, int? Original_SubtypeID, int Original_ItemID, int Original_CategoryID)
+            int? SubtypeID, int? MajorRegionID, int CategoryID, int Original_ItemID, int Original_CategoryID)
         {
-            if (poiTableAdapter.Update(CategoryID, Original_ItemID, Original_CategoryID) > 0)
+            if (poiTableAdapter.Update(CategoryID, Original_ItemID) > 0)
             {
-                return itemTableAdapter.Update(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, 
-                    Address, Latitude, Longitude, Postcode, Suburb, SubtypeID, Original_ItemID, Original_SubtypeID);
+                return itemTableAdapter.Update(ItemName, Details, Cost, Phone, Website, Email, OpeningHours, Address, Latitude, Longitude, 
+                    Postcode, Suburb, SubtypeID, MajorRegionID, Original_ItemID);
             }
             return 0;
         }
 
-        public int DeletePOI(int Original_ItemID, int Original_SubtypeID)
+        public int DeletePOI(int Original_ItemID)
         {
             if (poiTableAdapter.Delete(Original_ItemID) > 0)
             {
-                return itemTableAdapter.Delete(Original_ItemID, Original_SubtypeID);
+                return itemTableAdapter.Delete(Original_ItemID);
             }
             return 0;
         }
 
-        public int InsertPOI(String ItemName, String Details, decimal Cost, int Rating, String Phone, String Website, String Email,
+        public int InsertPOI(String ItemName, String Details, int Cost, String Phone, String Website, String Email,
             String OpeningHours, String Address, double Latitude, double Longitude, int Postcode, String Suburb,
-            int? SubtypeID,int? CategoryID)
+            int? SubtypeID, int? CategoryID, int? MajorRegionID)
         {
             
-            if (itemTableAdapter.Insert(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, Address,
-                    Latitude, Longitude, Postcode, Suburb, SubtypeID)>0)
+            if (itemTableAdapter.Insert(ItemName, Details, Cost, Phone, Website, Email, OpeningHours, Address,
+                    Latitude, Longitude, Postcode, Suburb, SubtypeID, MajorRegionID)>0)
             {
                 int ItemID = (int)itemTableAdapter.getNewlyAddedItemID();
                 poiTableAdapter.InsertNewPOI(ItemID, CategoryID);
@@ -164,33 +193,33 @@ namespace CMS.BLL
             return (DAL.CMSDBDataSet.EventItemRow)eventItemTableAdapter.GetDataByItemID(ItemID).Rows[0];
         }
 
-        public int UpdateEvent(String ItemName, String Details, decimal Cost, int Rating, String Phone, String Website, String Email,
+        public int UpdateEvent(String ItemName, String Details, int Cost, String Phone, String Website, String Email,
             String OpeningHours, String Address, double Latitude, double Longitude, int Postcode, String Suburb,
-            int? SubtypeID, DateTime EventStartDate, DateTime EventEndDate, int? Original_SubtypeID, int Original_ItemID)
+            int? SubtypeID, DateTime EventStartDate, DateTime EventEndDate, int? MajorRegionID, int Original_ItemID)
         {
             if (eventTableAdapter.Update(EventStartDate, EventEndDate, Original_ItemID) > 0)
             {
-                return itemTableAdapter.Update(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, Address,
-                    Latitude, Longitude, Postcode, Suburb, SubtypeID, Original_ItemID, Original_SubtypeID);
+                return itemTableAdapter.Update(ItemName, Details, Cost, Phone, Website, Email, OpeningHours, Address,
+                    Latitude, Longitude, Postcode, Suburb, SubtypeID, MajorRegionID, Original_ItemID);
             }
             return 0;
         }
 
-        public int DeleteEvent(int Original_ItemID, int Original_SubtypeID)
+        public int DeleteEvent(int Original_ItemID)
         {
             if (eventTableAdapter.Delete(Original_ItemID) > 0)
             {
-                return itemTableAdapter.Delete(Original_ItemID, Original_SubtypeID);
+                return itemTableAdapter.Delete(Original_ItemID);
             }
             return 0;
         }
 
-        public int InsertEvent(String ItemName, String Details, decimal Cost, int Rating, String Phone, String Website, String Email,
+        public int InsertEvent(String ItemName, String Details, int Cost, String Phone, String Website, String Email,
             String OpeningHours, String Address, double Latitude, double Longitude, int Postcode, String Suburb,
-            int? SubtypeID, DateTime EventStartDate, DateTime EventEndDate)
+            int? SubtypeID, DateTime EventStartDate, DateTime EventEndDate, int? MajorRegionID)
         {
-            if (itemTableAdapter.Insert(ItemName, Details, Cost, Rating, Phone, Website, Email, OpeningHours, Address,
-                    Latitude, Longitude, Postcode, Suburb, SubtypeID) > 0)
+            if (itemTableAdapter.Insert(ItemName, Details, Cost, Phone, Website, Email, OpeningHours, Address,
+                    Latitude, Longitude, Postcode, Suburb, SubtypeID, MajorRegionID) > 0)
             {
                 int? ItemID = itemTableAdapter.getNewlyAddedItemID();
                 eventTableAdapter.InsertNewItem(ItemID,EventStartDate, EventEndDate);
@@ -234,14 +263,10 @@ namespace CMS.BLL
             return mediaTableAdapter.GetDataByTourID(TourID);
         }
 
-        public DAL.CMSDBDataSet.MediaDataTable getMediaByTourLocationID(int TourLocationID)
-        {
-            return mediaTableAdapter.GetDataByTourLocationID(TourLocationID);
-        }
 
-        public int UpdateMedia(int? ItemID, String MediaURL, String MediaType, int? TourID, int? TourLocationID, int Original_MediaID)
+        public int UpdateMedia(int? ItemID, String MediaURL, String MediaType, int? TourID, int Original_MediaID)
         {
-            return mediaTableAdapter.Update(ItemID, MediaURL, MediaType, TourID, TourLocationID, Original_MediaID);
+            return mediaTableAdapter.Update(ItemID, MediaURL, MediaType, TourID, Original_MediaID);
         }
 
         public int DeleteMediaByItemID(int ItemID)
@@ -254,11 +279,6 @@ namespace CMS.BLL
             return mediaTableAdapter.DeleteByTourID(TourID);
         }
 
-        public int DeleteMediaByTourLocationID(int TourLocationID)
-        {
-            return mediaTableAdapter.DeleteByTourLocationID(TourLocationID);
-        }
-        
         public int DeleteMediaByMediaURL(int ItemID, string MediaURL)
         {
             return mediaTableAdapter.DeleteByMediaURL( MediaURL, ItemID);
@@ -267,11 +287,6 @@ namespace CMS.BLL
         public int DeleteMediaByMediaURLAndTourID(int TourID, string MediaURL)
         {
             return mediaTableAdapter.DeleteByMediaURLAndTourID(MediaURL, TourID);
-        }
-
-        public int DeleteMediaByMediaURLAndTourLocationID(int TourLocationID, string MediaURL)
-        {
-            return mediaTableAdapter.DeleteByMediaURLAndTourLocationID(MediaURL, TourLocationID);
         }
 
         public int DeleteMedia(int Original_MediaID)
@@ -289,11 +304,6 @@ namespace CMS.BLL
             return Convert.ToInt32(mediaTableAdapter.CountImagesMediaByTourID(TourID));
         }
 
-        public int CountImagesMediaByTourLocationID(int TourLocationID)
-        {
-            return Convert.ToInt32(mediaTableAdapter.CountImagesMediaByTourLocationID(TourLocationID));
-        }
-
         public int DeleteVideoMediaByItemId(int ItemID)
         {
             return mediaTableAdapter.DeleteVideoMedia(ItemID);
@@ -304,14 +314,10 @@ namespace CMS.BLL
             return mediaTableAdapter.DeleteVideoMediaByTourID(TourID);
         }
 
-        public int DeleteVideoMediaByTourLocationId(int Location)
-        {
-            return mediaTableAdapter.DeleteVideoMediaByTourLocationID(Location);
-        }
 
-        public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID, int? TourLocationID)
+        public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID)
         {
-            return mediaTableAdapter.Insert(ItemID, MediaURL, MediaType, TourID, TourLocationID);
+            return mediaTableAdapter.Insert(ItemID, MediaURL, MediaType, TourID);
         }
 
 
@@ -347,26 +353,26 @@ namespace CMS.BLL
         * Tour data access
         *********************************************************************/
 
-        public DAL.CMSDBDataSet.TourDataTable getAllTour()
+        public DAL.CMSDBDataSet.TourDataTable getAllTours()
         {
             return tourTableAdapter.GetData();        
         }
 
         public DAL.CMSDBDataSet.TourRow getTourByID(int TourID)
         {
-            return (DAL.CMSDBDataSet.TourRow)tourTableAdapter.GetDataByID(TourID).Rows[0];
+            return (DAL.CMSDBDataSet.TourRow)tourTableAdapter.GetDataByTourID(TourID).Rows[0];
         }
 
 
-        public int updateTour(String TourName, String TourDetail, Decimal TourCost, String TourPhone, String TourWebsite, 
-            String TourEmail, int TourID)
+        public int updateTour(String TourName, String TourDetail, int TourCost, String TourPhone, String TourWebsite, 
+            String TourEmail, String TourAgent, int TourID)
         {
-            return tourTableAdapter.UpdateByTourID(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, TourID);
+            return tourTableAdapter.Update(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, TourAgent, TourID);
         }
 
-        public int insertTour(String TourName, String TourDetail, Decimal TourCost, String TourPhone, String TourWebsite, String TourEmail)
+        public int insertTour(String TourName, String TourDetail, int TourCost, String TourPhone, String TourWebsite, String TourEmail, String TourAgent)
         {
-            return tourTableAdapter.Insert(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail);        
+            return tourTableAdapter.Insert(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, TourAgent);        
         }
 
         public int getNewlyInsertedTourID()
@@ -376,51 +382,12 @@ namespace CMS.BLL
 
         public int deleteTour(int TourID)
         {
-            tourLocationTableAdapter.DeleteByTourID(TourID);
             return tourTableAdapter.Delete(TourID);
         }
 
         /*********************************************************************
-        * Tour Location data access
+        * POITour data access
         *********************************************************************/
 
-        public DAL.CMSDBDataSet.TourLocationDataTable getTourLocationByTourID(int TourID)
-        {
-            return tourLocationTableAdapter.GetDataByTourID(TourID);
-        }
-
-        public DAL.CMSDBDataSet.TourLocationRow getTourLocationByTourLocationID(int TourLocationID)
-        {
-            return (DAL.CMSDBDataSet.TourLocationRow) tourLocationTableAdapter.GetDataByTourLocationID(TourLocationID).Rows[0];
-        }
-
-
-        public int deleteTourLocationByLocationID(int TourLocationID)
-        {
-            return tourLocationTableAdapter.Delete(TourLocationID);
-        }
-
-        public int insertTourLocation(int TourID, short TourSeqNum, String LocationName, double Latitude, double Longitude, 
-            String Address, String Suburb, short Postcode)
-        {
-            return tourLocationTableAdapter.Insert(TourID, TourSeqNum, LocationName, Latitude, Longitude, Address, Suburb, Postcode);        
-        }
-
-        public int updateTourLocation(int TourID, short TourSeqNum, String LocationName, double Latitude, double Longitude, String Address, 
-                String Suburb, short Postcode, int Original_TourLocationID)
-        {
-            return tourLocationTableAdapter.UpdateByTourLocationID(TourID, TourSeqNum, LocationName, Latitude, Longitude, Address, 
-                Suburb, Postcode, Original_TourLocationID);
-        }
-
-        public int getTourLocationIDByTourIDAndTourSeqNum(int tourID, short tourSeqNum)
-        {
-            return Convert.ToInt32(tourLocationTableAdapter.getTourLocationIDByTourIDAndSeqNum(tourID, tourSeqNum));
-        }
-
-        public int deleteTourLocationByTourID(int tourID)
-        {
-            return tourLocationTableAdapter.DeleteByTourID(tourID);
-        }
     }
 }

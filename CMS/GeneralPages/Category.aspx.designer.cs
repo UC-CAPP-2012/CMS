@@ -202,15 +202,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.TextBox InsertNameTextBox;
         
         /// <summary>
-        /// InsertNameTextBox_TextBoxWatermarkExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TextBoxWatermarkExtender InsertNameTextBox_TextBoxWatermarkExtender;
-        
-        /// <summary>
         /// InsertRequiredFieldValidator control.
         /// </summary>
         /// <remarks>

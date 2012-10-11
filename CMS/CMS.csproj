@@ -88,6 +88,7 @@
     <Content Include="GeneralPages\ChangePasswordSuccess.aspx" />
     <Content Include="GeneralPages\Category.aspx" />
     <Content Include="GeneralPages\Event.aspx" />
+    <Content Include="GeneralPages\MajorRegion.aspx" />
     <Content Include="GeneralPages\News.aspx" />
     <Content Include="GeneralPages\POI.aspx" />
     <Content Include="GeneralPages\SubType.aspx" />
@@ -187,6 +188,13 @@
     </Compile>
     <Compile Include="GeneralPages\Event.aspx.designer.cs">
       <DependentUpon>Event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralPages\MajorRegion.aspx.cs">
+      <DependentUpon>MajorRegion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralPages\MajorRegion.aspx.designer.cs">
+      <DependentUpon>MajorRegion.aspx</DependentUpon>
     </Compile>
     <Compile Include="GeneralPages\News.aspx.cs">
       <DependentUpon>News.aspx</DependentUpon>

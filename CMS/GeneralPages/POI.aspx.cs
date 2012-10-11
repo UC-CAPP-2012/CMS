@@ -38,21 +38,23 @@ namespace CMS.CMSPages
             this.NameDataLabel.Text = row["ItemName"].ToString();
             this.CategoryDataLabel.Text = row["CategoryName"].ToString();
             this.SubtypeDataLabel.Text = row["SubtypeName"].ToString();
+            this.MajorRegionDataLabel.Text = row["MajorRegionName"].ToString();
             this.PhoneDataLabel.Text = row["Phone"].ToString();
             this.EmailDataLabel.Text = row["Email"].ToString();
             this.WebsiteDataLabel.Text = row["Website"].ToString();
             this.OpeningHoursDataLabel.Text = row["OpeningHours"].ToString();
-            this.CostDataLabel.Text = row["Cost"].ToString();
-            this.RatingData.CurrentRating = Convert.ToInt32(row["Rating"].ToString());
+            this.RatingData.CurrentRating = Convert.ToInt32(row["Cost"].ToString());
+            if (this.RatingData.CurrentRating == 0)
+                this.FreeRatingData.CurrentRating = 1;
+            else
+                this.FreeRatingData.CurrentRating = 0;
             this.DescriptionDataLabel.Text = row["Details"].ToString();
             this.PostcodeDataLabel.Text = row["Postcode"].ToString();
             this.AddressDataLabel.Text = row["Address"].ToString();
 
             this.LatitudeHiddenField.Value = row["Latitude"].ToString();
             this.LongitudeHiddenField.Value = row["Longitude"].ToString();
-
             this.CategoryIDHiddenField.Value = row["CategoryID"].ToString();
-            this.SubtypeIDHiddenField.Value = row["SubtypeID"].ToString();
 
             this.POIMultiView.ActiveViewIndex = 0;
             bool hasVideo=false;
@@ -88,12 +90,13 @@ namespace CMS.CMSPages
             this.NameTextBox.Text = "";
             this.CategoryDropDownList.DataBind();
             this.SubtypeDropDownList.DataBind();
+            this.MajorRegionDropDownList.DataBind();
             this.PhoneTextBox.Text = "";
             this.EmailTextBox.Text = "";
             this.WebsiteTextBox.Text = "";
-            this.OpeningHoursTextBox.Text = "";
-            this.CostTextBox.Text = "";
+            this.OpeningHoursTextBox.Text = "";            
             this.Rating.CurrentRating = 0;
+            this.FreeRating.CurrentRating = 1;
             this.DescriptionTextBox.Text = "";
             this.PostcodeTextBox.Text = "";
             this.AddressTextBox.Text = "";
@@ -141,23 +144,24 @@ namespace CMS.CMSPages
 
                 //convert inputs into correct format.
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
-                decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
+                int cost = this.Rating.CurrentRating;
                 int categotyID = Convert.ToInt32(this.CategoryDropDownList.SelectedValue);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
+                int? majorRegion = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
                 int newItemId= dataAccess.InsertPOI(this.NameTextBox.Text, this.DescriptionTextBox.Text,
-                    cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
-                    this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode, suburb, subtypeID, categotyID);
+                    cost, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
+                    this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode, suburb, subtypeID, categotyID, majorRegion);
                 int count = ImageUploadFileName.Value.Split(';').Length;
                 for (int i = 0; i < count-1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images", null, null);
+                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images", null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null, null);
+                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null);
                 }
                 CurrentImagesFileName.Value = "";
                 this.POIGridView.DataBind();
@@ -174,11 +178,6 @@ namespace CMS.CMSPages
         {
             String senderID = ((CustomValidator)sender).ID;
             bool isNum = false;
-            if (senderID.Equals("CostTextBox_CustomValidator"))
-            {
-                Decimal num;
-                isNum = Decimal.TryParse(this.CostTextBox.Text, out num);          
-            }
             if (senderID.Equals("PostcodeTextBox_CustomValidator") && (this.PostcodeTextBox.Text.Length==4))
             {
                 Int32 num;
@@ -236,12 +235,16 @@ namespace CMS.CMSPages
             this.NameTextBox.Text = row["ItemName"].ToString();
             this.CategoryDropDownList.SelectedValue = row["CategoryID"].ToString();
             this.SubtypeDropDownList.SelectedValue = row["SubtypeID"].ToString();
+            this.MajorRegionDropDownList.SelectedValue = row["MajorRegionID"].ToString();
             this.PhoneTextBox.Text = row["Phone"].ToString();
             this.EmailTextBox.Text = row["Email"].ToString();
             this.WebsiteTextBox.Text = row["Website"].ToString();
             this.OpeningHoursTextBox.Text = row["OpeningHours"].ToString();
-            this.CostTextBox.Text = row["Cost"].ToString();
-            this.Rating.CurrentRating = Convert.ToInt32(row["Rating"].ToString());
+            this.Rating.CurrentRating = Convert.ToInt32(row["Cost"].ToString());
+            if (this.Rating.CurrentRating == 0)
+                this.FreeRating.CurrentRating = 1;
+            else
+                this.FreeRating.CurrentRating = 0;
             this.DescriptionTextBox.Text = row["Details"].ToString();
             this.PostcodeTextBox.Text = row["Postcode"].ToString();
             this.AddressTextBox.Text = row["Address"].ToString();
@@ -274,7 +277,7 @@ namespace CMS.CMSPages
         {
             int itemID = (Int32)this.POIGridView.SelectedDataKey.Value;
             dataAccess.DeleteMediaByItemID(itemID);
-            dataAccess.DeletePOI(itemID, Convert.ToInt32(this.SubtypeIDHiddenField.Value));
+            dataAccess.DeletePOI(itemID);
             this.POIGridView.DataBind();
             this.POIMultiView.ActiveViewIndex = -1;
         }
@@ -307,17 +310,18 @@ namespace CMS.CMSPages
                     longitude = Convert.ToDouble(this.ManualLogTextBox.Text);
                 }
                 //convert inputs into correct format.
-                decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
+                int cost = this.Rating.CurrentRating;
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int categotyID = Convert.ToInt32(this.CategoryDropDownList.SelectedValue);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
+                int? majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
                 int originalCategoryID = Convert.ToInt32(this.CategoryIDHiddenField.Value);
-                int? originalSubtypeID = Convert.ToInt32(this.SubtypeIDHiddenField.Value);
+
                 int itemID = Convert.ToInt32(this.POIGridView.SelectedDataKey.Value);
                 dataAccess.UpdatePOI(this.NameTextBox.Text, this.DescriptionTextBox.Text,
-                    cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
+                    cost, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
-                    suburb, subtypeID, categotyID, originalSubtypeID, itemID, originalCategoryID);
+                    suburb, subtypeID, majorRegionID, categotyID, itemID, originalCategoryID);
                 int imageDeleteCount = ImageDeleteFileName.Value != "" ? ImageDeleteFileName.Value.Split(';').Length : 0;
                 for (int y = 0; y < imageDeleteCount - 1; y++)
                 {
@@ -330,14 +334,14 @@ namespace CMS.CMSPages
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images", null, null);
+                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images", null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 dataAccess.DeleteVideoMediaByItemId(itemID);
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null, null);
+                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null);
                 }
                 this.POIGridView.DataBind();
                 this.POIMultiView.ActiveViewIndex = -1;
@@ -439,6 +443,29 @@ namespace CMS.CMSPages
             this.AutoLinkButton.BackColor = Color.Gray;
             this.ManualLinkButton.BackColor = Color.LightGray;
             this.AddressMultiView.ActiveViewIndex = 1;
+        }
+
+        protected void SubtypeDropDownList_DataBound(object sender, EventArgs e)
+        {
+            ListItem item = new ListItem("----- none -----", null);
+            this.SubtypeDropDownList.Items.Insert(0, item);
+        }
+
+        protected void MajorRegionDropDownList_DataBound(object sender, EventArgs e)
+        {
+            ListItem item = new ListItem("----- none -----", null);
+            this.MajorRegionDropDownList.Items.Insert(0, item);
+        }
+
+        protected void FreeRating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
+        {
+            this.Rating.CurrentRating = 0;
+        }
+
+
+        protected void Rating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
+        {
+            this.FreeRating.CurrentRating = 0;
         }
     }
 }

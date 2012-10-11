@@ -10,7 +10,7 @@
 namespace CMS.GeneralPages {
     
     
-    public partial class SubType {
+    public partial class MajorRegion {
         
         /// <summary>
         /// InsertLinkButton control.
@@ -22,22 +22,22 @@ namespace CMS.GeneralPages {
         protected global::System.Web.UI.WebControls.LinkButton InsertLinkButton;
         
         /// <summary>
-        /// SubtypeGridView control.
+        /// GridViewRegion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView SubtypeGridView;
+        protected global::System.Web.UI.WebControls.GridView GridViewRegion;
         
         /// <summary>
-        /// SubtypeObjectDataSource control.
+        /// ObjectDataSourceCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource SubtypeObjectDataSource;
+        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSourceCategory;
         
         /// <summary>
         /// ScriptManager1 control.
@@ -49,13 +49,13 @@ namespace CMS.GeneralPages {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// SubtypeMultiView control.
+        /// RegionMultiView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView SubtypeMultiView;
+        protected global::System.Web.UI.WebControls.MultiView RegionMultiView;
         
         /// <summary>
         /// DetailView control.

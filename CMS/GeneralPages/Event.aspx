@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script src="../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
-        <script src="../Scripts/jquery.MultiFile.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.MultiFile.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript">
 //<![CDATA[
@@ -95,8 +95,8 @@
         <div class="wrapper2">
             <div class="contentList event">
                 <asp:GridView ID="EventGridView" runat="server" AllowSorting="True" 
-                    AutoGenerateColumns="False" CellPadding="4" Width="100%"
-                    DataSourceID="EventObjectDataSource" ForeColor="#333333" DataKeyNames="ItemID"
+                    AutoGenerateColumns="False" CellPadding="4" Width="100%" DataKeyNames="ItemID"
+                    DataSourceID="EventObjectDataSource" ForeColor="#333333"
                     GridLines="None" onrowdatabound="EventGridView_RowDataBound" 
                     onselectedindexchanged="EventGridView_SelectedIndexChanged" 
                     AllowPaging="True">
@@ -105,14 +105,14 @@
                         <asp:CommandField SelectText="" ShowSelectButton="True">
                         <ItemStyle Width="5px" />
                         </asp:CommandField>
-                        <asp:BoundField DataField="ItemID" HeaderText="ItemID" 
-                            SortExpression="ItemID" InsertVisible="False" Visible="False" />
                         <asp:BoundField DataField="ItemName" HeaderText="Event Name" 
                             SortExpression="ItemName" />
                         <asp:BoundField DataField="SubtypeName" HeaderText="Subtype" 
                             SortExpression="SubtypeName" />
                         <asp:BoundField DataField="Suburb" HeaderText="Suburb" 
                             SortExpression="Suburb" />
+                        <asp:BoundField DataField="ItemID" HeaderText="ItemID" 
+                            SortExpression="ItemID" InsertVisible="False" Visible="False" />
                     </Columns>
                     <EditRowStyle BackColor="#999999" />
                     <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -126,53 +126,13 @@
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
                 <asp:ObjectDataSource ID="EventObjectDataSource" runat="server" 
-                    DeleteMethod="DeleteEvent" InsertMethod="InsertEvent" 
+                    DeleteMethod="DeleteEvent" 
                     SelectMethod="getAllEventList" TypeName="CMS.BLL.CMSBLClass" 
-                    UpdateMethod="UpdateEvent" OldValuesParameterFormatString="original_{0}">
+                    OldValuesParameterFormatString="original_{0}">
                     <DeleteParameters>
                         <asp:Parameter Name="Original_ItemID" Type="Int32" />
                         <asp:Parameter Name="Original_SubtypeID" Type="Int32" />
                     </DeleteParameters>
-                    <InsertParameters>
-                        <asp:Parameter Name="ItemName" Type="String" />
-                        <asp:Parameter Name="Details" Type="String" />
-                        <asp:Parameter Name="Cost" Type="Decimal" />
-                        <asp:Parameter Name="Rating" Type="Int32" />
-                        <asp:Parameter Name="Phone" Type="Int32" />
-                        <asp:Parameter Name="Website" Type="String" />
-                        <asp:Parameter Name="Email" Type="String" />
-                        <asp:Parameter Name="OpeningHours" Type="String" />
-                        <asp:Parameter Name="StreetNo" Type="String" />
-                        <asp:Parameter Name="StreetName" Type="String" />
-                        <asp:Parameter Name="Latitude" Type="Double" />
-                        <asp:Parameter Name="Longitude" Type="Double" />
-                        <asp:Parameter Name="Postcode" Type="Int32" />
-                        <asp:Parameter Name="Suburb" Type="String" />
-                        <asp:Parameter Name="SubtypeID" Type="Int32" />
-                        <asp:Parameter Name="EventStartDate" Type="DateTime" />
-                        <asp:Parameter Name="EventEndDate" Type="DateTime" />
-                    </InsertParameters>
-                    <UpdateParameters>
-                        <asp:Parameter Name="ItemName" Type="String" />
-                        <asp:Parameter Name="Details" Type="String" />
-                        <asp:Parameter Name="Cost" Type="Decimal" />
-                        <asp:Parameter Name="Rating" Type="Int32" />
-                        <asp:Parameter Name="Phone" Type="Int32" />
-                        <asp:Parameter Name="Website" Type="String" />
-                        <asp:Parameter Name="Email" Type="String" />
-                        <asp:Parameter Name="OpeningHours" Type="String" />
-                        <asp:Parameter Name="StreetNo" Type="String" />
-                        <asp:Parameter Name="StreetName" Type="String" />
-                        <asp:Parameter Name="Latitude" Type="Double" />
-                        <asp:Parameter Name="Longitude" Type="Double" />
-                        <asp:Parameter Name="Postcode" Type="Int32" />
-                        <asp:Parameter Name="Suburb" Type="String" />
-                        <asp:Parameter Name="SubtypeID" Type="Int32" />
-                        <asp:Parameter Name="EventStartDate" Type="DateTime" />
-                        <asp:Parameter Name="EventEndDate" Type="DateTime" />
-                        <asp:Parameter Name="Original_SubtypeID" Type="Int32" />
-                        <asp:Parameter Name="Original_ItemID" Type="Int32" />
-                    </UpdateParameters>
                 </asp:ObjectDataSource>
             </div>
             <div class="contentDetail event">
@@ -188,7 +148,7 @@
                                 <asp:ConfirmButtonExtender ID="DeleteButton_ConfirmButtonExtender" OnClientCancel="CancelClick"
                                     runat="server" ConfirmText="Are you sure you want to delete the selected event?" 
                                     Enabled="True" TargetControlID="DeleteButton">
-                                </asp:ConfirmButtonExtender>                  
+                                </asp:ConfirmButtonExtender>   
                             </span>
                         </h1>
                         <hr />
@@ -199,6 +159,10 @@
                         <p>
                             <asp:Label ID="DetailSubtypeLabel" runat="server" CssClass="label" Font-Bold="True" Text="Subtype : " Width="150px"></asp:Label>
                             <asp:Label ID="SubtypeDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailMajorRegionLabel" runat="server" CssClass="label" Font-Bold="True" Text="Major Region : " Width="150px"></asp:Label>
+                            <asp:Label ID="MajorRegionDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
                             <asp:Label ID="DetailPhoneLabel" runat="server" CssClass="label" Font-Bold="True" Text="Phone : " Width="150px"></asp:Label>
@@ -226,12 +190,10 @@
                         </p>
                         <p>
                             <asp:Label ID="DetailCostLabel" runat="server" CssClass="label" Font-Bold="True" Text="Cost : " Width="150px"></asp:Label>
-                            <asp:Label ID="CostDataLabel" runat="server" Width="460px"></asp:Label>
-                        </p>
-                        <p>
-                            <asp:Label ID="DetailRatingLabel" runat="server" CssClass="label" Font-Bold="True" Text="Rating : " Width="150px"></asp:Label>
-                            <asp:Rating ID="RatingData" runat="server" MaxRating="5"  StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
-                                    CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating" ReadOnly="True"></asp:Rating><br/>
+                            <asp:Rating ID="RatingData" runat="server" MaxRating="5" StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
+                                    CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating" ReadOnly="True"></asp:Rating>
+                            <asp:Rating ID="FreeRatingData" runat="server" MaxRating="1" StarCssClass="FreeRatingStar" WaitingStarCssClass="FreeSavedRatingStar"
+                                    CurrentRating="0" FilledStarCssClass="FreeFilledRatingStar" EmptyStarCssClass="FreeEmptyRatingStar" CssClass="FreeRating" ReadOnly="True"></asp:Rating><br/>
                         </p>
                         <p>
                             <asp:Label ID="DetailDescriptionLabel" runat="server" CssClass="label" Font-Bold="True" Text="Detailed Description : " Width="150px"></asp:Label>
@@ -253,7 +215,6 @@
                             <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label"  Enabled="False" Font-Bold="True" Text="Videos : " Width="150px"></asp:Label>
                             <div runat="server" id="eventVideo" Width="460px"></div>
                         </p>
-                        <asp:HiddenField ID="SubtypeIDHiddenField" runat="server" />
                     </asp:View>
 
                     <!-- insert and update new display (Visible when insert link button is clicked
@@ -275,6 +236,14 @@
                         </asp:DropDownList>
                         <asp:ObjectDataSource ID="SubtypeObjectDataSource" runat="server" 
                             SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource><br /><br />
+                        <!-- MajorRegion -->
+                        <asp:Label ID="MajorRegionLabel" CssClass="label" runat="server" Text="Major Region : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:DropDownList ID="MajorRegionDropDownList" runat="server" 
+                            DataSourceID="MajorRegionObjectDataSource" DataTextField="MajorRegionName" DataValueField="MajorRegionID" Width="405px">
+                        </asp:DropDownList>
+                        <asp:ObjectDataSource ID="MajorRegionObjectDataSource" runat="server" 
+                            SelectMethod="getAllMajorRegion" TypeName="CMS.BLL.CMSBLClass" 
+                                OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource><br /><br />
                         <!-- Phone -->
                         <asp:Label ID="PhoneLabel" CssClass="label" runat="server" Text="Phone : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="PhoneTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
@@ -294,6 +263,7 @@
                             <asp:CalendarExtender ID="StartDateTextBox_CalendarExtender" runat="server" 
                                 Enabled="True" TargetControlID="StartDateTextBox" Format="dd/MMMM/yyyy">
                             </asp:CalendarExtender>
+
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
                             ErrorMessage="Start date is required." ControlToValidate="StartDateTextBox" SetFocusOnError="True" />
                         <br /><br />
@@ -314,18 +284,13 @@
                         <br /><br />
                         <!-- Cost -->
                         <asp:Label ID="CostLabel" CssClass="label" runat="server" Text="Cost : " Font-Bold="True" Width="150px" ></asp:Label>
-                        <asp:TextBox ID="CostTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                        <p class="validationError">             
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                            ErrorMessage="Cost is required." ControlToValidate="CostTextBox" SetFocusOnError="True" />
-                            <span style="margin-left: -105px;"/>
-                            <asp:CustomValidator ID="CostTextBox_CustomValidator" runat="server" ErrorMessage="Cost should include only numbers."
-                            onservervalidate="numberInputValidate" ControlToValidate="CostTextBox"></asp:CustomValidator>
-                        </p>
-                        <!-- Rating -->
-                        <asp:Label ID="RatingLabel" CssClass="label" runat="server" Text="Rating : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:Rating ID="Rating" runat="server" MaxRating="5"  StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
-                                CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating"></asp:Rating><br /><br />        
+                                CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating" 
+                                onchanged="Rating_Changed" AutoPostBack="True"></asp:Rating>
+                        <asp:Rating ID="FreeRating" runat="server" MaxRating="1" StarCssClass="FreeRatingStar" WaitingStarCssClass="FreeSavedRatingStar"
+                                CurrentRating="0" FilledStarCssClass="FreeFilledRatingStar"  EmptyStarCssClass="FreeEmptyRatingStar" CssClass="FreeRating" 
+                                onchanged="FreeRating_Changed" AutoPostBack="True"></asp:Rating>        
+                        <br /><br />
                         <!-- Detailed Description -->
                         <asp:Label ID="DescriptionLabel" CssClass="label" runat="server" Text="Detailed description : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="DescriptionTextBox" runat="server" Width="400px" TextMode="MultiLine" Height="100px" ></asp:TextBox> 
@@ -427,9 +392,8 @@
                                });
                            });
 
-
                         </script>
-                        <!-- Buttons -->
+                        <!-- Buttons -->                        
                         <div class="detailButtons bottom">
                             <asp:MultiView ID="ButtonMultiView" runat="server">
                                 <asp:View ID="UpdateButtonView" runat="server">                            
@@ -462,5 +426,6 @@
         </div>
     </div>
     
+    </span>
     
 </asp:Content>

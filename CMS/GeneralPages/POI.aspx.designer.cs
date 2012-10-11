@@ -148,6 +148,24 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Label SubtypeDataLabel;
         
         /// <summary>
+        /// DetailMajorRegionLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DetailMajorRegionLabel;
+        
+        /// <summary>
+        /// MajorRegionDataLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MajorRegionDataLabel;
+        
+        /// <summary>
         /// DetailPhoneLabel control.
         /// </summary>
         /// <remarks>
@@ -229,24 +247,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Label DetailCostLabel;
         
         /// <summary>
-        /// CostDataLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CostDataLabel;
-        
-        /// <summary>
-        /// DetailRatingLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label DetailRatingLabel;
-        
-        /// <summary>
         /// RatingData control.
         /// </summary>
         /// <remarks>
@@ -254,6 +254,15 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.Rating RatingData;
+        
+        /// <summary>
+        /// FreeRatingData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.Rating FreeRatingData;
         
         /// <summary>
         /// DetailDescriptionLabel control.
@@ -355,15 +364,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.HiddenField CategoryIDHiddenField;
         
         /// <summary>
-        /// SubtypeIDHiddenField control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField SubtypeIDHiddenField;
-        
-        /// <summary>
         /// InsertView control.
         /// </summary>
         /// <remarks>
@@ -463,6 +463,33 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.ObjectDataSource SubtypeObjectDataSource;
         
         /// <summary>
+        /// MajorRegionLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MajorRegionLabel;
+        
+        /// <summary>
+        /// MajorRegionDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList MajorRegionDropDownList;
+        
+        /// <summary>
+        /// MajorRegionObjectDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource MajorRegionObjectDataSource;
+        
+        /// <summary>
         /// PhoneLabel control.
         /// </summary>
         /// <remarks>
@@ -544,42 +571,6 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Label CostLabel;
         
         /// <summary>
-        /// CostTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CostTextBox;
-        
-        /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
-        /// <summary>
-        /// CostTextBox_CustomValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CostTextBox_CustomValidator;
-        
-        /// <summary>
-        /// RatingLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label RatingLabel;
-        
-        /// <summary>
         /// Rating control.
         /// </summary>
         /// <remarks>
@@ -587,6 +578,15 @@ namespace CMS.CMSPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.Rating Rating;
+        
+        /// <summary>
+        /// FreeRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.Rating FreeRating;
         
         /// <summary>
         /// DescriptionLabel control.

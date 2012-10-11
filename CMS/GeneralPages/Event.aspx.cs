@@ -38,22 +38,24 @@ namespace CMS.CMSPages
 
             this.NameDataLabel.Text = row["ItemName"].ToString();
             this.SubtypeDataLabel.Text = row["SubtypeName"].ToString();
+            this.MajorRegionDataLabel.Text = row["MajorRegionName"].ToString();
             this.PhoneDataLabel.Text = row["Phone"].ToString();
             this.EmailDataLabel.Text = row["Email"].ToString();
             this.WebsiteDataLabel.Text = row["Website"].ToString();
             this.StartDateDataLabel.Text = Convert.ToDateTime(row["EventStartDate"].ToString()).ToString("dd/MMMM/yyyy");
             this.EndDateDataLabel.Text = Convert.ToDateTime(row["EventEndDate"].ToString()).ToString("dd/MMMM/yyyy");
             this.OpeningHoursDataLabel.Text = row["OpeningHours"].ToString();
-            this.CostDataLabel.Text = row["Cost"].ToString();
-            this.RatingData.CurrentRating = Convert.ToInt32(row["Rating"].ToString());
+            this.RatingData.CurrentRating = Convert.ToInt32(row["Cost"].ToString());
+            if (this.RatingData.CurrentRating == 0)
+                this.FreeRatingData.CurrentRating = 1;
+            else
+                this.FreeRatingData.CurrentRating = 0;
             this.DescriptionDataLabel.Text = row["Details"].ToString();
             this.PostcodeDataLabel.Text = row["Postcode"].ToString();
             this.AddressDataLabel.Text = row["Address"].ToString();
 
             this.LatitudeHiddenField.Value = row["Latitude"].ToString();
             this.LongitudeHiddenField.Value = row["Longitude"].ToString();
-
-            this.SubtypeIDHiddenField.Value = row["SubtypeID"].ToString();
 
             this.EventMultiView.ActiveViewIndex = 0;
 
@@ -92,12 +94,13 @@ namespace CMS.CMSPages
             this.EditTitleLabel.Text = "Insert New Event";
             this.NameTextBox.Text = "";
             this.SubtypeDropDownList.DataBind();
+            this.MajorRegionDropDownList.DataBind();
             this.PhoneTextBox.Text = "";
             this.EmailTextBox.Text = "";
             this.WebsiteTextBox.Text = "";
             this.OpeningHoursTextBox.Text = "";
-            this.CostTextBox.Text = "";
             this.Rating.CurrentRating = 0;
+            this.FreeRating.CurrentRating = 1;
             this.DescriptionTextBox.Text = "";
             this.PostcodeTextBox.Text = "";
             this.AddressTextBox.Text = "";
@@ -141,28 +144,29 @@ namespace CMS.CMSPages
                 }
 
                 //convert inputs into correct format.
-                decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
+                int cost = this.Rating.CurrentRating;
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
+                int? majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
                 DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text);
                 DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text);
 
                 int newItemId = dataAccess.InsertEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
-                    cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
+                    cost, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
-                    suburb, subtypeID, startDate, endDate);
+                    suburb, subtypeID, startDate, endDate, majorRegionID);
 
                 int count = ImageUploadFileName.Value.Split(';').Length;
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images", null, null);
+                    dataAccess.InsertMedia(newItemId, "../Media/" + filename, "Images", null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null, null);
+                    dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null);
                 }
                 CurrentImagesFileName.Value = "";
                 this.EventGridView.DataBind();
@@ -179,11 +183,6 @@ namespace CMS.CMSPages
         {
             String senderID = ((CustomValidator)sender).ID;
             bool isNum = false;
-            if (senderID.Equals("CostTextBox_CustomValidator"))
-            {
-                Decimal num;
-                isNum = Decimal.TryParse(this.CostTextBox.Text, out num);
-            }
             if (senderID.Equals("PostcodeTextBox_CustomValidator") && (this.PostcodeTextBox.Text.Length == 4))
             {
                 Int32 num;
@@ -241,14 +240,18 @@ namespace CMS.CMSPages
 
             this.NameTextBox.Text = row["ItemName"].ToString();
             this.SubtypeDropDownList.SelectedValue = row["SubtypeID"].ToString();
+            this.MajorRegionDropDownList.SelectedValue = row["MajorRegionID"].ToString();
             this.PhoneTextBox.Text = row["Phone"].ToString();
             this.EmailTextBox.Text = row["Email"].ToString();
             this.WebsiteTextBox.Text = row["Website"].ToString();
             this.StartDateTextBox_CalendarExtender.SelectedDate = Convert.ToDateTime(row["EventStartDate"].ToString());
             this.EndDateTextBox_CalendarExtender.SelectedDate = Convert.ToDateTime(row["EventEndDate"].ToString());
             this.OpeningHoursTextBox.Text = row["OpeningHours"].ToString();
-            this.CostTextBox.Text = row["Cost"].ToString();
-            this.Rating.CurrentRating = Convert.ToInt32(row["Rating"].ToString());
+            this.Rating.CurrentRating = Convert.ToInt32(row["Cost"].ToString());
+            if (this.Rating.CurrentRating == 0)
+                this.FreeRating.CurrentRating = 1;
+            else
+                this.FreeRating.CurrentRating = 0;
             this.DescriptionTextBox.Text = row["Details"].ToString();
             this.PostcodeTextBox.Text = row["Postcode"].ToString();
             this.AddressTextBox.Text = row["Address"].ToString();
@@ -283,7 +286,7 @@ namespace CMS.CMSPages
         {
             int itemID = (Int32)this.EventGridView.SelectedDataKey.Value;
             dataAccess.DeleteMediaByItemID(itemID);
-            dataAccess.DeleteEvent(itemID, Convert.ToInt32(this.SubtypeIDHiddenField.Value));
+            dataAccess.DeleteEvent(itemID);
             this.EventGridView.DataBind();
             this.EventMultiView.ActiveViewIndex = -1;
         }
@@ -324,16 +327,16 @@ namespace CMS.CMSPages
                 DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text, format);
 
                 //convert inputs into correct format.
-                decimal cost = Convert.ToDecimal(this.CostTextBox.Text);
+                int cost = this.Rating.CurrentRating;
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
-                int? originalSubtypeID = Convert.ToInt32(this.SubtypeIDHiddenField.Value);
+                int? majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
                 int itemID = Convert.ToInt32(this.EventGridView.SelectedDataKey.Value);
 
                 dataAccess.UpdateEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
-                    cost, this.Rating.CurrentRating, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
+                    cost, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
-                    suburb, subtypeID, startDate, endDate, originalSubtypeID, itemID);
+                    suburb, subtypeID, startDate, endDate, majorRegionID, itemID);
 
                 int imageDeleteCount = ImageDeleteFileName.Value != "" ? ImageDeleteFileName.Value.Split(';').Length : 0;
                 for (int y = 0; y < imageDeleteCount - 1; y++)
@@ -347,7 +350,7 @@ namespace CMS.CMSPages
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
-                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images", null, null);
+                    dataAccess.InsertMedia(itemID, "../Media/" + filename, "Images", null);
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
@@ -355,7 +358,7 @@ namespace CMS.CMSPages
 
                 if (VideoTextBox.Text.Length > 0)
                 {
-                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null, null);
+                    dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null);
                 }
                 this.EventGridView.DataBind();
                 this.EventMultiView.ActiveViewIndex = -1;
@@ -372,7 +375,6 @@ namespace CMS.CMSPages
             try
             {
                 StatusLabel.Text = "";
-                // eventsImagesAddUpdate.InnerHtml += "";
 
                 int count = ImageUploadFileName.Value != "" ? ImageUploadFileName.Value.Split(';').Length : 0;
                 if (count - 1 > 0 || ImageUploadDelete.Value == "1")
@@ -456,6 +458,17 @@ namespace CMS.CMSPages
             this.AutoLinkButton.BackColor = Color.Gray;
             this.ManualLinkButton.BackColor = Color.LightGray;
             this.AddressMultiView.ActiveViewIndex = 1;
+        }
+
+        protected void FreeRating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
+        {
+            this.Rating.CurrentRating = 0;
+        }
+
+
+        protected void Rating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
+        {
+            this.FreeRating.CurrentRating = 0;
         }
     }
 }

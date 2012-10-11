@@ -54,8 +54,11 @@ namespace CMS
                 case "User.aspx":
                     this.LinkButtonUser.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
                     break;
-                case "Subtype.aspx":
+                case "SubType.aspx":
                     this.LinkButtonSubType.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
+                    break;
+                case "MajorRegion.aspx":
+                    this.LinkButtonMajorRegion.BackColor = System.Drawing.ColorTranslator.FromHtml("#acacac");
                     break;
                 default:
                     break;
@@ -100,9 +103,12 @@ namespace CMS
                 case "LinkButtonSubType":
                     Response.Redirect("~/GeneralPages/SubType.aspx");
                     break;
+                case "LinkButtonMajorRegion":
+                    Response.Redirect("~/GeneralPages/MajorRegion.aspx");
+                    break;
                 default:
                     Response.Redirect("~/Default.aspx");
-                    break;
+                    break;                    
             }
         }
 

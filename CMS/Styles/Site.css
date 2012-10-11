@@ -547,7 +547,7 @@ first child of the left and right table columns */
     font-size: 0pt;
     width: 25px;
     height: 25px;
-    margin: 0px;
+    margin: -2px;
     padding: 0px;
     cursor: pointer;
     display: block;
@@ -564,6 +564,37 @@ first child of the left and right table columns */
 
 .savedRatingStar {
     background-image: url(/Resources/SavedStar.png);
+}
+
+.FreeRating
+{
+    position:relative;
+    float:left;
+    margin-left:5px;
+    margin-top:-2px;
+}
+
+.FreeRatingStar {
+    font-size: 0pt;
+    width: 49px;
+    height: 25px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    display: block;    
+    background-repeat: no-repeat;
+}
+
+.FreeFilledRatingStar {
+    background-image: url(/Resources/FilledFree.png);
+}
+
+.FreeEmptyRatingStar {
+    background-image: url(/Resources/EmptyFree.png);
+}
+
+.FreeSavedRatingStar {
+    background-image: url(/Resources/SavedFree.png);
 }
 
 .ajax__fileupload
@@ -837,7 +868,7 @@ div.accountInfo
 	.blue.button:hover							{ background-color: #2575cf; }
 	.yellow.button, .yellow.button:visited		{ background-color: #ffb515; }
 	.yellow.button:hover						{ background-color: #fc9200; }
-	.gray.button, .gray.button:visited		{ background-color: #636363; width:80px; height:18px; text-align:center; vertical-align:text-top; }
+	.gray.button, .gray.button:visited		{ background-color: #636363; width:100px; height:18px; text-align:center; vertical-align:text-top; }
 	.gray.button:hover						{ background-color: #acacac; }
    
    
