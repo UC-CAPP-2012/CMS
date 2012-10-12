@@ -38,7 +38,10 @@ namespace CMS.CMSPages
 
             this.NameDataLabel.Text = row["ItemName"].ToString();
             this.SubtypeDataLabel.Text = row["SubtypeName"].ToString();
-            this.MajorRegionDataLabel.Text = row["MajorRegionName"].ToString();
+            if (row["MajorRegionID"].ToString() != "")
+                this.MajorRegionDataLabel.Text = dataAccess.getMajorRegionName(Convert.ToInt32(row["MajorRegionID"].ToString()));
+            else
+                this.MajorRegionDataLabel.Text = "None";
             this.PhoneDataLabel.Text = row["Phone"].ToString();
             this.EmailDataLabel.Text = row["Email"].ToString();
             this.WebsiteDataLabel.Text = row["Website"].ToString();
@@ -147,7 +150,11 @@ namespace CMS.CMSPages
                 int cost = this.Rating.CurrentRating;
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
-                int? majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
+                int? majorRegionID;
+                if (this.MajorRegionDropDownList.SelectedValue != "")
+                    majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
+                else
+                    majorRegionID = null;
                 DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text);
                 DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text);
 
@@ -240,7 +247,10 @@ namespace CMS.CMSPages
 
             this.NameTextBox.Text = row["ItemName"].ToString();
             this.SubtypeDropDownList.SelectedValue = row["SubtypeID"].ToString();
-            this.MajorRegionDropDownList.SelectedValue = row["MajorRegionID"].ToString();
+            if (row["MajorRegionID"].ToString() != "")
+                this.MajorRegionDropDownList.SelectedValue = row["MajorRegionID"].ToString();
+            else
+                this.MajorRegionDropDownList.DataBind();
             this.PhoneTextBox.Text = row["Phone"].ToString();
             this.EmailTextBox.Text = row["Email"].ToString();
             this.WebsiteTextBox.Text = row["Website"].ToString();
@@ -330,7 +340,11 @@ namespace CMS.CMSPages
                 int cost = this.Rating.CurrentRating;
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
-                int? majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
+                int? majorRegionID;
+                if (this.MajorRegionDropDownList.SelectedValue != "")
+                    majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
+                else
+                    majorRegionID = null;
                 int itemID = Convert.ToInt32(this.EventGridView.SelectedDataKey.Value);
 
                 dataAccess.UpdateEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
@@ -469,6 +483,12 @@ namespace CMS.CMSPages
         protected void Rating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
         {
             this.FreeRating.CurrentRating = 0;
+        }
+
+        protected void MajorRegionDropDownList_DataBound(object sender, EventArgs e)
+        {
+            ListItem item = new ListItem("----- none -----", "");
+            this.MajorRegionDropDownList.Items.Insert(0, item);
         }
     }
 }

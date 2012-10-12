@@ -37,8 +37,14 @@ namespace CMS.CMSPages
 
             this.NameDataLabel.Text = row["ItemName"].ToString();
             this.CategoryDataLabel.Text = row["CategoryName"].ToString();
-            this.SubtypeDataLabel.Text = row["SubtypeName"].ToString();
-            this.MajorRegionDataLabel.Text = row["MajorRegionName"].ToString();
+            if (row["SubtypeID"].ToString() != "")
+                this.SubtypeDataLabel.Text = dataAccess.getSubtypeName(Convert.ToInt32(row["SubtypeID"].ToString()));
+            else
+                this.SubtypeDataLabel.Text = "None";
+            if (row["MajorRegionID"].ToString() != "")
+                this.MajorRegionDataLabel.Text = dataAccess.getMajorRegionName(Convert.ToInt32(row["MajorRegionID"].ToString()));
+            else
+                this.MajorRegionDataLabel.Text = "None";
             this.PhoneDataLabel.Text = row["Phone"].ToString();
             this.EmailDataLabel.Text = row["Email"].ToString();
             this.WebsiteDataLabel.Text = row["Website"].ToString();
@@ -146,8 +152,16 @@ namespace CMS.CMSPages
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int cost = this.Rating.CurrentRating;
                 int categotyID = Convert.ToInt32(this.CategoryDropDownList.SelectedValue);
-                int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
-                int? majorRegion = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
+                int? subtypeID;
+                if(this.SubtypeDropDownList.SelectedValue != "")
+                    subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
+                else
+                    subtypeID = null;
+                int? majorRegion;
+                if (this.MajorRegionDropDownList.SelectedValue != "")
+                    majorRegion = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
+                else
+                    majorRegion = null;
                 int newItemId= dataAccess.InsertPOI(this.NameTextBox.Text, this.DescriptionTextBox.Text,
                     cost, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode, suburb, subtypeID, categotyID, majorRegion);
@@ -234,8 +248,14 @@ namespace CMS.CMSPages
             DAL.CMSDBDataSet.POIItemRow row = dataAccess.getPOIByItemID(id);
             this.NameTextBox.Text = row["ItemName"].ToString();
             this.CategoryDropDownList.SelectedValue = row["CategoryID"].ToString();
-            this.SubtypeDropDownList.SelectedValue = row["SubtypeID"].ToString();
-            this.MajorRegionDropDownList.SelectedValue = row["MajorRegionID"].ToString();
+            if (row["SubtypeID"].ToString() != "")
+                this.SubtypeDropDownList.SelectedValue = row["SubtypeID"].ToString();
+            else
+                this.SubtypeDropDownList.DataBind();
+            if (row["MajorRegionID"].ToString() != "")
+                this.MajorRegionDropDownList.SelectedValue = row["MajorRegionID"].ToString();
+            else
+                this.MajorRegionDropDownList.DataBind();
             this.PhoneTextBox.Text = row["Phone"].ToString();
             this.EmailTextBox.Text = row["Email"].ToString();
             this.WebsiteTextBox.Text = row["Website"].ToString();
@@ -313,8 +333,16 @@ namespace CMS.CMSPages
                 int cost = this.Rating.CurrentRating;
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int categotyID = Convert.ToInt32(this.CategoryDropDownList.SelectedValue);
-                int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
-                int? majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
+                int? subtypeID;
+                if (this.SubtypeDropDownList.SelectedValue != "")
+                    subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
+                else
+                    subtypeID = null;
+                int? majorRegionID;
+                if (this.MajorRegionDropDownList.SelectedValue != "")
+                    majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
+                else
+                    majorRegionID = null;
                 int originalCategoryID = Convert.ToInt32(this.CategoryIDHiddenField.Value);
 
                 int itemID = Convert.ToInt32(this.POIGridView.SelectedDataKey.Value);
@@ -447,13 +475,13 @@ namespace CMS.CMSPages
 
         protected void SubtypeDropDownList_DataBound(object sender, EventArgs e)
         {
-            ListItem item = new ListItem("----- none -----", null);
+            ListItem item = new ListItem("----- none -----", "");
             this.SubtypeDropDownList.Items.Insert(0, item);
         }
 
         protected void MajorRegionDropDownList_DataBound(object sender, EventArgs e)
         {
-            ListItem item = new ListItem("----- none -----", null);
+            ListItem item = new ListItem("----- none -----", "");
             this.MajorRegionDropDownList.Items.Insert(0, item);
         }
 

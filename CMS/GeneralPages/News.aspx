@@ -151,8 +151,7 @@
                         <div class="news-image news-image-update"><asp:Image ID="NewsImageUpdate" runat="server" /></div>
                         <div  class="news-body-update">
                             <asp:Label ID="BodyUpdateLabel" CssClass="label" runat="server" Text="Body: " Font-Bold="True" Width="150px" ></asp:Label>
-                            <asp:Editor ID="NewsBodyEditor" runat="server" CssClass="newBodyEditor" 
-                                BorderStyle="Ridge"/>
+                            <asp:TextBox ID="NewsBodyTextBox" runat="server" TextMode="MultiLine" CssClass="newBodyEditor"></asp:TextBox>
                             <asp:Label ID="UpdateNewsNoContentStatus" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
                         </div>
                         
@@ -205,9 +204,8 @@
                         </div>
                         <div class="news-image news-image-update"><asp:Image ID="InsertNewsImage" runat="server" /></div>
                         <div  class="news-body-update">
-                            <asp:Label ID="Label5" CssClass="label" runat="server" Text="Body: " Font-Bold="True" Width="150px" ></asp:Label>
-                            <asp:Editor ID="InsertNewsEditor" runat="server" CssClass="newBodyEditor" 
-                                BorderStyle="Ridge"/>
+                            <asp:Label ID="Label5" CssClass="label" runat="server" Text="Body: " Font-Bold="True" Width="150px" ></asp:Label>                            
+                            <asp:TextBox ID="InsertNewsBodyTextBox" runat="server" TextMode="MultiLine" CssClass="newBodyEditor"></asp:TextBox>
                             <asp:Label ID="InsertNewsNoContentStatus" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
                         </div>
                         

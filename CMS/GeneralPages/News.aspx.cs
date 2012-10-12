@@ -26,7 +26,7 @@ namespace CMS.CMSPages
             this.AuthorTextBox.Text = this.GridViewNews.SelectedRow.Cells[4].Text;
             var News = dataAccess.getNewsById((Int32)this.GridViewNews.SelectedDataKey.Value);
             this.NewsImageUpdate.ImageUrl = News.NewsMediaURL;
-            this.NewsBodyEditor.Content = News.NewsBody;
+            this.NewsBodyTextBox.Text = News.NewsBody;
             if (!News.NewsMediaURL.StartsWith("../Media/default-news-image.png"))
             {
                 btnRemove.Visible = true;
@@ -49,11 +49,11 @@ namespace CMS.CMSPages
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (this.NewsBodyEditor.Content.Length > 0)
+            if (this.NewsBodyTextBox.Text.Length > 0)
             {
                 string title = NameTextBox.Text;
                 DateTime publishedDate = DateTime.Today;
-                string body = NewsBodyEditor.Content;
+                string body = NewsBodyTextBox.Text;
                 string newsPublisher = PublisherTextBox.Text;
                 string newsAuthor = AuthorTextBox.Text;
                 string newsImageUrl = "../Media/" + NewsImageUpdate.ImageUrl.Split('/')[2];
@@ -95,11 +95,11 @@ namespace CMS.CMSPages
 
         protected void SubmitNewButton_Click(object sender, EventArgs e)
         {
-            if (this.InsertNewsEditor.Content.Length > 0)
+            if (this.InsertNewsBodyTextBox.Text.Length > 0)
             {
                 string title = InsertNewsTitle.Text;
                 DateTime publishedDate = DateTime.Today;
-                string body = InsertNewsEditor.Content;
+                string body = InsertNewsBodyTextBox.Text;
                 string newsPublisher = InsertNewsPublisher.Text;
                 string newsAuthor = InsertNewsAuthor.Text;
                 string newsImageUrl = "../Media/" + InsertNewsImage.ImageUrl.Split('/')[2];

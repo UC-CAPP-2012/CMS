@@ -53,6 +53,9 @@ namespace CMS.BLL
         DAL.CMSDBDataSetTableAdapters.MajorRegionTableAdapter majorRegionTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.MajorRegionTableAdapter();
 
+        DAL.CMSDBDataSetTableAdapters.TourPOIListTableAdapter tourPOIListTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.TourPOIListTableAdapter();
+
         /*********************************************************************
          * Category data access
          *********************************************************************/
@@ -102,6 +105,11 @@ namespace CMS.BLL
             return subtypeTableAdapter.Insert(subtypeName);
         }
 
+        public String getSubtypeName(int subtypeID)
+        {
+            return subtypeTableAdapter.getNameByID(subtypeID);
+        }
+
 
         /*********************************************************************
         * MajorRegion data access
@@ -127,6 +135,10 @@ namespace CMS.BLL
             return majorRegionTableAdapter.Insert(MajorRegionName);
         }
 
+        public String getMajorRegionName(int MajorRegionID)
+        {
+            return majorRegionTableAdapter.getNameByID(MajorRegionID);
+        }
 
         /*********************************************************************
          * POI data access
@@ -389,5 +401,19 @@ namespace CMS.BLL
         * POITour data access
         *********************************************************************/
 
+        public DAL.CMSDBDataSet.TourPOIListDataTable getTourPOIListByTourID(int tourID)
+        {
+            return tourPOIListTableAdapter.GetDataTourID(tourID);
+        }
+
+        public int deleteTourPOIListByTourID(int tourID)
+        {
+            return poiTourTableAdapter.DeleteByTourID(tourID);
+        }
+
+        public int insertTourPOIList(int POIID, int TourID, int seqNum)
+        {
+            return poiTourTableAdapter.Insert(POIID, TourID, seqNum);
+        }
     }
 }

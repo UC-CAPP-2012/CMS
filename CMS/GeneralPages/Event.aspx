@@ -239,7 +239,9 @@
                         <!-- MajorRegion -->
                         <asp:Label ID="MajorRegionLabel" CssClass="label" runat="server" Text="Major Region : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:DropDownList ID="MajorRegionDropDownList" runat="server" 
-                            DataSourceID="MajorRegionObjectDataSource" DataTextField="MajorRegionName" DataValueField="MajorRegionID" Width="405px">
+                            DataSourceID="MajorRegionObjectDataSource" DataTextField="MajorRegionName" 
+                                DataValueField="MajorRegionID" Width="405px" 
+                                ondatabound="MajorRegionDropDownList_DataBound">
                         </asp:DropDownList>
                         <asp:ObjectDataSource ID="MajorRegionObjectDataSource" runat="server" 
                             SelectMethod="getAllMajorRegion" TypeName="CMS.BLL.CMSBLClass" 

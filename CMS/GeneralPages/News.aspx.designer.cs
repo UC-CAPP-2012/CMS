@@ -328,13 +328,13 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Label BodyUpdateLabel;
         
         /// <summary>
-        /// NewsBodyEditor control.
+        /// NewsBodyTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.HTMLEditor.Editor NewsBodyEditor;
+        protected global::System.Web.UI.WebControls.TextBox NewsBodyTextBox;
         
         /// <summary>
         /// UpdateNewsNoContentStatus control.
@@ -544,13 +544,13 @@ namespace CMS.CMSPages {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// InsertNewsEditor control.
+        /// InsertNewsBodyTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.HTMLEditor.Editor InsertNewsEditor;
+        protected global::System.Web.UI.WebControls.TextBox InsertNewsBodyTextBox;
         
         /// <summary>
         /// InsertNewsNoContentStatus control.

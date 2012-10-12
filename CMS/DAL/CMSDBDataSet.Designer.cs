@@ -54,6 +54,8 @@ namespace CMS.DAL {
         
         private TourDataTable tableTour;
         
+        private TourPOIListDataTable tableTourPOIList;
+        
         private global::System.Data.DataRelation relationCategoryPOI;
         
         private global::System.Data.DataRelation relationItemEvent2;
@@ -77,6 +79,14 @@ namespace CMS.DAL {
         private global::System.Data.DataRelation relationTourMedia;
         
         private global::System.Data.DataRelation relationTourPOITour;
+        
+        private global::System.Data.DataRelation relationItemEvent1;
+        
+        private global::System.Data.DataRelation relationItemEvent3;
+        
+        private global::System.Data.DataRelation relationItemPOI2;
+        
+        private global::System.Data.DataRelation relationItemMedia1;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -150,6 +160,9 @@ namespace CMS.DAL {
                 }
                 if ((ds.Tables["Tour"] != null)) {
                     base.Tables.Add(new TourDataTable(ds.Tables["Tour"]));
+                }
+                if ((ds.Tables["TourPOIList"] != null)) {
+                    base.Tables.Add(new TourPOIListDataTable(ds.Tables["TourPOIList"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -321,6 +334,16 @@ namespace CMS.DAL {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TourPOIListDataTable TourPOIList {
+            get {
+                return this.tableTourPOIList;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -430,6 +453,9 @@ namespace CMS.DAL {
                 }
                 if ((ds.Tables["Tour"] != null)) {
                     base.Tables.Add(new TourDataTable(ds.Tables["Tour"]));
+                }
+                if ((ds.Tables["TourPOIList"] != null)) {
+                    base.Tables.Add(new TourPOIListDataTable(ds.Tables["TourPOIList"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -554,6 +580,12 @@ namespace CMS.DAL {
                     this.tableTour.InitVars();
                 }
             }
+            this.tableTourPOIList = ((TourPOIListDataTable)(base.Tables["TourPOIList"]));
+            if ((initTable == true)) {
+                if ((this.tableTourPOIList != null)) {
+                    this.tableTourPOIList.InitVars();
+                }
+            }
             this.relationCategoryPOI = this.Relations["CategoryPOI"];
             this.relationItemEvent2 = this.Relations["ItemEvent2"];
             this.relationItemPOI1 = this.Relations["ItemPOI1"];
@@ -566,6 +598,10 @@ namespace CMS.DAL {
             this.relationSubtypeItem = this.Relations["SubtypeItem"];
             this.relationTourMedia = this.Relations["TourMedia"];
             this.relationTourPOITour = this.Relations["TourPOITour"];
+            this.relationItemEvent1 = this.Relations["ItemEvent1"];
+            this.relationItemEvent3 = this.Relations["ItemEvent3"];
+            this.relationItemPOI2 = this.Relations["ItemPOI2"];
+            this.relationItemMedia1 = this.Relations["ItemMedia1"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -606,6 +642,8 @@ namespace CMS.DAL {
             base.Tables.Add(this.tableItem);
             this.tableTour = new TourDataTable();
             base.Tables.Add(this.tableTour);
+            this.tableTourPOIList = new TourPOIListDataTable();
+            base.Tables.Add(this.tableTourPOIList);
             this.relationCategoryPOI = new global::System.Data.DataRelation("CategoryPOI", new global::System.Data.DataColumn[] {
                         this.tableCategory.CategoryIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePOI.CategoryIDColumn}, false);
@@ -654,6 +692,22 @@ namespace CMS.DAL {
                         this.tableTour.TourIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePOITour.TourIDColumn}, false);
             this.Relations.Add(this.relationTourPOITour);
+            this.relationItemEvent1 = new global::System.Data.DataRelation("ItemEvent1", new global::System.Data.DataColumn[] {
+                        this.tableItem.ItemIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableEventItem.ItemIDColumn}, false);
+            this.Relations.Add(this.relationItemEvent1);
+            this.relationItemEvent3 = new global::System.Data.DataRelation("ItemEvent3", new global::System.Data.DataColumn[] {
+                        this.tableTourPOIList.ItemIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableEvent.ItemIDColumn}, false);
+            this.Relations.Add(this.relationItemEvent3);
+            this.relationItemPOI2 = new global::System.Data.DataRelation("ItemPOI2", new global::System.Data.DataColumn[] {
+                        this.tableTourPOIList.ItemIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePOI.ItemIDColumn}, false);
+            this.Relations.Add(this.relationItemPOI2);
+            this.relationItemMedia1 = new global::System.Data.DataRelation("ItemMedia1", new global::System.Data.DataColumn[] {
+                        this.tableTourPOIList.ItemIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMedia.ItemIDColumn}, false);
+            this.Relations.Add(this.relationItemMedia1);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -743,6 +797,12 @@ namespace CMS.DAL {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeTour() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeTourPOIList() {
             return false;
         }
         
@@ -845,6 +905,9 @@ namespace CMS.DAL {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void TourRowChangeEventHandler(object sender, TourRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void TourPOIListRowChangeEventHandler(object sender, TourPOIListRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -4171,10 +4234,6 @@ namespace CMS.DAL {
             
             private global::System.Data.DataColumn columnCategoryID;
             
-            private global::System.Data.DataColumn columnSubtypeName;
-            
-            private global::System.Data.DataColumn columnMajorRegionName;
-            
             private global::System.Data.DataColumn columnCategoryName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4340,22 +4399,6 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SubtypeNameColumn {
-                get {
-                    return this.columnSubtypeName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MajorRegionNameColumn {
-                get {
-                    return this.columnMajorRegionName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn CategoryNameColumn {
                 get {
                     return this.columnCategoryName;
@@ -4415,8 +4458,6 @@ namespace CMS.DAL {
                         int SubtypeID, 
                         int MajorRegionID, 
                         int CategoryID, 
-                        string SubtypeName, 
-                        string MajorRegionName, 
                         string CategoryName) {
                 POIItemRow rowPOIItemRow = ((POIItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -4436,8 +4477,6 @@ namespace CMS.DAL {
                         SubtypeID,
                         MajorRegionID,
                         CategoryID,
-                        SubtypeName,
-                        MajorRegionName,
                         CategoryName};
                 rowPOIItemRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPOIItemRow);
@@ -4477,8 +4516,6 @@ namespace CMS.DAL {
                 this.columnSubtypeID = base.Columns["SubtypeID"];
                 this.columnMajorRegionID = base.Columns["MajorRegionID"];
                 this.columnCategoryID = base.Columns["CategoryID"];
-                this.columnSubtypeName = base.Columns["SubtypeName"];
-                this.columnMajorRegionName = base.Columns["MajorRegionName"];
                 this.columnCategoryName = base.Columns["CategoryName"];
             }
             
@@ -4517,10 +4554,6 @@ namespace CMS.DAL {
                 base.Columns.Add(this.columnMajorRegionID);
                 this.columnCategoryID = new global::System.Data.DataColumn("CategoryID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCategoryID);
-                this.columnSubtypeName = new global::System.Data.DataColumn("SubtypeName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSubtypeName);
-                this.columnMajorRegionName = new global::System.Data.DataColumn("MajorRegionName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMajorRegionName);
                 this.columnCategoryName = new global::System.Data.DataColumn("CategoryName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCategoryName);
                 this.columnItemID.AutoIncrement = true;
@@ -4534,8 +4567,6 @@ namespace CMS.DAL {
                 this.columnOpeningHours.MaxLength = 255;
                 this.columnAddress.MaxLength = 255;
                 this.columnSuburb.MaxLength = 255;
-                this.columnSubtypeName.MaxLength = 255;
-                this.columnMajorRegionName.MaxLength = 255;
                 this.columnCategoryName.MaxLength = 50;
             }
             
@@ -4705,8 +4736,6 @@ namespace CMS.DAL {
             private global::System.Data.DataColumn columnEventEndDate;
             
             private global::System.Data.DataColumn columnEventStartDate;
-            
-            private global::System.Data.DataColumn columnMajorRegionName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -4887,14 +4916,6 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MajorRegionNameColumn {
-                get {
-                    return this.columnMajorRegionName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4947,8 +4968,7 @@ namespace CMS.DAL {
                         int MajorRegionID, 
                         string SubtypeName, 
                         System.DateTime EventEndDate, 
-                        System.DateTime EventStartDate, 
-                        string MajorRegionName) {
+                        System.DateTime EventStartDate) {
                 EventItemRow rowEventItemRow = ((EventItemRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -4968,8 +4988,7 @@ namespace CMS.DAL {
                         MajorRegionID,
                         SubtypeName,
                         EventEndDate,
-                        EventStartDate,
-                        MajorRegionName};
+                        EventStartDate};
                 rowEventItemRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEventItemRow);
                 return rowEventItemRow;
@@ -5010,7 +5029,6 @@ namespace CMS.DAL {
                 this.columnSubtypeName = base.Columns["SubtypeName"];
                 this.columnEventEndDate = base.Columns["EventEndDate"];
                 this.columnEventStartDate = base.Columns["EventStartDate"];
-                this.columnMajorRegionName = base.Columns["MajorRegionName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5052,8 +5070,6 @@ namespace CMS.DAL {
                 base.Columns.Add(this.columnEventEndDate);
                 this.columnEventStartDate = new global::System.Data.DataColumn("EventStartDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEventStartDate);
-                this.columnMajorRegionName = new global::System.Data.DataColumn("MajorRegionName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMajorRegionName);
                 this.columnItemID.AutoIncrement = true;
                 this.columnItemID.AutoIncrementSeed = -1;
                 this.columnItemID.AutoIncrementStep = -1;
@@ -5066,7 +5082,6 @@ namespace CMS.DAL {
                 this.columnAddress.MaxLength = 255;
                 this.columnSuburb.MaxLength = 255;
                 this.columnSubtypeName.MaxLength = 255;
-                this.columnMajorRegionName.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6037,6 +6052,285 @@ namespace CMS.DAL {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TourPOIListDataTable : global::System.Data.TypedTableBase<TourPOIListRow> {
+            
+            private global::System.Data.DataColumn columnItemName;
+            
+            private global::System.Data.DataColumn columnItemID;
+            
+            private global::System.Data.DataColumn columnSeqNum;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListDataTable() {
+                this.TableName = "TourPOIList";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal TourPOIListDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected TourPOIListDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ItemNameColumn {
+                get {
+                    return this.columnItemName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ItemIDColumn {
+                get {
+                    return this.columnItemID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SeqNumColumn {
+                get {
+                    return this.columnSeqNum;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListRow this[int index] {
+                get {
+                    return ((TourPOIListRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event TourPOIListRowChangeEventHandler TourPOIListRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event TourPOIListRowChangeEventHandler TourPOIListRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event TourPOIListRowChangeEventHandler TourPOIListRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event TourPOIListRowChangeEventHandler TourPOIListRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddTourPOIListRow(TourPOIListRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListRow AddTourPOIListRow(string ItemName, int SeqNum) {
+                TourPOIListRow rowTourPOIListRow = ((TourPOIListRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ItemName,
+                        null,
+                        SeqNum};
+                rowTourPOIListRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTourPOIListRow);
+                return rowTourPOIListRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                TourPOIListDataTable cln = ((TourPOIListDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TourPOIListDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnItemName = base.Columns["ItemName"];
+                this.columnItemID = base.Columns["ItemID"];
+                this.columnSeqNum = base.Columns["SeqNum"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnItemName = new global::System.Data.DataColumn("ItemName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItemName);
+                this.columnItemID = new global::System.Data.DataColumn("ItemID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItemID);
+                this.columnSeqNum = new global::System.Data.DataColumn("SeqNum", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSeqNum);
+                this.columnItemName.MaxLength = 255;
+                this.columnItemID.AutoIncrement = true;
+                this.columnItemID.AutoIncrementSeed = -1;
+                this.columnItemID.AutoIncrementStep = -1;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListRow NewTourPOIListRow() {
+                return ((TourPOIListRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TourPOIListRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(TourPOIListRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TourPOIListRowChanged != null)) {
+                    this.TourPOIListRowChanged(this, new TourPOIListRowChangeEvent(((TourPOIListRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TourPOIListRowChanging != null)) {
+                    this.TourPOIListRowChanging(this, new TourPOIListRowChangeEvent(((TourPOIListRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TourPOIListRowDeleted != null)) {
+                    this.TourPOIListRowDeleted(this, new TourPOIListRowChangeEvent(((TourPOIListRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TourPOIListRowDeleting != null)) {
+                    this.TourPOIListRowDeleting(this, new TourPOIListRowChangeEvent(((TourPOIListRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveTourPOIListRow(TourPOIListRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                CMSDBDataSet ds = new CMSDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TourPOIListDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class CategoryRow : global::System.Data.DataRow {
@@ -6182,6 +6476,17 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListRow TourPOIListRow {
+                get {
+                    return ((TourPOIListRow)(this.GetParentRow(this.Table.ParentRelations["ItemEvent3"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["ItemEvent3"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEventStartDateNull() {
                 return this.IsNull(this.tableEvent.EventStartDateColumn);
             }
@@ -6287,6 +6592,17 @@ namespace CMS.DAL {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["ItemPOI"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListRow TourPOIListRow {
+                get {
+                    return ((TourPOIListRow)(this.GetParentRow(this.Table.ParentRelations["ItemPOI2"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["ItemPOI2"]);
                 }
             }
             
@@ -7100,6 +7416,17 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListRow TourPOIListRow {
+                get {
+                    return ((TourPOIListRow)(this.GetParentRow(this.Table.ParentRelations["ItemMedia1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["ItemMedia1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsItemIDNull() {
                 return this.IsNull(this.tableMedia.ItemIDColumn);
             }
@@ -7616,38 +7943,6 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SubtypeName {
-                get {
-                    try {
-                        return ((string)(this[this.tablePOIItem.SubtypeNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SubtypeName\' in table \'POIItem\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePOIItem.SubtypeNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string MajorRegionName {
-                get {
-                    try {
-                        return ((string)(this[this.tablePOIItem.MajorRegionNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MajorRegionName\' in table \'POIItem\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePOIItem.MajorRegionNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string CategoryName {
                 get {
                     try {
@@ -7852,30 +8147,6 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCategoryIDNull() {
                 this[this.tablePOIItem.CategoryIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSubtypeNameNull() {
-                return this.IsNull(this.tablePOIItem.SubtypeNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSubtypeNameNull() {
-                this[this.tablePOIItem.SubtypeNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsMajorRegionNameNull() {
-                return this.IsNull(this.tablePOIItem.MajorRegionNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetMajorRegionNameNull() {
-                this[this.tablePOIItem.MajorRegionNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8206,17 +8477,12 @@ namespace CMS.DAL {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string MajorRegionName {
+            public ItemRow ItemRow {
                 get {
-                    try {
-                        return ((string)(this[this.tableEventItem.MajorRegionNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MajorRegionName\' in table \'EventItem\' is DBNull.", e);
-                    }
+                    return ((ItemRow)(this.GetParentRow(this.Table.ParentRelations["ItemEvent1"])));
                 }
                 set {
-                    this[this.tableEventItem.MajorRegionNameColumn] = value;
+                    this.SetParentRow(value, this.Table.ParentRelations["ItemEvent1"]);
                 }
             }
             
@@ -8434,18 +8700,6 @@ namespace CMS.DAL {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEventStartDateNull() {
                 this[this.tableEventItem.EventStartDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsMajorRegionNameNull() {
-                return this.IsNull(this.tableEventItem.MajorRegionNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetMajorRegionNameNull() {
-                this[this.tableEventItem.MajorRegionNameColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8920,6 +9174,17 @@ namespace CMS.DAL {
                     return ((MediaRow[])(base.GetChildRows(this.Table.ChildRelations["ItemMedia"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public EventItemRow[] GetEventItemRows() {
+                if ((this.Table.ChildRelations["ItemEvent1"] == null)) {
+                    return new EventItemRow[0];
+                }
+                else {
+                    return ((EventItemRow[])(base.GetChildRows(this.Table.ChildRelations["ItemEvent1"])));
+                }
+            }
         }
         
         /// <summary>
@@ -9162,6 +9427,138 @@ namespace CMS.DAL {
                 }
                 else {
                     return ((POITourRow[])(base.GetChildRows(this.Table.ChildRelations["TourPOITour"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class TourPOIListRow : global::System.Data.DataRow {
+            
+            private TourPOIListDataTable tableTourPOIList;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal TourPOIListRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTourPOIList = ((TourPOIListDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ItemName {
+                get {
+                    try {
+                        return ((string)(this[this.tableTourPOIList.ItemNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemName\' in table \'TourPOIList\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTourPOIList.ItemNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ItemID {
+                get {
+                    try {
+                        return ((int)(this[this.tableTourPOIList.ItemIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemID\' in table \'TourPOIList\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTourPOIList.ItemIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int SeqNum {
+                get {
+                    try {
+                        return ((int)(this[this.tableTourPOIList.SeqNumColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SeqNum\' in table \'TourPOIList\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTourPOIList.SeqNumColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsItemNameNull() {
+                return this.IsNull(this.tableTourPOIList.ItemNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetItemNameNull() {
+                this[this.tableTourPOIList.ItemNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsItemIDNull() {
+                return this.IsNull(this.tableTourPOIList.ItemIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetItemIDNull() {
+                this[this.tableTourPOIList.ItemIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSeqNumNull() {
+                return this.IsNull(this.tableTourPOIList.SeqNumColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSeqNumNull() {
+                this[this.tableTourPOIList.SeqNumColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public EventRow[] GetEventRows() {
+                if ((this.Table.ChildRelations["ItemEvent3"] == null)) {
+                    return new EventRow[0];
+                }
+                else {
+                    return ((EventRow[])(base.GetChildRows(this.Table.ChildRelations["ItemEvent3"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public POIRow[] GetPOIRows() {
+                if ((this.Table.ChildRelations["ItemPOI2"] == null)) {
+                    return new POIRow[0];
+                }
+                else {
+                    return ((POIRow[])(base.GetChildRows(this.Table.ChildRelations["ItemPOI2"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public MediaRow[] GetMediaRows() {
+                if ((this.Table.ChildRelations["ItemMedia1"] == null)) {
+                    return new MediaRow[0];
+                }
+                else {
+                    return ((MediaRow[])(base.GetChildRows(this.Table.ChildRelations["ItemMedia1"])));
                 }
             }
         }
@@ -9662,6 +10059,40 @@ namespace CMS.DAL {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public TourRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class TourPOIListRowChangeEvent : global::System.EventArgs {
+            
+            private TourPOIListRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListRowChangeEvent(TourPOIListRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TourPOIListRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -10863,11 +11294,16 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT SubtypeID, SubtypeName FROM Subtype";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT  SubtypeName\r\nFROM     Subtype\r\nWHERE  (SubtypeID LIKE ?)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SubtypeID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubtypeID", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10997,6 +11433,35 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual string getNameByID(int SubtypeID) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(SubtypeID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((string)(returnValue));
             }
         }
     }
@@ -13039,11 +13504,16 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT POITourID, POIID, TourID, SeqNum FROM POITour";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM POITour\r\nWHERE  (TourID = ?)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13168,6 +13638,30 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteByTourID(int TourID) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(TourID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -13323,11 +13817,16 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT MajorRegionID, MajorRegionName FROM MajorRegion";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT  MajorRegionName\r\nFROM     MajorRegion\r\nWHERE  (MajorRegionID LIKE ?)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("MajorRegionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MajorRegionID", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13457,6 +13956,35 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual string getNameByID(int MajorRegionID) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(MajorRegionID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((string)(returnValue));
             }
         }
     }
@@ -13598,8 +14126,6 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("SubtypeID", "SubtypeID");
             tableMapping.ColumnMappings.Add("MajorRegionID", "MajorRegionID");
             tableMapping.ColumnMappings.Add("CategoryID", "CategoryID");
-            tableMapping.ColumnMappings.Add("SubtypeName", "SubtypeName");
-            tableMapping.ColumnMappings.Add("MajorRegionName", "MajorRegionName");
             tableMapping.ColumnMappings.Add("CategoryName", "CategoryName");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -13619,23 +14145,19 @@ namespace CMS.DAL.CMSDBDataSetTableAdapters {
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT  Item.ItemID, Item.ItemName, Item.Details, Item.Cost, Item.Phone, Item.Website, Item.Email, Item.OpeningHours, 
                Item.Address, Item.Latitude, Item.Longitude, Item.Suburb, Item.Postcode, Item.SubtypeID, Item.MajorRegionID, 
-               POI.CategoryID, Subtype.SubtypeName, MajorRegion.MajorRegionName, Category.CategoryName
-FROM     ((((MajorRegion INNER JOIN
-               Item ON MajorRegion.MajorRegionID = Item.MajorRegionID) INNER JOIN
+               POI.CategoryID, Category.CategoryName
+FROM     ((Item INNER JOIN
                POI ON Item.ItemID = POI.ItemID) INNER JOIN
-               Category ON POI.CategoryID = Category.CategoryID) INNER JOIN
-               Subtype ON Item.SubtypeID = Subtype.SubtypeID)";
+               Category ON POI.CategoryID = Category.CategoryID)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = @"SELECT  Item.ItemID, Item.ItemName, Item.Details, Item.Cost, Item.Phone, Item.Website, Item.Email, Item.OpeningHours, 
                Item.Address, Item.Latitude, Item.Longitude, Item.Suburb, Item.Postcode, Item.SubtypeID, Item.MajorRegionID, 
-               POI.CategoryID, Subtype.SubtypeName, MajorRegion.MajorRegionName, Category.CategoryName
-FROM     ((((MajorRegion INNER JOIN
-               Item ON MajorRegion.MajorRegionID = Item.MajorRegionID) INNER JOIN
+               POI.CategoryID, Category.CategoryName
+FROM     ((Item INNER JOIN
                POI ON Item.ItemID = POI.ItemID) INNER JOIN
-               Category ON POI.CategoryID = Category.CategoryID) INNER JOIN
-               Subtype ON Item.SubtypeID = Subtype.SubtypeID)
+               Category ON POI.CategoryID = Category.CategoryID)
 WHERE  (Item.ItemID LIKE ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Current, false, null));
@@ -13831,7 +14353,6 @@ WHERE  (Item.ItemID LIKE ?)";
             tableMapping.ColumnMappings.Add("SubtypeName", "SubtypeName");
             tableMapping.ColumnMappings.Add("EventEndDate", "EventEndDate");
             tableMapping.ColumnMappings.Add("EventStartDate", "EventStartDate");
-            tableMapping.ColumnMappings.Add("MajorRegionName", "MajorRegionName");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -13850,20 +14371,18 @@ WHERE  (Item.ItemID LIKE ?)";
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT  Item.ItemID, Item.ItemName, Item.Details, Item.Cost, Item.Phone, Item.Website, Item.Email, Item.OpeningHours, 
                Item.Address, Item.Latitude, Item.Longitude, Item.Postcode, Item.Suburb, Item.SubtypeID, Item.MajorRegionID, 
-               Subtype.SubtypeName, Event.EventEndDate, Event.EventStartDate, MajorRegion.MajorRegionName
-FROM     (((Event INNER JOIN
+               Subtype.SubtypeName, Event.EventEndDate, Event.EventStartDate
+FROM     ((Event INNER JOIN
                Item ON Event.ItemID = Item.ItemID) INNER JOIN
-               MajorRegion ON Item.MajorRegionID = MajorRegion.MajorRegionID) INNER JOIN
                Subtype ON Item.SubtypeID = Subtype.SubtypeID)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = @"SELECT  Item.ItemID, Item.ItemName, Item.Details, Item.Cost, Item.Phone, Item.Website, Item.Email, Item.OpeningHours, 
                Item.Address, Item.Latitude, Item.Longitude, Item.Postcode, Item.Suburb, Item.SubtypeID, Item.MajorRegionID, 
-               Subtype.SubtypeName, Event.EventEndDate, Event.EventStartDate, MajorRegion.MajorRegionName
-FROM     (((Event INNER JOIN
+               Subtype.SubtypeName, Event.EventEndDate, Event.EventStartDate
+FROM     ((Event INNER JOIN
                Item ON Event.ItemID = Item.ItemID) INNER JOIN
-               MajorRegion ON Item.MajorRegionID = MajorRegion.MajorRegionID) INNER JOIN
                Subtype ON Item.SubtypeID = Subtype.SubtypeID)
 WHERE  (Item.ItemID LIKE ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
@@ -14839,6 +15358,180 @@ WHERE  (Item.ItemID LIKE ?)";
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TourPOIListTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public TourPOIListTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TourPOIList";
+            tableMapping.ColumnMappings.Add("ItemName", "ItemName");
+            tableMapping.ColumnMappings.Add("ItemID", "ItemID");
+            tableMapping.ColumnMappings.Add("SeqNum", "SeqNum");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CMSConnectionString"].ConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT  Item.ItemName, Item.ItemID, POITour.SeqNum\r\nFROM     ((Item INNER JOIN\r\n " +
+                "              POI ON Item.ItemID = POI.ItemID) INNER JOIN\r\n               POITou" +
+                "r ON POI.ItemID = POITour.POIID)\r\nWHERE  (POITour.TourID LIKE ?)";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int FillByTourID(CMSDBDataSet.TourPOIListDataTable dataTable, int TourID) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(TourID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual CMSDBDataSet.TourPOIListDataTable GetDataTourID(int TourID) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(TourID));
+            CMSDBDataSet.TourPOIListDataTable dataTable = new CMSDBDataSet.TourPOIListDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -15161,15 +15854,6 @@ WHERE  (Item.ItemID LIKE ?)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateUpdatedRows(CMSDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._majorRegionTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.MajorRegion.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._majorRegionTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._subtypeTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Subtype.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -15179,12 +15863,12 @@ WHERE  (Item.ItemID LIKE ?)";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._categoryTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Category.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._majorRegionTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.MajorRegion.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._categoryTableAdapter.Update(updatedRows));
+                    result = (result + this._majorRegionTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15194,6 +15878,15 @@ WHERE  (Item.ItemID LIKE ?)";
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._itemTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._categoryTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Category.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._categoryTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15270,14 +15963,6 @@ WHERE  (Item.ItemID LIKE ?)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateInsertedRows(CMSDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._majorRegionTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.MajorRegion.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._majorRegionTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._subtypeTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Subtype.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -15286,11 +15971,11 @@ WHERE  (Item.ItemID LIKE ?)";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._categoryTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Category.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._majorRegionTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.MajorRegion.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._categoryTableAdapter.Update(addedRows));
+                    result = (result + this._majorRegionTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15299,6 +15984,14 @@ WHERE  (Item.ItemID LIKE ?)";
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._itemTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._categoryTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Category.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._categoryTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15424,14 +16117,6 @@ WHERE  (Item.ItemID LIKE ?)";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._itemTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Item.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._itemTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._categoryTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Category.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -15440,11 +16125,11 @@ WHERE  (Item.ItemID LIKE ?)";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._subtypeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Subtype.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._itemTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Item.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._subtypeTableAdapter.Update(deletedRows));
+                    result = (result + this._itemTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15453,6 +16138,14 @@ WHERE  (Item.ItemID LIKE ?)";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._majorRegionTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._subtypeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Subtype.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._subtypeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
