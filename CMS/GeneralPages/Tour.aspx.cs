@@ -47,6 +47,7 @@ namespace CMS.GeneralPages
             this.DescriptionDataLabel.Text = tour["TourDetail"].ToString();
             this.TourIDHiddenField.Value = tour["TourID"].ToString();
             this.AgentDataLabel.Text = tour["TourAgent"].ToString();
+            this.ViewLocationListBox.DataBind();
             this.TourMultiView.ActiveViewIndex = 0;            
             bool hasVideo = false;
             bool hasImages = false;
@@ -87,6 +88,14 @@ namespace CMS.GeneralPages
                 lst.Add(item);
             }
 
+            ListItemCollection collection = new ListItemCollection();
+            this.SelectedPOIListBox.DataSource = collection;
+            this.SelectedPOIListBox.DataBind();
+            Session["SelectedPOIList"] = collection;
+
+            this.POIListBox.DataSource = dataAccess.getAllPOIList();
+            this.POIListBox.DataBind();
+            this.SearchPOITextBox.Text = "";
             this.TourIDHiddenField.Value = "-1";
             this.NameTextBox.Text = "";
             this.PhoneTextBox.Text = "";
@@ -121,6 +130,30 @@ namespace CMS.GeneralPages
             poiImagesAddUpdate.InnerHtml = "";
 
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
+
+            DAL.CMSDBDataSet.TourPOIListDataTable list = dataAccess.getTourPOIListByTourID(TourID);
+            ListItemCollection collection = new ListItemCollection();
+
+            foreach(DAL.CMSDBDataSet.TourPOIListRow row in list)
+            {
+                collection.Add(new ListItem(row["ItemName"].ToString(), row["ItemID"].ToString()));
+            }
+                        
+            this.SelectedPOIListBox.DataSource = collection;
+            this.SelectedPOIListBox.DataBind();
+            Session["SelectedPOIList"] = collection;
+
+            DAL.CMSDBDataSet.POIListDataTable poi = dataAccess.getAllPOIList();
+
+            foreach (ListItem item in collection)
+            {
+                if (poi.Rows.Find(item.Value) != null)
+                    poi.Rows.Remove(poi.Rows.Find(item.Value));
+            }
+            this.POIListBox.DataSource = poi;
+            this.POIListBox.DataBind();
+            this.SearchPOITextBox.Text = "";
+
             DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
             this.EditTitleLabel.Text = "Update Tour";
             this.NameTextBox.Text = tour["TourName"].ToString();
@@ -184,6 +217,14 @@ namespace CMS.GeneralPages
 
                 dataAccess.updateTour(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail,Agent, TourID);
 
+                dataAccess.deleteTourPOIListByTourID(TourID);
+
+                ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
+                foreach (ListItem item in collection)
+                {
+                    dataAccess.insertTourPOIList(Convert.ToInt32(item.Value), TourID, collection.IndexOf(item));
+                }                
+
                 //TourImages
 
                 int imageDeleteCount = ImageDeleteFileName.Value != "" ? ImageDeleteFileName.Value.Split(';').Length : 0;
@@ -228,7 +269,6 @@ namespace CMS.GeneralPages
         {
             if (this.InsertRequiredFieldValidator.IsValid && RequiredFieldValidator2.IsValid)
             {
-
                 String TourName = this.NameTextBox.Text;
                 String TourDetail = this.DescriptionTextBox.Text;
                 int TourCost = this.Rating.CurrentRating;
@@ -239,6 +279,12 @@ namespace CMS.GeneralPages
 
                 dataAccess.insertTour(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, Agent);
                 int TourID = dataAccess.getNewlyInsertedTourID();
+
+                ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
+                foreach (ListItem item in collection)
+                {
+                    dataAccess.insertTourPOIList(Convert.ToInt32(item.Value), TourID, collection.IndexOf(item));
+                } 
 
                  //tourImages
                 int count = ImageUploadFileName.Value.Split(';').Length;
@@ -363,6 +409,105 @@ namespace CMS.GeneralPages
         protected void Rating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
         {
             this.FreeRating.CurrentRating = 0;
+        }
+
+        protected void SearchLinkButton_Click(object sender, EventArgs e)
+        {
+            DAL.CMSDBDataSet.POIListDataTable poi = dataAccess.searchPOI(this.SearchPOITextBox.Text);
+            ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
+            foreach (ListItem item in collection)
+            {
+                if (poi.Rows.Find(item.Value) != null)
+                    poi.Rows.Remove(poi.Rows.Find(item.Value));
+            }
+            this.POIListBox.DataSource = poi;
+            this.POIListBox.DataBind();
+        }
+
+        protected void ViewAllLinkButton_Click(object sender, EventArgs e)
+        {
+            DAL.CMSDBDataSet.POIListDataTable poi = dataAccess.getAllPOIList();
+            ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
+            foreach (ListItem item in collection)
+            {
+                if (poi.Rows.Find(item.Value) != null)
+                    poi.Rows.Remove(poi.Rows.Find(item.Value));
+            }
+            this.POIListBox.DataSource = poi;
+            this.POIListBox.DataBind();
+        }
+
+        protected void SelectLinkButton_Click(object sender, EventArgs e)
+        {
+            if (this.POIListBox.SelectedIndex >= 0)
+            {
+                ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
+                ListItem selectedItem = this.POIListBox.SelectedItem;
+                collection.Add(selectedItem);
+                this.SelectedPOIListBox.DataSource = collection;
+                this.SelectedPOIListBox.DataBind();
+                Session["SelectedPOIList"] = collection;
+
+                this.POIListBox.Items.Remove(selectedItem);
+                this.POIListBox.DataBind();
+            }
+        }
+
+        protected void RemoveLinkButton_Click(object sender, EventArgs e)
+        {
+            if (this.SelectedPOIListBox.SelectedIndex >= 0)
+            {
+                ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
+                ListItem selectedItem = this.SelectedPOIListBox.SelectedItem;
+                collection.Remove(selectedItem);
+                this.SelectedPOIListBox.DataSource = collection;
+                this.SelectedPOIListBox.DataBind();
+                Session["SelectedPOIList"] = collection;
+
+                DAL.CMSDBDataSet.POIListDataTable poi = dataAccess.getAllPOIList();
+                foreach (ListItem item in collection)
+                {
+                    if (poi.Rows.Find(item.Value) != null)
+                        poi.Rows.Remove(poi.Rows.Find(item.Value));
+                }
+
+                this.POIListBox.DataSource = poi;
+                this.POIListBox.DataBind();
+            }
+        }
+
+        protected void UpLinkButton_Click(object sender, EventArgs e)
+        {
+            if (this.SelectedPOIListBox.SelectedIndex > 0)
+            {
+                ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
+                ListItem selectedItem = this.SelectedPOIListBox.SelectedItem;
+                int selectedIndex = this.SelectedPOIListBox.SelectedIndex;
+                collection.Remove(selectedItem);
+                collection.Insert(selectedIndex - 1, selectedItem);
+                Session["SelectedPOIList"] = collection;
+
+                this.SelectedPOIListBox.DataSource = collection;
+                this.SelectedPOIListBox.SelectedIndex = selectedIndex - 1;
+                this.SelectedPOIListBox.DataBind();
+            }
+        }
+
+        protected void DownLinkButton_Click(object sender, EventArgs e)
+        {
+            if (this.SelectedPOIListBox.SelectedIndex < this.SelectedPOIListBox.Items.Count-1)
+            {
+                ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
+                ListItem selectedItem = this.SelectedPOIListBox.SelectedItem;
+                int selectedIndex = this.SelectedPOIListBox.SelectedIndex;
+                collection.Remove(selectedItem);
+                collection.Insert(selectedIndex + 1, selectedItem);
+                Session["SelectedPOIList"] = collection;
+
+                this.SelectedPOIListBox.DataSource = collection;
+                this.SelectedPOIListBox.SelectedIndex = selectedIndex + 1;
+                this.SelectedPOIListBox.DataBind();
+            }
         }
     }
 }

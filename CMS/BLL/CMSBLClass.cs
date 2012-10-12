@@ -149,6 +149,11 @@ namespace CMS.BLL
             return poiListTableAdapter.GetDataAll();
         }
 
+        public DAL.CMSDBDataSet.POIListDataTable searchPOI(String searchString)
+        {
+            return poiListTableAdapter.GetDataBySearch(searchString);
+        }
+
         public DAL.CMSDBDataSet.POIItemRow getPOIByItemID(int ItemID)
         {
             return (DAL.CMSDBDataSet.POIItemRow)poiItemTableAdapter.GetDataByItemID(ItemID).Rows[0];
@@ -189,6 +194,7 @@ namespace CMS.BLL
             }
             return 0;
         }
+
 
 
         /*********************************************************************

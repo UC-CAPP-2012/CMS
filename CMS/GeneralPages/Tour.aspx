@@ -170,24 +170,41 @@
                                     CurrentRating="0" FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" CssClass="Rating" ReadOnly="True"></asp:Rating>
                         <asp:Rating ID="FreeRatingData" runat="server" MaxRating="1" StarCssClass="FreeRatingStar" WaitingStarCssClass="FreeSavedRatingStar"
                                     CurrentRating="0" FilledStarCssClass="FreeFilledRatingStar" EmptyStarCssClass="FreeEmptyRatingStar" CssClass="FreeRating" ReadOnly="True"></asp:Rating><br/>
+                        <p>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailDescriptionLabel" runat="server" CssClass="label" 
+                                Font-Bold="True" Text="Detailed Description : " Width="150px"></asp:Label>
+                            <asp:Label ID="DescriptionDataLabel" runat="server" Width="480px"></asp:Label>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailLocationLabel" runat="server" CssClass="label" 
+                                Font-Bold="True" Text="Tour Locations : " Width="150px"></asp:Label>
+                            <asp:ListBox ID="ViewLocationListBox" runat="server" 
+                                DataSourceID="ObjectDataSource1" DataTextField="ItemName" 
+                                DataValueField="ItemID" Height="200px" Width="300px"></asp:ListBox>
+                            <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
+                                SelectMethod="getTourPOIListByTourID" TypeName="CMS.BLL.CMSBLClass">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="TourGridView" Name="tourID" 
+                                        PropertyName="SelectedValue" Type="Int32" />
+                                </SelectParameters>
+                            </asp:ObjectDataSource>
+                        </p>
+                        <p>
+                            <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" 
+                                Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
+                        </p>
+                        <div ID="poiImages" runat="server" width="460px"></div>
+                        <br/>
+                        <p>
+                            <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label" 
+                                Enabled="False" Font-Bold="True" Text="Video : " Width="150px"></asp:Label>
+                        </p>
+                        <div ID="poiVideo" runat="server" width="460px"></div>
+                        <br/>
+                        <asp:HiddenField ID="TourIDHiddenField" runat="server" />
                     </p>
-                    <p>
-                        <asp:Label ID="DetailDescriptionLabel" runat="server" CssClass="label" Font-Bold="True" Text="Detailed Description : " Width="150px"></asp:Label>
-                        <asp:Label ID="DescriptionDataLabel" runat="server" Width="480px"></asp:Label>
-                    </p>                            
-                    <p>
-                        <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
-                    </p>
-                    <div runat="server" id="poiImages" width="460px"></div><br/>
-                    <p>
-                        <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label" 
-                            Enabled="False" Font-Bold="True" Text="Video : " Width="150px"></asp:Label>
-                    </p>
-                    <div ID="poiVideo" runat="server" width="460px"></div><br/>
-                    <!-- Location view -->
-                    <asp:Label ID="LocationLabel" runat="server" CssClass="label" Enabled="False" 
-                        Font-Bold="True" Text="Tour Locations : " Width="150px"></asp:Label>
-                    <asp:HiddenField ID="TourIDHiddenField" runat="server" />
                 </asp:View>
 
                 <!-- insert and update new display (Visible when insert link button is clicked
@@ -235,8 +252,40 @@
                         ErrorMessage="Detailed description is required." ControlToValidate="DescriptionTextBox" SetFocusOnError="True" />
                     </p> 
                     <!-- Tour Locations -->
-                    <asp:Label ID="Label1" CssClass="label" runat="server" Text="Tour Locations : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="TourLocationTextBox" Width="200px" runat="server"></asp:TextBox><br/><br/> 
+                    <asp:Label ID="LocationLabel" CssClass="label" runat="server" Text="Tour Locations : " Font-Bold="True" Width="150px" ></asp:Label>
+                    <div class="TourLocationMaster">
+                        <div class="POIList">
+                            <asp:Label ID="POIListLabel" runat="server" Text="Location List" CssClass="LocationLabel" 
+                                BackColor="#CCCCFF" Width="250px" ForeColor="#444444" Font-Bold="True"></asp:Label><br/>
+                            <asp:TextBox ID="SearchPOITextBox" runat="server" CssClass="searchTextBox" Width="199px" ></asp:TextBox>
+                            <asp:LinkButton ID="SearchLinkButton" runat="server" 
+                                CssClass="button small lightGray search" Width="20px" Height="11px" 
+                                onclick="SearchLinkButton_Click"></asp:LinkButton>
+                            <asp:ListBox ID="POIListBox" runat="server" Width="250px" CssClass="listBox"  Height="200px" 
+                                DataTextField="ItemName" DataValueField="ItemID" ></asp:ListBox><br/>
+                            <asp:LinkButton ID="ViewAllLinkButton" runat="server" 
+                                CssClass="button small lightGray" Width="100px" 
+                                onclick="ViewAllLinkButton_Click">View All</asp:LinkButton>
+                            <asp:LinkButton ID="SelectLinkButton" runat="server" 
+                                CssClass="button small lightGray right" Width="100px" 
+                                onclick="SelectLinkButton_Click">Select</asp:LinkButton>
+                        </div>
+                        <div class="SelectedPOIList">
+                            <asp:Label ID="SelectedPOIListLabel" runat="server" Text="Selected Location" CssClass="LocationLabel" 
+                                BackColor="#CCCCFF" Width="250px" ForeColor="#444444" Font-Bold="True"></asp:Label><br/>
+                            <asp:ListBox ID="SelectedPOIListBox" runat="server"  Width="250px" Height="222px" CssClass="listBox"
+                                DataTextField="Text" DataValueField="Value"></asp:ListBox><br/>
+                            <asp:LinkButton ID="UpLinkButton" runat="server" 
+                                CssClass="button small lightGray up" Height="9px" Width="30px" 
+                                onclick="UpLinkButton_Click"></asp:LinkButton>
+                            <asp:LinkButton ID="DownLinkButton" runat="server" 
+                                CssClass="button small lightGray down" Height="9px" Width="30px" 
+                                onclick="DownLinkButton_Click"></asp:LinkButton>
+                            <asp:LinkButton ID="RemoveLinkButton" runat="server" 
+                                CssClass="button small lightGray right" Width="118px" 
+                                onclick="RemoveLinkButton_Click">Remove</asp:LinkButton>
+                        </div>
+                    </div>
                     <div class="clear"></div>  
                     <!-- YouTube Video -->
                     <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>

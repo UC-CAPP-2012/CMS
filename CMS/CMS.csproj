@@ -100,10 +100,16 @@
     <Content Include="Resources\ccapp-banner.png" />
     <Content Include="Resources\ccapp-logo.png" />
     <Content Include="Resources\cross.png" />
+    <Content Include="Resources\down.png" />
+    <Content Include="Resources\down_over.png" />
     <Content Include="Resources\elgg_sprites.png" />
     <Content Include="Resources\EmptyStar.png" />
     <Content Include="Resources\FilledStar.png" />
     <Content Include="Resources\SavedStar.png" />
+    <Content Include="Resources\search.png" />
+    <Content Include="Resources\search_over.png" />
+    <Content Include="Resources\up.png" />
+    <Content Include="Resources\up_over.png" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.js" />
