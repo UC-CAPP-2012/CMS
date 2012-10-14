@@ -2,8 +2,7 @@
     CodeBehind="Index.aspx.cs" Inherits="CMS.Account.Login" %>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false">
-        <LayoutTemplate>     
-            
+        <LayoutTemplate>                 
             <div class="accountInfoLogin">
                 <div class="logInBox">
                     <fieldset class="login">

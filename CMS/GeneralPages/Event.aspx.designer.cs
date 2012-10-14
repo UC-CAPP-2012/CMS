@@ -553,13 +553,22 @@ namespace CMS.CMSPages {
         protected global::AjaxControlToolkit.CalendarExtender StartDateTextBox_CalendarExtender;
         
         /// <summary>
-        /// RequiredFieldValidator6 control.
+        /// StartDateTextBoxCustomValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
+        protected global::System.Web.UI.WebControls.CustomValidator StartDateTextBoxCustomValidator;
+        
+        /// <summary>
+        /// TextBoxWatermarkExtender2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender2;
         
         /// <summary>
         /// EndDateLabel control.
@@ -589,13 +598,22 @@ namespace CMS.CMSPages {
         protected global::AjaxControlToolkit.CalendarExtender EndDateTextBox_CalendarExtender;
         
         /// <summary>
-        /// RequiredFieldValidator4 control.
+        /// EndDateTextBoxCustomValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        protected global::System.Web.UI.WebControls.CustomValidator EndDateTextBoxCustomValidator;
+        
+        /// <summary>
+        /// TextBoxWatermarkExtender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TextBoxWatermarkExtender TextBoxWatermarkExtender1;
         
         /// <summary>
         /// OpeningHoursLabel control.

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 using System.Data;
+using System.Media;
 
 namespace CMS.GeneralPages
 {
@@ -15,7 +16,7 @@ namespace CMS.GeneralPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-                
+
         }
 
         protected void TourGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -32,6 +33,8 @@ namespace CMS.GeneralPages
         {
             poiImages.InnerHtml = "";
             poiVideo.InnerHtml = "";
+            this.detailAudio.InnerHtml = "";
+            AudioURLHiddenField.Value = "";
 
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
             DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
@@ -48,9 +51,11 @@ namespace CMS.GeneralPages
             this.TourIDHiddenField.Value = tour["TourID"].ToString();
             this.AgentDataLabel.Text = tour["TourAgent"].ToString();
             this.ViewLocationListBox.DataBind();
-            this.TourMultiView.ActiveViewIndex = 0;            
+            this.TourMultiView.ActiveViewIndex = 0;
             bool hasVideo = false;
             bool hasImages = false;
+            bool hasAudio = false;
+
             var media = dataAccess.getMediaByTourID(TourID);
             string[] separator = { "v=" };
             foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
@@ -60,11 +65,20 @@ namespace CMS.GeneralPages
                     poiImages.InnerHtml += "<img class='itemImage' src='" + mediaRow.MediaURL + "' />";
                     hasImages = true;
                 }
-                else
+                if (mediaRow.MediaType == "Video")
                 {
                     poiVideo.InnerHtml = "<iframe width='460' height='260' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
                                         + "' frameborder='0' allowfullscreen></iframe>";
                     hasVideo = true;
+                }
+                if (mediaRow.MediaType == "Audio")
+                {
+                    this.detailAudio.InnerHtml = "<object type='application/x-shockwave-flash' data='../Resources/emff_old_noborder.swf' width='91' height='25'>"
+                                               + "<param name='movie' value='../Resources/emff_old_noborder.swf'>"
+                                               + "<param name='FlashVars' value='src=" + mediaRow.MediaURL + "'>"
+                                               + "</object>";
+                    AudioURLHiddenField.Value = mediaRow.MediaURL;
+                    hasAudio = true;
                 }
             }
 
@@ -76,6 +90,11 @@ namespace CMS.GeneralPages
             if (!hasVideo)
             {
                 poiVideo.InnerHtml = "This Tour does not have any video.";
+            }
+
+            if (!hasAudio)
+            {
+                this.detailAudio.InnerHtml = "This Tour does not have any audio.";
             }
         }
 
@@ -109,12 +128,15 @@ namespace CMS.GeneralPages
             this.VideoTextBox.Text = "";
             FileUpload.Attributes.Remove("maxlength");
             FileUpload.Attributes.Add("maxlength", (5).ToString());
+            this.locationErrorLabel.Visible = false;
 
             CurrentImagesFileName.Value = "";
             StatusLabel.Text = "";
             ImageUploadFileName.Value = "";
             ImageDeleteFileName.Value = "";
             poiImagesAddUpdate.InnerHtml = "";
+            EditCurrentAudio.InnerHtml = "";
+            this.AudioRemoveLinkButton.Visible = false;
 
             this.EditTitleLabel.Text = "Insert New Tour";
             this.ButtonMultiView.ActiveViewIndex = 1;
@@ -128,17 +150,22 @@ namespace CMS.GeneralPages
             ImageUploadFileName.Value = "";
             ImageDeleteFileName.Value = "";
             poiImagesAddUpdate.InnerHtml = "";
+            IsAudioRemovedHiddenField.Value = "false";
+            this.locationErrorLabel.Visible = false;
+
+            EditCurrentAudio.InnerHtml = "";
+            this.AudioRemoveLinkButton.Visible = false;
 
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
 
             DAL.CMSDBDataSet.TourPOIListDataTable list = dataAccess.getTourPOIListByTourID(TourID);
             ListItemCollection collection = new ListItemCollection();
 
-            foreach(DAL.CMSDBDataSet.TourPOIListRow row in list)
+            foreach (DAL.CMSDBDataSet.TourPOIListRow row in list)
             {
                 collection.Add(new ListItem(row["ItemName"].ToString(), row["ItemID"].ToString()));
             }
-                        
+
             this.SelectedPOIListBox.DataSource = collection;
             this.SelectedPOIListBox.DataBind();
             Session["SelectedPOIList"] = collection;
@@ -180,11 +207,18 @@ namespace CMS.GeneralPages
                     CurrentImagesFileName.Value += mediaRow.MediaURL.Split('/')[2] + ';';
                     poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + mediaRow.MediaURL.Split('/')[2] + "' ><img class='itemImage' src='" + mediaRow.MediaURL + "'/><a class='delete-image' rel='" + mediaRow.MediaURL.Split('/')[2] + "'><div class='close_image' title='close'></div></a></div>";
                 }
-                else
+                if (mediaRow.MediaType == "Video")
                 {
                     this.VideoTextBox.Text = mediaRow.MediaURL;
                 }
-
+                if (mediaRow.MediaType == "Audio")
+                {
+                    EditCurrentAudio.InnerHtml = "<object type='application/x-shockwave-flash' data='../Resources/emff_old_noborder.swf' width='91' height='25'>"
+                                               + "<param name='movie' value='../Resources/emff_old_noborder.swf'>"
+                                               + "<param name='FlashVars' value='src=" + mediaRow.MediaURL + "'>"
+                                               + "</object>";
+                    this.AudioRemoveLinkButton.Visible = true;
+                }
             }
 
             this.ButtonMultiView.ActiveViewIndex = 0;
@@ -196,6 +230,7 @@ namespace CMS.GeneralPages
             int tourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
 
             dataAccess.DeleteMediaByTourID(tourID);
+            dataAccess.deleteTourPOIListByTourID(tourID);
             dataAccess.deleteTour(tourID);
             this.TourGridView.DataBind();
             this.TourMultiView.ActiveViewIndex = -1;
@@ -204,7 +239,8 @@ namespace CMS.GeneralPages
         //submit update
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (this.InsertRequiredFieldValidator.IsValid && RequiredFieldValidator2.IsValid)
+            if (this.InsertRequiredFieldValidator.IsValid && RequiredFieldValidator2.IsValid && this.CustomValidator1.IsValid
+                && (this.SelectedPOIListBox.Items.Count > 0))
             {
                 String TourName = this.NameTextBox.Text;
                 String TourDetail = this.DescriptionTextBox.Text;
@@ -215,7 +251,7 @@ namespace CMS.GeneralPages
                 String Agent = this.AgentTextBox.Text;
                 int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
 
-                dataAccess.updateTour(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail,Agent, TourID);
+                dataAccess.updateTour(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, Agent, TourID);
 
                 dataAccess.deleteTourPOIListByTourID(TourID);
 
@@ -223,7 +259,7 @@ namespace CMS.GeneralPages
                 foreach (ListItem item in collection)
                 {
                     dataAccess.insertTourPOIList(Convert.ToInt32(item.Value), TourID, collection.IndexOf(item));
-                }                
+                }
 
                 //TourImages
 
@@ -249,6 +285,29 @@ namespace CMS.GeneralPages
                     dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID);
                 }
 
+                if (this.AudioFileUpload.PostedFile.ContentLength != 0)
+                {
+                    dataAccess.DeleteAudioByTourID(TourID);
+
+                    HttpPostedFile posFile = this.AudioFileUpload.PostedFile;
+                    Random rand = new Random((int)DateTime.Now.Ticks);
+                    int numIterations = 0;
+                    numIterations = rand.Next(1000000000, 2147483647);
+                    Guid id = new Guid();
+                    id = Guid.NewGuid();
+                    String fileName = "Audio_" + numIterations.ToString() + id.ToString() + posFile.FileName;
+                    posFile.SaveAs(Server.MapPath("~/Media/") + fileName);
+
+                    dataAccess.InsertMedia(null, "../Media/" + fileName, "Audio", TourID);
+                }
+                else
+                {
+                    if (IsAudioRemovedHiddenField.Value.Equals("True"))
+                    {
+                        dataAccess.DeleteAudioByTourID(TourID);
+                    }
+                }
+
 
                 this.TourGridView.DataBind();
 
@@ -256,18 +315,31 @@ namespace CMS.GeneralPages
                 this.TourMultiView.ActiveViewIndex = -1;
 
             }
+            else
+            {
+                if (this.SelectedPOIListBox.Items.Count < 1)
+                {
+                    this.locationErrorLabel.Visible = true;
+                }
+                else
+                {
+                    this.locationErrorLabel.Visible = false;
+                }
+            }
         }
 
         //cancel update
         protected void CancelButton_Click(object sender, EventArgs e)
         {
+            this.IsAudioRemovedHiddenField.Value = "False";
             this.TourMultiView.ActiveViewIndex = 0;
         }
 
         //confirm insert
         protected void InsertButton_Click(object sender, EventArgs e)
         {
-            if (this.InsertRequiredFieldValidator.IsValid && RequiredFieldValidator2.IsValid)
+            if (this.InsertRequiredFieldValidator.IsValid && RequiredFieldValidator2.IsValid && this.CustomValidator1.IsValid
+                && (this.SelectedPOIListBox.Items.Count > 0))
             {
                 String TourName = this.NameTextBox.Text;
                 String TourDetail = this.DescriptionTextBox.Text;
@@ -284,9 +356,9 @@ namespace CMS.GeneralPages
                 foreach (ListItem item in collection)
                 {
                     dataAccess.insertTourPOIList(Convert.ToInt32(item.Value), TourID, collection.IndexOf(item));
-                } 
+                }
 
-                 //tourImages
+                //tourImages
                 int count = ImageUploadFileName.Value.Split(';').Length;
                 for (int i = 0; i < count - 1; i++)
                 {
@@ -299,17 +371,44 @@ namespace CMS.GeneralPages
                 {
                     dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID);
                 }
+
+                if (this.AudioFileUpload.PostedFile.ContentLength != 0)
+                {
+                    HttpPostedFile posFile = this.AudioFileUpload.PostedFile;
+                    Random rand = new Random((int)DateTime.Now.Ticks);
+                    int numIterations = 0;
+                    numIterations = rand.Next(1000000000, 2147483647);
+                    Guid id = new Guid();
+                    id = Guid.NewGuid();
+                    String fileName = "Audio_" + numIterations.ToString() + id.ToString() + posFile.FileName;
+                    posFile.SaveAs(Server.MapPath("~/Media/") + fileName);
+
+                    dataAccess.InsertMedia(null, "../Media/" + fileName, "Audio", TourID);
+                }
+
                 CurrentImagesFileName.Value = "";
- 
+
                 this.TourGridView.DataBind();
                 Session.Remove("LocationTable");
                 this.TourMultiView.ActiveViewIndex = -1;
+            }
+            else
+            {
+                if (this.SelectedPOIListBox.Items.Count < 1)
+                {
+                    this.locationErrorLabel.Visible = true;
+                }
+                else
+                {
+                    this.locationErrorLabel.Visible = false;
+                }
             }
         }
 
         //cancel insert
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
+            this.IsAudioRemovedHiddenField.Value = "False";
             this.TourMultiView.ActiveViewIndex = -1;
         }
 
@@ -327,8 +426,8 @@ namespace CMS.GeneralPages
                     for (int x = 0; x < countExisting - 1; x++)
                     {
                         poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + CurrentImagesFileName.Value.Split(';')[x] + "' ><img class='itemImage' src='../Media/" +
-                        CurrentImagesFileName.Value.Split(';')[x] + "' id='" + CurrentImagesFileName.Value.Split(';')[x] 
-                        + "' /><a class='upload-images' rel='" + CurrentImagesFileName.Value.Split(';')[x] 
+                        CurrentImagesFileName.Value.Split(';')[x] + "' id='" + CurrentImagesFileName.Value.Split(';')[x]
+                        + "' /><a class='upload-images' rel='" + CurrentImagesFileName.Value.Split(';')[x]
                         + "'><div class='close_image ' title='close'></div></a></div>";
                     }
                 }
@@ -336,7 +435,7 @@ namespace CMS.GeneralPages
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
                     string target = "<div class='poi-images'  id='" + filename + "' ><img class='itemImage' src='../Temp_Media/" +
-                        filename + "' id='" + filename + "' /><a class='upload-images' rel='" + filename 
+                        filename + "' id='" + filename + "' /><a class='upload-images' rel='" + filename
                         + "'><div class='close_image ' title='close'></div></a></div>";
                     poiImagesAddUpdate.InnerHtml += target;
                 }
@@ -375,10 +474,10 @@ namespace CMS.GeneralPages
                             hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
                             ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
                             poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' ><img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() +
-                                hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName 
-                                + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName 
-                                + "'><div class='close_image ' title='close'></div></a></div>";                           
-                        }                        
+                                hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName
+                                + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName
+                                + "'><div class='close_image ' title='close'></div></a></div>";
+                        }
                     }
                     FileUpload.Attributes.Remove("maxlength");
                     FileUpload.Attributes.Add("maxlength", (5 - hfc.Count).ToString());
@@ -495,7 +594,7 @@ namespace CMS.GeneralPages
 
         protected void DownLinkButton_Click(object sender, EventArgs e)
         {
-            if (this.SelectedPOIListBox.SelectedIndex < this.SelectedPOIListBox.Items.Count-1)
+            if (this.SelectedPOIListBox.SelectedIndex < this.SelectedPOIListBox.Items.Count - 1)
             {
                 ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
                 ListItem selectedItem = this.SelectedPOIListBox.SelectedItem;
@@ -508,6 +607,24 @@ namespace CMS.GeneralPages
                 this.SelectedPOIListBox.SelectedIndex = selectedIndex + 1;
                 this.SelectedPOIListBox.DataBind();
             }
+        }
+
+        protected void AudioRemoveLinkButton_Click(object sender, EventArgs e)
+        {
+            EditCurrentAudio.InnerHtml = "Current Audio Removed.";
+            this.AudioRemoveLinkButton.Visible = false;
+            this.IsAudioRemovedHiddenField.Value = "True";
+        }
+
+        protected void audioFileTypeCheck(object sender, ServerValidateEventArgs e)
+        {
+            bool isOK = true;
+            String fileExtension = this.AudioFileUpload.PostedFile.FileName.Substring(this.AudioFileUpload.PostedFile.FileName.LastIndexOf("."));
+            if (!fileExtension.Equals(".mp3"))
+            {
+                isOK = false;
+            }
+            e.IsValid = isOK;
         }
     }
 }

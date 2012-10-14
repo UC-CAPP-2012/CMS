@@ -155,8 +155,11 @@ namespace CMS.CMSPages
                     majorRegionID = Convert.ToInt32(this.MajorRegionDropDownList.SelectedValue);
                 else
                     majorRegionID = null;
-                DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text);
-                DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text);
+               
+                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-AU");
+
+                DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text, culture);
+                DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text, culture);
 
                 int newItemId = dataAccess.InsertEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
                     cost, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
@@ -329,12 +332,10 @@ namespace CMS.CMSPages
                     longitude = Convert.ToDouble(this.ManualLogTextBox.Text);
                 }
 
-                DateTimeFormatInfo format = new DateTimeFormatInfo();
-                format.ShortDatePattern = "dd/MMMM/yyyy";
-                format.DateSeparator = "/";
+                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-AU");
 
-                DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text, format);
-                DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text, format);
+                DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text, culture);
+                DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text, culture);
 
                 //convert inputs into correct format.
                 int cost = this.Rating.CurrentRating;
@@ -489,6 +490,41 @@ namespace CMS.CMSPages
         {
             ListItem item = new ListItem("----- none -----", "");
             this.MajorRegionDropDownList.Items.Insert(0, item);
+        }
+
+        protected void DateValidation(object sender, ServerValidateEventArgs e)
+        {
+            bool isOK = true;
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-AU");
+            DateTime datetime = new DateTime(); 
+            DateTime? start = null;
+            DateTime? end = null;
+
+            if (!DateTime.TryParse(StartDateTextBox.Text, out datetime))
+            {
+                isOK = false;
+            }
+            else
+            {
+                start = Convert.ToDateTime(StartDateTextBox.Text, culture);
+            }
+
+            if (!DateTime.TryParse(EndDateTextBox.Text, out datetime))
+            {
+                isOK = false;
+                this.EndDateTextBoxCustomValidator.ErrorMessage = "Invalid end date is entered";
+            }
+            else
+            {
+                end = Convert.ToDateTime(EndDateTextBox.Text, culture);
+                if ((start != null) && (start > end))
+                {
+                    isOK = false;
+                    this.EndDateTextBoxCustomValidator.ErrorMessage = "End date cannot be earlier than start date.";
+                }
+            }
+
+            e.IsValid = isOK;
         }
     }
 }

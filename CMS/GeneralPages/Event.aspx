@@ -265,19 +265,23 @@
                             <asp:CalendarExtender ID="StartDateTextBox_CalendarExtender" runat="server" 
                                 Enabled="True" TargetControlID="StartDateTextBox" Format="dd/MMMM/yyyy">
                             </asp:CalendarExtender>
-
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
-                            ErrorMessage="Start date is required." ControlToValidate="StartDateTextBox" SetFocusOnError="True" />
+                        <asp:CustomValidator ID="StartDateTextBoxCustomValidator" runat="server" ErrorMessage="Invalid start date is entered." ForeColor="Red" 
+                             ControlToValidate="StartDateTextBox" OnServerValidate="DateValidation" ValidateEmptyText="True"></asp:CustomValidator>
+                        <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="StartDateTextBox" 
+                            WatermarkText="dd/mm/yyyy" WatermarkCssClass="waterMark">
+                        </asp:TextBoxWatermarkExtender>
                         <br /><br />
                         <!-- End Date -->
                         <asp:Label ID="EndDateLabel" CssClass="label" runat="server" Text="End Date : " Font-Bold="True" Width="150px" ></asp:Label>
-                        <asp:TextBox ID="EndDateTextBox" runat="server" Width="200px" 
-                                onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
+                        <asp:TextBox ID="EndDateTextBox" runat="server" Width="200px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
                             <asp:CalendarExtender ID="EndDateTextBox_CalendarExtender" runat="server" 
                                 Enabled="True" TargetControlID="EndDateTextBox" Format="dd/MMMM/yyyy">
                             </asp:CalendarExtender>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
-                            ErrorMessage="End date is required." ControlToValidate="EndDateTextBox" SetFocusOnError="True" />
+                            <asp:CustomValidator ID="EndDateTextBoxCustomValidator" runat="server" ErrorMessage="Invalid end date is entered." ForeColor="Red" 
+                             ControlToValidate="EndDateTextBox" OnServerValidate="DateValidation" ValidateEmptyText="True"></asp:CustomValidator>
+                        <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="EndDateTextBox" 
+                            WatermarkText="dd/mm/yyyy" WatermarkCssClass="waterMark">
+                        </asp:TextBoxWatermarkExtender>
                             <span style="margin-left: -105px;"/>
                         <br /><br />
                         <!-- Opening Hours -->

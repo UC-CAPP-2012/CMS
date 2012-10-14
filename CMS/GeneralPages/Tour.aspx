@@ -192,16 +192,24 @@
                             </asp:ObjectDataSource>
                         </p>
                         <p>
-                            <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" 
-                                Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
+                            <asp:Label ID="DetailAudioLabel" runat="server" CssClass="label" Font-Bold="True" Text="Audio : " Width="150px"></asp:Label>
+                            <div ID="detailAudio" class="DetailAudio" runat="server"></div>
+                            <asp:HiddenField ID="AudioURLHiddenField" runat="server" />
                         </p>
-                        <div ID="poiImages" runat="server" width="460px"></div>
-                        <br/>
+                        <div class="clear"></div>
                         <p>
                             <asp:Label ID="DetailVideoLabel" runat="server" CssClass="label" 
                                 Enabled="False" Font-Bold="True" Text="Video : " Width="150px"></asp:Label>
                         </p>
-                        <div ID="poiVideo" runat="server" width="460px"></div>
+                        <div ID="poiVideo" runat="server" width="460px">
+                        </div>
+                        <br/>
+                        <p>
+                            <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" 
+                                Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
+                        </p>
+                        <div ID="poiImages" runat="server" width="460px">
+                        </div>
                         <br/>
                         <asp:HiddenField ID="TourIDHiddenField" runat="server" />
                     </p>
@@ -258,15 +266,15 @@
                             <asp:Label ID="POIListLabel" runat="server" Text="Location List" CssClass="LocationLabel" 
                                 BackColor="#CCCCFF" Width="250px" ForeColor="#444444" Font-Bold="True"></asp:Label><br/>
                             <asp:TextBox ID="SearchPOITextBox" runat="server" CssClass="searchTextBox" Width="199px" ></asp:TextBox>
-                            <asp:LinkButton ID="SearchLinkButton" runat="server" 
+                            <asp:LinkButton ID="SearchLinkButton" runat="server" CausesValidation="false" 
                                 CssClass="button small lightGray search" Width="20px" Height="11px" 
                                 onclick="SearchLinkButton_Click"></asp:LinkButton>
                             <asp:ListBox ID="POIListBox" runat="server" Width="250px" CssClass="listBox"  Height="200px" 
                                 DataTextField="ItemName" DataValueField="ItemID" ></asp:ListBox><br/>
-                            <asp:LinkButton ID="ViewAllLinkButton" runat="server" 
+                            <asp:LinkButton ID="ViewAllLinkButton" runat="server" CausesValidation="false" 
                                 CssClass="button small lightGray" Width="100px" 
                                 onclick="ViewAllLinkButton_Click">View All</asp:LinkButton>
-                            <asp:LinkButton ID="SelectLinkButton" runat="server" 
+                            <asp:LinkButton ID="SelectLinkButton" runat="server" CausesValidation="false" 
                                 CssClass="button small lightGray right" Width="100px" 
                                 onclick="SelectLinkButton_Click">Select</asp:LinkButton>
                         </div>
@@ -275,22 +283,38 @@
                                 BackColor="#CCCCFF" Width="250px" ForeColor="#444444" Font-Bold="True"></asp:Label><br/>
                             <asp:ListBox ID="SelectedPOIListBox" runat="server"  Width="250px" Height="222px" CssClass="listBox"
                                 DataTextField="Text" DataValueField="Value"></asp:ListBox><br/>
-                            <asp:LinkButton ID="UpLinkButton" runat="server" 
+                            <asp:LinkButton ID="UpLinkButton" runat="server" CausesValidation="false" 
                                 CssClass="button small lightGray up" Height="9px" Width="30px" 
                                 onclick="UpLinkButton_Click"></asp:LinkButton>
-                            <asp:LinkButton ID="DownLinkButton" runat="server" 
+                            <asp:LinkButton ID="DownLinkButton" runat="server" CausesValidation="false" 
                                 CssClass="button small lightGray down" Height="9px" Width="30px" 
                                 onclick="DownLinkButton_Click"></asp:LinkButton>
-                            <asp:LinkButton ID="RemoveLinkButton" runat="server" 
+                            <asp:LinkButton ID="RemoveLinkButton" runat="server" CausesValidation="false" 
                                 CssClass="button small lightGray right" Width="118px" 
                                 onclick="RemoveLinkButton_Click">Remove</asp:LinkButton>
-                        </div>
+                            <asp:Label ID="locationErrorLabel" runat="server" Text="At least one location is required." ForeColor="Red" Visible="False"></asp:Label>
+                        <br/>
+                        </div>                        
                     </div>
-                    <div class="clear"></div>  
+                    <div class="clear"></div>
+                    <!-- Audio -->
+                        <asp:Label ID="AudioLabel" CssClass="label" runat="server" Text="Audio : " Font-Bold="True" Width="150px" ></asp:Label>
+                        
+                        <div class = "AudioUpload">
+                            <asp:Label ID="Label1" runat="server" Text="mp3 files only." 
+                                CssClass="imgLabel"></asp:Label><br />
+                            <asp:FileUpload ID="AudioFileUpload" runat="server" /><br/>
+                            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="File type must be mp3." ControlToValidate="AudioFileUpload"
+                                onservervalidate="audioFileTypeCheck" ForeColor="Red"></asp:CustomValidator><br/>
+                            <div ID="EditCurrentAudio" class="editAudio" runat="server"></div>
+                            <asp:LinkButton ID="AudioRemoveLinkButton" runat="server" CssClass="button small lightGray audio" Visible="false" 
+                                onclick="AudioRemoveLinkButton_Click" CausesValidation="false" >Remove Current Audio</asp:LinkButton>
+                            <asp:HiddenField ID="IsAudioRemovedHiddenField" runat="server" />
+                        </div>                    
+                    <div class="clear"></div>
                     <!-- YouTube Video -->
                     <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
-                    <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <br /><br />
+                    <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);" CssClass="VideoTextBox"></asp:TextBox> 
                     <div class="clear"></div>
                     <!-- Images -->
                     <asp:Label ID="ImageLabel" CssClass="label" runat="server" Text="Images : " Font-Bold="True" Width="150px" ></asp:Label>
@@ -334,7 +358,7 @@
                                 $('#MainContent_ImageUploadDelete').val("1");
                             });
                         });
-                    </script>
+                    </script>                    
                     <div class="clear"></div><br />
                     <!-- Buttons -->
                     <div class="detailButtons bottom">

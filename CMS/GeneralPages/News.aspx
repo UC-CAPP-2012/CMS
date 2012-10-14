@@ -170,7 +170,7 @@
                     <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
                         CssClass="detailButtons" CausesValidation="False" 
                         onclick="InsertCancelButton_Click" />
-                    <h2> Insert New Category </h2>
+                    <h2> Insert New News </h2>
                     <div class="newsUpdateForm"> 
                         <asp:Label ID="Label1" CssClass="label" runat="server" Text="Title: " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="InsertNewsTitle" runat="server" Width="250px"></asp:TextBox> 

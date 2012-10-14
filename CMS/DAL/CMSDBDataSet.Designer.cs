@@ -12806,7 +12806,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[11];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[12];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT  MediaID, ItemID, MediaURL, MediaType, TourID\r\nFROM     Media";
@@ -12823,48 +12823,53 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
             this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[3] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "DELETE FROM Media\r\nWHERE  (ItemID = ?)";
+            this._commandCollection[3].CommandText = "DELETE FROM Media\r\nWHERE  (TourID LIKE ?) AND (MediaType LIKE \'Audio\')";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[4] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = "DELETE FROM Media\r\nWHERE        (MediaURL = ?) AND (ItemID = ?)";
+            this._commandCollection[4].CommandText = "DELETE FROM Media\r\nWHERE  (ItemID = ?)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("MediaURL", global::System.Data.OleDb.OleDbType.WChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MediaURL", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[5] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = "DELETE FROM Media\r\nWHERE        (MediaURL = ?) AND (TourID = ?)";
+            this._commandCollection[5].CommandText = "DELETE FROM Media\r\nWHERE        (MediaURL = ?) AND (ItemID = ?)";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[5].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("MediaURL", global::System.Data.OleDb.OleDbType.WChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MediaURL", global::System.Data.DataRowVersion.Original, false, null));
-            this._commandCollection[5].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[6] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[6].Connection = this.Connection;
-            this._commandCollection[6].CommandText = "DELETE FROM Media\r\nWHERE  (TourID = ?)";
+            this._commandCollection[6].CommandText = "DELETE FROM Media\r\nWHERE        (MediaURL = ?) AND (TourID = ?)";
             this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[6].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("MediaURL", global::System.Data.OleDb.OleDbType.WChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MediaURL", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[6].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[7] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[7].Connection = this.Connection;
-            this._commandCollection[7].CommandText = "DELETE FROM Media\r\nWHERE        (ItemID = ?) AND (MediaType = \'Video\')";
+            this._commandCollection[7].CommandText = "DELETE FROM Media\r\nWHERE  (TourID = ?)";
             this._commandCollection[7].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[7].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[8] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[8].Connection = this.Connection;
-            this._commandCollection[8].CommandText = "DELETE FROM Media\r\nWHERE        (TourID = ?) AND (MediaType = \'Video\')";
+            this._commandCollection[8].CommandText = "DELETE FROM Media\r\nWHERE        (ItemID = ?) AND (MediaType = \'Video\')";
             this._commandCollection[8].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[8].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[9] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[9].Connection = this.Connection;
-            this._commandCollection[9].CommandText = "SELECT ItemID, MediaID, MediaType, MediaURL, TourID FROM Media WHERE (ItemID = ?)" +
-                "";
+            this._commandCollection[9].CommandText = "DELETE FROM Media\r\nWHERE        (TourID = ?) AND (MediaType = \'Video\')";
             this._commandCollection[9].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[9].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[9].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[10] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[10].Connection = this.Connection;
-            this._commandCollection[10].CommandText = "SELECT ItemID, MediaID, MediaType, MediaURL, TourID FROM Media WHERE (TourID LIKE" +
-                " ?)";
+            this._commandCollection[10].CommandText = "SELECT ItemID, MediaID, MediaType, MediaURL, TourID FROM Media WHERE (ItemID = ?)" +
+                "";
             this._commandCollection[10].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[10].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[10].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[11] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[11].Connection = this.Connection;
+            this._commandCollection[11].CommandText = "SELECT ItemID, MediaID, MediaType, MediaURL, TourID FROM Media WHERE (TourID LIKE" +
+                " ?)";
+            this._commandCollection[11].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[11].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12896,7 +12901,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByItemID(CMSDBDataSet.MediaDataTable dataTable, global::System.Nullable<int> ItemID) {
-            this.Adapter.SelectCommand = this.CommandCollection[9];
+            this.Adapter.SelectCommand = this.CommandCollection[10];
             if ((ItemID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID.Value));
             }
@@ -12915,7 +12920,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual CMSDBDataSet.MediaDataTable GetDataByItemID(global::System.Nullable<int> ItemID) {
-            this.Adapter.SelectCommand = this.CommandCollection[9];
+            this.Adapter.SelectCommand = this.CommandCollection[10];
             if ((ItemID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID.Value));
             }
@@ -12932,7 +12937,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByTourID(CMSDBDataSet.MediaDataTable dataTable, global::System.Nullable<int> TourID) {
-            this.Adapter.SelectCommand = this.CommandCollection[10];
+            this.Adapter.SelectCommand = this.CommandCollection[11];
             if ((TourID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(TourID.Value));
             }
@@ -12951,7 +12956,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual CMSDBDataSet.MediaDataTable GetDataByTourID(global::System.Nullable<int> TourID) {
-            this.Adapter.SelectCommand = this.CommandCollection[10];
+            this.Adapter.SelectCommand = this.CommandCollection[11];
             if ((TourID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(TourID.Value));
             }
@@ -13177,8 +13182,37 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
-        public virtual int DeleteByItemID(global::System.Nullable<int> ItemID) {
+        public virtual int DeleteAudioByTourID(global::System.Nullable<int> TourID) {
             global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[3];
+            if ((TourID.HasValue == true)) {
+                command.Parameters[0].Value = ((int)(TourID.Value));
+            }
+            else {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteByItemID(global::System.Nullable<int> ItemID) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[4];
             if ((ItemID.HasValue == true)) {
                 command.Parameters[0].Value = ((int)(ItemID.Value));
             }
@@ -13207,7 +13241,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
         public virtual int DeleteByMediaURL(string MediaURL, global::System.Nullable<int> ItemID) {
-            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[4];
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[5];
             if ((MediaURL == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -13242,7 +13276,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
         public virtual int DeleteByMediaURLAndTourID(string MediaURL, global::System.Nullable<int> TourID) {
-            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[5];
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[6];
             if ((MediaURL == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -13277,7 +13311,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
         public virtual int DeleteByTourID(global::System.Nullable<int> TourID) {
-            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[6];
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[7];
             if ((TourID.HasValue == true)) {
                 command.Parameters[0].Value = ((int)(TourID.Value));
             }
@@ -13306,7 +13340,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
         public virtual int DeleteVideoMedia(global::System.Nullable<int> ItemID) {
-            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[7];
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[8];
             if ((ItemID.HasValue == true)) {
                 command.Parameters[0].Value = ((int)(ItemID.Value));
             }
@@ -13335,7 +13369,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
         public virtual int DeleteVideoMediaByTourID(global::System.Nullable<int> TourID) {
-            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[8];
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[9];
             if ((TourID.HasValue == true)) {
                 command.Parameters[0].Value = ((int)(TourID.Value));
             }

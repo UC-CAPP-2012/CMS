@@ -281,7 +281,6 @@ namespace CMS.BLL
             return mediaTableAdapter.GetDataByTourID(TourID);
         }
 
-
         public int UpdateMedia(int? ItemID, String MediaURL, String MediaType, int? TourID, int Original_MediaID)
         {
             return mediaTableAdapter.Update(ItemID, MediaURL, MediaType, TourID, Original_MediaID);
@@ -332,6 +331,10 @@ namespace CMS.BLL
             return mediaTableAdapter.DeleteVideoMediaByTourID(TourID);
         }
 
+        public int DeleteAudioByTourID(int TourID)
+        {
+            return mediaTableAdapter.DeleteAudioByTourID(TourID);
+        }
 
         public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID)
         {
