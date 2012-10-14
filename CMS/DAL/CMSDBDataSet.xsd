@@ -500,7 +500,7 @@ WHERE  (TourID= ?) AND (MediaType='Images')</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAudioByTourID" Modifier="Public" Name="DeleteAudioByTourID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="DeleteAudioByTourID">
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAudioByTourID" Modifier="Public" Name="DeleteAudioByTourID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="DeleteAudioByTourID">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM Media
@@ -511,7 +511,7 @@ WHERE  (TourID LIKE ?) AND (MediaType LIKE 'Audio')</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByItemID" Modifier="Public" Name="DeleteByItemID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="DeleteByItemID">
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByItemID" Modifier="Public" Name="DeleteByItemID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="DeleteByItemID">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM Media
@@ -522,7 +522,7 @@ WHERE  (ItemID = ?)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByMediaURL" Modifier="Public" Name="DeleteByMediaURL" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="DeleteByMediaURL">
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByMediaURL" Modifier="Public" Name="DeleteByMediaURL" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="DeleteByMediaURL">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM Media
@@ -534,7 +534,7 @@ WHERE        (MediaURL = ?) AND (ItemID = ?)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByMediaURLAndTourID" Modifier="Public" Name="DeleteByMediaURLAndTourID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="DeleteByMediaURLAndTourID">
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByMediaURLAndTourID" Modifier="Public" Name="DeleteByMediaURLAndTourID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="DeleteByMediaURLAndTourID">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM Media
@@ -546,7 +546,7 @@ WHERE        (MediaURL = ?) AND (TourID = ?)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByTourID" Modifier="Public" Name="DeleteByTourID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="DeleteByTourID">
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteByTourID" Modifier="Public" Name="DeleteByTourID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="DeleteByTourID">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM Media
@@ -557,7 +557,7 @@ WHERE  (TourID = ?)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteVideoMedia" Modifier="Public" Name="DeleteVideoMedia" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="DeleteVideoMedia">
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteVideoMedia" Modifier="Public" Name="DeleteVideoMedia" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="DeleteVideoMedia">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM Media
@@ -568,7 +568,7 @@ WHERE        (ItemID = ?) AND (MediaType = 'Video')</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteVideoMediaByTourID" Modifier="Public" Name="DeleteVideoMediaByTourID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="DeleteVideoMediaByTourID">
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteVideoMediaByTourID" Modifier="Public" Name="DeleteVideoMediaByTourID" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="DeleteVideoMediaByTourID">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM Media
@@ -589,10 +589,46 @@ WHERE        (TourID = ?) AND (MediaType = 'Video')</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="Media" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByMediaURL" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByMediaURL" GeneratorSourceName="FillByMediaURL" GetMethodModifier="Public" GetMethodName="GetDataByMediaURL" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByMediaURL" UserSourceName="FillByMediaURL">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  MediaURL
+FROM     Media
+WHERE  (TourID LIKE ?) AND (MediaType NOT LIKE 'Video')</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="TourID" DataSourceName="Media" DataTypeServer="DbType.Int32" DbType="Int32" Direction="Input" ParameterName="TourID" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="TourID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="Media" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByMediaURLByItemID" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByMediaURLByItemID" GeneratorSourceName="FillByMediaURLByItemID" GetMethodModifier="Public" GetMethodName="GetDataByMediaURLByItemID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByMediaURLByItemID" UserSourceName="FillByMediaURLByItemID">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  MediaURL
+FROM     Media
+WHERE  (ItemID LIKE ?) AND (MediaType NOT LIKE 'Video')</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="ItemID" DataSourceName="Media" DataTypeServer="DbType.Int32" DbType="Int32" Direction="Input" ParameterName="ItemID" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ItemID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
               <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="Media" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByTourID" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByTourID" GeneratorSourceName="FillByTourID" GetMethodModifier="Public" GetMethodName="GetDataByTourID" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByTourID" UserSourceName="FillByTourID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ItemID, MediaID, MediaType, MediaURL, TourID FROM Media WHERE (TourID LIKE ?)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="TourID" DataSourceName="Media" DataTypeServer="DbType.Int32" DbType="Int32" Direction="Input" ParameterName="TourID" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="TourID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="CMSConnectionString (Web.config)" DbObjectName="Media" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="getAudioURLByTourID" Modifier="Public" Name="getAudioURLByTourID" QueryType="Scalar" ScalarCallRetval="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="getAudioURLByTourID">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT  MediaURL
+FROM     Media
+WHERE  (TourID LIKE ?) AND (MediaType LIKE 'Audio')</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="TourID" DataSourceName="Media" DataTypeServer="DbType.Int32" DbType="Int32" Direction="Input" ParameterName="TourID" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="TourID" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
@@ -1610,22 +1646,22 @@ WHERE  (POITour.TourID LIKE ?)</CommandText>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="CategoryPOI" msdata:parent="Category" msdata:child="POI" msdata:parentkey="CategoryID" msdata:childkey="CategoryID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_ParentPropName="CategoryRow" msprop:Generator_UserRelationName="CategoryPOI" msprop:Generator_RelationVarName="relationCategoryPOI" msprop:Generator_UserParentTable="Category" />
-      <msdata:Relationship name="ItemEvent2" msdata:parent="EventList" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_ParentPropName="EventListRow" msprop:Generator_UserRelationName="ItemEvent2" msprop:Generator_RelationVarName="relationItemEvent2" msprop:Generator_UserParentTable="EventList" />
-      <msdata:Relationship name="ItemPOI1" msdata:parent="EventList" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_ParentPropName="EventListRow" msprop:Generator_UserRelationName="ItemPOI1" msprop:Generator_RelationVarName="relationItemPOI1" msprop:Generator_UserParentTable="EventList" />
-      <msdata:Relationship name="POIPOITour" msdata:parent="POI" msdata:child="POITour" msdata:parentkey="ItemID" msdata:childkey="POIID" msprop:Generator_UserChildTable="POITour" msprop:Generator_ChildPropName="GetPOITourRows" msprop:Generator_UserParentTable="POI" msprop:Generator_UserRelationName="POIPOITour" msprop:Generator_RelationVarName="relationPOIPOITour" msprop:Generator_ParentPropName="POIRow" />
-      <msdata:Relationship name="CategoryPOI1" msdata:parent="POIItem" msdata:child="POI" msdata:parentkey="CategoryID" msdata:childkey="CategoryID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_UserParentTable="POIItem" msprop:Generator_UserRelationName="CategoryPOI1" msprop:Generator_RelationVarName="relationCategoryPOI1" msprop:Generator_ParentPropName="POIItemRow" />
-      <msdata:Relationship name="ItemEvent" msdata:parent="Item" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_UserParentTable="Item" msprop:Generator_UserRelationName="ItemEvent" msprop:Generator_RelationVarName="relationItemEvent" msprop:Generator_ParentPropName="ItemRow" />
-      <msdata:Relationship name="ItemPOI" msdata:parent="Item" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_UserParentTable="Item" msprop:Generator_UserRelationName="ItemPOI" msprop:Generator_RelationVarName="relationItemPOI" msprop:Generator_ParentPropName="ItemRow" />
-      <msdata:Relationship name="ItemMedia" msdata:parent="Item" msdata:child="Media" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_UserParentTable="Item" msprop:Generator_UserRelationName="ItemMedia" msprop:Generator_RelationVarName="relationItemMedia" msprop:Generator_ParentPropName="ItemRow" />
-      <msdata:Relationship name="MajorRegionItem" msdata:parent="MajorRegion" msdata:child="Item" msdata:parentkey="MajorRegionID" msdata:childkey="MajorRegionID" msprop:Generator_UserChildTable="Item" msprop:Generator_ChildPropName="GetItemRows" msprop:Generator_UserParentTable="MajorRegion" msprop:Generator_UserRelationName="MajorRegionItem" msprop:Generator_RelationVarName="relationMajorRegionItem" msprop:Generator_ParentPropName="MajorRegionRow" />
-      <msdata:Relationship name="SubtypeItem" msdata:parent="Subtype" msdata:child="Item" msdata:parentkey="SubtypeID" msdata:childkey="SubtypeID" msprop:Generator_UserChildTable="Item" msprop:Generator_ChildPropName="GetItemRows" msprop:Generator_UserParentTable="Subtype" msprop:Generator_UserRelationName="SubtypeItem" msprop:Generator_RelationVarName="relationSubtypeItem" msprop:Generator_ParentPropName="SubtypeRow" />
-      <msdata:Relationship name="TourMedia" msdata:parent="Tour" msdata:child="Media" msdata:parentkey="TourID" msdata:childkey="TourID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_ParentPropName="TourRow" msprop:Generator_UserRelationName="TourMedia" msprop:Generator_RelationVarName="relationTourMedia" msprop:Generator_UserParentTable="Tour" />
-      <msdata:Relationship name="TourPOITour" msdata:parent="Tour" msdata:child="POITour" msdata:parentkey="TourID" msdata:childkey="TourID" msprop:Generator_UserChildTable="POITour" msprop:Generator_ChildPropName="GetPOITourRows" msprop:Generator_ParentPropName="TourRow" msprop:Generator_UserRelationName="TourPOITour" msprop:Generator_RelationVarName="relationTourPOITour" msprop:Generator_UserParentTable="Tour" />
-      <msdata:Relationship name="ItemEvent1" msdata:parent="Item" msdata:child="EventItem" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="EventItem" msprop:Generator_ChildPropName="GetEventItemRows" msprop:Generator_UserParentTable="Item" msprop:Generator_UserRelationName="ItemEvent1" msprop:Generator_RelationVarName="relationItemEvent1" msprop:Generator_ParentPropName="ItemRow" />
-      <msdata:Relationship name="ItemEvent3" msdata:parent="TourPOIList" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_UserParentTable="TourPOIList" msprop:Generator_UserRelationName="ItemEvent3" msprop:Generator_RelationVarName="relationItemEvent3" msprop:Generator_ParentPropName="TourPOIListRow" />
-      <msdata:Relationship name="ItemPOI2" msdata:parent="TourPOIList" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_UserParentTable="TourPOIList" msprop:Generator_UserRelationName="ItemPOI2" msprop:Generator_RelationVarName="relationItemPOI2" msprop:Generator_ParentPropName="TourPOIListRow" />
-      <msdata:Relationship name="ItemMedia1" msdata:parent="TourPOIList" msdata:child="Media" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_UserParentTable="TourPOIList" msprop:Generator_UserRelationName="ItemMedia1" msprop:Generator_RelationVarName="relationItemMedia1" msprop:Generator_ParentPropName="TourPOIListRow" />
+      <msdata:Relationship name="CategoryPOI" msdata:parent="Category" msdata:child="POI" msdata:parentkey="CategoryID" msdata:childkey="CategoryID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_UserParentTable="Category" msprop:Generator_UserRelationName="CategoryPOI" msprop:Generator_RelationVarName="relationCategoryPOI" msprop:Generator_ParentPropName="CategoryRow" />
+      <msdata:Relationship name="ItemEvent2" msdata:parent="EventList" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_UserParentTable="EventList" msprop:Generator_UserRelationName="ItemEvent2" msprop:Generator_RelationVarName="relationItemEvent2" msprop:Generator_ParentPropName="EventListRow" />
+      <msdata:Relationship name="ItemPOI1" msdata:parent="EventList" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_UserParentTable="EventList" msprop:Generator_UserRelationName="ItemPOI1" msprop:Generator_RelationVarName="relationItemPOI1" msprop:Generator_ParentPropName="EventListRow" />
+      <msdata:Relationship name="POIPOITour" msdata:parent="POI" msdata:child="POITour" msdata:parentkey="ItemID" msdata:childkey="POIID" msprop:Generator_UserChildTable="POITour" msprop:Generator_ChildPropName="GetPOITourRows" msprop:Generator_ParentPropName="POIRow" msprop:Generator_UserRelationName="POIPOITour" msprop:Generator_RelationVarName="relationPOIPOITour" msprop:Generator_UserParentTable="POI" />
+      <msdata:Relationship name="CategoryPOI1" msdata:parent="POIItem" msdata:child="POI" msdata:parentkey="CategoryID" msdata:childkey="CategoryID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_ParentPropName="POIItemRow" msprop:Generator_UserRelationName="CategoryPOI1" msprop:Generator_RelationVarName="relationCategoryPOI1" msprop:Generator_UserParentTable="POIItem" />
+      <msdata:Relationship name="ItemEvent" msdata:parent="Item" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_ParentPropName="ItemRow" msprop:Generator_UserRelationName="ItemEvent" msprop:Generator_RelationVarName="relationItemEvent" msprop:Generator_UserParentTable="Item" />
+      <msdata:Relationship name="ItemPOI" msdata:parent="Item" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_ParentPropName="ItemRow" msprop:Generator_UserRelationName="ItemPOI" msprop:Generator_RelationVarName="relationItemPOI" msprop:Generator_UserParentTable="Item" />
+      <msdata:Relationship name="ItemMedia" msdata:parent="Item" msdata:child="Media" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_ParentPropName="ItemRow" msprop:Generator_UserRelationName="ItemMedia" msprop:Generator_RelationVarName="relationItemMedia" msprop:Generator_UserParentTable="Item" />
+      <msdata:Relationship name="MajorRegionItem" msdata:parent="MajorRegion" msdata:child="Item" msdata:parentkey="MajorRegionID" msdata:childkey="MajorRegionID" msprop:Generator_UserChildTable="Item" msprop:Generator_ChildPropName="GetItemRows" msprop:Generator_ParentPropName="MajorRegionRow" msprop:Generator_UserRelationName="MajorRegionItem" msprop:Generator_RelationVarName="relationMajorRegionItem" msprop:Generator_UserParentTable="MajorRegion" />
+      <msdata:Relationship name="SubtypeItem" msdata:parent="Subtype" msdata:child="Item" msdata:parentkey="SubtypeID" msdata:childkey="SubtypeID" msprop:Generator_UserChildTable="Item" msprop:Generator_ChildPropName="GetItemRows" msprop:Generator_ParentPropName="SubtypeRow" msprop:Generator_UserRelationName="SubtypeItem" msprop:Generator_RelationVarName="relationSubtypeItem" msprop:Generator_UserParentTable="Subtype" />
+      <msdata:Relationship name="TourMedia" msdata:parent="Tour" msdata:child="Media" msdata:parentkey="TourID" msdata:childkey="TourID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_UserParentTable="Tour" msprop:Generator_UserRelationName="TourMedia" msprop:Generator_RelationVarName="relationTourMedia" msprop:Generator_ParentPropName="TourRow" />
+      <msdata:Relationship name="TourPOITour" msdata:parent="Tour" msdata:child="POITour" msdata:parentkey="TourID" msdata:childkey="TourID" msprop:Generator_UserChildTable="POITour" msprop:Generator_ChildPropName="GetPOITourRows" msprop:Generator_UserParentTable="Tour" msprop:Generator_UserRelationName="TourPOITour" msprop:Generator_RelationVarName="relationTourPOITour" msprop:Generator_ParentPropName="TourRow" />
+      <msdata:Relationship name="ItemEvent1" msdata:parent="Item" msdata:child="EventItem" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="EventItem" msprop:Generator_ChildPropName="GetEventItemRows" msprop:Generator_ParentPropName="ItemRow" msprop:Generator_UserRelationName="ItemEvent1" msprop:Generator_RelationVarName="relationItemEvent1" msprop:Generator_UserParentTable="Item" />
+      <msdata:Relationship name="ItemEvent3" msdata:parent="TourPOIList" msdata:child="Event" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Event" msprop:Generator_ChildPropName="GetEventRows" msprop:Generator_ParentPropName="TourPOIListRow" msprop:Generator_UserRelationName="ItemEvent3" msprop:Generator_RelationVarName="relationItemEvent3" msprop:Generator_UserParentTable="TourPOIList" />
+      <msdata:Relationship name="ItemPOI2" msdata:parent="TourPOIList" msdata:child="POI" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="POI" msprop:Generator_ChildPropName="GetPOIRows" msprop:Generator_ParentPropName="TourPOIListRow" msprop:Generator_UserRelationName="ItemPOI2" msprop:Generator_RelationVarName="relationItemPOI2" msprop:Generator_UserParentTable="TourPOIList" />
+      <msdata:Relationship name="ItemMedia1" msdata:parent="TourPOIList" msdata:child="Media" msdata:parentkey="ItemID" msdata:childkey="ItemID" msprop:Generator_UserChildTable="Media" msprop:Generator_ChildPropName="GetMediaRows" msprop:Generator_ParentPropName="TourPOIListRow" msprop:Generator_UserRelationName="ItemMedia1" msprop:Generator_RelationVarName="relationItemMedia1" msprop:Generator_UserParentTable="TourPOIList" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

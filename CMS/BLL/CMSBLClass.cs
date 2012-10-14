@@ -341,6 +341,22 @@ namespace CMS.BLL
             return mediaTableAdapter.Insert(ItemID, MediaURL, MediaType, TourID);
         }
 
+        public String getAudioURLByTourID(int TourID)
+        {
+            return mediaTableAdapter.getAudioURLByTourID(TourID);
+        }
+
+        public DAL.CMSDBDataSet.MediaDataTable getMediaURLByTourID(int TourID)
+        {
+            return mediaTableAdapter.GetDataByMediaURL(TourID);
+        }
+
+        public DAL.CMSDBDataSet.MediaDataTable getMediaURLByItemID(int ItemID)
+        {
+            return mediaTableAdapter.GetDataByMediaURLByItemID(ItemID);
+        }
+
+        
 
         /*********************************************************************
         * News data access

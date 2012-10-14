@@ -296,6 +296,13 @@ namespace CMS.CMSPages
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             int itemID = (Int32)this.POIGridView.SelectedDataKey.Value;
+
+            DAL.CMSDBDataSet.MediaDataTable URL = dataAccess.getMediaURLByItemID(itemID);
+            foreach (DAL.CMSDBDataSet.MediaRow row in URL)
+            {
+                System.IO.File.Delete(Server.MapPath("~/Media/" + row["MediaURL"].ToString().Substring(row["MediaURL"].ToString().LastIndexOf("/") + 1)));
+            }
+
             dataAccess.DeleteMediaByItemID(itemID);
             dataAccess.DeletePOI(itemID);
             this.POIGridView.DataBind();

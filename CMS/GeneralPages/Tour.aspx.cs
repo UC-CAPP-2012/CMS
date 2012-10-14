@@ -228,7 +228,13 @@ namespace CMS.GeneralPages
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             int tourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
-
+            
+            DAL.CMSDBDataSet.MediaDataTable URL = dataAccess.getMediaURLByTourID(tourID);
+            foreach (DAL.CMSDBDataSet.MediaRow row in URL)
+            {
+                System.IO.File.Delete(Server.MapPath("~/Media/" + row["MediaURL"].ToString().Substring(row["MediaURL"].ToString().LastIndexOf("/") + 1)));
+            }
+            
             dataAccess.DeleteMediaByTourID(tourID);
             dataAccess.deleteTourPOIListByTourID(tourID);
             dataAccess.deleteTour(tourID);
@@ -287,7 +293,12 @@ namespace CMS.GeneralPages
 
                 if (this.AudioFileUpload.PostedFile.ContentLength != 0)
                 {
-                    dataAccess.DeleteAudioByTourID(TourID);
+                    String url = dataAccess.getAudioURLByTourID(TourID);
+                    if (url != null)
+                    {
+                        System.IO.File.Delete(Server.MapPath("~/Media/" + url.Substring(url.LastIndexOf("/") + 1)));
+                        dataAccess.DeleteAudioByTourID(TourID);
+                    }
 
                     HttpPostedFile posFile = this.AudioFileUpload.PostedFile;
                     Random rand = new Random((int)DateTime.Now.Ticks);
@@ -304,6 +315,8 @@ namespace CMS.GeneralPages
                 {
                     if (IsAudioRemovedHiddenField.Value.Equals("True"))
                     {
+                        String url = dataAccess.getAudioURLByTourID(TourID);
+                        System.IO.File.Delete(Server.MapPath("~/Media/" + url.Substring(url.LastIndexOf("/") + 1)));
                         dataAccess.DeleteAudioByTourID(TourID);
                     }
                 }

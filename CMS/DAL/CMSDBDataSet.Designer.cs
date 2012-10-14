@@ -12806,7 +12806,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[12];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[15];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT  MediaID, ItemID, MediaURL, MediaType, TourID\r\nFROM     Media";
@@ -12866,10 +12866,28 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
             this._commandCollection[10].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[11] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[11].Connection = this.Connection;
-            this._commandCollection[11].CommandText = "SELECT ItemID, MediaID, MediaType, MediaURL, TourID FROM Media WHERE (TourID LIKE" +
-                " ?)";
+            this._commandCollection[11].CommandText = "SELECT  MediaURL\r\nFROM     Media\r\nWHERE  (TourID LIKE ?) AND (MediaType NOT LIKE " +
+                "\'Video\')";
             this._commandCollection[11].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[11].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[12] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[12].Connection = this.Connection;
+            this._commandCollection[12].CommandText = "SELECT  MediaURL\r\nFROM     Media\r\nWHERE  (ItemID LIKE ?) AND (MediaType NOT LIKE " +
+                "\'Video\')";
+            this._commandCollection[12].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[12].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ItemID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ItemID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[13] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[13].Connection = this.Connection;
+            this._commandCollection[13].CommandText = "SELECT ItemID, MediaID, MediaType, MediaURL, TourID FROM Media WHERE (TourID LIKE" +
+                " ?)";
+            this._commandCollection[13].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[13].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[14] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[14].Connection = this.Connection;
+            this._commandCollection[14].CommandText = "SELECT  MediaURL\r\nFROM     Media\r\nWHERE  (TourID LIKE ?) AND (MediaType LIKE \'Aud" +
+                "io\')";
+            this._commandCollection[14].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[14].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TourID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TourID", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12936,7 +12954,7 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByTourID(CMSDBDataSet.MediaDataTable dataTable, global::System.Nullable<int> TourID) {
+        public virtual int FillByMediaURL(CMSDBDataSet.MediaDataTable dataTable, global::System.Nullable<int> TourID) {
             this.Adapter.SelectCommand = this.CommandCollection[11];
             if ((TourID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(TourID.Value));
@@ -12955,8 +12973,80 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual CMSDBDataSet.MediaDataTable GetDataByTourID(global::System.Nullable<int> TourID) {
+        public virtual CMSDBDataSet.MediaDataTable GetDataByMediaURL(global::System.Nullable<int> TourID) {
             this.Adapter.SelectCommand = this.CommandCollection[11];
+            if ((TourID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(TourID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            CMSDBDataSet.MediaDataTable dataTable = new CMSDBDataSet.MediaDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByMediaURLByItemID(CMSDBDataSet.MediaDataTable dataTable, global::System.Nullable<int> ItemID) {
+            this.Adapter.SelectCommand = this.CommandCollection[12];
+            if ((ItemID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual CMSDBDataSet.MediaDataTable GetDataByMediaURLByItemID(global::System.Nullable<int> ItemID) {
+            this.Adapter.SelectCommand = this.CommandCollection[12];
+            if ((ItemID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ItemID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            CMSDBDataSet.MediaDataTable dataTable = new CMSDBDataSet.MediaDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByTourID(CMSDBDataSet.MediaDataTable dataTable, global::System.Nullable<int> TourID) {
+            this.Adapter.SelectCommand = this.CommandCollection[13];
+            if ((TourID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(TourID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual CMSDBDataSet.MediaDataTable GetDataByTourID(global::System.Nullable<int> TourID) {
+            this.Adapter.SelectCommand = this.CommandCollection[13];
             if ((TourID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(TourID.Value));
             }
@@ -13391,6 +13481,40 @@ WHERE  (Item.ItemName LIKE '%' + ? + '%')";
                 }
             }
             return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual string getAudioURLByTourID(global::System.Nullable<int> TourID) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[14];
+            if ((TourID.HasValue == true)) {
+                command.Parameters[0].Value = ((int)(TourID.Value));
+            }
+            else {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((string)(returnValue));
+            }
         }
     }
     
