@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CMS {
+namespace CMS.ErrorPages {
     
     
-    public partial class _404 {
+    public partial class _500Error {
         
         /// <summary>
         /// Image1 control.

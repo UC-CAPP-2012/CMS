@@ -55,7 +55,6 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="404.aspx" />
     <Content Include="About.aspx" />
     <Content Include="AdminPages\AddUser.aspx" />
     <Content Include="AdminPages\Admin.aspx" />
@@ -85,6 +84,11 @@
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
     <Content Include="App_Data\CMS.accdb" />
+    <Content Include="ErrorPages\400Error.aspx" />
+    <Content Include="ErrorPages\401Error.aspx" />
+    <Content Include="ErrorPages\403Error.aspx" />
+    <Content Include="ErrorPages\404Error.aspx" />
+    <Content Include="ErrorPages\500Error.aspx" />
     <Content Include="GeneralPages\ChangePassword.aspx" />
     <Content Include="GeneralPages\ChangePasswordSuccess.aspx" />
     <Content Include="GeneralPages\Category.aspx" />
@@ -137,13 +141,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="404.aspx.cs">
-      <DependentUpon>404.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="404.aspx.designer.cs">
-      <DependentUpon>404.aspx</DependentUpon>
-    </Compile>
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -167,6 +164,41 @@
     </Compile>
     <Compile Include="BLL\ClassManageUser.cs" />
     <Compile Include="BLL\CMSBLClass.cs" />
+    <Compile Include="ErrorPages\400Error.aspx.cs">
+      <DependentUpon>400Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\400Error.aspx.designer.cs">
+      <DependentUpon>400Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\401Error.aspx.cs">
+      <DependentUpon>401Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\401Error.aspx.designer.cs">
+      <DependentUpon>401Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\403Error.aspx.cs">
+      <DependentUpon>403Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\403Error.aspx.designer.cs">
+      <DependentUpon>403Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\404Error.aspx.cs">
+      <DependentUpon>404Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\404Error.aspx.designer.cs">
+      <DependentUpon>404Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\500Error.aspx.cs">
+      <DependentUpon>500Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\500Error.aspx.designer.cs">
+      <DependentUpon>500Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GeneralPages\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

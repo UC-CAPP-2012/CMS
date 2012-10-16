@@ -1209,13 +1209,13 @@ div.accountInfo
  color : Gray;    
 }
 
-.Master404
+.ErrorMaster
 {
-    width:700px;
+    width:800px;
     margin: 50px auto auto auto;    
 }
 
-.img404
+.ErrorImg
 {
     position:relative;
     float:left;
@@ -1225,11 +1225,11 @@ div.accountInfo
     margin-right:30px;
 }
 
-.Text404
+.ErrorText
 {
     position:relative;
     float:left;
-    width:500px;
+    width:600px;
     height:300px
 }
 
