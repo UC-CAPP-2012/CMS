@@ -245,8 +245,7 @@ namespace CMS.GeneralPages
         //submit update
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (this.InsertRequiredFieldValidator.IsValid && RequiredFieldValidator2.IsValid && this.CustomValidator1.IsValid
-                && (this.SelectedPOIListBox.Items.Count > 0))
+            if (this.Page.IsValid && (this.SelectedPOIListBox.Items.Count > 0))
             {
                 String TourName = this.NameTextBox.Text;
                 String TourDetail = this.DescriptionTextBox.Text;
@@ -351,8 +350,7 @@ namespace CMS.GeneralPages
         //confirm insert
         protected void InsertButton_Click(object sender, EventArgs e)
         {
-            if (this.InsertRequiredFieldValidator.IsValid && RequiredFieldValidator2.IsValid && this.CustomValidator1.IsValid
-                && (this.SelectedPOIListBox.Items.Count > 0))
+            if (this.Page.IsValid && (this.SelectedPOIListBox.Items.Count > 0))
             {
                 String TourName = this.NameTextBox.Text;
                 String TourDetail = this.DescriptionTextBox.Text;
@@ -638,6 +636,23 @@ namespace CMS.GeneralPages
                 isOK = false;
             }
             e.IsValid = isOK;
+        }
+
+
+        protected void numberInputValidate(object sender, ServerValidateEventArgs e)
+        {
+            String senderID = ((CustomValidator)sender).ID;
+            bool isNum = false;
+
+            if (senderID.Equals("PhoneTextBox_CustomValidator"))
+            {
+                Int32 num;
+                if (Int32.TryParse(this.PhoneTextBox.Text, out num) && (this.PhoneTextBox.Text.Length < 11))
+                {
+                    isNum = true;
+                }
+            }
+            e.IsValid = isNum;
         }
     }
 }

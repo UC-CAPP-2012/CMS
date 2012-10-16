@@ -391,6 +391,15 @@ namespace CMS.GeneralPages {
         protected global::System.Web.UI.WebControls.TextBox PhoneTextBox;
         
         /// <summary>
+        /// PhoneTextBox_CustomValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator PhoneTextBox_CustomValidator;
+        
+        /// <summary>
         /// EmailLabel control.
         /// </summary>
         /// <remarks>
@@ -569,6 +578,15 @@ namespace CMS.GeneralPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label SelectedPOIListLabel;
+        
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// SelectedPOIListBox control.

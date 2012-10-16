@@ -32,6 +32,8 @@ namespace CMS.CMSPages
         {
             poiImages.InnerHtml = "";
             poiVideo.InnerHtml = "";
+            this.detailAudio.InnerHtml = "";
+            AudioURLHiddenField.Value = "";
             int id = (Int32)this.POIGridView.SelectedDataKey.Value;
             DAL.CMSDBDataSet.POIItemRow row = dataAccess.getPOIByItemID(id);
 
@@ -65,6 +67,8 @@ namespace CMS.CMSPages
             this.POIMultiView.ActiveViewIndex = 0;
             bool hasVideo=false;
             bool hasImages = false;
+            bool hasAudio = false;
+
             var media = dataAccess.getMediaByItemID(id);
             string[] separator = { "v=" };
             foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
@@ -74,11 +78,20 @@ namespace CMS.CMSPages
                     poiImages.InnerHtml += "<img class='itemImage' src='" + mediaRow.MediaURL + "' />";
                     hasImages = true;
                 }
-                else
+                if (mediaRow.MediaType == "Video")
                 {
                     poiVideo.InnerHtml = "<iframe width='460' height='260' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
                                         + "' frameborder='0' allowfullscreen></iframe>";
                     hasVideo = true;               
+                }
+                if (mediaRow.MediaType == "Audio")
+                {
+                    this.detailAudio.InnerHtml = "<object type='application/x-shockwave-flash' data='../Resources/emff_old_noborder.swf' width='91' height='25'>"
+                                               + "<param name='movie' value='../Resources/emff_old_noborder.swf'>"
+                                               + "<param name='FlashVars' value='src=" + mediaRow.MediaURL + "'>"
+                                               + "</object>";
+                    AudioURLHiddenField.Value = mediaRow.MediaURL;
+                    hasAudio = true;
                 }
             }
             
@@ -88,6 +101,11 @@ namespace CMS.CMSPages
 
             if(!hasVideo){
                 poiVideo.InnerHtml = "This POI does not have any video.";
+            }
+
+            if (!hasAudio)
+            {
+                this.detailAudio.InnerHtml = "This Tour does not have any audio.";
             }
         }
 
@@ -107,6 +125,8 @@ namespace CMS.CMSPages
             this.PostcodeTextBox.Text = "";
             this.AddressTextBox.Text = "";
             this.EditTitleLabel.Text = "Insert New Point Of Interest";
+            EditCurrentAudio.InnerHtml = "";
+            this.AudioRemoveLinkButton.Visible = false;
 
             this.StatusLabel.Text = "";
             this.VideoTextBox.Text = "";
@@ -178,6 +198,21 @@ namespace CMS.CMSPages
                     dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null);
                 }
                 CurrentImagesFileName.Value = "";
+
+                if (this.AudioFileUpload.PostedFile.ContentLength != 0)
+                {
+                    HttpPostedFile posFile = this.AudioFileUpload.PostedFile;
+                    Random rand = new Random((int)DateTime.Now.Ticks);
+                    int numIterations = 0;
+                    numIterations = rand.Next(1000000000, 2147483647);
+                    Guid id = new Guid();
+                    id = Guid.NewGuid();
+                    String fileName = "Audio_" + numIterations.ToString() + id.ToString() + posFile.FileName;
+                    posFile.SaveAs(Server.MapPath("~/Media/") + fileName);
+
+                    dataAccess.InsertMedia(newItemId, "../Media/" + fileName, "Audio", null);
+                }
+
                 this.POIGridView.DataBind();
                 this.POIMultiView.ActiveViewIndex = -1;
             }
@@ -185,6 +220,7 @@ namespace CMS.CMSPages
 
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
+            this.IsAudioRemovedHiddenField.Value = "False";
             this.POIMultiView.ActiveViewIndex = -1;
         }
         
@@ -227,6 +263,14 @@ namespace CMS.CMSPages
                     isNum = true;
                 }
             }
+            if (senderID.Equals("PhoneTextBox_CustomValidator"))
+            {
+                Int32 num;
+                if (Int32.TryParse(this.PhoneTextBox.Text, out num) && (this.PhoneTextBox.Text.Length<11))
+                {
+                    isNum = true;
+                }
+            }
             e.IsValid = isNum;
         }
 
@@ -244,6 +288,9 @@ namespace CMS.CMSPages
             this.ManualStNameTextBox.Text = "";
             this.ManualSuburbTextBox.Text = "";
             poiImagesAddUpdate.InnerHtml = "";
+            EditCurrentAudio.InnerHtml = "";
+            this.AudioRemoveLinkButton.Visible = false;
+
             int id = (Int32)this.POIGridView.SelectedDataKey.Value;
             DAL.CMSDBDataSet.POIItemRow row = dataAccess.getPOIByItemID(id);
             this.NameTextBox.Text = row["ItemName"].ToString();
@@ -283,11 +330,18 @@ namespace CMS.CMSPages
                     CurrentImagesFileName.Value += mediaRow.MediaURL.Split('/')[2]+';';
                     poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + mediaRow.MediaURL.Split('/')[2] + "' ><img class='itemImage' src='" + mediaRow.MediaURL + "'/><a class='delete-image' rel='" + mediaRow.MediaURL.Split('/')[2] + "'><div class='close_image' title='close'></div></a></div>";
                 }
-                else
+                if (mediaRow.MediaType == "Video")
                 {
                     this.VideoTextBox.Text = mediaRow.MediaURL;
                 }
-
+                if (mediaRow.MediaType == "Audio")
+                {
+                    EditCurrentAudio.InnerHtml = "<object type='application/x-shockwave-flash' data='../Resources/emff_old_noborder.swf' width='91' height='25'>"
+                                               + "<param name='movie' value='../Resources/emff_old_noborder.swf'>"
+                                               + "<param name='FlashVars' value='src=" + mediaRow.MediaURL + "'>"
+                                               + "</object>";
+                    this.AudioRemoveLinkButton.Visible = true;
+                }
             }
             this.ButtonMultiView.ActiveViewIndex = 0;
             this.POIMultiView.ActiveViewIndex = 1;
@@ -378,6 +432,37 @@ namespace CMS.CMSPages
                 {
                     dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null);
                 }
+
+                if (this.AudioFileUpload.PostedFile.ContentLength != 0)
+                {
+                    String url = dataAccess.getAudioURLByItemID(itemID);
+                    if (url != null)
+                    {
+                        System.IO.File.Delete(Server.MapPath("~/Media/" + url.Substring(url.LastIndexOf("/") + 1)));
+                        dataAccess.DeleteAudioByItemID(itemID);
+                    }
+
+                    HttpPostedFile posFile = this.AudioFileUpload.PostedFile;
+                    Random rand = new Random((int)DateTime.Now.Ticks);
+                    int numIterations = 0;
+                    numIterations = rand.Next(1000000000, 2147483647);
+                    Guid id = new Guid();
+                    id = Guid.NewGuid();
+                    String fileName = "Audio_" + numIterations.ToString() + id.ToString() + posFile.FileName;
+                    posFile.SaveAs(Server.MapPath("~/Media/") + fileName);
+
+                    dataAccess.InsertMedia(itemID, "../Media/" + fileName, "Audio", null);
+                }
+                else
+                {
+                    if (IsAudioRemovedHiddenField.Value.Equals("True"))
+                    {
+                        String url = dataAccess.getAudioURLByItemID(itemID);
+                        System.IO.File.Delete(Server.MapPath("~/Media/" + url.Substring(url.LastIndexOf("/") + 1)));
+                        dataAccess.DeleteAudioByItemID(itemID);
+                    }
+                }
+
                 this.POIGridView.DataBind();
                 this.POIMultiView.ActiveViewIndex = -1;
             }
@@ -385,6 +470,7 @@ namespace CMS.CMSPages
 
         protected void CancelButton_Click(object sender, EventArgs e)
         {
+            this.IsAudioRemovedHiddenField.Value = "False";
             this.POIMultiView.ActiveViewIndex = 0;
         }
         
@@ -501,6 +587,24 @@ namespace CMS.CMSPages
         protected void Rating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
         {
             this.FreeRating.CurrentRating = 0;
+        }
+
+        protected void AudioRemoveLinkButton_Click(object sender, EventArgs e)
+        {
+            EditCurrentAudio.InnerHtml = "Current Audio Removed.";
+            this.AudioRemoveLinkButton.Visible = false;
+            this.IsAudioRemovedHiddenField.Value = "True";
+        }
+
+        protected void audioFileTypeCheck(object sender, ServerValidateEventArgs e)
+        {
+            bool isOK = true;
+            String fileExtension = this.AudioFileUpload.PostedFile.FileName.Substring(this.AudioFileUpload.PostedFile.FileName.LastIndexOf("."));
+            if (!fileExtension.Equals(".mp3"))
+            {
+                isOK = false;
+            }
+            e.IsValid = isOK;
         }
     }
 }

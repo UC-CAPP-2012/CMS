@@ -230,7 +230,10 @@
                     <!-- Phone -->
                     <asp:Label ID="PhoneLabel" CssClass="label" runat="server" Text="Phone : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="PhoneTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                    <br /><br />
+                    <p class="validationError">
+                            <asp:CustomValidator ID="PhoneTextBox_CustomValidator" runat="server" ErrorMessage="Please enter numbers only. (Max length: 10)"
+                                onservervalidate="numberInputValidate" ControlToValidate="PhoneTextBox"></asp:CustomValidator>
+                    </p>
                     <!-- Email -->
                     <asp:Label ID="EmailLabel" CssClass="label" runat="server" Text="Email : " Font-Bold="True" Width="150px" ></asp:Label>
                     <asp:TextBox ID="EmailTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
@@ -265,7 +268,7 @@
                         <div class="POIList">
                             <asp:Label ID="POIListLabel" runat="server" Text="Location List" CssClass="LocationLabel" 
                                 BackColor="#CCCCFF" Width="250px" ForeColor="#444444" Font-Bold="True"></asp:Label><br/>
-                            <asp:TextBox ID="SearchPOITextBox" runat="server" CssClass="searchTextBox" Width="199px" ></asp:TextBox>
+                            <asp:TextBox ID="SearchPOITextBox" runat="server" CssClass="searchTextBox" Width="199px"></asp:TextBox>
                             <asp:LinkButton ID="SearchLinkButton" runat="server" CausesValidation="false" 
                                 CssClass="button small lightGray search" Width="20px" Height="11px" 
                                 onclick="SearchLinkButton_Click"></asp:LinkButton>
@@ -281,7 +284,9 @@
                         <div class="SelectedPOIList">
                             <asp:Label ID="SelectedPOIListLabel" runat="server" Text="Selected Location" CssClass="LocationLabel" 
                                 BackColor="#CCCCFF" Width="250px" ForeColor="#444444" Font-Bold="True"></asp:Label><br/>
-                            <asp:ListBox ID="SelectedPOIListBox" runat="server"  Width="250px" Height="222px" CssClass="listBox"
+                            <asp:Label ID="Label2" runat="server" Text="The sequence of tour will be determined by the order of the selected location below." Width="250px" 
+                                ForeColor="#3c3c67"></asp:Label><br/>
+                            <asp:ListBox ID="SelectedPOIListBox" runat="server"  Width="250px" Height="200px" CssClass="listBox"
                                 DataTextField="Text" DataValueField="Value"></asp:ListBox><br/>
                             <asp:LinkButton ID="UpLinkButton" runat="server" CausesValidation="false" 
                                 CssClass="button small lightGray up" Height="9px" Width="30px" 

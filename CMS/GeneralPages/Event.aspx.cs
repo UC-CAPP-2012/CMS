@@ -228,6 +228,14 @@ namespace CMS.CMSPages
                     isNum = true;
                 }
             }
+            if (senderID.Equals("PhoneTextBox_CustomValidator"))
+            {
+                Int32 num;
+                if (Int32.TryParse(this.PhoneTextBox.Text, out num) && (this.PhoneTextBox.Text.Length < 11))
+                {
+                    isNum = true;
+                }
+            }
             e.IsValid = isNum;
         }
 

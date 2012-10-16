@@ -207,6 +207,12 @@
                             <asp:Label ID="AddressDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
+                            <asp:Label ID="DetailAudioLabel" runat="server" CssClass="label" Font-Bold="True" Text="Audio : " Width="150px"></asp:Label>
+                            <div ID="detailAudio" class="DetailAudio" runat="server"></div>
+                            <asp:HiddenField ID="AudioURLHiddenField" runat="server" />
+                        </p>
+                        <div class="clear"></div>
+                        <p>
                             <asp:Label ID="DetailImageLabel" runat="server" CssClass="label" 
                                 Font-Bold="True" Text="Images : " Width="150px"></asp:Label>
                             <div ID="poiImages" runat="server" width="460px"></div>        
@@ -258,8 +264,11 @@
                                 OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource><br /><br />
                         <!-- Phone -->
                         <asp:Label ID="PhoneLabel" CssClass="label" runat="server" Text="Phone : " Font-Bold="True" Width="150px" ></asp:Label>
-                        <asp:TextBox ID="PhoneTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                        <br /><br />
+                        <asp:TextBox ID="PhoneTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox>
+                        <p class="validationError">
+                            <asp:CustomValidator ID="PhoneTextBox_CustomValidator" runat="server" ErrorMessage="Please enter numbers only. (Max length: 10)"
+                                onservervalidate="numberInputValidate" ControlToValidate="PhoneTextBox"></asp:CustomValidator>
+                        </p>
                         <!-- Email -->
                         <asp:Label ID="EmailLabel" CssClass="label" runat="server" Text="Email : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="EmailTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
@@ -332,7 +341,22 @@
                                 </asp:MultiView>
                             </div>
                         </div>                                      
+                        <div class="clear"></div>
+                        <!-- Audio -->
+                        <asp:Label ID="AudioLabel" CssClass="label" runat="server" Text="Audio : " Font-Bold="True" Width="150px" ></asp:Label>
                         
+                        <div class = "AudioUpload">
+                            <asp:Label ID="Label7" runat="server" Text="mp3 files only." 
+                                CssClass="imgLabel"></asp:Label><br />
+                            <asp:FileUpload ID="AudioFileUpload" runat="server" /><br/>
+                            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="File type must be mp3." ControlToValidate="AudioFileUpload"
+                                onservervalidate="audioFileTypeCheck" ForeColor="Red"></asp:CustomValidator><br/>
+                            <div ID="EditCurrentAudio" class="editAudio" runat="server"></div>
+                            <asp:LinkButton ID="AudioRemoveLinkButton" runat="server" CssClass="button small lightGray audio" Visible="false" 
+                                onclick="AudioRemoveLinkButton_Click" CausesValidation="false" >Remove Current Audio</asp:LinkButton>
+                            <asp:HiddenField ID="IsAudioRemovedHiddenField" runat="server" />
+                        </div>                    
+                        <div class="clear"></div>
                         <!-- YouTube Video -->
                         <asp:Label ID="VideoLabel" CssClass="label" runat="server" Text="YouTube Video : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="VideoTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 

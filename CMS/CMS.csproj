@@ -55,6 +55,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.aspx" />
     <Content Include="About.aspx" />
     <Content Include="AdminPages\AddUser.aspx" />
     <Content Include="AdminPages\Admin.aspx" />
@@ -96,6 +97,7 @@
     <Content Include="GeneralPages\User.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Media\default-news-image.png" />
+    <Content Include="Resources\404.png" />
     <Content Include="Resources\button-hover.png" />
     <Content Include="Resources\ccapp-banner.png" />
     <Content Include="Resources\ccapp-logo.png" />
@@ -135,6 +137,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

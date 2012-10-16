@@ -249,7 +249,10 @@
                         <!-- Phone -->
                         <asp:Label ID="PhoneLabel" CssClass="label" runat="server" Text="Phone : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="PhoneTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 
-                        <br /><br />
+                        <p class="validationError">
+                            <asp:CustomValidator ID="PhoneTextBox_CustomValidator" runat="server" ErrorMessage="Please enter numbers only. (Max length: 10)"
+                                onservervalidate="numberInputValidate" ControlToValidate="PhoneTextBox"></asp:CustomValidator>
+                        </p>
                         <!-- Email -->
                         <asp:Label ID="EmailLabel" CssClass="label" runat="server" Text="Email : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="EmailTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);"></asp:TextBox> 

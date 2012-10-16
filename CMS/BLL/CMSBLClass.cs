@@ -163,7 +163,7 @@ namespace CMS.BLL
             String OpeningHours, String Address, double Latitude, double Longitude, int Postcode, String Suburb, 
             int? SubtypeID, int? MajorRegionID, int CategoryID, int Original_ItemID, int Original_CategoryID)
         {
-            if (poiTableAdapter.Update(CategoryID, Original_ItemID) > 0)
+            if (poiTableAdapter.UpdatePOI(CategoryID, Original_ItemID) > 0)
             {
                 return itemTableAdapter.Update(ItemName, Details, Cost, Phone, Website, Email, OpeningHours, Address, Latitude, Longitude, 
                     Postcode, Suburb, SubtypeID, MajorRegionID, Original_ItemID);
@@ -336,6 +336,11 @@ namespace CMS.BLL
             return mediaTableAdapter.DeleteAudioByTourID(TourID);
         }
 
+        public int DeleteAudioByItemID(int ItemID)
+        {
+            return mediaTableAdapter.deleteAudioByItemID(ItemID);
+        }
+
         public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID)
         {
             return mediaTableAdapter.Insert(ItemID, MediaURL, MediaType, TourID);
@@ -344,6 +349,11 @@ namespace CMS.BLL
         public String getAudioURLByTourID(int TourID)
         {
             return mediaTableAdapter.getAudioURLByTourID(TourID);
+        }
+
+        public String getAudioURLByItemID(int Item)
+        {
+            return mediaTableAdapter.getAudioURLByItemID(Item);
         }
 
         public DAL.CMSDBDataSet.MediaDataTable getMediaURLByTourID(int TourID)
