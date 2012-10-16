@@ -89,6 +89,7 @@
     <Content Include="ErrorPages\403Error.aspx" />
     <Content Include="ErrorPages\404Error.aspx" />
     <Content Include="ErrorPages\500Error.aspx" />
+    <Content Include="ErrorPages\DefaultError.aspx" />
     <Content Include="GeneralPages\ChangePassword.aspx" />
     <Content Include="GeneralPages\ChangePasswordSuccess.aspx" />
     <Content Include="GeneralPages\Category.aspx" />
@@ -198,6 +199,13 @@
     </Compile>
     <Compile Include="ErrorPages\500Error.aspx.designer.cs">
       <DependentUpon>500Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\DefaultError.aspx.cs">
+      <DependentUpon>DefaultError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\DefaultError.aspx.designer.cs">
+      <DependentUpon>DefaultError.aspx</DependentUpon>
     </Compile>
     <Compile Include="GeneralPages\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
