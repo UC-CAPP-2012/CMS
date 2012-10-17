@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MajorRegion.aspx.cs" Inherits="CMS.GeneralPages.MajorRegion" %>
+﻿<%@ Page Title="CAPP CMS - Major Region" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MajorRegion.aspx.cs" Inherits="CMS.GeneralPages.MajorRegion" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>

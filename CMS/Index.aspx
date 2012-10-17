@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Login.master" AutoEventWireup="true"
+﻿<%@ Page Title="CAPP CMS - Log In" Language="C#" MasterPageFile="~/Login.master" AutoEventWireup="true"
     CodeBehind="Index.aspx.cs" Inherits="CMS.Account.Login" %>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false">
