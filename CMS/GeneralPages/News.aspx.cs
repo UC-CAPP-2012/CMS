@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace CMS.CMSPages
+namespace CMS.GeneralPages
 {
     public partial class News : System.Web.UI.Page
     {

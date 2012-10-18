@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CMS.CMSPages {
+namespace CMS.GeneralPages {
     
     
     public partial class Category {

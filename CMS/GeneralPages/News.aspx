@@ -1,4 +1,4 @@
-﻿<%@ Page Title="CAPP CMS - News" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="News.aspx.cs" Inherits="CMS.CMSPages.News" %>
+﻿<%@ Page Title="CAPP CMS - News" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="News.aspx.cs" Inherits="CMS.GeneralPages.News" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit.HTMLEditor"
     TagPrefix="asp" %>

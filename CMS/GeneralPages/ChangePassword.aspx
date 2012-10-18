@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="CAPP CMS - Change Password" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="ChangePassword.aspx.cs" Inherits="CMS.Account.ChangePassword" %>
+    CodeBehind="ChangePassword.aspx.cs" Inherits="CMS.GeneralPages.ChangePassword" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>

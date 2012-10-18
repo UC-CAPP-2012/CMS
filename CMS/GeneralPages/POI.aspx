@@ -1,4 +1,4 @@
-<%@ Page Title="CAPP CMS - POI" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="POI.aspx.cs" Inherits="CMS.CMSPages.POI" %>
+<%@ Page Title="CAPP CMS - POI" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="POI.aspx.cs" Inherits="CMS.GeneralPages.POI" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>

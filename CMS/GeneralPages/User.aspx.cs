@@ -10,7 +10,7 @@ using System.Xml;
 using System.IO;
 
 
-namespace CMS.CMSPages
+namespace CMS.GeneralPages
 {
     public partial class Users : System.Web.UI.Page
     {

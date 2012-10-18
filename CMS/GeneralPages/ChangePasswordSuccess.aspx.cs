@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace CMS.Account
+namespace CMS.GeneralPages
 {
     public partial class ChangePasswordSuccess : System.Web.UI.Page
     {

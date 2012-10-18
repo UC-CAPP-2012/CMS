@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 
-namespace CMS.CMSPages
+namespace CMS.GeneralPages
 {
     public partial class POI : System.Web.UI.Page
     {

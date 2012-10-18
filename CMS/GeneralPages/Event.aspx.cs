@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Globalization;
 using System.Drawing;
 
-namespace CMS.CMSPages
+namespace CMS.GeneralPages
 {
     public partial class Event : System.Web.UI.Page
     {
