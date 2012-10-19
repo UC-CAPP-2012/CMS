@@ -35,8 +35,8 @@ namespace CMS.BLL
         DAL.CMSDBDataSetTableAdapters.POIListTableAdapter poiListTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.POIListTableAdapter();
 
-        DAL.CMSDBDataSetTableAdapters.SubtypeTableAdapter subtypeTableAdapter
-            = new DAL.CMSDBDataSetTableAdapters.SubtypeTableAdapter();
+        DAL.CMSDBDataSetTableAdapters.SubTypeTableAdapter subtypeTableAdapter
+            = new DAL.CMSDBDataSetTableAdapters.SubTypeTableAdapter();
 
         DAL.CMSDBDataSetTableAdapters.UserTableAdapter userTableAdapter
             = new DAL.CMSDBDataSetTableAdapters.UserTableAdapter();
@@ -76,6 +76,7 @@ namespace CMS.BLL
         }
 
         public int InsertCategory(String categoryName)
+
         {
             return categoryTableAdapter.Insert(categoryName);
         }
@@ -85,7 +86,7 @@ namespace CMS.BLL
          * Sub Type data access
          *********************************************************************/
 
-        public DAL.CMSDBDataSet.SubtypeDataTable getAllSubtype()
+        public DAL.CMSDBDataSet.SubTypeDataTable getAllSubtype()
         {
             return subtypeTableAdapter.GetData();
         }
@@ -169,6 +170,7 @@ namespace CMS.BLL
                     Postcode, Suburb, SubtypeID, MajorRegionID, Original_ItemID);
             }
             return 0;
+
         }
 
         public int DeletePOI(int Original_ItemID)
@@ -182,14 +184,14 @@ namespace CMS.BLL
 
         public int InsertPOI(String ItemName, String Details, int Cost, String Phone, String Website, String Email,
             String OpeningHours, String Address, double Latitude, double Longitude, int Postcode, String Suburb,
-            int? SubtypeID, int? CategoryID, int? MajorRegionID)
+            int? SubtypeID, int CategoryID, int? MajorRegionID)
         {
             
             if (itemTableAdapter.Insert(ItemName, Details, Cost, Phone, Website, Email, OpeningHours, Address,
                     Latitude, Longitude, Postcode, Suburb, SubtypeID, MajorRegionID)>0)
             {
                 int ItemID = (int)itemTableAdapter.getNewlyAddedItemID();
-                poiTableAdapter.InsertNewPOI(ItemID, CategoryID);
+                poiTableAdapter.Insert(ItemID, CategoryID);
                 return Convert.ToInt32(ItemID);
             }
             return 0;
@@ -239,8 +241,8 @@ namespace CMS.BLL
             if (itemTableAdapter.Insert(ItemName, Details, Cost, Phone, Website, Email, OpeningHours, Address,
                     Latitude, Longitude, Postcode, Suburb, SubtypeID, MajorRegionID) > 0)
             {
-                int? ItemID = itemTableAdapter.getNewlyAddedItemID();
-                eventTableAdapter.InsertNewItem(ItemID,EventStartDate, EventEndDate);
+                int ItemID = Convert.ToInt32(itemTableAdapter.getNewlyAddedItemID());
+                eventTableAdapter.Insert(ItemID,EventStartDate, EventEndDate);
                 return Convert.ToInt32(ItemID);
             }
             return 0;

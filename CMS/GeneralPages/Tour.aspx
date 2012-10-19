@@ -285,7 +285,7 @@
                             <asp:Label ID="SelectedPOIListLabel" runat="server" Text="Selected Location" CssClass="LocationLabel" 
                                 BackColor="#CCCCFF" Width="250px" ForeColor="#444444" Font-Bold="True"></asp:Label><br/>
                             <asp:Label ID="Label2" runat="server" Text="The sequence of tour will be determined by the order of the selected location below." Width="250px" 
-                                ForeColor="#3c3c67"></asp:Label><br/>
+                                ForeColor="#3c3c67" Font-Size="12px"></asp:Label><br/>
                             <asp:ListBox ID="SelectedPOIListBox" runat="server"  Width="250px" Height="200px" CssClass="listBox"
                                 DataTextField="Text" DataValueField="Value"></asp:ListBox><br/>
                             <asp:LinkButton ID="UpLinkButton" runat="server" CausesValidation="false" 

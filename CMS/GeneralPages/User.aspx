@@ -22,20 +22,23 @@
                     <hr />
                         <asp:GridView ID="UsersGridView" runat="server" AllowPaging="True" 
                             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-                            DataKeyNames="UserEmail" DataSourceID="UsersObjectDataSource" ForeColor="#333333" 
+                            DataKeyNames="Email" DataSourceID="UsersObjectDataSource" ForeColor="#333333" 
                             GridLines="None">
                             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                             <Columns>
-                                <asp:BoundField DataField="UserEmail" HeaderText="User Email" ReadOnly="True" 
-                                    SortExpression="UserEmail" />
                                 <asp:BoundField DataField="UserFirstName" HeaderText="First Name" 
                                     SortExpression="UserFirstName" />
                                 <asp:BoundField DataField="UserLastName" HeaderText="Last Name" 
                                     SortExpression="UserLastName" />
-                                <asp:BoundField DataField="UserPostcode" HeaderText="Postcode" 
-                                    SortExpression="UserPostcode" />
-                                <asp:BoundField DataField="UserSubscribed" HeaderText="Subscribed" 
-                                    SortExpression="UserSubscribed" />
+                                <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" 
+                                    SortExpression="Email" />
+                                <asp:BoundField DataField="Postcode" HeaderText="Postcode" 
+                                    SortExpression="Postcode" />
+                                <asp:TemplateField HeaderText="Subscribed">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" Text=<%#AutoConvert(Eval("Subscribe"))%>></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                             <EditRowStyle BackColor="#999999" />
                             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -49,7 +52,8 @@
                             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                         </asp:GridView>
                         <asp:ObjectDataSource ID="UsersObjectDataSource" runat="server" 
-                            SelectMethod="getAllUsers" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource>
+                            SelectMethod="getAllUsers" TypeName="CMS.BLL.CMSBLClass" 
+                            OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource>
                         <div class="export-xml-btns"><asp:Button ID="btnAllUsersXML" runat="server" Text="Export to XML" 
                             onclick="btnAllUsersXML_Click" /></div>
                     </asp:View>
@@ -58,18 +62,18 @@
                     <hr />
                     <asp:GridView ID="SubcribedUsersGridView" runat="server" AllowPaging="True" 
                             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-                            DataKeyNames="UserEmail" DataSourceID="SubcribedUsersObjectDataSource" 
+                            DataKeyNames="Email" DataSourceID="SubcribedUsersObjectDataSource" 
                             ForeColor="#333333" GridLines="None">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
-                            <asp:BoundField DataField="UserEmail" HeaderText="User Email" ReadOnly="True" 
-                                SortExpression="UserEmail" />
                             <asp:BoundField DataField="UserFirstName" HeaderText="First Name" 
                                 SortExpression="UserFirstName" />
                             <asp:BoundField DataField="UserLastName" HeaderText="Last Name" 
                                 SortExpression="UserLastName" />
-                            <asp:BoundField DataField="UserPostcode" HeaderText="Postcode" 
-                                SortExpression="UserPostcode" />
+                            <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" 
+                                SortExpression="Email" />
+                            <asp:BoundField DataField="Postcode" HeaderText="Postcode" 
+                                SortExpression="Postcode" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -83,7 +87,8 @@
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                         </asp:GridView>
                         <asp:ObjectDataSource ID="SubcribedUsersObjectDataSource" runat="server" 
-                            SelectMethod="getAllSubcribedUsers" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource>
+                            SelectMethod="getAllSubcribedUsers" TypeName="CMS.BLL.CMSBLClass" 
+                            OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource>
                             <div class="export-xml-btns"><asp:Button ID="btnSubcribedUsersXML" runat="server" 
                                     Text="Export to XML" onclick="btnSubcribedUsersXML_Click"  /></div>
                     </asp:View>
@@ -92,18 +97,18 @@
                     <hr />
                     <asp:GridView ID="UnsubcribedUsersGridView" runat="server" AllowPaging="True" 
                             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-                            DataKeyNames="UserEmail" DataSourceID="UnsubcribedUsersObjectDataSource" 
+                            DataKeyNames="Email" DataSourceID="UnsubcribedUsersObjectDataSource" 
                             ForeColor="#333333" GridLines="None">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
-                            <asp:BoundField DataField="UserEmail" HeaderText="User Email" ReadOnly="True" 
-                                SortExpression="UserEmail" />
                             <asp:BoundField DataField="UserFirstName" HeaderText="First Name" 
                                 SortExpression="UserFirstName" />
                             <asp:BoundField DataField="UserLastName" HeaderText="Last Name" 
                                 SortExpression="UserLastName" />
-                            <asp:BoundField DataField="UserPostcode" HeaderText="Postcode" 
-                                SortExpression="UserPostcode" />
+                            <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" 
+                                SortExpression="Email" />
+                            <asp:BoundField DataField="Postcode" HeaderText="Postcode" 
+                                SortExpression="Postcode" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -117,7 +122,8 @@
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                         </asp:GridView>
                         <asp:ObjectDataSource ID="UnsubcribedUsersObjectDataSource" runat="server" 
-                            SelectMethod="getAllUnsubcribedUsers" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource>
+                            SelectMethod="getAllUnsubcribedUsers" TypeName="CMS.BLL.CMSBLClass" 
+                            OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource>
                             <div class="export-xml-btns"><asp:Button ID="btnUnsubcribedUsersXML" runat="server" 
                                     Text="Export to XML" onclick="btnUnsubcribedUsersXML_Click"/></div>
                     </asp:View>

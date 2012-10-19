@@ -246,12 +246,13 @@
                         <!-- Subtype -->
                         <asp:Label ID="SubTypeLabel" CssClass="label" runat="server" Text="Subtype : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:DropDownList ID="SubtypeDropDownList" runat="server" 
-                            DataSourceID="SubtypeObjectDataSource" DataTextField="SubtypeName" 
-                                DataValueField="SubtypeID" Width="405px" 
+                            DataSourceID="SubtypeObjectDataSource" DataTextField="SubType" 
+                                DataValueField="SubTypeID" Width="405px" 
                                 ondatabound="SubtypeDropDownList_DataBound">
                         </asp:DropDownList>
                         <asp:ObjectDataSource ID="SubtypeObjectDataSource" runat="server" 
-                            SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource><br /><br />
+                            SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass" 
+                                OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource><br /><br />
                         <!-- MajorRegion -->
                         <asp:Label ID="MajorRegionLabel" CssClass="label" runat="server" Text="Major Region : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:DropDownList ID="MajorRegionDropDownList" runat="server" 

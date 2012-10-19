@@ -28,11 +28,11 @@
                     <asp:CommandField SelectText="" ShowSelectButton="True" >
                     <ItemStyle Width="5px" />
                     </asp:CommandField>
-                    <asp:BoundField DataField="SubtypeID" HeaderText="SubtypeID" 
-                        InsertVisible="False" ReadOnly="True" SortExpression="SubtypeID" 
+                    <asp:BoundField DataField="SubTypeID" HeaderText="SubtypeID" 
+                        InsertVisible="False" ReadOnly="True" SortExpression="SubTypeID" 
                         Visible="False" />
-                    <asp:BoundField DataField="SubtypeName" HeaderText="SubtypeName" 
-                        SortExpression="SubtypeName">
+                    <asp:BoundField DataField="SubType" HeaderText="Subtype Name" 
+                        SortExpression="SubType">
                     </asp:BoundField>
                 </Columns>
                 <EditRowStyle BackColor="#999999" />
@@ -49,7 +49,7 @@
             <asp:ObjectDataSource ID="SubtypeObjectDataSource" runat="server" 
                 DeleteMethod="DeleteSubtype" InsertMethod="InsertSubtype" 
                 SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass" 
-                UpdateMethod="UpdateSubtype">
+                UpdateMethod="UpdateSubtype" OldValuesParameterFormatString="original_{0}">
                 <DeleteParameters>
                     <asp:Parameter Name="original_SubtypeID" Type="Int32" />
                 </DeleteParameters>

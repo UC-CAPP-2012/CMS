@@ -39,7 +39,7 @@ namespace CMS.GeneralPages
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
             DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
             this.NameDataLabel.Text = tour["TourName"].ToString();
-            this.PhoneDataLabel.Text = tour["TourPhone"].ToString();
+            this.PhoneDataLabel.Text = tour["Tour Phone"].ToString();
             this.EmailDataLabel.Text = tour["TourEmail"].ToString();
             this.WebsiteDataLabel.Text = tour["TourWebsite"].ToString();
             this.RatingData.CurrentRating = Convert.ToInt32(tour["TourCost"].ToString());
@@ -47,7 +47,7 @@ namespace CMS.GeneralPages
                 this.FreeRatingData.CurrentRating = 1;
             else
                 this.FreeRatingData.CurrentRating = 0;
-            this.DescriptionDataLabel.Text = tour["TourDetail"].ToString();
+            this.DescriptionDataLabel.Text = tour["TourDetails"].ToString();
             this.TourIDHiddenField.Value = tour["TourID"].ToString();
             this.AgentDataLabel.Text = tour["TourAgent"].ToString();
             this.ViewLocationListBox.DataBind();
@@ -184,7 +184,7 @@ namespace CMS.GeneralPages
             DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
             this.EditTitleLabel.Text = "Update Tour";
             this.NameTextBox.Text = tour["TourName"].ToString();
-            this.PhoneTextBox.Text = tour["TourPhone"].ToString();
+            this.PhoneTextBox.Text = tour["Tour Phone"].ToString();
             this.EmailTextBox.Text = tour["TourEmail"].ToString();
             this.WebsiteTextBox.Text = tour["TourWebsite"].ToString();
             this.AgentTextBox.Text = tour["TourAgent"].ToString();
@@ -193,7 +193,7 @@ namespace CMS.GeneralPages
                 this.FreeRating.CurrentRating = 1;
             else
                 this.FreeRating.CurrentRating = 0;
-            this.DescriptionTextBox.Text = tour["TourDetail"].ToString();
+            this.DescriptionTextBox.Text = tour["TourDetails"].ToString();
 
             var media = dataAccess.getMediaByTourID(TourID);
             ImageUploadDelete.Value = "0";

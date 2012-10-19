@@ -37,7 +37,7 @@ namespace CMS.GeneralPages
             DAL.CMSDBDataSet.EventItemRow row = dataAccess.getEventByItemID(id);
 
             this.NameDataLabel.Text = row["ItemName"].ToString();
-            this.SubtypeDataLabel.Text = row["SubtypeName"].ToString();
+            this.SubtypeDataLabel.Text = row["SubType"].ToString();
             if (row["MajorRegionID"].ToString() != "")
                 this.MajorRegionDataLabel.Text = dataAccess.getMajorRegionName(Convert.ToInt32(row["MajorRegionID"].ToString()));
             else
@@ -53,7 +53,7 @@ namespace CMS.GeneralPages
                 this.FreeRatingData.CurrentRating = 1;
             else
                 this.FreeRatingData.CurrentRating = 0;
-            this.DescriptionDataLabel.Text = row["Details"].ToString();
+            this.DescriptionDataLabel.Text = row["Detais"].ToString();
             this.PostcodeDataLabel.Text = row["Postcode"].ToString();
             this.AddressDataLabel.Text = row["Address"].ToString();
 
@@ -257,7 +257,7 @@ namespace CMS.GeneralPages
             DAL.CMSDBDataSet.EventItemRow row = dataAccess.getEventByItemID(id);
 
             this.NameTextBox.Text = row["ItemName"].ToString();
-            this.SubtypeDropDownList.SelectedValue = row["SubtypeID"].ToString();
+            this.SubtypeDropDownList.SelectedValue = row["SubTypeID"].ToString();
             if (row["MajorRegionID"].ToString() != "")
                 this.MajorRegionDropDownList.SelectedValue = row["MajorRegionID"].ToString();
             else
@@ -273,7 +273,7 @@ namespace CMS.GeneralPages
                 this.FreeRating.CurrentRating = 1;
             else
                 this.FreeRating.CurrentRating = 0;
-            this.DescriptionTextBox.Text = row["Details"].ToString();
+            this.DescriptionTextBox.Text = row["Detais"].ToString();
             this.PostcodeTextBox.Text = row["Postcode"].ToString();
             this.AddressTextBox.Text = row["Address"].ToString();
 

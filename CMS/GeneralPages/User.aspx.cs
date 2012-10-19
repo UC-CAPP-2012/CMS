@@ -82,5 +82,14 @@ namespace CMS.GeneralPages
             foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../XMLTempFiles")))
                 System.IO.File.Delete(f);
         }
+
+        protected string AutoConvert(object obj)
+        {
+            if (Convert.ToByte(obj.ToString()) == 1)
+            {
+                return "Yes";
+            }
+            return "No";
+        }
     }
 }

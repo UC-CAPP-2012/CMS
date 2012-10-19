@@ -39,8 +39,8 @@ namespace CMS.GeneralPages
 
             this.NameDataLabel.Text = row["ItemName"].ToString();
             this.CategoryDataLabel.Text = row["CategoryName"].ToString();
-            if (row["SubtypeID"].ToString() != "")
-                this.SubtypeDataLabel.Text = dataAccess.getSubtypeName(Convert.ToInt32(row["SubtypeID"].ToString()));
+            if (row["SubTypeID"].ToString() != "")
+                this.SubtypeDataLabel.Text = dataAccess.getSubtypeName(Convert.ToInt32(row["SubTypeID"].ToString()));
             else
                 this.SubtypeDataLabel.Text = "None";
             if (row["MajorRegionID"].ToString() != "")
@@ -56,7 +56,7 @@ namespace CMS.GeneralPages
                 this.FreeRatingData.CurrentRating = 1;
             else
                 this.FreeRatingData.CurrentRating = 0;
-            this.DescriptionDataLabel.Text = row["Details"].ToString();
+            this.DescriptionDataLabel.Text = row["Detais"].ToString();
             this.PostcodeDataLabel.Text = row["Postcode"].ToString();
             this.AddressDataLabel.Text = row["Address"].ToString();
 
@@ -295,8 +295,8 @@ namespace CMS.GeneralPages
             DAL.CMSDBDataSet.POIItemRow row = dataAccess.getPOIByItemID(id);
             this.NameTextBox.Text = row["ItemName"].ToString();
             this.CategoryDropDownList.SelectedValue = row["CategoryID"].ToString();
-            if (row["SubtypeID"].ToString() != "")
-                this.SubtypeDropDownList.SelectedValue = row["SubtypeID"].ToString();
+            if (row["SubTypeID"].ToString() != "")
+                this.SubtypeDropDownList.SelectedValue = row["SubTypeID"].ToString();
             else
                 this.SubtypeDropDownList.DataBind();
             if (row["MajorRegionID"].ToString() != "")
@@ -312,7 +312,7 @@ namespace CMS.GeneralPages
                 this.FreeRating.CurrentRating = 1;
             else
                 this.FreeRating.CurrentRating = 0;
-            this.DescriptionTextBox.Text = row["Details"].ToString();
+            this.DescriptionTextBox.Text = row["Detais"].ToString();
             this.PostcodeTextBox.Text = row["Postcode"].ToString();
             this.AddressTextBox.Text = row["Address"].ToString();
 

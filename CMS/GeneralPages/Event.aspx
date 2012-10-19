@@ -107,8 +107,8 @@
                         </asp:CommandField>
                         <asp:BoundField DataField="ItemName" HeaderText="Event Name" 
                             SortExpression="ItemName" />
-                        <asp:BoundField DataField="SubtypeName" HeaderText="Subtype" 
-                            SortExpression="SubtypeName" />
+                        <asp:BoundField DataField="SubType" HeaderText="Subtype" 
+                            SortExpression="SubType" />
                         <asp:BoundField DataField="Suburb" HeaderText="Suburb" 
                             SortExpression="Suburb" />
                         <asp:BoundField DataField="ItemID" HeaderText="ItemID" 
@@ -126,13 +126,8 @@
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
                 <asp:ObjectDataSource ID="EventObjectDataSource" runat="server" 
-                    DeleteMethod="DeleteEvent" 
                     SelectMethod="getAllEventList" TypeName="CMS.BLL.CMSBLClass" 
                     OldValuesParameterFormatString="original_{0}">
-                    <DeleteParameters>
-                        <asp:Parameter Name="Original_ItemID" Type="Int32" />
-                        <asp:Parameter Name="Original_SubtypeID" Type="Int32" />
-                    </DeleteParameters>
                 </asp:ObjectDataSource>
             </div>
             <div class="contentDetail event">
@@ -232,10 +227,12 @@
                         <!-- Subtype -->
                         <asp:Label ID="SubTypeLabel" CssClass="label" runat="server" Text="Subtype : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:DropDownList ID="SubtypeDropDownList" runat="server" 
-                            DataSourceID="SubtypeObjectDataSource" DataTextField="SubtypeName" DataValueField="SubtypeID" Width="405px">
+                            DataSourceID="SubtypeObjectDataSource" DataTextField="SubType" 
+                                DataValueField="SubTypeID" Width="405px">
                         </asp:DropDownList>
                         <asp:ObjectDataSource ID="SubtypeObjectDataSource" runat="server" 
-                            SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass"></asp:ObjectDataSource><br /><br />
+                            SelectMethod="getAllSubtype" TypeName="CMS.BLL.CMSBLClass" 
+                                OldValuesParameterFormatString="original_{0}"></asp:ObjectDataSource><br /><br />
                         <!-- MajorRegion -->
                         <asp:Label ID="MajorRegionLabel" CssClass="label" runat="server" Text="Major Region : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:DropDownList ID="MajorRegionDropDownList" runat="server" 

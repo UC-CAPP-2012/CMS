@@ -37,11 +37,14 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.5.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -83,7 +86,6 @@
     <Content Include="App_Data\ASPNETDB_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
     </Content>
-    <Content Include="App_Data\CMS.accdb" />
     <Content Include="ErrorPages\400Error.aspx" />
     <Content Include="ErrorPages\401Error.aspx" />
     <Content Include="ErrorPages\403Error.aspx" />
@@ -107,6 +109,7 @@
     <Content Include="Resources\ccapp-banner.png" />
     <Content Include="Resources\ccapp-logo.png" />
     <Content Include="Resources\cross.png" />
+    <Content Include="Resources\default-news-image.png" />
     <Content Include="Resources\down.png" />
     <Content Include="Resources\down_over.png" />
     <Content Include="Resources\elgg_sprites.png" />
@@ -165,6 +168,11 @@
     </Compile>
     <Compile Include="BLL\ClassManageUser.cs" />
     <Compile Include="BLL\CMSBLClass.cs" />
+    <Compile Include="DAL\CMSDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMSDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ErrorPages\400Error.aspx.cs">
       <DependentUpon>400Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -220,11 +228,6 @@
     </Compile>
     <Compile Include="GeneralPages\ChangePasswordSuccess.aspx.designer.cs">
       <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\CMSDBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CMSDBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DAL\DataSetManageUser.Designer.cs">
       <AutoGen>True</AutoGen>
