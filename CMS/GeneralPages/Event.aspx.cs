@@ -405,7 +405,7 @@ namespace CMS.GeneralPages
             try
             {
                 StatusLabel.Text = "";
-
+                //poiImagesAddUpdate.InnerHtml += "";
                 int count = ImageUploadFileName.Value != "" ? ImageUploadFileName.Value.Split(';').Length : 0;
                 if (count - 1 > 0 || ImageUploadDelete.Value == "1")
                 {
@@ -428,40 +428,55 @@ namespace CMS.GeneralPages
                 // Get the HttpFileCollection
                 HttpFileCollection hfc = Request.Files;
                 bool uploadStatus = true;
+
                 for (int i = 0; i < hfc.Count; i++)
                 {
-                    HttpPostedFile hpf = hfc[i];
-
-                    if (!(hpf.ContentLength < 51200))
+                    if (hfc.AllKeys[i].Equals("ctl00$MainContent$FileUpload"))
                     {
-                        uploadStatus = false;
+                        HttpPostedFile hpf = hfc[i];
+
+                        if (!(hpf.ContentLength < 51200))
+                        {
+                            uploadStatus = false;
+                            StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
+                        }
                     }
                 }
                 if (uploadStatus)
                 {
+                    int uploadImgCount = 0;
                     for (int i = 0; i < hfc.Count; i++)
                     {
-                        HttpPostedFile hpf = hfc[i];
+                        if (hfc.AllKeys[i].Equals("ctl00$MainContent$FileUpload") && hfc[i].ContentLength > 0)
+                        {
+                            HttpPostedFile hpf = hfc[i];
+                            uploadImgCount++;
+                            Random rand = new Random((int)DateTime.Now.Ticks);
+                            int numIterations = 0;
+                            numIterations = rand.Next(1000000000, 2147483647);
+                            Guid id = new Guid();
 
-                        Random rand = new Random((int)DateTime.Now.Ticks);
-                        int numIterations = 0;
-                        numIterations = rand.Next(1000000000, 2147483647);
-                        Guid id = new Guid();
+                            //-- Create new GUID and echo to the console
+                            id = Guid.NewGuid();
+                            hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
+                            ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
+                            eventsImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' ><img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() +
+                                hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName + "'><div class='close_image ' title='close'></div></a></div>";
 
-                        //-- Create new GUID and echo to the console
-                        id = Guid.NewGuid();
-                        hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
-                        ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
-                        eventsImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' ><img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() +
-                            hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName + "'><div class='close_image ' title='close'></div></a></div>";
+                        }
                     }
+                    int thumbNailCount = 0;
+                    String thumbNail = eventsImagesAddUpdate.InnerHtml.ToString();
+                    while (thumbNail.Contains("poi-images"))
+                    {
+                        thumbNail = thumbNail.Remove(thumbNail.IndexOf("poi-images"), 10);
+                        thumbNailCount++;
+                    }
+
+                    int maxlength = 5 - thumbNailCount;
                     FileUpload.Attributes.Remove("maxlength");
-                    FileUpload.Attributes.Add("maxlength", (5 - hfc.Count).ToString());
+                    FileUpload.Attributes.Add("maxlength", maxlength.ToString());
                     StatusLabel.Text = "Uploaded Successfully.";
-                }
-                else
-                {
-                    StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
                 }
             }
             catch (Exception ex)

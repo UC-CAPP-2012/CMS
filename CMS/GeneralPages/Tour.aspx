@@ -306,8 +306,7 @@
                         <asp:Label ID="AudioLabel" CssClass="label" runat="server" Text="Audio : " Font-Bold="True" Width="150px" ></asp:Label>
                         
                         <div class = "AudioUpload">
-                            <asp:Label ID="Label1" runat="server" Text="mp3 files only." 
-                                CssClass="imgLabel"></asp:Label><br />
+                            <asp:Label ID="SelectAudioLabel" runat="server" CssClass="imgLabel"></asp:Label><br />
                             <asp:FileUpload ID="AudioFileUpload" runat="server" /><br/>
                             <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="File type must be mp3." ControlToValidate="AudioFileUpload"
                                 onservervalidate="audioFileTypeCheck" ForeColor="Red"></asp:CustomValidator><br/>

@@ -16,7 +16,21 @@ namespace CMS.GeneralPages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["AudioFileUpload"] == null && this.AudioFileUpload.HasFile)
+            {
+                Session["AudioFileUpload"] = this.AudioFileUpload;
+                this.SelectAudioLabel.Text = "Selected Audio File : " + AudioFileUpload.FileName;
+            }
+            else if (Session["AudioFileUpload"] != null && (!this.AudioFileUpload.HasFile))
+            {
+                this.AudioFileUpload = (FileUpload)Session["AudioFileUpload"];
+                this.SelectAudioLabel.Text = "Selected Audio File : " + AudioFileUpload.FileName;
+            }
+            else if (AudioFileUpload.HasFile)
+            {
+                Session["AudioFileUpload"] = this.AudioFileUpload;
+                this.SelectAudioLabel.Text = "Selected Audio File : " + AudioFileUpload.FileName;
+            }
         }
 
         protected void TourGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -35,6 +49,8 @@ namespace CMS.GeneralPages
             poiVideo.InnerHtml = "";
             this.detailAudio.InnerHtml = "";
             AudioURLHiddenField.Value = "";
+            Session.Remove("AudioFileUpload");
+            this.SelectAudioLabel.Text = "mp3 files only.";
 
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
             DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
@@ -111,6 +127,8 @@ namespace CMS.GeneralPages
             this.SelectedPOIListBox.DataSource = collection;
             this.SelectedPOIListBox.DataBind();
             Session["SelectedPOIList"] = collection;
+            Session.Remove("AudioFileUpload");
+            this.SelectAudioLabel.Text = "mp3 files only.";
 
             this.POIListBox.DataSource = dataAccess.getAllPOIList();
             this.POIListBox.DataBind();
@@ -155,6 +173,8 @@ namespace CMS.GeneralPages
 
             EditCurrentAudio.InnerHtml = "";
             this.AudioRemoveLinkButton.Visible = false;
+            Session.Remove("AudioFileUpload");
+            this.SelectAudioLabel.Text = "mp3 files only.";
 
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
 
@@ -437,17 +457,14 @@ namespace CMS.GeneralPages
                     for (int x = 0; x < countExisting - 1; x++)
                     {
                         poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + CurrentImagesFileName.Value.Split(';')[x] + "' ><img class='itemImage' src='../Media/" +
-                        CurrentImagesFileName.Value.Split(';')[x] + "' id='" + CurrentImagesFileName.Value.Split(';')[x]
-                        + "' /><a class='upload-images' rel='" + CurrentImagesFileName.Value.Split(';')[x]
-                        + "'><div class='close_image ' title='close'></div></a></div>";
+                        CurrentImagesFileName.Value.Split(';')[x] + "' id='" + CurrentImagesFileName.Value.Split(';')[x] + "' /><a class='upload-images' rel='" + CurrentImagesFileName.Value.Split(';')[x] + "'><div class='close_image ' title='close'></div></a></div>";
                     }
                 }
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
                     string target = "<div class='poi-images'  id='" + filename + "' ><img class='itemImage' src='../Temp_Media/" +
-                        filename + "' id='" + filename + "' /><a class='upload-images' rel='" + filename
-                        + "'><div class='close_image ' title='close'></div></a></div>";
+                        filename + "' id='" + filename + "' /><a class='upload-images' rel='" + filename + "'><div class='close_image ' title='close'></div></a></div>";
                     poiImagesAddUpdate.InnerHtml += target;
                 }
 
@@ -464,17 +481,19 @@ namespace CMS.GeneralPages
                         if (!(hpf.ContentLength < 51200))
                         {
                             uploadStatus = false;
+                            StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
                         }
                     }
                 }
                 if (uploadStatus)
                 {
+                    int uploadImgCount = 0;
                     for (int i = 0; i < hfc.Count; i++)
                     {
-                        if (hfc.AllKeys[i].Equals("ctl00$MainContent$FileUpload"))
+                        if (hfc.AllKeys[i].Equals("ctl00$MainContent$FileUpload") && hfc[i].ContentLength > 0)
                         {
                             HttpPostedFile hpf = hfc[i];
-
+                            uploadImgCount++;
                             Random rand = new Random((int)DateTime.Now.Ticks);
                             int numIterations = 0;
                             numIterations = rand.Next(1000000000, 2147483647);
@@ -485,18 +504,22 @@ namespace CMS.GeneralPages
                             hpf.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + hpf.FileName);
                             ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
                             poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' ><img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() +
-                                hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName
-                                + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName
-                                + "'><div class='close_image ' title='close'></div></a></div>";
+                                hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName + "'><div class='close_image ' title='close'></div></a></div>";
+
                         }
                     }
+                    int thumbNailCount = 0;
+                    String thumbNail = poiImagesAddUpdate.InnerHtml.ToString();
+                    while (thumbNail.Contains("poi-images"))
+                    {
+                        thumbNail = thumbNail.Remove(thumbNail.IndexOf("poi-images"), 10);
+                        thumbNailCount++;
+                    }
+
+                    int maxlength = 5 - thumbNailCount;
                     FileUpload.Attributes.Remove("maxlength");
-                    FileUpload.Attributes.Add("maxlength", (5 - hfc.Count).ToString());
+                    FileUpload.Attributes.Add("maxlength", maxlength.ToString());
                     StatusLabel.Text = "Uploaded Successfully.";
-                }
-                else
-                {
-                    StatusLabel.Text = "One of the files is larger than 50 kb! Please try again.";
                 }
             }
             catch (Exception ex)
@@ -504,6 +527,7 @@ namespace CMS.GeneralPages
                 Console.Out.WriteLine(ex.Message);
             }
         }
+        
 
         public void DeleteAllTempFiles()
         {

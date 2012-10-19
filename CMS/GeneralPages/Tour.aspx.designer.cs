@@ -643,13 +643,13 @@ namespace CMS.GeneralPages {
         protected global::System.Web.UI.WebControls.Label AudioLabel;
         
         /// <summary>
-        /// Label1 control.
+        /// SelectAudioLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label SelectAudioLabel;
         
         /// <summary>
         /// AudioFileUpload control.
