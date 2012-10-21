@@ -118,6 +118,9 @@
                 </asp:BoundField>
             </Columns>
             <EditRowStyle BackColor="#999999" />
+            <EmptyDataTemplate>
+                <span/>There is no point of interest.</span>
+            </EmptyDataTemplate>
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -138,7 +141,6 @@
             <div class="contentDetailWrapper">
                 <asp:ScriptManager ID="ScriptManager1" runat="server"/>
                 <asp:MultiView ID="POIMultiView" runat="server">
-
                     <!-- default detail display -->
                     <asp:View ID="DetailView" runat="server">
                         <h1> Point Of Interest Details

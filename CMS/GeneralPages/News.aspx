@@ -44,6 +44,9 @@
                     SortExpression="NewsAuthor" />
             </Columns>
             <EditRowStyle BackColor="#999999" />
+            <EmptyDataTemplate>
+                <span/>There is no news.</span>
+            </EmptyDataTemplate>
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -82,7 +85,7 @@
     </div>
     <!-- Data Detail -->
         <div class="contentDetail news">
-            <div class="contentDetailWrapper">
+            <div class="contentDetailWrapper news">
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <asp:MultiView ID="NewsMultiView" runat="server">
 
@@ -109,14 +112,6 @@
 
                 <!-- update display (Visible when update button is clicked) -->
                 <asp:View ID="UpdateView" runat="server">
-                    <asp:Button ID="SubmitButton" runat="server" Text="Submit Update" Width="120px" 
-                        CssClass="detailButtons" onclick="SubmitButton_Click"  />
-                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" OnClientCancel="CancelClick"
-                        runat="server" ConfirmText="Do you want to submit the update?" Enabled="True" 
-                        TargetControlID="SubmitButton" ConfirmOnFormSubmit="True">
-                    </asp:ConfirmButtonExtender>
-                    <asp:Button ID="CancelButton" runat="server" Text="Cancel" Width="70px" 
-                        CssClass="detailButtons" onclick="CancelButton_Click" CausesValidation="False" />
                     <h2> Update News Details </h2> 
                     <div class="newsUpdateForm"> 
                         <asp:Label ID="TitleUpdateLabel" CssClass="label" runat="server" Text="Title: " Font-Bold="True" Width="150px" ></asp:Label>
@@ -139,7 +134,7 @@
                         </p>
                         <asp:Label ID="ImageUpdateLabel" CssClass="label" runat="server" Text="Image: " Font-Bold="True" Width="150px" ></asp:Label>
                         <div class="news-image-upload">
-                         <asp:Label ID="Label6" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
+                         <asp:Label ID="Label6" CssClass="imgLabel" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label><br/>
                             <asp:FileUpload ID="NewsImageUpload" runat="server" />
                             <asp:Button ID="btnUpload" runat="server" onclick="btnUpload_Click" 
                                 Text="Upload" />
@@ -149,27 +144,25 @@
                             <asp:HiddenField ID="NewsImageUploadFileName" runat="server" />
                         </div>
                         <div class="news-image news-image-update"><asp:Image ID="NewsImageUpdate" runat="server" /></div>
+                        <div class="clear"></div>
                         <div  class="news-body-update">
                             <asp:Label ID="BodyUpdateLabel" CssClass="label" runat="server" Text="Body: " Font-Bold="True" Width="150px" ></asp:Label>
                             <asp:TextBox ID="NewsBodyTextBox" runat="server" TextMode="MultiLine" CssClass="newBodyEditor"></asp:TextBox>
-                            <asp:Label ID="UpdateNewsNoContentStatus" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
-                        </div>
-                        
+                            <asp:Label ID="UpdateNewsNoContentStatus" CssClass="label statusMsg" runat="server" Text="" Width="150px" ></asp:Label>
+                        </div>                        
                     </div>
-
+                    <div class="detailButtons bottom">
+                        <asp:Button ID="SubmitButton" runat="server" Text="Submit Update" Width="120px" onclick="SubmitButton_Click"  />
+                        <asp:ConfirmButtonExtender ID="ConfirmButtonExtender1" OnClientCancel="CancelClick"
+                            runat="server" ConfirmText="Do you want to submit the update?" Enabled="True" 
+                            TargetControlID="SubmitButton" ConfirmOnFormSubmit="True">
+                        </asp:ConfirmButtonExtender>
+                        <asp:Button ID="CancelButton" runat="server" Text="Cancel" Width="70px" onclick="CancelButton_Click" CausesValidation="False" />
+                    </div>
                 </asp:View>
 
                 <!-- insert new display (Visible when insert link button is clicked) -->
                 <asp:View ID="InsertView" runat="server">
-                    <asp:Button ID="SubmitNewButton" runat="server" Text="Insert New" Width="100px" 
-                        CssClass="detailButtons" onclick="SubmitNewButton_Click" />
-                    <asp:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server" OnClientCancel="CancelClick"
-                     ConfirmText="Do you want to add this news article?" Enabled="True" 
-                        TargetControlID="SubmitNewButton" ConfirmOnFormSubmit="True">
-                    </asp:ConfirmButtonExtender>
-                    <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px" 
-                        CssClass="detailButtons" CausesValidation="False" 
-                        onclick="InsertCancelButton_Click" />
                     <h2> Insert New News </h2>
                     <div class="newsUpdateForm"> 
                         <asp:Label ID="Label1" CssClass="label" runat="server" Text="Title: " Font-Bold="True" Width="150px" ></asp:Label>
@@ -192,7 +185,7 @@
                         </p>
                         <asp:Label ID="Label3" CssClass="label" runat="server" Text="Image: " Font-Bold="True" Width="150px" ></asp:Label>
                         <div class="news-image-upload">
-                            <asp:Label ID="Label4" CssClass="label statusMsg imageUpload" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label>
+                            <asp:Label ID="Label4" CssClass="imgLabel" runat="server" Text="Max File Size: 50kb." Font-Bold="True" Width="150px" ></asp:Label><br/>
                             <asp:FileUpload ID="InsertNewsImageUpload" runat="server" />
                             <asp:Button ID="btnInsertNewsUpload" runat="server" 
                                 Text="Upload" onclick="btnInsertNewsUpload_Click" />
@@ -200,23 +193,29 @@
                                 Text="Remove" onclick="btnInsertNewsRemove_Click" Visible="False"  />
                             <asp:Label ID="InsertStatusLabel" CssClass="label statusMsg imageUpload" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
                             <asp:HiddenField ID="InsertNewsImageName" runat="server" />
-
                         </div>
                         <div class="news-image news-image-update"><asp:Image ID="InsertNewsImage" runat="server" /></div>
+                        <div class="clear"></div>
                         <div  class="news-body-update">
                             <asp:Label ID="Label5" CssClass="label" runat="server" Text="Body: " Font-Bold="True" Width="150px" ></asp:Label>                            
                             <asp:TextBox ID="InsertNewsBodyTextBox" runat="server" TextMode="MultiLine" CssClass="newBodyEditor"></asp:TextBox>
-                            <asp:Label ID="InsertNewsNoContentStatus" CssClass="label statusMsg" runat="server" Text="" Font-Bold="True" Width="150px" ></asp:Label>
-                        </div>
-                        
+                            <asp:Label ID="InsertNewsNoContentStatus" CssClass="label statusMsg" runat="server" Text="" Width="150px" ></asp:Label>
+                        </div>                        
+                    </div>
+                    <div class="detailButtons bottom">
+                        <asp:Button ID="SubmitNewButton" runat="server" Text="Insert New" Width="100px" onclick="SubmitNewButton_Click" />
+                        <asp:ConfirmButtonExtender ID="ConfirmButtonExtender2" runat="server" OnClientCancel="CancelClick"
+                         ConfirmText="Do you want to add this news article?" Enabled="True" 
+                            TargetControlID="SubmitNewButton" ConfirmOnFormSubmit="True">
+                        </asp:ConfirmButtonExtender>
+                        <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel" Width="70px"
+                         CausesValidation="False" onclick="InsertCancelButton_Click" />
                     </div>
                 </asp:View>
             </asp:MultiView>
         </div>
         </div>
     </div>
-    </div>
-    
-    </span>
-    
+    </div>    
+    </span>    
 </asp:Content>

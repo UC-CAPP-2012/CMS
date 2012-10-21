@@ -39,6 +39,9 @@
                     </asp:BoundField>
             </Columns>
             <EditRowStyle BackColor="#999999" />
+            <EmptyDataTemplate>
+                <span/>There is no major region.</span>
+            </EmptyDataTemplate>
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -128,4 +131,5 @@
         </div>
         </div>
     </div>
+    </span>
 </asp:Content>

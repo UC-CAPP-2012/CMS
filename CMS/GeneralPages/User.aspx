@@ -8,8 +8,8 @@
             <div class="sideBarNavigation">
                 <ul>
                     <li><asp:LinkButton ID="AllUsersLinkButton" runat="server"  onclick="AllUsersButton_Click">View all Users</asp:LinkButton></li>
-                    <li><asp:LinkButton ID="SubcribedUsersLinkButton" runat="server"  onclick="SubcribedUsersButton_Click">View all Subcribed Users</asp:LinkButton></li>
-                    <li><asp:LinkButton ID="UnsubcribedUsersLinkButton" runat="server"  onclick="UnsubcribedUsersButton_Click">View all Unsubcribed Users</asp:LinkButton></li>
+                    <li><asp:LinkButton ID="SubcribedUsersLinkButton" runat="server"  onclick="SubcribedUsersButton_Click">View all Subscribed Users</asp:LinkButton></li>
+                    <li><asp:LinkButton ID="UnsubcribedUsersLinkButton" runat="server"  onclick="UnsubcribedUsersButton_Click">View all Unsubscribed Users</asp:LinkButton></li>
                 </ul>
             </div>
         </div>
@@ -36,7 +36,7 @@
                                     SortExpression="Postcode" />
                                 <asp:TemplateField HeaderText="Subscribed">
                                     <ItemTemplate>
-                                        <asp:Label runat="server" Text=<%#AutoConvert(Eval("Subscribe"))%>></asp:Label>
+                                        <span/>There is no users.</span>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -58,7 +58,7 @@
                             onclick="btnAllUsersXML_Click" /></div>
                     </asp:View>
                     <asp:View ID="SubcribedUsersView" runat="server">
-                    <h1>All Subcribed Users</h1>
+                    <h1>All Subscribed Users</h1>
                     <hr />
                     <asp:GridView ID="SubcribedUsersGridView" runat="server" AllowPaging="True" 
                             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
@@ -76,6 +76,9 @@
                                 SortExpression="Postcode" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
+                        <EmptyDataTemplate>
+                            <span/>There is no subscribed user.</span>
+                        </EmptyDataTemplate>
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
@@ -93,7 +96,7 @@
                                     Text="Export to XML" onclick="btnSubcribedUsersXML_Click"  /></div>
                     </asp:View>
                     <asp:View ID="UnsubcribedUsersView" runat="server">
-                    <h1>All Unsubcribed Users</h1>
+                    <h1>All Unsusbcribed Users</h1>
                     <hr />
                     <asp:GridView ID="UnsubcribedUsersGridView" runat="server" AllowPaging="True" 
                             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
@@ -111,6 +114,9 @@
                                 SortExpression="Postcode" />
                         </Columns>
                         <EditRowStyle BackColor="#999999" />
+                        <EmptyDataTemplate>
+                            <span/>There is no unsubscribed user.</span>
+                        </EmptyDataTemplate>
                         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />

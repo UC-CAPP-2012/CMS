@@ -189,6 +189,11 @@ namespace CMS.GeneralPages
 
         protected void InsertLinkButton_Click(object sender, EventArgs e)
         {
+            this.AuthorTextBox.Text = "";
+            this.NameTextBox.Text = "";
+            this.PublisherTextBox.Text = "";
+            this.NewsBodyTextBox.Text = "";
+            this.InsertNewsBodyTextBox.Text = "";
             this.NewsMultiView.ActiveViewIndex = 2;
             this.InsertNewsImage.ImageUrl = "../Media/default-news-image.png";
             btnInsertNewsRemove.Visible = false;
@@ -197,6 +202,7 @@ namespace CMS.GeneralPages
         protected void btnInsertNewsUpload_Click(object sender, EventArgs e)
         {
             InsertStatusLabel.Text = "";
+
             if (InsertNewsImageUpload.HasFile)
             {
                 try

@@ -21,9 +21,14 @@
                             Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
                             [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/Index.aspx"/> ]
                         </LoggedInTemplate>
-                    </asp:LoginView>
+                    </asp:LoginView>                    
                 </div>
-                
+                <div runat="server" ID="settings">                
+                        <a runat="server" id="Admin_link" name="administration" CausesValidation="False"><span style="float:right;">Administrations</span><span class="elgg-icon-admin-settings"></span></a>
+                        <br />
+                        <a runat="server" id="Settings_link" name="administration" CausesValidation="False"><span style="float:right;">Settings</span><span class="elgg-icon-settings"></span></a>
+                </div>
+                <div class="clear" ></div>
                 <h1>
                     <span class="capitalTitle">C</span>ontent 
                     <span class="capitalTitle">M</span>anagement 
@@ -49,12 +54,7 @@
                             CssClass="medium button gray" > News </asp:LinkButton>
                     <asp:LinkButton ID="LinkButtonUser" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
                             CssClass="medium button gray" > User </asp:LinkButton>
-                </div>
-                <div runat="server" ID="settings">
-                
-                    <a runat="server" id="Admin_link" name="administration" class="admin_settings" CausesValidation="False"><span class="elgg-icon-admin-settings"></span>Administrations</a>
-                    <a runat="server" id="Settings_link" name="administration" CausesValidation="False"><span class="elgg-icon-settings"></span>Settings</a>
-                </div>
+                </div>                
             </div>
             <div class="mainUnderLine"></div>
         </div>
