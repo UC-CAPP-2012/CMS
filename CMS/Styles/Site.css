@@ -259,6 +259,7 @@ first child of the left and right table columns */
     box-shadow: 0 0 10px #555555 inset;
     margin-left: 200px;
     margin-top: -8px;
+    position:relative;
 }
 .wrapper2Settings
 {
@@ -276,8 +277,11 @@ first child of the left and right table columns */
 
 .contentList
 {
+    position:absolute;
     float:left;
     width:460px;
+    height:100%;
+    overflow-y:auto;
 }
 
 .contentList table
