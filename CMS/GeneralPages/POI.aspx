@@ -39,11 +39,12 @@
                 map.fitBounds(place.geometry.viewport);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(15); 
+                map.setZoom(15);
             }
 
             document.getElementById('MainContent_LatitudeHiddenField').setAttribute('value', place.geometry.location.lat());
             document.getElementById('MainContent_LongitudeHiddenField').setAttribute('value', place.geometry.location.lng());
+
 
             var image = new google.maps.MarkerImage(
               place.icon,
@@ -64,7 +65,6 @@
             }
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindow.open(map, marker);
-
         });
 
         // Sets a listener on a radio button to change the filter type on Places
@@ -203,6 +203,11 @@
                             <asp:Label ID="PostcodeDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
+                            <asp:Label ID="DetailSuburbLabel" runat="server" CssClass="label" 
+                                Font-Bold="True" Text="Suburb : " Width="150px"></asp:Label>
+                            <asp:Label ID="SuburbDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
                             <asp:Label ID="DetailAddressLabel" runat="server" CssClass="label" 
                                 Font-Bold="True" Text="Address : " Width="150px"></asp:Label>
                             <asp:Label ID="AddressDataLabel" runat="server" Width="460px"></asp:Label>
@@ -298,7 +303,7 @@
                         <p class="validationError">             
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                             ErrorMessage="Detailed description is required." ControlToValidate="DescriptionTextBox" SetFocusOnError="True" />
-                        </p>
+                        </p>                        
                         <!--Postcode -->
                         <asp:Label ID="PostcodeLabel" CssClass="label" runat="server" Text="Postcode : " Font-Bold="True" Width="150px" ></asp:Label>
                         <asp:TextBox ID="PostcodeTextBox" runat="server" Width="60px" onkeydown = "return (event.keyCode!=13);" MaxLength="4"></asp:TextBox> 
@@ -308,6 +313,13 @@
                             <span style="margin-left: -115px;"/>
                             <asp:CustomValidator ID="PostcodeTextBox_CustomValidator" runat="server" ErrorMessage="Postcode should be 4 digit numbers."
                             onservervalidate="numberInputValidate" ControlToValidate="PostcodeTextBox"></asp:CustomValidator>
+                        </p> 
+                        <!--Suburb -->
+                        <asp:Label ID="SuburbLabel" CssClass="label" runat="server" Text="Suburb : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="SuburbTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);" ></asp:TextBox> 
+                        <p class="validationError"> 
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                            ErrorMessage="Suburb is required." ControlToValidate="SuburbTextBox" SetFocusOnError="True" />
                         </p> 
                         <!-- Address -->
                         <asp:Label ID="AddressLabel" CssClass="label" runat="server" Text="Address : " Font-Bold="True" Width="150px" ></asp:Label>

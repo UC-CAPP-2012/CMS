@@ -201,6 +201,11 @@
                             <asp:Label ID="PostcodeDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
                         <p>
+                            <asp:Label ID="DetailSuburbLabel" runat="server" CssClass="label" 
+                                Font-Bold="True" Text="Suburb : " Width="150px"></asp:Label>
+                            <asp:Label ID="SuburbDataLabel" runat="server" Width="460px"></asp:Label>
+                        </p>
+                        <p>
                             <asp:Label ID="DetailAddressLabel" runat="server" CssClass="label" Font-Bold="True" Text="Address : " Width="150px"></asp:Label>
                             <asp:Label ID="AddressDataLabel" runat="server" Width="460px"></asp:Label>
                         </p>
@@ -315,6 +320,13 @@
                             <span style="margin-left: -115px;"/>
                             <asp:CustomValidator ID="PostcodeTextBox_CustomValidator" runat="server" ErrorMessage="Postcode should be 4 digit numbers."
                             onservervalidate="numberInputValidate" ControlToValidate="PostcodeTextBox"></asp:CustomValidator>
+                        </p> 
+                        <!--Suburb -->
+                        <asp:Label ID="SuburbLabel" CssClass="label" runat="server" Text="Suburb : " Font-Bold="True" Width="150px" ></asp:Label>
+                        <asp:TextBox ID="SuburbTextBox" runat="server" Width="400px" onkeydown = "return (event.keyCode!=13);" ></asp:TextBox> 
+                        <p class="validationError"> 
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                            ErrorMessage="Suburb is required." ControlToValidate="SuburbTextBox" SetFocusOnError="True" />
                         </p> 
                         <!-- Address -->
                     <asp:Label ID="AddressLabel" CssClass="label" runat="server" Text="Address : " Font-Bold="True" Width="150px" ></asp:Label>

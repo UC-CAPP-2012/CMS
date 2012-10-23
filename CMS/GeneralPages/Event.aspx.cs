@@ -55,6 +55,7 @@ namespace CMS.GeneralPages
                 this.FreeRatingData.CurrentRating = 0;
             this.DescriptionDataLabel.Text = row["Detais"].ToString();
             this.PostcodeDataLabel.Text = row["Postcode"].ToString();
+            this.SuburbDataLabel.Text = row["Suburb"].ToString();
             this.AddressDataLabel.Text = row["Address"].ToString();
 
             this.LatitudeHiddenField.Value = row["Latitude"].ToString();
@@ -106,6 +107,7 @@ namespace CMS.GeneralPages
             this.FreeRating.CurrentRating = 1;
             this.DescriptionTextBox.Text = "";
             this.PostcodeTextBox.Text = "";
+            this.SuburbTextBox.Text = "";
             this.AddressTextBox.Text = "";
             this.StatusLabel.Text = "";
             this.VideoTextBox.Text = "";
@@ -131,8 +133,7 @@ namespace CMS.GeneralPages
                 if (this.AddressMultiView.ActiveViewIndex == 0)
                 {
                     address = this.AddressTextBox.Text;
-                    suburb = address.Remove(0, address.IndexOf(",") + 2);
-                    suburb = suburb.Substring(0, suburb.IndexOf(","));
+                    suburb = this.SuburbTextBox.Text;
                     latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
                     longitude = Convert.ToDouble(this.LongitudeHiddenField.Value);
 
@@ -275,6 +276,7 @@ namespace CMS.GeneralPages
                 this.FreeRating.CurrentRating = 0;
             this.DescriptionTextBox.Text = row["Detais"].ToString();
             this.PostcodeTextBox.Text = row["Postcode"].ToString();
+            this.SuburbTextBox.Text = row["Suburb"].ToString();
             this.AddressTextBox.Text = row["Address"].ToString();
 
             this.LatitudeHiddenField.Value = row["Latitude"].ToString();
@@ -332,8 +334,7 @@ namespace CMS.GeneralPages
                 if (this.AddressMultiView.ActiveViewIndex == 0)
                 {
                     address = this.AddressTextBox.Text;
-                    suburb = address.Remove(0, address.IndexOf(",") + 2);
-                    suburb = suburb.Substring(0, suburb.IndexOf(","));
+                    suburb = this.SuburbTextBox.Text;
                     latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
                     longitude = Convert.ToDouble(this.LongitudeHiddenField.Value);
 
