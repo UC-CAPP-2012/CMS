@@ -25,7 +25,7 @@
     </div>
     <div class="wrapper2">
     <div class="contentList news">
-        <asp:GridView ID="GridViewNews" runat="server" AllowPaging="True" 
+        <asp:GridView ID="GridViewNews" runat="server" 
             AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
             DataKeyNames="NewsID" DataSourceID="ObjectDataSourceNews" ForeColor="#333333" 
             GridLines="None"  Width="100%"

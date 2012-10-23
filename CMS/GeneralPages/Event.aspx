@@ -98,8 +98,7 @@
                     AutoGenerateColumns="False" CellPadding="4" Width="100%" DataKeyNames="ItemID"
                     DataSourceID="EventObjectDataSource" ForeColor="#333333"
                     GridLines="None" onrowdatabound="EventGridView_RowDataBound" 
-                    onselectedindexchanged="EventGridView_SelectedIndexChanged" 
-                    AllowPaging="True">
+                    onselectedindexchanged="EventGridView_SelectedIndexChanged">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:CommandField SelectText="" ShowSelectButton="True">

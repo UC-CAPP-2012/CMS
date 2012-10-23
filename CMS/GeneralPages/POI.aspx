@@ -97,8 +97,7 @@
             AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ItemID"
             DataSourceID="POIObjectDataSource" ForeColor="#333333" GridLines="None" 
             Width="100%" onrowdatabound="POIGridView_RowDataBound" 
-            onselectedindexchanged="POIGridView_SelectedIndexChanged" 
-            AllowPaging="True">
+            onselectedindexchanged="POIGridView_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775"/>
             <Columns>
                 <asp:CommandField SelectText="" ShowSelectButton="True">
