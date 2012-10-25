@@ -8,7 +8,7 @@
                     <fieldset class="login">
                         <p class="login-heading">Please enter ID and Password to login to CMS</p>
                         <p>
-                            <asp:TextBox ID="UserName" runat="server" CssClass="textEntry" placeholder="Email" ToolTip="User Email"></asp:TextBox>
+                            <asp:TextBox ID="UserName" runat="server" CssClass="textEntry" placeholder="User Name" ToolTip="User Naem"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="UserName" 
                                  CssClass="failureNotification" ErrorMessage="User Name is required." ToolTip="User Name is required." 
                                  ValidationGroup="LoginUserValidationGroup"></asp:RequiredFieldValidator>

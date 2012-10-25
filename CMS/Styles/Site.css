@@ -290,6 +290,7 @@ first child of the left and right table columns */
     -moz-box-shadow: inset 19px 20px 10px -20px #555555;
     -webkit-box-shadow: inset 19px 20px 10px -20px #555555;
     border-left-color:Black;
+    -webkit-appearance:none;
 }
 
 .category.contentList       {   width:250px;    }
