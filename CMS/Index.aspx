@@ -6,7 +6,7 @@
             <div class="accountInfoLogin">
                 <div class="logInBox">
                     <fieldset class="login">
-                        <p class="login-heading">Please enter ID and Password to login to CMS</p>
+                        <p class="login-heading">Please enter User Name and Password to login to CMS</p>
                         <p>
                             <asp:TextBox ID="UserName" runat="server" CssClass="textEntry" placeholder="User Name" ToolTip="User Naem"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="UserName" 
