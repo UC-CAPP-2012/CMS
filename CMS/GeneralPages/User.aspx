@@ -36,7 +36,7 @@
                                     SortExpression="Postcode" />
                                 <asp:TemplateField HeaderText="Subscribed">
                                     <ItemTemplate>
-                                        <span/>There is no users.</span>
+                                        <asp:Label ID="SubscribedLabel" runat="server" Text='<%#AutoConvert(Eval("Subscribe")) %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

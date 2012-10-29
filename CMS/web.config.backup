@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+	<connectionStrings>
+  <add name="ApplicationServices" connectionString="data source=.\SQLEXPRESS;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnetdb.mdf;User Instance=true"
+   providerName="System.Data.SqlClient" />
+  <add name="capp_chronicleonline_com_auConnectionString1" connectionString="User Id=mycapp1001;server=MYSQL-5.chronicleonline.com.au;password=AdgUVvld;Persist Security Info=True;database=capp_chronicleonline_com_au"
+   providerName="MySql.Data.MySqlClient" />
+  <add name="capp_chronicleonline_com_auConnectionString" connectionString="server=MYSQL-5.chronicleonline.com.au;User Id=mycapp1001;password=AdgUVvld;database=capp_chronicleonline_com_au;Persist Security Info=True"
+   providerName="MySql.Data.MySqlClient" />
+ </connectionStrings>
+	<system.web>
+    <httpRuntime maxRequestLength="1048576" executionTimeout="600"/>
+    <pages maintainScrollPositionOnPostBack="true"></pages>
+    <globalization requestEncoding="utf-8" responseEncoding="utf-8" culture="en-US"/>
+    <compilation debug="true" targetFramework="4.0">
+			<assemblies>
+				<add assembly="System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/>
+				<add assembly="System.Web.Extensions.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+				<add assembly="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/></assemblies></compilation>
+		<authentication mode="Forms">
+   <forms loginUrl="~/Index.aspx" timeout="2880" />
+  </authentication>
+		<membership>
+			<providers>
+				<clear/>
+				<add name="AspNetSqlMembershipProvider" type="System.Web.Security.SqlMembershipProvider" connectionStringName="ApplicationServices" enablePasswordRetrieval="false" enablePasswordReset="true" requiresQuestionAndAnswer="false" requiresUniqueEmail="false" maxInvalidPasswordAttempts="5" minRequiredPasswordLength="6" minRequiredNonalphanumericCharacters="0" passwordAttemptWindow="10" applicationName="/"/>
+			</providers>
+		</membership>
+		<profile>
+			<providers>
+				<clear/>
+				<add name="AspNetSqlProfileProvider" type="System.Web.Profile.SqlProfileProvider" connectionStringName="ApplicationServices" applicationName="/"/>
+			</providers>
+		</profile>
+		<roleManager enabled="true">
+			<providers>
+				<clear/>
+				<add connectionStringName="ApplicationServices" applicationName="/" name="AspNetSqlRoleProvider" type="System.Web.Security.SqlRoleProvider"/>
+				<add applicationName="/" name="AspNetWindowsTokenRoleProvider" type="System.Web.Security.WindowsTokenRoleProvider"/>
+			</providers>
+		</roleManager>
+    <customErrors mode="On" defaultRedirect="~/ErrorPages/DefaultError.aspx">
+      <error statusCode="400" redirect="~/ErrorPages/400Error.aspx" />
+      <error statusCode="401" redirect="~/ErrorPages/401Error.aspx" />
+      <error statusCode="403" redirect="~/ErrorPages/403Error.aspx" />
+      <error statusCode="404" redirect="~/ErrorPages/404Error.aspx" />
+      <error statusCode="500" redirect="~/ErrorPages/500Error.aspx" />
+    </customErrors>
+  </system.web>
+  <system.webServer>
+		<modules runAllManagedModulesForAllRequests="true"/>
+	</system.webServer>
+</configuration>
