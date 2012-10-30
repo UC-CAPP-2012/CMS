@@ -100,8 +100,15 @@ namespace CMS.GeneralPages
                 }
                 if (mediaRow.MediaType == "Video")
                 {
-                    poiVideo.InnerHtml = "<iframe width='460' height='260' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
-                                        + "' frameborder='0' allowfullscreen></iframe>";
+                    if (mediaRow.MediaURL.Contains("www.youtube.com") && mediaRow.MediaURL.Contains("v="))
+                    {
+                        poiVideo.InnerHtml = "<iframe width='460' height='260' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
+                                            + "' frameborder='0' allowfullscreen></iframe>";
+                    }
+                    else
+                    {
+                        poiVideo.InnerHtml = "URL - " + mediaRow.MediaURL + "</br>(Sorry, only Videos from Youtube can be played on the CMS.)";
+                    }
                     hasVideo = true;               
                 }
                 if (mediaRow.MediaType == "Audio")
