@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CMS.BLL;
-
-namespace CMSTest
+namespace TestCMS
 {
     /// <summary>
-    /// Summary description for TestClassManageUser
+    /// Summary description for UnitTest1
     /// </summary>
     [TestClass]
     public class TestClassManageUser
     {
+        ClassManageUser targetClass = new ClassManageUser();
         public TestClassManageUser()
         {
             //
@@ -61,11 +61,11 @@ namespace CMSTest
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestGetAllRoles()
         {
-            //
-            // TODO: Add test logic here
-            //
+            int expected = 2;
+            int actual = targetClass.GetAllRoles().Count;
+            Assert.AreEqual(expected, actual);
         }
     }
 }

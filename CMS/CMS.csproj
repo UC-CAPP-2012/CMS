@@ -82,9 +82,12 @@
     <Content Include="AjaxControlToolkit.Binary.NET4\tr-TR\AjaxControlToolkit.resources.dll" />
     <Content Include="AjaxControlToolkit.Binary.NET4\zh-CHS\AjaxControlToolkit.resources.dll" />
     <Content Include="AjaxControlToolkit.Binary.NET4\zh-CHT\AjaxControlToolkit.resources.dll" />
-    <Content Include="App_Data\ASPNETDB.MDF" />
+    <Content Include="App_Data\ASPNETDB.MDF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\ASPNETDB_log.ldf">
       <DependentUpon>ASPNETDB.MDF</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ErrorPages\400Error.aspx" />
     <Content Include="ErrorPages\401Error.aspx" />

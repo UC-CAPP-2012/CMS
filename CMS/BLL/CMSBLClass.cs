@@ -78,7 +78,8 @@ namespace CMS.BLL
         public int InsertCategory(String categoryName)
 
         {
-            return categoryTableAdapter.Insert(categoryName);
+            categoryTableAdapter.Insert(categoryName);
+            return (int) categoryTableAdapter.getNewID();
         }
 
 
@@ -103,7 +104,8 @@ namespace CMS.BLL
 
         public int InsertSubtype(String subtypeName)
         {
-            return subtypeTableAdapter.Insert(subtypeName);
+            subtypeTableAdapter.Insert(subtypeName);
+            return (int)subtypeTableAdapter.getNewID();
         }
 
         public String getSubtypeName(int subtypeID)
@@ -133,7 +135,8 @@ namespace CMS.BLL
 
         public int InsertMajorRegion(String MajorRegionName)
         {
-            return majorRegionTableAdapter.Insert(MajorRegionName);
+            majorRegionTableAdapter.Insert(MajorRegionName);
+            return (int) majorRegionTableAdapter.getNewID();
         }
 
         public String getMajorRegionName(int MajorRegionID)
@@ -273,6 +276,12 @@ namespace CMS.BLL
          * Media data access
          *********************************************************************/
 
+        public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID)
+        {
+            mediaTableAdapter.Insert(ItemID, MediaURL, MediaType, TourID);
+            return (int) mediaTableAdapter.getNewID();
+        }
+
         public DAL.CMSDBDataSet.MediaDataTable getMediaByItemID(int ItemID)
         {
             return mediaTableAdapter.GetDataByItemID(ItemID);
@@ -343,11 +352,6 @@ namespace CMS.BLL
             return mediaTableAdapter.deleteAudioByItemID(ItemID);
         }
 
-        public int InsertMedia(int? ItemID, String MediaURL, String MediaType, int? TourID)
-        {
-            return mediaTableAdapter.Insert(ItemID, MediaURL, MediaType, TourID);
-        }
-
         public String getAudioURLByTourID(int TourID)
         {
             return mediaTableAdapter.getAudioURLByTourID(TourID);
@@ -390,7 +394,8 @@ namespace CMS.BLL
 
         public int InsertNews(String newsHeading, DateTime newsDateTime, String newsBody, String newsMediaURL, String newsPublisher, String newsAuthor)
         {
-            return newsTableAdapter.Insert(newsHeading, newsDateTime, newsBody, newsMediaURL, newsPublisher, newsAuthor);
+            newsTableAdapter.Insert(newsHeading, newsDateTime, newsBody, newsMediaURL, newsPublisher, newsAuthor);
+            return (int) newsTableAdapter.getNewID();
         }
 
         public DAL.CMSDBDataSet.NewsRow getNewsById(int Id)
@@ -421,7 +426,7 @@ namespace CMS.BLL
 
         public int insertTour(String TourName, String TourDetail, int TourCost, String TourPhone, String TourWebsite, String TourEmail, String TourAgent)
         {
-            return tourTableAdapter.Insert(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, TourAgent);        
+            return tourTableAdapter.Insert(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, TourAgent);
         }
 
         public int getNewlyInsertedTourID()
