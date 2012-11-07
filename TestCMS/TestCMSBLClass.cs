@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CMS.BLL;
+using MySql.Data.MySqlClient;
 namespace TestCMS
 {
     /// <summary>
@@ -67,11 +68,10 @@ namespace TestCMS
         [TestMethod]
         public void TestGetAllCategory()
         {
-            bool expected = true;
+            int expected = 8;
             int actual = targetClass.getAllCategory().Count;
-            Assert.AreEqual(expected, actual>0);
+            Assert.AreEqual(expected, actual);
         }
-
 
         [TestMethod]
         public void TestInsertCategory()
@@ -79,7 +79,15 @@ namespace TestCMS
             newID = targetClass.InsertCategory("TestInsertName");
             Assert.AreNotEqual(0, newID);
         }
-        
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertCategoryWithNullName()
+        {
+            newID = targetClass.InsertCategory(null);
+            Assert.AreNotEqual(0, newID);
+        }
+
         [TestMethod]
         public void TestUpdateCategory()
         {
@@ -89,10 +97,36 @@ namespace TestCMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdateCategoryWithNullName()
+        {
+            int expected = 1;
+            int actual = targetClass.UpdateCategory(null, newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestUpdateCategoryWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateCategory("TestUpdateName", 1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+        
+        
+        [TestMethod]
         public void TestDeleteCategory()
         {
             int expected = 1;
             int actual = targetClass.DeleteCategory(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteCategoryWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteCategory(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -105,9 +139,9 @@ namespace TestCMS
         [TestMethod]
         public void TestGetAllSubtype()
         {
-            bool expected = true;
+            int expected = 44;
             int actual = targetClass.getAllSubtype().Count;
-            Assert.AreEqual(expected, actual>0);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -120,10 +154,35 @@ namespace TestCMS
 
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertSubtypeWithNullName()
+        {
+            newID = targetClass.InsertSubtype(null);
+            Assert.AreNotEqual(0, newID);
+        }
+
+        [TestMethod]
         public void TestUpdateSubtype()
         {
             int expected = 1;
             int actual = targetClass.UpdateSubtype("TestUpdateName", newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdateSubtypeWithNullName()
+        {
+            int expected = 1;
+            int actual = targetClass.UpdateSubtype(null, newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestUpdateSubtypeWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateSubtype("TestUpdateName", 1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -136,10 +195,26 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestGetSubtypeNameWithInvalidID()
+        {
+            String expected = null;
+            String actual = targetClass.getSubtypeName(1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestDeleteSubtype()
         {
             int expected = 1;
             int actual = targetClass.DeleteSubtype(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteSubtypeWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteSubtype(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -152,15 +227,23 @@ namespace TestCMS
         [TestMethod]
         public void TestGetAllMajorRegion()
         {
-            bool expected = true;
+            int expected = 12;
             int actual = targetClass.getAllMajorRegion().Count;
-            Assert.AreEqual(expected, actual>0);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestInsertMajorRegion()
         {
             newID = targetClass.InsertMajorRegion("TestInsertName");
+            Assert.AreNotEqual(0, newID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertMajorRegionWithNullName()
+        {
+            newID = targetClass.InsertSubtype(null);
             Assert.AreNotEqual(0, newID);
         }
 
@@ -173,6 +256,23 @@ namespace TestCMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdateMajorRegionWithNullName()
+        {
+            int expected = 1;
+            int actual = targetClass.UpdateMajorRegion(null, newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestUpdateMajorRegionWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateMajorRegion("TestUpdateName", 1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestGetMajorRegionName()
         {
             String expected = "TestUpdateName";
@@ -181,10 +281,26 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestGetMajorRegionNameWithInvalidID()
+        {
+            String expected = null;
+            String actual = targetClass.getMajorRegionName(1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestDeleteMajorRegion()
         {
             int expected = 1;
             int actual = targetClass.DeleteMajorRegion(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteMajorRegionWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMajorRegion(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -197,9 +313,9 @@ namespace TestCMS
         [TestMethod]
         public void TestGetAllPOIList()
         {
-            bool expected = true;
+            int expected = 398;
             int actual = targetClass.getAllPOIList().Count;
-            Assert.AreEqual(expected, actual > 0);
+            Assert.AreEqual(expected, actual);
         }
         
         [TestMethod]
@@ -207,6 +323,41 @@ namespace TestCMS
         {
             newID = targetClass.InsertPOI("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite", "TestInsertEmail", "TestInsertHours", "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1, 1, 2);
             Assert.AreNotEqual(0, newID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertPOIWithNullStrings()
+        {
+            int poiID = targetClass.InsertPOI(null, null, 0, null, null, null, null, null, 0, 0, 0, null, 1, 1, 2);
+            Assert.AreNotEqual(0, poiID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertPOIWithInvalidCategoryID()
+        {
+            int poiID = targetClass.InsertPOI("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite", 
+                "TestInsertEmail", "TestInsertHours", "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1, 1000000000, 2);
+            Assert.AreNotEqual(0, poiID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertPOIWithInvalidSubtypeID()
+        {
+            int poiID = targetClass.InsertPOI("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite",
+                "TestInsertEmail", "TestInsertHours", "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1000000000, 1, 2);
+            Assert.AreNotEqual(0, poiID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertPOIWithInvalidMajorRegionID()
+        {
+            int poiID = targetClass.InsertPOI("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite",
+                "TestInsertEmail", "TestInsertHours", "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1, 1, 1000000000);
+            Assert.AreNotEqual(0, poiID);
         }
 
         [TestMethod]
@@ -218,10 +369,75 @@ namespace TestCMS
         }
 
         [TestMethod]
-        public void TestSearchPOI()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdatePOIWithNullStrings()
+        {
+            int expected = 1;
+            int actual = targetClass.UpdatePOI(null, null, 0, null, null, null, null, null, 0, 0, 0, null, 1, 2, 1, newID, 1);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestUpdatePOIWithInvaildID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdatePOI("TestUpdateName", "TestUpdateDetail", 0, "TestUpdatePhone", "TestUpdateWebsite", 
+                "TestUpdateEmail", "TestUpdateHours", "TestUpdateAddress", 0, 0, 0, "TestUpdateSuburb", 1, 2, 1, 1000000000, 1);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestUpdatePOIWithInvaildCategoryID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdatePOI("TestUpdateName", "TestUpdateDetail", 0, "TestUpdatePhone", "TestUpdateWebsite",
+                "TestUpdateEmail", "TestUpdateHours", "TestUpdateAddress", 0, 0, 0, "TestUpdateSuburb", 1, 2, 1000000000, newID, 1);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestUpdatePOIWithInvaildSubtypeID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdatePOI("TestUpdateName", "TestUpdateDetail", 0, "TestUpdatePhone", "TestUpdateWebsite",
+                "TestUpdateEmail", "TestUpdateHours", "TestUpdateAddress", 0, 0, 0, "TestUpdateSuburb", 1000000000, 2, 1, newID, 1);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestUpdatePOIWithInvaildMajorRegionID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdatePOI("TestUpdateName", "TestUpdateDetail", 0, "TestUpdatePhone", "TestUpdateWebsite",
+                "TestUpdateEmail", "TestUpdateHours", "TestUpdateAddress", 0, 0, 0, "TestUpdateSuburb", 1, 1000000000, 1, newID, 1);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestSearchPOIWithExistingString()
         {
             int expected = 1;
             int actual = targetClass.searchPOI("TestUpdateName").Rows.Count;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestSearchPOIWithNoneExistingString()
+        {
+            int expected = 0;
+            int actual = targetClass.searchPOI("TestNoneExistingString").Rows.Count;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestSearchPOIWithNullString()
+        {
+            int expected = 1;
+            int actual = targetClass.searchPOI(null).Rows.Count;
             Assert.AreEqual(expected, actual);
         }
 
@@ -234,10 +450,27 @@ namespace TestCMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestGetPOIByInvalidID()
+        {
+            String expected = "TestUpdateName";
+            var actual = targetClass.getPOIByItemID(1000000000);
+            Assert.AreEqual(expected, actual.ItemName);
+        }
+
+        [TestMethod]
         public void TestDeletePOI()
         {
             int expected = 1;
             int actual = targetClass.DeletePOI(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeletePOIWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeletePOI(1000000000);
             Assert.AreEqual(expected, actual);
         }
         #endregion
@@ -249,9 +482,9 @@ namespace TestCMS
         [TestMethod]
         public void TestGetAllEventIList()
         {
-            bool expected = true;
+            int expected = 54;
             int actual = targetClass.getAllEventList().Count;
-            Assert.AreEqual(expected, actual > 0);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -259,6 +492,32 @@ namespace TestCMS
         {
             newID = targetClass.InsertEvent("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite", "TestInsertEmail", "TestInsertHours", "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1,
                 DateTime.Today, DateTime.Today.AddDays(1), 2);
+            Assert.AreNotEqual(0, newID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertEventWithNullStrings()
+        {
+            newID = targetClass.InsertEvent(null, null, 0, null, null, null, null, null, 0, 0, 0, null, 1, DateTime.Today, DateTime.Today.AddDays(1), 2);
+            Assert.AreNotEqual(0, newID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertEventWithInvalidSubtypeID()
+        {
+            newID = targetClass.InsertEvent("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite", "TestInsertEmail", "TestInsertHours", 
+                "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1000000000, DateTime.Today, DateTime.Today.AddDays(1), 2);
+            Assert.AreNotEqual(0, newID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertEventWithInvalidMajorRegionID()
+        {
+            newID = targetClass.InsertEvent("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite", "TestInsertEmail", "TestInsertHours",
+                "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1, DateTime.Today, DateTime.Today.AddDays(1), 1000000000);
             Assert.AreNotEqual(0, newID);
         }
 
@@ -271,10 +530,57 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestUpdateEventWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateEvent("TestUpdateName", "TestUpdateDetail", 0, "TestUpdatePhone", "TestUpdateWebsite", "TestUpdateEmail", 
+                "TestUpdateHours",  "TestUpdateAddress", 0, 0, 0, "TestUpdateSuburb", 1, DateTime.Today, DateTime.Today.AddDays(1), 2, 1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdateEventWithNullStrings()
+        {
+            int expected = 1;
+            int actual = targetClass.UpdateEvent(null, null, 0, null, null, null, null, null, 0, 0, 0, null, 1, DateTime.Today, DateTime.Today.AddDays(1), 2, newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestUpdateEventWithInvalidSubtypeID()
+        {
+            int expected = 1;
+            int actual = targetClass.UpdateEvent("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite", "TestInsertEmail", "TestInsertHours",
+                "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1000000000, DateTime.Today, DateTime.Today.AddDays(1), 2, newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestUpdateEventWithInvalidMajorRegionID()
+        {
+            int expected = 1;
+            int actual = targetClass.UpdateEvent("TestInsertName", "TestInsertDetail", 0, "TestInsertPhone", "TestInsertWebsite", "TestInsertEmail", "TestInsertHours",
+                "TestInsertAddress", 0, 0, 0, "TestInsertSuburb", 1, DateTime.Today, DateTime.Today.AddDays(1), 1000000000, newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestGetEventByItemID()
         {
             String expected = "TestUpdateName";
             var actual = targetClass.getEventByItemID(newID);
+            Assert.AreEqual(expected, actual.ItemName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestGetEventByInvalidItemID()
+        {
+            String expected = "TestUpdateName";
+            var actual = targetClass.getEventByItemID(1000000000);
             Assert.AreEqual(expected, actual.ItemName);
         }
         
@@ -283,6 +589,14 @@ namespace TestCMS
         {
             int expected = 1;
             int actual = targetClass.DeleteEvent(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteEventWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteEvent(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -296,36 +610,25 @@ namespace TestCMS
         [TestMethod]
         public void TestGetAllUsers()
         {
-            bool expected = true;
+            int expected = 7;
             var actual = targetClass.getAllUsers();
-            Assert.AreEqual(expected, actual.Count > 0);
+            Assert.AreEqual(expected, actual.Count);
         }
 
         [TestMethod]
         public void TestGetAllSubcribedUsers()
         {
-            bool expectedCount = true;
-            bool expectedSubscribed = true;
-            var actual = targetClass.getAllSubcribedUsers();
-            Assert.AreEqual(expectedCount, actual.Count > 0);
-            foreach (var item in actual)
-            {
-                Assert.AreEqual(expectedSubscribed, Convert.ToBoolean(item.Subscribe));
-            }
+            int expectedCount = 4;
+            int actual = targetClass.getAllSubcribedUsers().Count;
+            Assert.AreEqual(expectedCount, actual);
         }
-
 
         [TestMethod]
         public void TestGetAllUnsubcribedUsers()
         {
-            bool expectedCount = true;
-            bool expectedSubscribed = false;
-            var actual = targetClass.getAllUnsubcribedUsers();
-            Assert.AreEqual(expectedCount, actual.Count > 0);
-            foreach (var item in actual)
-            {
-                Assert.AreEqual(expectedSubscribed, Convert.ToBoolean(item.Subscribe));
-            }
+            int expectedCount = 3;
+            int actual = targetClass.getAllUnsubcribedUsers().Count;
+            Assert.AreEqual(expectedCount, actual);
         }
 
         #endregion
@@ -337,15 +640,23 @@ namespace TestCMS
         [TestMethod]
         public void TestGetAllNews()
         {
-            bool expected = true;
+            int expected = 1;
             int actual = targetClass.getAllNews().Count;
-            Assert.AreEqual(expected, actual > 0);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void TestInsertNews()
         {
             newID = targetClass.InsertNews("TestInsertHeading", DateTime.Today, "TestInsertBody", "TestInsertMediaURL", "TestInsertPublisher", "TestInsertAuthor");
+            Assert.AreNotEqual(0, newID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertNewsWithNullStrings()
+        {
+            newID = targetClass.InsertNews(null, DateTime.Today, null, null, null, null);
             Assert.AreNotEqual(0, newID);
         }
 
@@ -358,10 +669,37 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestUpdateNewsWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateNews("TestUpdateHeading", DateTime.Today, "TestUpdateBody", "TestUpdateMediaURL", "TestUpdatePublisher", 
+                "TestUpdateAuthor", 1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdateNewsWithNullStirngs()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateNews(null, DateTime.Today, null, null, null, null, newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestGetNewsByID()
         {
             String expected = "TestUpdateHeading";
             var actual = targetClass.getNewsById(newID);
+            Assert.AreEqual(expected, actual.NewsHeading);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestGetNewsByInvalidID()
+        {
+            String expected = "TestUpdateHeading";
+            var actual = targetClass.getNewsById(1000000000);
             Assert.AreEqual(expected, actual.NewsHeading);
         }
 
@@ -373,6 +711,13 @@ namespace TestCMS
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void TestDeleteNewsWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteNews(1000000000);
+            Assert.AreEqual(expected, actual);
+        }
         #endregion
 
         /*********************************************************************
@@ -382,9 +727,9 @@ namespace TestCMS
         [TestMethod]
         public void TestGetAllTour()
         {
-            bool expected = true;
+            int expected = 1;
             int actual = targetClass.getAllTours().Count;
-            Assert.AreEqual(expected, actual > 0);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -397,11 +742,21 @@ namespace TestCMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertTourWithNullStrings()
+        {
+            int expected = 1;
+            int actual = targetClass.insertTour(null, null, 0, null, null, null, null);
+            newID = targetClass.getNewlyInsertedTourID();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestGetNewlyInsertedTourID()
         {
-            bool expected = true;
+            int expected = newID;
             int actual = targetClass.getNewlyInsertedTourID();
-            Assert.AreEqual(expected, actual > 0);
+            Assert.AreEqual(expected, actual);
         }
         
         [TestMethod]
@@ -409,6 +764,24 @@ namespace TestCMS
         {
             int expected = 1;
             int actual = targetClass.updateTour("TestUpdateName", "TestUpdateDetail", 0, "TestUpdatePhone", "TestUpdateWebsite", "TestUpdateEmail", "TestUpdateAgent", newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestUpdateTourWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.updateTour("TestUpdateName", "TestUpdateDetail", 0, "TestUpdatePhone", "TestUpdateWebsite", "TestUpdateEmail", 
+                "TestUpdateAgent", 1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdateTourWithNullStrings()
+        {
+            int expected = 0;
+            int actual = targetClass.updateTour(null, null, 0, null, null, null, null, newID);
             Assert.AreEqual(expected, actual);
         }
 
@@ -421,10 +794,27 @@ namespace TestCMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestGetTourByInvalidID()
+        {
+            String expected = "TestUpdateName";
+            var actual = targetClass.getTourByID(1000000000);
+            Assert.AreEqual(expected, actual.TourName);
+        }
+
+        [TestMethod]
         public void TestDeleteTour()
         {
             int expected = 1;
             int actual = targetClass.deleteTour(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteTourWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.deleteTour(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -447,10 +837,36 @@ namespace TestCMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertTourPOIListWithInvalidPOIID()
+        {
+            int expected = 1;
+            int actual = targetClass.insertTourPOIList(1000000000, newID, 4);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertTourPOIListWithInvalidTourID()
+        {
+            int expected = 1;
+            int actual = targetClass.insertTourPOIList(100, 1000000000, 1);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestgetTourPOIListByTourID()
         {
             int expected = 3;
             int actual = targetClass.getTourPOIListByTourID(newID).Count;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestgetTourPOIListByInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.getTourPOIListByTourID(1000000000).Count;
             Assert.AreEqual(expected, actual);
         }
 
@@ -461,6 +877,15 @@ namespace TestCMS
             int actual = targetClass.deleteTourPOIListByTourID(newID);
             targetClass.deleteTour(newID);
             Assert.AreEqual(expected, actual);            
+        }
+
+        [TestMethod]
+        public void TestdeleteTourPOIListByInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.deleteTourPOIListByTourID(1000000000);
+            targetClass.deleteTour(newID);
+            Assert.AreEqual(expected, actual);
         }
 
         #endregion
@@ -496,10 +921,36 @@ namespace TestCMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertMediaForPOIWithInvalidPOIID()
+        {
+            bool expected = true;
+            int actual = targetClass.InsertMedia(1000000000, "InsertImageTestURL", "Images", null);
+            Assert.AreEqual(expected, actual > 0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertMediaForPOIWithNullStirng()
+        {
+            bool expected = true;
+            int actual = targetClass.InsertMedia(newID, null, null, null);
+            Assert.AreEqual(expected, actual > 0);
+        }
+
+        [TestMethod]
         public void TestGetMediaByItemID()
         {
             int expected = 3;
             int actual = targetClass.getMediaByItemID(newID).Count;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestGetMediaByInvalidItemID()
+        {
+            int expected = 0;
+            int actual = targetClass.getMediaByItemID(1000000000).Count;
             Assert.AreEqual(expected, actual);
         }
 
@@ -512,10 +963,44 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestCountImagesMediaByInvalidItemId()
+        {
+            int expected = 0;
+            int actual = targetClass.CountImagesMediaByItemId(1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestUpdateMediaForItem()
         {
             int expected = 1;
             int actual = targetClass.UpdateMedia(newID, "UpdateAudioTestURL", "Audio", null, newMediaID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestUpdateMediaForItemWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateMedia(newID, "UpdateAudioTestURL", "Audio", null, 1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestUpdateMediaForItemWithInvalidItemID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateMedia(1000000000, "UpdateAudioTestURL", "Audio", null, newMediaID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdateMediaForItemWithNullString()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateMedia(1000000000, null, null, null, newMediaID);
             Assert.AreEqual(expected, actual);
         }
 
@@ -528,10 +1013,26 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestGetMediaURLByInvalidItemID()
+        {
+            int expected = 0;
+            int actual = targetClass.getMediaURLByItemID(1000000000).Count;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestGetAudioURLByItemID()
         {
             String expected = "UpdateAudioTestURL";
             String actual = targetClass.getAudioURLByItemID(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestGetAudioURLByInvalidItemID()
+        {
+            String expected = null;
+            String actual = targetClass.getAudioURLByItemID(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -544,10 +1045,34 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestDeleteMediaByMediaURLAndInvalidItemID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMediaByMediaURL(1000000000, "InvalidMediaURL");
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteMediaByInvalidMediaURL()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMediaByMediaURL(newID, "InvalidMediaURL");
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestDeleteAudioByItemID()
         {
             int expected = 1;
             int actual = targetClass.DeleteAudioByItemID(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteAudioByInvalidItemID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteAudioByItemID(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -560,11 +1085,27 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestDeleteVideoMediaByInvalidItemId()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteVideoMediaByItemId(1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestDeleteMediaforItem()
         {
             TestInsertAudioForPOI();
             int expected = 1;
             int actual = targetClass.DeleteMedia(newMediaID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteMediaforItemWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMedia(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -579,6 +1120,14 @@ namespace TestCMS
             int actual = targetClass.DeleteMediaByItemID(newID);
             targetClass.DeletePOI(newID);
             Assert.AreEqual(expected, actual);           
+        }
+
+        [TestMethod]
+        public void TestDeleteMediaByInvalidItemID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMediaByItemID(1000000000);
+            Assert.AreEqual(expected, actual);
         }
         #endregion
 
@@ -611,10 +1160,38 @@ namespace TestCMS
         }
 
         [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestInsertMediaForTourWithInvalidTourID()
+        {
+            bool expected = true;
+            int actual = targetClass.InsertMedia(null, "InsertMediaTestURL", "InsertMediaTestURL", 1000000000);
+            newMediaID = actual;
+            Assert.AreEqual(expected, actual > 0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestInsertMediaForTourWithNullStrings()
+        {
+            bool expected = true;
+            int actual = targetClass.InsertMedia(null, null, null, newID);
+            newMediaID = actual;
+            Assert.AreEqual(expected, actual > 0);
+        }
+
+        [TestMethod]
         public void TestGetMediaByTourID()
         {
             int expected = 3;
             int actual = targetClass.getMediaByTourID(newID).Count;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestGetMediaByInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.getMediaByTourID(1000000000).Count;
             Assert.AreEqual(expected, actual);
         }
 
@@ -627,10 +1204,35 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestCountImagesMediaByInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.CountImagesMediaByTourID(1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestUpdateMediaForTour()
         {
             int expected = 1;
             int actual = targetClass.UpdateMedia(null, "UpdateAudioTestURL", "Audio", newID, newMediaID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestUpdateMediaForTourWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateMedia(null, "UpdateAudioTestURL", "Audio", newID, 1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MySqlException))]
+        public void TestUpdateMediaForTourWithInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateMedia(null, "UpdateAudioTestURL", "Audio", 1000000000, newMediaID);
             Assert.AreEqual(expected, actual);
         }
 
@@ -643,10 +1245,26 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestGetMediaURLByInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.getMediaURLByTourID(1000000000).Count;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestGetAudioURLByTourID()
         {
             String expected = "UpdateAudioTestURL";
             String actual = targetClass.getAudioURLByTourID(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestGetAudioURLByInvalidTourID()
+        {
+            String expected = null;
+            String actual = targetClass.getAudioURLByTourID(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -659,10 +1277,34 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestDeleteMediaByInvalidMediaURLAndTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMediaByMediaURLAndTourID(newID, "InvalidMediaURL");
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteMediaByMediaURLAndInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMediaByMediaURLAndTourID(1000000000, "InsertImageTestURL");
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestDeleteAudioByTourID()
         {
             int expected = 1;
             int actual = targetClass.DeleteAudioByTourID(newID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteAudioByInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteAudioByTourID(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -675,11 +1317,27 @@ namespace TestCMS
         }
 
         [TestMethod]
+        public void TestDeleteVideoMediaByInvalidTourId()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteVideoMediaByTourId(1000000000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestDeleteMediaForTour()
         {
             TestInsertAudioForTour();
             int expected = 1;
             int actual = targetClass.DeleteMedia(newMediaID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestDeleteMediaForTourWithInvalidID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMedia(1000000000);
             Assert.AreEqual(expected, actual);
         }
 
@@ -694,6 +1352,14 @@ namespace TestCMS
             int actual = targetClass.DeleteMediaByTourID(newID);
             targetClass.deleteTour(newID);
             Assert.AreEqual(expected, actual);            
+        }
+
+        [TestMethod]
+        public void TestDeleteMediaByInvalidTourID()
+        {
+            int expected = 0;
+            int actual = targetClass.DeleteMediaByTourID(1000000000);
+            Assert.AreEqual(expected, actual);
         }
         #endregion
     }
