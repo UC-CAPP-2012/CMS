@@ -107,7 +107,7 @@
                             <asp:TextBox ID="InsertNameTextBox" runat="server" Width="250px"></asp:TextBox> 
                             <p class="validationError">             
                                 <asp:RequiredFieldValidator ID="InsertRequiredFieldValidator" runat="server" 
-                                ErrorMessage="Category name is required." ControlToValidate="InsertNameTextBox" SetFocusOnError="True" />
+                                ErrorMessage="Region name is required." ControlToValidate="InsertNameTextBox" SetFocusOnError="True" />
                             </p>
                             <div class="detailButtons bottom">
                                 <asp:Button ID="SubmitNewButton" runat="server" Text="Confirm" Width="100px" onclick="SubmitNewButton_Click" />
