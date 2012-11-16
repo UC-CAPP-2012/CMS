@@ -14,28 +14,54 @@ namespace CMS.GeneralPages
 {
     public partial class Users : System.Web.UI.Page
     {
+        //MySQL Data Access Class
         BLL.CMSBLClass dataAccess = new BLL.CMSBLClass();
 
+        /// <summary>
+        /// The method that runs everytime when the page loads.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Display view with the grid view containing all users.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void AllUsersButton_Click(object sender, EventArgs e)
         {
             this.UsersMultiView.ActiveViewIndex = 0;
         }
 
+        /// <summary>
+        /// Display view with the grid view containing subscribed users.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void SubcribedUsersButton_Click(object sender, EventArgs e)
         {
             this.UsersMultiView.ActiveViewIndex = 1;
         }
 
+        /// <summary>
+        /// Display view with the grid view containing unsubscribed users.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void UnsubcribedUsersButton_Click(object sender, EventArgs e)
         {
             this.UsersMultiView.ActiveViewIndex = 2;
         }
 
+        /// <summary>
+        /// Pass all users to ConnectionXML to export it to xml.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnAllUsersXML_Click(object sender, EventArgs e)
         {
             var allUsers = dataAccess.getAllUsers();
@@ -44,6 +70,10 @@ namespace CMS.GeneralPages
             this.ConnectionXML(ds);
         }
 
+        /// <summary>
+        /// Export the users data to a xml file.
+        /// </summary>
+        /// <param name="ds">Dataset containing users to export to xml</param>
         public void ConnectionXML(DataSet ds)
         {
             DeleteAllTempFiles();
@@ -61,6 +91,11 @@ namespace CMS.GeneralPages
             Response.End();
         }
 
+        /// <summary>
+        /// Pass only unsubscribed users to ConnectionXML to export it to xml.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnUnsubcribedUsersXML_Click(object sender, EventArgs e)
         {
             var allUsers = dataAccess.getAllUnsubcribedUsers();
@@ -69,6 +104,11 @@ namespace CMS.GeneralPages
             this.ConnectionXML(ds);
         }
 
+        /// <summary>
+        /// Pass only subscribed users to ConnectionXML to export it to xml.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnSubcribedUsersXML_Click(object sender, EventArgs e)
         {
             var allUsers = dataAccess.getAllSubcribedUsers();
@@ -77,12 +117,20 @@ namespace CMS.GeneralPages
             this.ConnectionXML(ds);
         }
 
+        /// <summary>
+        /// Delete all temporarily saved images 
+        /// </summary>
         public void DeleteAllTempFiles()
         {
             foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../XMLTempFiles")))
                 System.IO.File.Delete(f);
         }
 
+        /// <summary>
+        /// Convert number type data into string(yes, no) for Subscribed data field  
+        /// </summary>
+        /// <param name="obj">Number type data indicating whether the user is subscribed or not</param>
+        /// <returns>'Yes' for 1 'No' for the others.</returns>
         protected string AutoConvert(object obj)
         {
             if (Convert.ToByte(obj.ToString()) == 1)

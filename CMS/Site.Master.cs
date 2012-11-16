@@ -11,6 +11,13 @@ namespace CMS
 {
     public partial class SiteMaster : System.Web.UI.MasterPage
     {
+        /// <summary>
+        /// Enable administration menus if the user has an Amin role and set the tap menu color according to what page the user is viewing. 
+        /// If the user is not logged in, Redirect to the login page.
+        /// The method that runs everytime when the page loads.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             //Redirect to login page when logged out
@@ -31,6 +38,7 @@ namespace CMS
 
             Settings_link.HRef = "/GeneralPages/ChangePassword.aspx";
             Admin_link.HRef = "/AdminPages/AddUser.aspx";
+
             //Set current menu button colour
             string[] file = Request.CurrentExecutionFilePath.Split('/');
             string fileName = file[file.Length - 1];
@@ -69,7 +77,12 @@ namespace CMS
         }
 
 
-        //Redirect when menu button is clicked.
+        /// <summary>
+        /// Detact which page the user requested to browse and set the tap menu color according to it. 
+        /// The method that runs everytime when the page loads.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void MenuButton_Clicked(object sender, EventArgs e)
         {
             LinkButton clickedButton = (LinkButton)sender;

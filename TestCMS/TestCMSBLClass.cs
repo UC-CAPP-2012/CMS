@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CMS.BLL;
 using MySql.Data.MySqlClient;
+
 namespace TestCMS
 {
     /// <summary>
@@ -925,7 +926,7 @@ namespace TestCMS
         public void TestInsertMediaForPOIWithInvalidPOIID()
         {
             bool expected = true;
-            int actual = targetClass.InsertMedia(1000000000, "InsertImageTestURL", "Images", null);
+            int actual = targetClass.InsertMedia(1000000000, "InsertMediaTestURL", "Media", null);
             Assert.AreEqual(expected, actual > 0);
         }
 
@@ -1000,7 +1001,7 @@ namespace TestCMS
         public void TestUpdateMediaForItemWithNullString()
         {
             int expected = 0;
-            int actual = targetClass.UpdateMedia(1000000000, null, null, null, newMediaID);
+            int actual = targetClass.UpdateMedia(newID, null, null, null, newMediaID);
             Assert.AreEqual(expected, actual);
         }
 
@@ -1233,6 +1234,15 @@ namespace TestCMS
         {
             int expected = 0;
             int actual = targetClass.UpdateMedia(null, "UpdateAudioTestURL", "Audio", 1000000000, newMediaID);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestUpdateMediaForTourWithNullString()
+        {
+            int expected = 0;
+            int actual = targetClass.UpdateMedia(null, null, null, newID, newMediaID);
             Assert.AreEqual(expected, actual);
         }
 

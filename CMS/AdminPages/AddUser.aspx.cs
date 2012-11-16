@@ -6,30 +6,26 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 using System.Web.Security;
+
 namespace CMS.AdminPages
 {
     public partial class AddUser : System.Web.UI.Page
     {
+        /// <summary>
+        /// The method that runs everytime when the page loads.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected void RegisterUser_CreatedUser(object sender, EventArgs e)
-        {
-            //Get the creating user
-            MembershipUser newUser = Membership.GetUser(RegisterUser.UserName);
-            Guid newUserId = (Guid)newUser.ProviderUserKey;
-
-            BLL.ClassManageUser addRole = new BLL.ClassManageUser();
-
-            //Get the Id for role 'General'
-            Guid studentRoleID = addRole.getRoleID("General");
-
-            //Assign role 'General' to the new user
-            addRole.AddUserRole(newUserId, studentRoleID);
-        }
-
+        /// <summary>
+        /// Create new user. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void RegisterUser_CreatingUser(object sender, LoginCancelEventArgs e)
         {
             //Set status text to show nothing
@@ -60,6 +56,28 @@ namespace CMS.AdminPages
                 //If everything is good, set email to be the creating username
                 RegisterUser.UserName = RegisterUser.Email;
             }
+        }
+
+
+        /// <summary>
+        /// Assign role 'General' to the new user after the user is created. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
+
+        protected void RegisterUser_CreatedUser(object sender, EventArgs e)
+        {
+            //Get the creating user
+            MembershipUser newUser = Membership.GetUser(RegisterUser.UserName);
+            Guid newUserId = (Guid)newUser.ProviderUserKey;
+
+            BLL.ClassManageUser addRole = new BLL.ClassManageUser();
+
+            //Get the Id for role 'General'
+            Guid studentRoleID = addRole.getRoleID("General");
+
+            //Assign role 'General' to the new user
+            addRole.AddUserRole(newUserId, studentRoleID);
         }
     }
 }

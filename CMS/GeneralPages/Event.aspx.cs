@@ -11,14 +11,25 @@ namespace CMS.GeneralPages
 {
     public partial class Event : System.Web.UI.Page
     {
+        //MySQL Data Access Class
         BLL.CMSBLClass dataAccess = new BLL.CMSBLClass();
 
+        /// <summary>
+        /// The method that runs everytime when the page loads.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
                 this.AddressMultiView.ActiveViewIndex = 0;
         }
 
+        /// <summary>
+        /// Add mouse event attributes to each row to change the background color when moving the mouse over it.  
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void EventGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType.Equals(DataControlRowType.DataRow))
@@ -29,13 +40,21 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Display detail view for the selected Event.  
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void EventGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             eventImages.InnerHtml = "";
             eventVideo.InnerHtml = "";
             int id = (Int32)this.EventGridView.SelectedDataKey.Value;
+            
+            //Retrieve data for the selected Event
             DAL.CMSDBDataSet.EventItemRow row = dataAccess.getEventByItemID(id);
 
+            //Set the detail lables with the retrieved Event data
             this.NameDataLabel.Text = row["ItemName"].ToString();
             this.SubtypeDataLabel.Text = row["SubType"].ToString();
             if (row["MajorRegionID"].ToString() != "")
@@ -69,6 +88,7 @@ namespace CMS.GeneralPages
             string[] separator = { "v=" };
             foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
             {
+                //Display image thumb nail 
                 if (mediaRow.MediaType == "Images")
                 {
                     eventImages.InnerHtml += "<img class='itemImage' src='" + mediaRow.MediaURL + "' />";
@@ -76,6 +96,7 @@ namespace CMS.GeneralPages
                 }
                 else
                 {
+                    //Display youtube video player 
                     if (mediaRow.MediaURL.Contains("www.youtube.com") && mediaRow.MediaURL.Contains("v="))
                     {
                         eventVideo.InnerHtml = "<iframe width='460' height='260' src='http://www.youtube.com/embed/" + mediaRow.MediaURL.Split(separator, StringSplitOptions.None)[1].Substring(0, 11)
@@ -89,6 +110,7 @@ namespace CMS.GeneralPages
                 }
             }
 
+            //Display empty media messages.
             if (!hasImages)
             {
                 eventImages.InnerHtml = "This POI does not have any images.";
@@ -100,8 +122,14 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Display insert form view with empty input controls.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void InsertLinkButton_Click(object sender, EventArgs e)
         {
+            //Reset all input controls.
             this.EditTitleLabel.Text = "Insert New Event";
             this.NameTextBox.Text = "";
             this.SubtypeDropDownList.DataBind();
@@ -126,19 +154,24 @@ namespace CMS.GeneralPages
             this.EventMultiView.ActiveViewIndex = 1;
         }
 
-        //confirm insert
+        /// <summary>
+        /// Insert new Event using the user inputs then refresh the Event gridview and display the empty view. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void InsertButton_Click(object sender, EventArgs e)
         {
+            //Check whether all vaildators confirm vaild inputs.
             if (this.Page.IsValid)
-            {
-                // get streetNo, streetName, suburb from address
+            {                
                 String address;
                 String suburb;
                 double latitude;
                 double longitude;
-
+                 
                 if (this.AddressMultiView.ActiveViewIndex == 0)
                 {
+                    //Get address values form the auto address view.
                     address = this.AddressTextBox.Text;
                     suburb = this.SuburbTextBox.Text;
                     latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
@@ -147,6 +180,7 @@ namespace CMS.GeneralPages
                 }
                 else
                 {
+                    //Get address values form the manual address view.
                     address = this.ManualStNoTextBox.Text + " " + this.ManualStNameTextBox.Text + ", "
                                     + this.ManualSuburbTextBox.Text + ", Australian Capital Territory";
                     suburb = this.ManualSuburbTextBox.Text;
@@ -154,7 +188,7 @@ namespace CMS.GeneralPages
                     longitude = Convert.ToDouble(this.ManualLogTextBox.Text);
                 }
 
-                //convert inputs into correct format.
+                //Convert inputs into correct format.
                 int cost = this.Rating.CurrentRating;
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
@@ -169,11 +203,13 @@ namespace CMS.GeneralPages
                 DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text, culture);
                 DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text, culture);
 
+                //Perform insert and get the new Event ID as a return value.
                 int newItemId = dataAccess.InsertEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
                     cost, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
                     suburb, subtypeID, startDate, endDate, majorRegionID);
 
+                //Insert images for the new Event
                 int count = ImageUploadFileName.Value.Split(';').Length;
                 for (int i = 0; i < count - 1; i++)
                 {
@@ -182,32 +218,47 @@ namespace CMS.GeneralPages
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
+                //Insert video for the new Event
                 if (VideoTextBox.Text.Length > 0)
                 {
                     dataAccess.InsertMedia(newItemId, VideoTextBox.Text, "Video", null);
                 }
+
                 CurrentImagesFileName.Value = "";
                 this.EventGridView.DataBind();
                 this.EventMultiView.ActiveViewIndex = -1;
             }
         }
 
+        /// <summary>
+        /// To cancel insert, display the empty view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
             this.EventMultiView.ActiveViewIndex = -1;
         }
 
+        /// <summary>
+        /// Validate number inputs
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void numberInputValidate(object sender, ServerValidateEventArgs e)
         {
             String senderID = ((CustomValidator)sender).ID;
             bool isNum = false;
+            //Check if the entered postcode is 4 digit numbers.
             if (senderID.Equals("PostcodeTextBox_CustomValidator") && (this.PostcodeTextBox.Text.Length == 4))
             {
                 Int32 num;
                 isNum = Int32.TryParse(this.PostcodeTextBox.Text, out num);
             }
+            //Check for auto address inputs(should not be empty)
             if (senderID.Equals("AutoAddressTextBox_CustomValidator"))
             {
+
                 if (this.AddressMultiView.ActiveViewIndex == 1)
                 {
                     isNum = true;
@@ -218,6 +269,7 @@ namespace CMS.GeneralPages
                     isNum = true;
                 }
             }
+            //Check for manual address inputs(should not be empty)
             if (senderID.Equals("ManualAddressTextBox_CustomValidator"))
             {
                 Int32 intNum;
@@ -227,6 +279,7 @@ namespace CMS.GeneralPages
                 {
                     isNum = true;
                 }
+                //All the text boxes must not be empty and street number, lat and long should have correct type of number inputs.
                 if ((this.AddressMultiView.ActiveViewIndex == 1)
                     && (this.ManualStNoTextBox.Text.Length > 0) && Int32.TryParse(this.ManualStNoTextBox.Text, out intNum)
                     && (this.ManualStNameTextBox.Text.Length > 0) && (this.ManualSuburbTextBox.Text.Length > 0)
@@ -236,6 +289,7 @@ namespace CMS.GeneralPages
                     isNum = true;
                 }
             }
+            //Ckeck is the entered phone number contains less than 11 digit numbers(Only numbers).
             if (senderID.Equals("PhoneTextBox_CustomValidator"))
             {
                 Int32 num;
@@ -247,8 +301,14 @@ namespace CMS.GeneralPages
             e.IsValid = isNum;
         }
 
+        /// <summary>
+        /// Display update form view with input controls filled with the original data of the selected Event.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
+            //Reset all hidden fields, file uploaders and address multi view
             CurrentImagesFileName.Value = "";
             StatusLabel.Text = "";
             ImageUploadFileName.Value = "";
@@ -262,8 +322,11 @@ namespace CMS.GeneralPages
             this.ManualStNameTextBox.Text = "";
             this.ManualSuburbTextBox.Text = "";
             int id = (Int32)this.EventGridView.SelectedDataKey.Value;
+            
+            //Retrieve data for selected Event.
             DAL.CMSDBDataSet.EventItemRow row = dataAccess.getEventByItemID(id);
 
+            //Fill input controls with the retrieved data.
             this.NameTextBox.Text = row["ItemName"].ToString();
             this.SubtypeDropDownList.SelectedValue = row["SubTypeID"].ToString();
             if (row["MajorRegionID"].ToString() != "")
@@ -293,14 +356,17 @@ namespace CMS.GeneralPages
             FileUpload.Attributes.Remove("maxlength");
             FileUpload.Attributes.Add("maxlength", (5 - numOfMedia).ToString());
 
+            //Retrieve stored images for selected Event. 
             var media = dataAccess.getMediaByItemID(id);
             foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
             {
+                //Display image thumb nails
                 if (mediaRow.MediaType == "Images")
                 {
                     CurrentImagesFileName.Value += mediaRow.MediaURL.Split('/')[2] + ';';
                     eventsImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + mediaRow.MediaURL.Split('/')[2] + "' ><img class='itemImage' src='" + mediaRow.MediaURL + "'/><a class='delete-image' rel='" + mediaRow.MediaURL.Split('/')[2] + "'><div class='close_image' title='close'></div></a></div>";
                 }
+                //Display video URL
                 else
                 {
                     this.VideoTextBox.Text = mediaRow.MediaURL;
@@ -312,27 +378,41 @@ namespace CMS.GeneralPages
             this.EventMultiView.ActiveViewIndex = 1;
         }
 
+        /// <summary>
+        /// Delete selected Event then refresh the Event gridview and display empty view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             int itemID = (Int32)this.EventGridView.SelectedDataKey.Value;
-
+            //get the urls of all related medias
             DAL.CMSDBDataSet.MediaDataTable URL = dataAccess.getMediaURLByItemID(itemID);
             foreach (DAL.CMSDBDataSet.MediaRow row in URL)
             {
+                //delete media files
                 System.IO.File.Delete(Server.MapPath("~/Media/" + row["MediaURL"].ToString().Substring(row["MediaURL"].ToString().LastIndexOf("/") + 1)));
             }
 
+            // delete related medias and event from the database.
             dataAccess.DeleteMediaByItemID(itemID);
             dataAccess.DeleteEvent(itemID);
+            //refresh the gridview and display empty view.
             this.EventGridView.DataBind();
             this.EventMultiView.ActiveViewIndex = -1;
         }
 
+        /// <summary>
+        /// Update the selected Event using the user inputs then refresh the Event gridview 
+        /// and display the detail view for the updated Event. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
+            //Check whether all vaildators confirm vaild inputs.
             if (this.Page.IsValid)
             {
-                // get streetNo, streetName, suburb from address
                 String address;
                 String suburb;
                 double latitude;
@@ -340,6 +420,7 @@ namespace CMS.GeneralPages
 
                 if (this.AddressMultiView.ActiveViewIndex == 0)
                 {
+                    //Get address values form the auto address view.
                     address = this.AddressTextBox.Text;
                     suburb = this.SuburbTextBox.Text;
                     latitude = Convert.ToDouble(this.LatitudeHiddenField.Value);
@@ -348,6 +429,7 @@ namespace CMS.GeneralPages
                 }
                 else
                 {
+                    //Get address values form the manual address view.
                     address = this.ManualStNoTextBox.Text + " " + this.ManualStNameTextBox.Text + ", "
                         + this.ManualSuburbTextBox.Text + ", Australian Capital Territory";
                     suburb = this.ManualSuburbTextBox.Text;
@@ -355,12 +437,11 @@ namespace CMS.GeneralPages
                     longitude = Convert.ToDouble(this.ManualLogTextBox.Text);
                 }
 
+                //convert inputs into correct format.
                 System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-AU");
-
                 DateTime startDate = Convert.ToDateTime(this.StartDateTextBox.Text, culture);
                 DateTime endDate = Convert.ToDateTime(this.EndDateTextBox.Text, culture);
-
-                //convert inputs into correct format.
+                
                 int cost = this.Rating.CurrentRating;
                 int postCode = Convert.ToInt32(this.PostcodeTextBox.Text);
                 int? subtypeID = Convert.ToInt32(this.SubtypeDropDownList.SelectedValue);
@@ -371,11 +452,13 @@ namespace CMS.GeneralPages
                     majorRegionID = null;
                 int itemID = Convert.ToInt32(this.EventGridView.SelectedDataKey.Value);
 
+                //Perform update.
                 dataAccess.UpdateEvent(this.NameTextBox.Text, this.DescriptionTextBox.Text,
                     cost, this.PhoneTextBox.Text, this.WebsiteTextBox.Text, this.EmailTextBox.Text,
                     this.OpeningHoursTextBox.Text, address, latitude, longitude, postCode,
                     suburb, subtypeID, startDate, endDate, majorRegionID, itemID);
 
+                //Delete the images that user requested to delete
                 int imageDeleteCount = ImageDeleteFileName.Value != "" ? ImageDeleteFileName.Value.Split(';').Length : 0;
                 for (int y = 0; y < imageDeleteCount - 1; y++)
                 {
@@ -384,6 +467,7 @@ namespace CMS.GeneralPages
                     System.IO.File.Delete(Server.MapPath("~/Media/" + deletedFilename));
                 }
 
+                //Insert images for the selected Event
                 int count = ImageUploadFileName.Value != "" ? ImageUploadFileName.Value.Split(';').Length : 0;
                 for (int i = 0; i < count - 1; i++)
                 {
@@ -392,8 +476,10 @@ namespace CMS.GeneralPages
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
+                //delete old video
                 dataAccess.DeleteVideoMediaByItemId(itemID);
 
+                //Insert new video
                 if (VideoTextBox.Text.Length > 0)
                 {
                     dataAccess.InsertMedia(itemID, VideoTextBox.Text, "Video", null);
@@ -403,18 +489,28 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// To cancel update, go back to the detail view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             this.EventMultiView.ActiveViewIndex = 0;
         }
 
+        /// <summary>
+        /// Upload images that user selected using file uploader.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             try
             {
                 StatusLabel.Text = "";
-                //poiImagesAddUpdate.InnerHtml += "";
                 int count = ImageUploadFileName.Value != "" ? ImageUploadFileName.Value.Split(';').Length : 0;
+                //Display thumb nails for currently stored images
                 if (count - 1 > 0 || ImageUploadDelete.Value == "1")
                 {
                     eventsImagesAddUpdate.InnerHtml = "";
@@ -425,6 +521,7 @@ namespace CMS.GeneralPages
                         CurrentImagesFileName.Value.Split(';')[x] + "' id='" + CurrentImagesFileName.Value.Split(';')[x] + "' /><a class='upload-images' rel='" + CurrentImagesFileName.Value.Split(';')[x] + "'><div class='close_image ' title='close'></div></a></div>";
                     }
                 }
+                //Display thumb nails for previously uploaded images
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
@@ -438,11 +535,12 @@ namespace CMS.GeneralPages
                 bool uploadStatus = true;
 
                 for (int i = 0; i < hfc.Count; i++)
-                {
+                {   
+                    //Check if the file is uploaded using the image file uploader (not the audio file uploader.)
                     if (hfc.AllKeys[i].Equals("ctl00$MainContent$FileUpload"))
                     {
                         HttpPostedFile hpf = hfc[i];
-
+                        //Check the image size.
                         if (!(hpf.ContentLength < 51200))
                         {
                             uploadStatus = false;
@@ -450,6 +548,7 @@ namespace CMS.GeneralPages
                         }
                     }
                 }
+                //Start uploading if the size of all selected images are ok.
                 if (uploadStatus)
                 {
                     int uploadImgCount = 0;
@@ -470,9 +569,10 @@ namespace CMS.GeneralPages
                             ImageUploadFileName.Value = ImageUploadFileName.Value + numIterations.ToString() + id.ToString() + hpf.FileName + ';';
                             eventsImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' ><img class='itemImage' src='../Temp_Media/" + numIterations.ToString() + id.ToString() +
                                 hpf.FileName + "' id='" + numIterations.ToString() + id.ToString() + hpf.FileName + "' /><a class='upload-images' rel='" + numIterations.ToString() + id.ToString() + hpf.FileName + "'><div class='close_image ' title='close'></div></a></div>";
-
                         }
                     }
+
+                    // Count the total number of images.
                     int thumbNailCount = 0;
                     String thumbNail = eventsImagesAddUpdate.InnerHtml.ToString();
                     while (thumbNail.Contains("poi-images"))
@@ -481,9 +581,11 @@ namespace CMS.GeneralPages
                         thumbNailCount++;
                     }
 
+                    //Set the maximum number of images that can be inserted.
                     int maxlength = 5 - thumbNailCount;
                     FileUpload.Attributes.Remove("maxlength");
                     FileUpload.Attributes.Add("maxlength", maxlength.ToString());
+
                     StatusLabel.Text = "Uploaded Successfully.";
                 }
             }
@@ -493,12 +595,22 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Delete all temporarily saved images 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         public void DeleteAllTempFiles()
         {
             foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../Temp_Media")))
                 System.IO.File.Delete(f);
         }
-
+        
+        /// <summary>
+        /// Display auto address input form view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void AutoLinkButton_Click(object sender, EventArgs e)
         {
             this.AutoLinkButton.BackColor = Color.LightGray;
@@ -506,6 +618,11 @@ namespace CMS.GeneralPages
             this.AddressMultiView.ActiveViewIndex = 0;
         }
 
+        /// <summary>
+        /// Display manual address input form view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void ManualLinkButton_Click(object sender, EventArgs e)
         {
             this.AutoLinkButton.BackColor = Color.Gray;
@@ -513,23 +630,42 @@ namespace CMS.GeneralPages
             this.AddressMultiView.ActiveViewIndex = 1;
         }
 
+        /// <summary>
+        /// Set Star Rating to 0 when free sign is clicked.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void FreeRating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
         {
             this.Rating.CurrentRating = 0;
         }
 
-
+        /// <summary>
+        /// Set free sign to off if changed star rating is higher than 0.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void Rating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
         {
             this.FreeRating.CurrentRating = 0;
         }
 
+        /// <summary>
+        /// Insert 'none' list item to major region dorp down list.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void MajorRegionDropDownList_DataBound(object sender, EventArgs e)
         {
             ListItem item = new ListItem("----- none -----", "");
             this.MajorRegionDropDownList.Items.Insert(0, item);
         }
 
+        /// <summary>
+        /// Validate date inputs
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void DateValidation(object sender, ServerValidateEventArgs e)
         {
             bool isOK = true;
@@ -538,6 +674,7 @@ namespace CMS.GeneralPages
             DateTime? start = null;
             DateTime? end = null;
 
+            //Check if the start date is in correct form
             if (!DateTime.TryParse(StartDateTextBox.Text, out datetime))
             {
                 isOK = false;
@@ -546,7 +683,7 @@ namespace CMS.GeneralPages
             {
                 start = Convert.ToDateTime(StartDateTextBox.Text, culture);
             }
-
+            //Check if the end date is in correct form
             if (!DateTime.TryParse(EndDateTextBox.Text, out datetime))
             {
                 isOK = false;
@@ -555,13 +692,13 @@ namespace CMS.GeneralPages
             else
             {
                 end = Convert.ToDateTime(EndDateTextBox.Text, culture);
+                //Check if the end date is not earlier than start date
                 if ((start != null) && (start > end))
                 {
                     isOK = false;
                     this.EndDateTextBoxCustomValidator.ErrorMessage = "End date cannot be earlier than start date.";
                 }
             }
-
             e.IsValid = isOK;
         }
     }

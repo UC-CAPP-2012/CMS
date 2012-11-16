@@ -1,73 +1,77 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CMS.SiteMaster" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head runat="server">
-    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
-    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
-    </asp:ContentPlaceHolder>
-</head>
-<body>
-    <form class="form" runat="server">
-    <div class="page">
-        <div class="header">
-            <div class="title">
-                <div class="loginDisplay">
-                    <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                        <AnonymousTemplate>
-                            [ <a href="Index.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
-                            Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                            [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/Index.aspx"/> ]
-                        </LoggedInTemplate>
-                    </asp:LoginView>                    
+    <head runat="server">
+        <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+        <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+            <!--========== Head contents (Child pages) ==========-->
+        </asp:ContentPlaceHolder>
+    </head>
+    <body>
+        <form class="form" runat="server">
+            <div class="page">
+                <div class="header">
+                    <div class="title">
+                        <!--========== Login Display ==========-->
+                        <div class="loginDisplay">
+                            <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                                <AnonymousTemplate>
+                                    [ <a href="Index.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
+                                </AnonymousTemplate>
+                                <LoggedInTemplate>
+                                    Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                                    [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/Index.aspx"/> ]
+                                </LoggedInTemplate>
+                            </asp:LoginView>                    
+                        </div>
+                        <!--========== Administration Menu ==========-->      
+                        <div runat="server" ID="settings">                
+                            <a runat="server" id="Admin_link" name="administration" CausesValidation="False"><span style="float:right;">Administrations</span><span class="elgg-icon-admin-settings"></span></a>
+                            <br />
+                            <a runat="server" id="Settings_link" name="administration" CausesValidation="False"><span style="float:right;">Settings</span><span class="elgg-icon-settings"></span></a>
+                        </div>
+                        <div class="clear" ></div>
+                        <!--========== Title ==========-->      
+                        <h1>
+                            <span class="capitalTitle">C</span>ontent 
+                            <span class="capitalTitle">M</span>anagement 
+                            <span class="capitalTitle">S</span>ystem
+                        </h1>
+                    </div>            
+                    <!--========== Main Menus ==========-->      
+                    <div class="mainMenu">
+                        <div class="navigation-links">
+                            <asp:LinkButton ID="LinkButtonCategory" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                                    CssClass="medium button gray" > Category </asp:LinkButton>
+                            <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                                    CssClass="medium button gray" > Sub Type </asp:LinkButton>
+                            <asp:LinkButton ID="LinkButtonMajorRegion" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                                    CssClass="medium button gray" > Major Region </asp:LinkButton>
+                            <asp:LinkButton ID="LinkButtonPOI" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                                    CssClass="medium button gray" > POI </asp:LinkButton>
+                            <asp:LinkButton ID="LinkButtonEvent" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                                    CssClass="medium button gray" > Event </asp:LinkButton>
+                            <asp:LinkButton ID="LinkButtonTour" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                                    CssClass="medium button gray" > Tour </asp:LinkButton>
+                            <asp:LinkButton ID="LinkButtonNews" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                                    CssClass="medium button gray" > News </asp:LinkButton>
+                            <asp:LinkButton ID="LinkButtonUser" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
+                                    CssClass="medium button gray" > User </asp:LinkButton>
+                        </div>                
+                    </div>
+                    <div class="mainUnderLine"></div>
                 </div>
-                <div runat="server" ID="settings">                
-                        <a runat="server" id="Admin_link" name="administration" CausesValidation="False"><span style="float:right;">Administrations</span><span class="elgg-icon-admin-settings"></span></a>
-                        <br />
-                        <a runat="server" id="Settings_link" name="administration" CausesValidation="False"><span style="float:right;">Settings</span><span class="elgg-icon-settings"></span></a>
-                </div>
-                <div class="clear" ></div>
-                <h1>
-                    <span class="capitalTitle">C</span>ontent 
-                    <span class="capitalTitle">M</span>anagement 
-                    <span class="capitalTitle">S</span>ystem
-                </h1>
+                <div class="main">
+                    <div class="contents">
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                            <!--========== Body contents (Child pages) ==========-->      
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>        
             </div>
-            
-            <div class="mainMenu">
-                <div class="navigation-links">
-                    <asp:LinkButton ID="LinkButtonCategory" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > Category </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonSubType" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > Sub Type </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonMajorRegion" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > Major Region </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonPOI" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > POI </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonEvent" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > Event </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonTour" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > Tour </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonNews" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > News </asp:LinkButton>
-                    <asp:LinkButton ID="LinkButtonUser" runat="server" OnClick="MenuButton_Clicked" CausesValidation="False"
-                            CssClass="medium button gray" > User </asp:LinkButton>
-                </div>                
+            <div class="footer">
+                    <p>Copyright © 2012 Canberra Times. All rights reserved.</p>
             </div>
-            <div class="mainUnderLine"></div>
-        </div>
-        <div class="main">
-            <div class="contents">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
-            </div>
-        </div>
-        
-    </div>
-    <div class="footer">
-            <p>Copyright © 2012 Canberra Times. All rights reserved.</p>
-    </div>
-    </form>
-</body>
+        </form>
+    </body>
 </html>

@@ -12,27 +12,45 @@ namespace CMS.GeneralPages
 {
     public partial class Tour : System.Web.UI.Page
     {
+        //MySQL Data Access Class
         BLL.CMSBLClass dataAccess = new BLL.CMSBLClass();
 
+        /// <summary>
+        /// Maintain selected audio file between postback. 
+        /// This method runs everytime when the page loads.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            // If new audio file is selected store it using session.
             if (Session["AudioFileUpload"] == null && this.AudioFileUpload.HasFile)
             {
+                //store audio file to session
                 Session["AudioFileUpload"] = this.AudioFileUpload;
                 this.SelectAudioLabel.Text = "Selected Audio File : " + AudioFileUpload.FileName;
             }
+            // If session has audio file but no new file is selected.
             else if (Session["AudioFileUpload"] != null && (!this.AudioFileUpload.HasFile))
             {
+                //get audio file form session 
                 this.AudioFileUpload = (FileUpload)Session["AudioFileUpload"];
                 this.SelectAudioLabel.Text = "Selected Audio File : " + AudioFileUpload.FileName;
             }
+            // If new audio file is selected over old selected audio file
             else if (AudioFileUpload.HasFile)
             {
+                //reset session with new audio file.
                 Session["AudioFileUpload"] = this.AudioFileUpload;
                 this.SelectAudioLabel.Text = "Selected Audio File : " + AudioFileUpload.FileName;
             }
         }
 
+        /// <summary>
+        /// Add mouse event attributes to each row to change the background color when moving the mouse over it.  
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void TourGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType.Equals(DataControlRowType.DataRow))
@@ -43,6 +61,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Display detail view for the selected Tour.  
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void TourGridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             poiImages.InnerHtml = "";
@@ -53,7 +76,11 @@ namespace CMS.GeneralPages
             this.SelectAudioLabel.Text = "mp3 files only.";
 
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
+
+            //Retrieve data for the selected Tour
             DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
+
+            //Set the detail lables with the retrieved POIs data
             this.NameDataLabel.Text = tour["TourName"].ToString();
             this.PhoneDataLabel.Text = tour["Tour Phone"].ToString();
             this.EmailDataLabel.Text = tour["TourEmail"].ToString();
@@ -76,11 +103,13 @@ namespace CMS.GeneralPages
             string[] separator = { "v=" };
             foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
             {
+                //Display image thumb nail 
                 if (mediaRow.MediaType == "Images")
                 {
                     poiImages.InnerHtml += "<img class='itemImage' src='" + mediaRow.MediaURL + "' />";
                     hasImages = true;
                 }
+                //Display youtube video player 
                 if (mediaRow.MediaType == "Video")
                 {
                     if (mediaRow.MediaURL.Contains("www.youtube.com") && mediaRow.MediaURL.Contains("v="))
@@ -95,6 +124,7 @@ namespace CMS.GeneralPages
                     hasVideo = true;
                     hasVideo = true;
                 }
+                //Display flash audio player
                 if (mediaRow.MediaType == "Audio")
                 {
                     this.detailAudio.InnerHtml = "<object type='application/x-shockwave-flash' data='../Resources/emff_old_noborder.swf' width='91' height='25'>"
@@ -106,6 +136,7 @@ namespace CMS.GeneralPages
                 }
             }
 
+            //Display empty media messages.
             if (!hasImages)
             {
                 poiImages.InnerHtml = "This Tour does not have any images.";
@@ -122,20 +153,25 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Display insert form view with empty input controls.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void InsertLinkButton_Click(object sender, EventArgs e)
         {
-            List<ListItem> lst = new List<ListItem>();
-            for (int i = 1; i < 11; i++)
-            {
-                ListItem item = new ListItem(i.ToString(), "true");
-                lst.Add(item);
-            }
-
+            //Create new collection to store selected POIs for the Tour
             ListItemCollection collection = new ListItemCollection();
             this.SelectedPOIListBox.DataSource = collection;
             this.SelectedPOIListBox.DataBind();
+
+            //Store the collection to session to maintain it between postbacks. 
             Session["SelectedPOIList"] = collection;
+
+            //Clear session for audio file.
             Session.Remove("AudioFileUpload");
+
+            //Reset all input controls.
             this.SelectAudioLabel.Text = "mp3 files only.";
 
             this.POIListBox.DataSource = dataAccess.getAllPOIList();
@@ -169,8 +205,14 @@ namespace CMS.GeneralPages
             this.TourMultiView.ActiveViewIndex = 1;
         }
 
+        /// <summary>
+        /// Display update form view with input controls filled with the original data of the selected Tour.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
+            //Reset all hidden fields, file uploaders
             CurrentImagesFileName.Value = "";
             StatusLabel.Text = "";
             ImageUploadFileName.Value = "";
@@ -186,30 +228,42 @@ namespace CMS.GeneralPages
 
             int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
 
+            //Retrieve all POIs previously selected for this Tour.
             DAL.CMSDBDataSet.TourPOIListDataTable list = dataAccess.getTourPOIListByTourID(TourID);
-            ListItemCollection collection = new ListItemCollection();
 
+            //Create new collection to store retrieved POI List to it.
+            ListItemCollection collection = new ListItemCollection();
             foreach (DAL.CMSDBDataSet.TourPOIListRow row in list)
             {
                 collection.Add(new ListItem(row["ItemName"].ToString(), row["ItemID"].ToString()));
             }
 
+            //Bind collection to list box.
             this.SelectedPOIListBox.DataSource = collection;
             this.SelectedPOIListBox.DataBind();
+
+            //Store collection to session to maintain it between postbacks.
             Session["SelectedPOIList"] = collection;
 
+            //Retrieve all POIs stored in the database
             DAL.CMSDBDataSet.POIListDataTable poi = dataAccess.getAllPOIList();
 
+            //Remove the ones that has already been selected 
             foreach (ListItem item in collection)
             {
                 if (poi.Rows.Find(item.Value) != null)
                     poi.Rows.Remove(poi.Rows.Find(item.Value));
             }
+
+            //Bind data table to list box.
             this.POIListBox.DataSource = poi;
             this.POIListBox.DataBind();
             this.SearchPOITextBox.Text = "";
 
+            //Retrieve data for selected Tour.
             DAL.CMSDBDataSet.TourRow tour = dataAccess.getTourByID(TourID);
+
+            //Fill input controls with the retrieved data.
             this.EditTitleLabel.Text = "Update Tour";
             this.NameTextBox.Text = tour["TourName"].ToString();
             this.PhoneTextBox.Text = tour["Tour Phone"].ToString();
@@ -223,6 +277,7 @@ namespace CMS.GeneralPages
                 this.FreeRating.CurrentRating = 0;
             this.DescriptionTextBox.Text = tour["TourDetails"].ToString();
 
+            //Retrieve stored images for selected Tour. 
             var media = dataAccess.getMediaByTourID(TourID);
             ImageUploadDelete.Value = "0";
             int numOfMedia = dataAccess.CountImagesMediaByTourID(TourID);
@@ -230,15 +285,18 @@ namespace CMS.GeneralPages
             FileUpload.Attributes.Add("maxlength", (5 - numOfMedia).ToString());
             foreach (DAL.CMSDBDataSet.MediaRow mediaRow in media.Rows)
             {
+                //Display image thumb nails
                 if (mediaRow.MediaType == "Images")
                 {
                     CurrentImagesFileName.Value += mediaRow.MediaURL.Split('/')[2] + ';';
                     poiImagesAddUpdate.InnerHtml += "<div class='poi-images'  id='" + mediaRow.MediaURL.Split('/')[2] + "' ><img class='itemImage' src='" + mediaRow.MediaURL + "'/><a class='delete-image' rel='" + mediaRow.MediaURL.Split('/')[2] + "'><div class='close_image' title='close'></div></a></div>";
                 }
+                //Display video URL
                 if (mediaRow.MediaType == "Video")
                 {
                     this.VideoTextBox.Text = mediaRow.MediaURL;
                 }
+                //Display flash audio player
                 if (mediaRow.MediaType == "Audio")
                 {
                     EditCurrentAudio.InnerHtml = "<object type='application/x-shockwave-flash' data='../Resources/emff_old_noborder.swf' width='91' height='25'>"
@@ -253,26 +311,41 @@ namespace CMS.GeneralPages
             this.TourMultiView.ActiveViewIndex = 1;
         }
 
+        /// <summary>
+        /// Delete selected Tour then refresh the Tour gridview and display empty view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             int tourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
-            
+
+            //get the urls of all related medias
             DAL.CMSDBDataSet.MediaDataTable URL = dataAccess.getMediaURLByTourID(tourID);
             foreach (DAL.CMSDBDataSet.MediaRow row in URL)
             {
+                //delete media files
                 System.IO.File.Delete(Server.MapPath("~/Media/" + row["MediaURL"].ToString().Substring(row["MediaURL"].ToString().LastIndexOf("/") + 1)));
             }
-            
+
+            // delete related medias and event from the database.
             dataAccess.DeleteMediaByTourID(tourID);
             dataAccess.deleteTourPOIListByTourID(tourID);
             dataAccess.deleteTour(tourID);
+            //refresh the gridview and display empty view.
             this.TourGridView.DataBind();
             this.TourMultiView.ActiveViewIndex = -1;
         }
 
-        //submit update
+        /// <summary>
+        /// Update the selected POI using the user inputs then refresh the POI gridview 
+        /// and display the detail view for the updated POI. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
+            //Check whether all vaildators confirm vaild inputs and at least on POI is selected for the Tour.
             if (this.Page.IsValid && (this.SelectedPOIListBox.Items.Count > 0))
             {
                 String TourName = this.NameTextBox.Text;
@@ -284,18 +357,20 @@ namespace CMS.GeneralPages
                 String Agent = this.AgentTextBox.Text;
                 int TourID = Convert.ToInt32(this.TourGridView.SelectedDataKey.Value);
 
+                //Perform update.
                 dataAccess.updateTour(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, Agent, TourID);
 
+                //Delete all TourPOIs for this Tour
                 dataAccess.deleteTourPOIListByTourID(TourID);
 
+                //Retrieve new selected TourPOIs from session and store them to the database
                 ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
                 foreach (ListItem item in collection)
                 {
                     dataAccess.insertTourPOIList(Convert.ToInt32(item.Value), TourID, collection.IndexOf(item));
                 }
 
-                //TourImages
-
+                //Delete the images that user requested to delete
                 int imageDeleteCount = ImageDeleteFileName.Value != "" ? ImageDeleteFileName.Value.Split(';').Length : 0;
                 for (int y = 0; y < imageDeleteCount - 1; y++)
                 {
@@ -304,6 +379,7 @@ namespace CMS.GeneralPages
                     System.IO.File.Delete(Server.MapPath("~/Media/" + deletedFilename));
                 }
 
+                //Insert images for the selected Tour
                 int count = ImageUploadFileName.Value != "" ? ImageUploadFileName.Value.Split(';').Length : 0;
                 for (int i = 0; i < count - 1; i++)
                 {
@@ -312,12 +388,15 @@ namespace CMS.GeneralPages
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
+                //delete old video
                 dataAccess.DeleteVideoMediaByTourId(TourID);
+                //Insert new video
                 if (VideoTextBox.Text.Length > 0)
                 {
                     dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID);
                 }
 
+                //delete old audio if exists then Insert new audio
                 if (this.AudioFileUpload.PostedFile.ContentLength != 0)
                 {
                     String url = dataAccess.getAudioURLByTourID(TourID);
@@ -368,18 +447,28 @@ namespace CMS.GeneralPages
             }
         }
 
-        //cancel update
+        /// <summary>
+        /// To cancel update, go back to the detail view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             this.IsAudioRemovedHiddenField.Value = "False";
             this.TourMultiView.ActiveViewIndex = 0;
         }
 
-        //confirm insert
+        /// <summary>
+        /// Insert new Tour using the user inputs then refresh the Tour gridview and display the empty view. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void InsertButton_Click(object sender, EventArgs e)
         {
+            //Check whether all vaildators confirm vaild inputs and at least on POI is selected for the Tour.
             if (this.Page.IsValid && (this.SelectedPOIListBox.Items.Count > 0))
             {
+                //Convert inputs into correct format.
                 String TourName = this.NameTextBox.Text;
                 String TourDetail = this.DescriptionTextBox.Text;
                 int TourCost = this.Rating.CurrentRating;
@@ -388,16 +477,18 @@ namespace CMS.GeneralPages
                 String TourEmail = this.EmailTextBox.Text;
                 String Agent = this.AgentTextBox.Text;
 
+                //Perform insert and get the new POI ID as a return value.
                 dataAccess.insertTour(TourName, TourDetail, TourCost, TourPhone, TourWebsite, TourEmail, Agent);
                 int TourID = dataAccess.getNewlyInsertedTourID();
 
+                //Retrieve new selected TourPOIs from session and store them to the database
                 ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
                 foreach (ListItem item in collection)
                 {
                     dataAccess.insertTourPOIList(Convert.ToInt32(item.Value), TourID, collection.IndexOf(item));
                 }
 
-                //tourImages
+                //Insert images for the new Tour
                 int count = ImageUploadFileName.Value.Split(';').Length;
                 for (int i = 0; i < count - 1; i++)
                 {
@@ -406,11 +497,13 @@ namespace CMS.GeneralPages
                     System.IO.File.Move(Server.MapPath("~/Temp_Media/" + filename), Server.MapPath("~/Media/" + filename));
                 }
 
+                //Insert video for the new Tour
                 if (VideoTextBox.Text.Length > 0)
                 {
                     dataAccess.InsertMedia(null, VideoTextBox.Text, "Video", TourID);
                 }
 
+                //Insert audio for the new Tour
                 if (this.AudioFileUpload.PostedFile.ContentLength != 0)
                 {
                     HttpPostedFile posFile = this.AudioFileUpload.PostedFile;
@@ -444,20 +537,29 @@ namespace CMS.GeneralPages
             }
         }
 
-        //cancel insert
+        /// <summary>
+        /// To cancel insert, display the empty view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
             this.IsAudioRemovedHiddenField.Value = "False";
             this.TourMultiView.ActiveViewIndex = -1;
         }
 
+        /// <summary>
+        /// Upload images that user selected using file uploader.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             try
             {
                 StatusLabel.Text = "";
-                //poiImagesAddUpdate.InnerHtml += "";
                 int count = ImageUploadFileName.Value != "" ? ImageUploadFileName.Value.Split(';').Length : 0;
+                //Display thumb nails for currently stored images
                 if (count - 1 > 0 || ImageUploadDelete.Value == "1")
                 {
                     poiImagesAddUpdate.InnerHtml = "";
@@ -468,6 +570,7 @@ namespace CMS.GeneralPages
                         CurrentImagesFileName.Value.Split(';')[x] + "' id='" + CurrentImagesFileName.Value.Split(';')[x] + "' /><a class='upload-images' rel='" + CurrentImagesFileName.Value.Split(';')[x] + "'><div class='close_image ' title='close'></div></a></div>";
                     }
                 }
+                //Display thumb nails for previously uploaded images
                 for (int i = 0; i < count - 1; i++)
                 {
                     string filename = ImageUploadFileName.Value.Split(';')[i];
@@ -482,10 +585,11 @@ namespace CMS.GeneralPages
 
                 for (int i = 0; i < hfc.Count; i++)
                 {
+                    //Check if the file is uploaded using the image file uploader (not the audio file uploader.)
                     if (hfc.AllKeys[i].Equals("ctl00$MainContent$FileUpload"))
                     {
                         HttpPostedFile hpf = hfc[i];
-
+                        //Check the image size.
                         if (!(hpf.ContentLength < 51200))
                         {
                             uploadStatus = false;
@@ -493,6 +597,7 @@ namespace CMS.GeneralPages
                         }
                     }
                 }
+                //Start uploading if the size of all selected images are ok.
                 if (uploadStatus)
                 {
                     int uploadImgCount = 0;
@@ -516,6 +621,8 @@ namespace CMS.GeneralPages
 
                         }
                     }
+
+                    // Count the total number of images.
                     int thumbNailCount = 0;
                     String thumbNail = poiImagesAddUpdate.InnerHtml.ToString();
                     while (thumbNail.Contains("poi-images"))
@@ -524,6 +631,7 @@ namespace CMS.GeneralPages
                         thumbNailCount++;
                     }
 
+                    //Set the maximum number of images that can be inserted.
                     int maxlength = 5 - thumbNailCount;
                     FileUpload.Attributes.Remove("maxlength");
                     FileUpload.Attributes.Add("maxlength", maxlength.ToString());
@@ -535,50 +643,89 @@ namespace CMS.GeneralPages
                 Console.Out.WriteLine(ex.Message);
             }
         }
-        
 
+        /// <summary>
+        /// Delete all temporarily saved images 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         public void DeleteAllTempFiles()
         {
             foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../Temp_Media")))
                 System.IO.File.Delete(f);
         }
 
+        /// <summary>
+        /// Set Star Rating to 0 when free sign is clicked.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void FreeRating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
         {
             this.Rating.CurrentRating = 0;
         }
 
+        /// <summary>
+        /// Set free sign to off if changed star rating is higher than 0.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void Rating_Changed(object sender, AjaxControlToolkit.RatingEventArgs e)
         {
             this.FreeRating.CurrentRating = 0;
         }
 
+        /// <summary>
+        /// Search POIs which have a name including the given search string.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void SearchLinkButton_Click(object sender, EventArgs e)
         {
+            //Retrieve POIs which have a name including the search string that the user entered.
             DAL.CMSDBDataSet.POIListDataTable poi = dataAccess.searchPOI(this.SearchPOITextBox.Text);
+            
+            //Retrieve the previously selected POIs from session and remove them from the POI datatable.
             ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
             foreach (ListItem item in collection)
             {
                 if (poi.Rows.Find(item.Value) != null)
                     poi.Rows.Remove(poi.Rows.Find(item.Value));
             }
+
+           //bind datatable to list box.
             this.POIListBox.DataSource = poi;
             this.POIListBox.DataBind();
         }
 
+        /// <summary>
+        /// List all POIs
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void ViewAllLinkButton_Click(object sender, EventArgs e)
         {
+            //Retrieve all POIs
             DAL.CMSDBDataSet.POIListDataTable poi = dataAccess.getAllPOIList();
+
+            //Retrieve the previously selected POIs from session and remove them from the POI datatable.
             ListItemCollection collection = Session["SelectedPOIList"] as ListItemCollection;
             foreach (ListItem item in collection)
             {
                 if (poi.Rows.Find(item.Value) != null)
                     poi.Rows.Remove(poi.Rows.Find(item.Value));
             }
+
+            //bind datatable to list box.
             this.POIListBox.DataSource = poi;
             this.POIListBox.DataBind();
         }
 
+        /// <summary>
+        /// Remove the selected POI form the POI list box and add it to the selected POI list.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void SelectLinkButton_Click(object sender, EventArgs e)
         {
             if (this.POIListBox.SelectedIndex >= 0)
@@ -595,6 +742,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Remove the selected POI form the selected POI list box and add it to the POI list.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void RemoveLinkButton_Click(object sender, EventArgs e)
         {
             if (this.SelectedPOIListBox.SelectedIndex >= 0)
@@ -618,6 +770,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Move up the selected POI
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void UpLinkButton_Click(object sender, EventArgs e)
         {
             if (this.SelectedPOIListBox.SelectedIndex > 0)
@@ -635,6 +792,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Move down the selected POI
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void DownLinkButton_Click(object sender, EventArgs e)
         {
             if (this.SelectedPOIListBox.SelectedIndex < this.SelectedPOIListBox.Items.Count - 1)
@@ -652,6 +814,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Reserve the audio file to be deleted when user complete insert or update.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void AudioRemoveLinkButton_Click(object sender, EventArgs e)
         {
             EditCurrentAudio.InnerHtml = "Current Audio Removed.";
@@ -659,6 +826,11 @@ namespace CMS.GeneralPages
             this.IsAudioRemovedHiddenField.Value = "True";
         }
 
+        /// <summary>
+        /// Check if the type of audio file is mp3.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void audioFileTypeCheck(object sender, ServerValidateEventArgs e)
         {
             bool isOK = true;
@@ -670,12 +842,16 @@ namespace CMS.GeneralPages
             e.IsValid = isOK;
         }
 
-
+        /// <summary>
+        /// Validate number inputs
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void numberInputValidate(object sender, ServerValidateEventArgs e)
         {
             String senderID = ((CustomValidator)sender).ID;
             bool isNum = false;
-
+            //Ckeck is the entered phone number contains less than 11 digit numbers(Only numbers).
             if (senderID.Equals("PhoneTextBox_CustomValidator"))
             {
                 Int32 num;

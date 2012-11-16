@@ -9,7 +9,15 @@ namespace CMS.GeneralPages
 {
     public partial class News : System.Web.UI.Page
     {
+        //MySQL Data Access Class
         BLL.CMSBLClass dataAccess = new BLL.CMSBLClass();
+
+        /// <summary>
+        /// Sort the news gridview when the first time loading the page.
+        /// The method that runs everytime when the page loads.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -18,6 +26,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Display update form view with input controls filled with the original data of the selected News.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             this.NewsMultiView.ActiveViewIndex = 1;
@@ -33,6 +46,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Delete selected News then refresh the News gridview and display empty view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             int id = (Int32)this.GridViewNews.SelectedDataKey.Value;
@@ -47,6 +65,12 @@ namespace CMS.GeneralPages
 
         }
 
+        /// <summary>
+        /// Update the selected News using the user inputs then refresh 
+        /// the News gridview and display the detail view for the updated News. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
             if (this.NewsBodyTextBox.Text.Length > 0)
@@ -83,16 +107,31 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// To cancel update, go back to the detail view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             this.NewsMultiView.ActiveViewIndex = 0;
         }
 
+        /// <summary>
+        /// To cancel insert, display the empty view.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void InsertCancelButton_Click(object sender, EventArgs e)
         {
             this.NewsMultiView.ActiveViewIndex = -1;
         }
 
+        /// <summary>
+        /// Insert new News using the user inputs then refresh the News gridview and display the empty view. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void SubmitNewButton_Click(object sender, EventArgs e)
         {
             if (this.InsertNewsBodyTextBox.Text.Length > 0)
@@ -117,6 +156,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Add mouse event attributes to each row to change the background color when moving the mouse over it.  
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void GridViewNews_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType.Equals(DataControlRowType.DataRow))
@@ -129,6 +173,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Display detail view for the selected News.  
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void GridViewNews_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.NewsMultiView.ActiveViewIndex = 0;
@@ -141,17 +190,25 @@ namespace CMS.GeneralPages
             this.newsImage.InnerHtml ="<img alt='"+this.GridViewNews.SelectedRow.Cells[1].Text+"' title='"+this.GridViewNews.SelectedRow.Cells[1].Text+"' src='"+News.NewsMediaURL+"'/>";
         }
 
+        /// <summary>
+        /// Upload images that user selected using file uploader.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             StatusLabel.Text = "";
+            //Check if image file is selected
             if (NewsImageUpload.HasFile)
             {
                 try
                 {
+                    //Check the image file types
                     if (NewsImageUpload.PostedFile.ContentType == "image/jpeg" ||
                        NewsImageUpload.PostedFile.ContentType == "image/png" ||
                        NewsImageUpload.PostedFile.ContentType == "image/gif")
                     {
+                        //Check the image file size
                         if (NewsImageUpload.PostedFile.ContentLength < 102400)
                         {
                             Random rand = new Random((int)DateTime.Now.Ticks);
@@ -159,7 +216,7 @@ namespace CMS.GeneralPages
                             numIterations = rand.Next(1000000000, 2147483647);
                             Guid id = new Guid();
 
-                            //-- Create new GUID and echo to the console
+                            // Create new GUID and echo to the console
                             id = Guid.NewGuid();
                             DeleteAllTempFiles();
                             NewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + NewsImageUpload.FileName);
@@ -187,6 +244,11 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Display insert form view with empty input controls.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void InsertLinkButton_Click(object sender, EventArgs e)
         {
             this.AuthorTextBox.Text = "";
@@ -199,18 +261,25 @@ namespace CMS.GeneralPages
             btnInsertNewsRemove.Visible = false;
         }
 
+        /// <summary>
+        /// Upload images for the new News using file uploader.
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnInsertNewsUpload_Click(object sender, EventArgs e)
         {
             InsertStatusLabel.Text = "";
-
+            //Check if image file is selected
             if (InsertNewsImageUpload.HasFile)
             {
                 try
                 {
+                    //Check the image file types
                     if (InsertNewsImageUpload.PostedFile.ContentType == "image/jpeg" ||
                        InsertNewsImageUpload.PostedFile.ContentType == "image/png" ||
                        InsertNewsImageUpload.PostedFile.ContentType == "image/gif")
                     {
+                        //Check the image file size
                         if (InsertNewsImageUpload.PostedFile.ContentLength < 51200)
                         {
                             Random rand = new Random((int)DateTime.Now.Ticks);
@@ -218,7 +287,7 @@ namespace CMS.GeneralPages
                             numIterations = rand.Next(1000000000, 2147483647);
                             Guid id = new Guid();
 
-                            //-- Create new GUID and echo to the console
+                            //Create new GUID and echo to the console
                             id = Guid.NewGuid();
                             DeleteAllTempFiles();
                             InsertNewsImageUpload.SaveAs(Server.MapPath("~/Temp_Media/") + numIterations.ToString() + id.ToString() + InsertNewsImageUpload.FileName);
@@ -248,12 +317,22 @@ namespace CMS.GeneralPages
             }
         }
 
+        /// <summary>
+        /// Delete all temporarily saved images 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         public void DeleteAllTempFiles()
         {
             foreach (var f in System.IO.Directory.GetFiles(Server.MapPath("../Temp_Media")))
             System.IO.File.Delete(f);
         }
 
+        /// <summary>
+        /// When canceling insert, set the news image to the default image and clear all temp image files. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnInsertNewsRemove_Click(object sender, EventArgs e)
         {
             this.InsertNewsImage.ImageUrl = "../Media/default-news-image.png";
@@ -261,6 +340,11 @@ namespace CMS.GeneralPages
             DeleteAllTempFiles();
         }
 
+        /// <summary>
+        /// When canceling update, set the news image to the default image and clear all temp image files. 
+        /// </summary>
+        /// <param name="sender">The object that raised this event.</param>
+        /// <param name="e">An EventArgs that contains the event data.</param>
         protected void btnRemove_Click(object sender, EventArgs e)
         {
             this.NewsImageUpdate.ImageUrl = "../Media/default-news-image.png";

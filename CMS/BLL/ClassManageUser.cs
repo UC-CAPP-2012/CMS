@@ -27,16 +27,32 @@ namespace CMS.BLL
         DAL.DataSetManageUserTableAdapters.aspnet_MembershipTableAdapter membershipAdapter =
             new DAL.DataSetManageUserTableAdapters.aspnet_MembershipTableAdapter();
 
+
+        /// <summary>
+        /// Retrieves all Roles from the database.
+        /// </summary>
+        /// <returns> Datatable containing all Roles. </returns>
         public DAL.DataSetManageUser.aspnet_RolesDataTable GetAllRoles()
         {
             return roleAdapter.GetData();
         }
 
+        /// <summary>
+        /// Assign a specific role to a specific user.
+        /// </summary>
+        /// <param name="userID">The ID of the User which the role will be assigned to.</param>
+        /// <param name="roleID">The ID of the Role which will be assigned to the user.</param>
+        /// <returns> 1 for success, 0 for fail </returns>
         public int AddUserRole(Guid userID, Guid roleID)
         {
             return userRoleAdapter.Insert(userID, roleID);
         }
 
+        /// <summary>
+        /// Get Role ID using string type Role name.
+        /// </summary>
+        /// <param name="role">The name of the Role to find ID for.</param>
+        /// <returns>Role ID</returns>
         public Guid getRoleID(string role)
         {
             DataView dataView = new DataView();
@@ -54,6 +70,11 @@ namespace CMS.BLL
             return roleID;
         }
 
+        /// <summary>
+        /// Get Role name using Role ID.
+        /// </summary>
+        /// <param name="roleID">The ID of the Role to find name for.</param>
+        /// <returns>Role name</returns>
         public string getRoleName(Guid roleID)
         {
             DataView dataView = new DataView();
@@ -71,6 +92,12 @@ namespace CMS.BLL
             return role;
         }
 
+
+        /// <summary>
+        /// Get the name of the Role which is assigned to a specific User.
+        /// </summary>
+        /// <param name="userName">The name of the User to find the Role name for.</param>
+        /// <returns>Role name</returns>
         public string getUserRole(string userName)
         {
             DataView dataView = new DataView();
@@ -80,11 +107,22 @@ namespace CMS.BLL
             return this.getRoleName(userRoleID);
         }
 
+        /// <summary>
+        /// Retrieves all Users from the database.
+        /// </summary>
+        /// <returns> Datatable containing all Users. </returns>
         public DAL.DataSetManageUser.aspnet_UsersDataTable GetAllUsers()
         {
             return userAdapter.GetAllUsers();
         }
 
+
+        /// <summary>
+        /// Remove User from the database.
+        /// </summary>
+        /// <param name="ApplicationId">The Application ID of the User.</param>
+        /// <param name="LoweredUserName">The ID of the User in lower case letters.</param>
+        /// <returns> 1 for success, 0 for fail </returns>
         public int removeUser(Guid ApplicationId, string LoweredUserName)
         {
             Guid userID = this.GetUserID(LoweredUserName);
@@ -99,6 +137,12 @@ namespace CMS.BLL
             return userAdapter.Delete(ApplicationId, LoweredUserName);
         }
 
+
+        /// <summary>
+        /// Get the ID of the User.
+        /// </summary>
+        /// <param name="userName"> The name of the User to find ID for. </param>
+        /// <returns> User ID </returns>
         public Guid GetUserID(string userName)
         {
             DataView dataView = new DataView();
@@ -116,6 +160,12 @@ namespace CMS.BLL
             return userID;
         }
 
+
+        /// <summary>
+        /// Check whether the User Name already exists.
+        /// </summary>
+        /// <param name="username"> The name of the User. </param>
+        /// <returns> true for exist, false for not exist </returns>
         public bool isUserExist(string username)
         {
             bool result = false;
@@ -132,6 +182,12 @@ namespace CMS.BLL
             return result;
         }
 
+
+        /// <summary>
+        /// Get the ID of the Role which is assigned to a specific User.
+        /// </summary>
+        /// <param name="userName">The name of the User to find the Role ID for.</param>
+        /// <returns>Role ID</returns>
         public Guid GetUserRoleID(Guid userID)
         {
             DataView dataView = new DataView();
